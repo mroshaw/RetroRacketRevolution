@@ -1,0 +1,70 @@
+using UnityEngine;
+using UnityEngine.Events;
+using Sirenix.OdinInspector;
+
+namespace #NAMESPACE#
+{
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+        // Public serializable properties
+        [BoxGroup("General Settings")]
+        public string setting1;
+        
+        [FoldoutGroup("Events")]
+        public UnityEvent MyEvent;
+
+        // Public properties
+        
+        // Private fields
+
+        #region UnityMethods
+        /// <summary>
+        /// Subscribe to events
+        /// </summary>   
+        private void OnEnable()
+        {
+            #NOTRIM#
+        }
+        
+        /// <summary>
+        /// Unsubscribe from events
+        /// </summary>   
+        private void OnDisable()
+        {
+            #NOTRIM#
+        }
+
+        /// <summary>
+        /// Initialise this component
+        /// </summary>   
+        private void Awake()
+        {
+            #NOTRIM#
+        }
+    
+        /// <summary>
+        /// Configure the component on Start
+        /// </summary>
+        private void Start()
+        {
+            #NOTRIM#
+        }
+
+        /// <summary>
+        /// Clean up on Destroy
+        /// </summary>
+        private void OnDestroy()
+        {
+            #NOTRIM#
+        }
+        #endregion
+
+	#region PublicMethods
+	#NOTRIM#
+	#endregion
+
+	#region PrivateMethods
+	#NOTRIM#
+	#endregion
+    }
+}

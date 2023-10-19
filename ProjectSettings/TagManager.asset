@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ball
+  - Collectible
+  - OutOfBounds
+  - Boundary
+  - Brick
+  - Player2
+  - LaserBolt
+  - Catcher
+  - Enemy
+  - EnemyProjectile
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - PostProcessing
+  - Water
+  - UI
+  - Bricks
+  - Player1
+  - Bonus
+  - Ball
+  - Walls
+  - Player2
+  - MegaBall
+  - LaserBolt
+  - Catcher
+  - Enemy
+  - EnemyProjectile
+  - OutOfBounds
+  - Ceiling
+  - Disruptor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2822939807
+    locked: 0
+  - name: Brick1
+    uniqueID: 1097864741
+    locked: 0
+  - name: Brick2
+    uniqueID: 549233211
+    locked: 0
+  - name: Game
+    uniqueID: 3464910779
+    locked: 0
+  - name: UI
+    uniqueID: 3302592333
+    locked: 0

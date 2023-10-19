@@ -1,0 +1,33 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using UnityEditor;
+
+using UnityEngine;
+
+namespace #NAMESPACE#
+{
+    public class #SCRIPTNAME# : OdinEditorWindow
+    {
+        [MenuItem("Window/#PARENTNAMESPACE#/%EDITORWINDOW%")]
+        public static void ShowWindow()
+        {
+            GetWindow(typeof(#SCRIPTNAME#));
+        }
+    
+        // UI layout
+        [FoldoutGroup("Setting Group 1")]
+        public string setting1;
+    
+        [Button("BigButton1", ButtonSizes.Large), GUIColor(0, 1, 0)]
+        private void BigButton()
+        {
+            #NOTRIM#
+        }
+        
+        [Button("Button2")]
+        private void Button2()
+        {
+            #NOTRIM#   
+        }
+    }
+}

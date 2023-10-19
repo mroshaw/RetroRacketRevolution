@@ -1,0 +1,60 @@
+using UnityEngine;
+using Sirenix.OdinInspector;
+
+namespace #NAMESPACE#
+{
+    /// <summary>
+    /// Scriptable Object: TODO Purpose and Summary
+    /// </summary>
+    [CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "#PARENTNAMESPACE#/#SCRIPTFRIENDLYNAME#", order = 1)]
+    public class #SCRIPTNAME# : ScriptableObject
+    {
+        // Public serializable properties
+        [BoxGroup("General Settings")]
+        public string setting1;
+                
+        // Private fields
+        private string _privateField;
+
+        #region UNITY_EVENTS
+        /// <summary>
+        /// Scriptable Object is enabled
+        /// </summary>   
+        private void OnEnable()
+        {
+            #NOTRIM#
+        }
+        
+        /// <summary>
+        /// Scriptable Object is disabled
+        /// </summary>   
+        private void OnDisable()
+        {
+            #NOTRIM#
+        }
+        /// <summary>
+        /// Scriptable Object is destroyed
+        /// </summary>   
+        private void OnDestroy()
+        {
+            #NOTRIM#
+        }
+
+        /// <summary>
+        /// Configure the component on awake
+        /// </summary>   
+        private void Awake()
+        {
+            #NOTRIM#
+        }
+        
+        /// <summary>
+        /// Configure the component on awake
+        /// </summary>   
+        private void OnValidate()
+        {
+            #NOTRIM#
+        }
+        #endregion
+    }
+}

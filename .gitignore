@@ -70,3 +70,28 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/[Aa]ssets/_Project/Audio/Music/
+/[Aa]ssets/_Project/Audio/Music.meta
+/[Aa]ssets/Coffee/
+/[Aa]ssets/Coffee.meta
+/[Aa]ssets/Feel/
+/[Aa]ssets/Feel.meta
+/[Aa]ssets/Graphy - Ultimate Stats Monitor/
+/[Aa]ssets/Graphy - Ultimate Stats Monitor.meta
+/[Aa]ssets/Hovl Studio/
+/[Aa]ssets/Hovl Studio.meta
+/[Aa]ssets/RetroAesthetics/
+/[Aa]ssets/RetroAesthetics.meta
+/[Aa]ssets/Samples/
+/[Aa]ssets/Samples.meta
+/[Aa]ssets/ScienceFictionGUI/
+/[Aa]ssets/ScienceFictionGUI.meta
+/[Aa]ssets/TextMesh Pro/
+/[Aa]ssets/TextMesh Pro.meta
+/[Aa]ssets/Plugins/
+/[Aa]ssets/Plugins.meta
+/[Aa]ssets/_Project/Audio/Music/
+/[Aa]ssets/_Project/Audio/Music.meta
+/[Aa]ssets/_Project/Scenes/Test Scenes.meta
+/[Aa]ssets/_Project/Scenes/Test Scenes/
+/Screenshots

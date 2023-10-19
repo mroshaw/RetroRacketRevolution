@@ -1,0 +1,37 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using UnityEditor;
+
+using UnityEngine;
+
+namespace #NAMESPACE#
+{
+    [CustomEditor(typeof(#EDITORCLASS#))]
+    public class #SCRIPTNAME# : OdinEditor
+    {
+        // Local class instance
+        #EDITORCLASS# _%EDITORCLASSLOWER%; 
+    
+        // Public serializable properties
+        [FoldoutGroup("General Settings")]
+        public string setting1;
+
+        // Public serializable properties
+        [FoldoutGroup("#EDITORCLASS#")]
+        public string setting2;
+
+        // Private fields
+        private string _field1;
+
+        // Populate inspector editor UI
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            _%EDITORCLASSLOWER% = target as #EDITORCLASS#;
+            if (GUILayout.Button("Button 1"))
+            {
+
+            }
+        }
+    }
+}

@@ -1,0 +1,386 @@
+{
+    "name": "CheatControls",
+    "maps": [
+        {
+            "name": "Cheats",
+            "id": "69ee4677-e6cd-40c0-867f-451c88d2a8a2",
+            "actions": [
+                {
+                    "name": "CheatLives",
+                    "type": "Button",
+                    "id": "235ffa32-d7e3-47cc-a3d9-65c4ab095845",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatLaserP1",
+                    "type": "Button",
+                    "id": "a181a6fc-cff1-45c5-a5ab-93ce60443296",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatLaserP2",
+                    "type": "Button",
+                    "id": "576bba39-03b7-4b78-9d11-a1e249370db9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatCatchP1",
+                    "type": "Button",
+                    "id": "ebc37306-11b9-4dfd-8411-9ba82c893056",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatCatchP2",
+                    "type": "Button",
+                    "id": "9917dec7-180b-4743-ae55-6d441f7961b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnLife",
+                    "type": "Button",
+                    "id": "781a8690-e944-4a29-8027-2e7f0be5329b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnLaser",
+                    "type": "Button",
+                    "id": "c60cbd67-0b1e-4e55-86e1-c4c429095d21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnCatch",
+                    "type": "Button",
+                    "id": "29a35573-48dd-4151-9fb3-8b8f4589c3e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnSlowBall",
+                    "type": "Button",
+                    "id": "cb9a6c33-044d-4234-b449-54ea9b8cbdd8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnMegaBall",
+                    "type": "Button",
+                    "id": "f38bfbc3-1511-4232-a5da-7a3f86a47400",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnMultiBall",
+                    "type": "Button",
+                    "id": "fbf0a83d-dc5b-4149-99fc-4ad37fc0940a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnGrowBat",
+                    "type": "Button",
+                    "id": "a83fb3c1-3043-4054-91d7-55ecac6b7995",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnShrinkBat",
+                    "type": "Button",
+                    "id": "e12f2d1f-f9c4-4007-bd98-7a5dbc24e4b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnSmallScore",
+                    "type": "Button",
+                    "id": "1c1b9783-49b9-4bfb-ac7f-ed9dbe6f2fe9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnBigScore",
+                    "type": "Button",
+                    "id": "42e98ded-c199-44e4-86fd-3139e450412e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnWinLevel",
+                    "type": "Button",
+                    "id": "60de159e-1794-4f65-bfd3-d337246cc60f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSpawnRandom",
+                    "type": "Button",
+                    "id": "617bc488-2912-4d57-a121-4f7ddd35f8e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSkipLevel",
+                    "type": "Button",
+                    "id": "5865c2b8-8891-43b3-bab7-2c3f504b4b19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0896a7ad-d6de-472a-a73d-412d2258b882",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatLives",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "936461bd-3c7e-4118-b5fd-7049bfe8a9b6",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatLaserP1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "351f08ee-7643-4c82-b110-5be0c4edd26a",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatLaserP2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b65996d4-2a99-4130-86c4-93f5f5ee6c52",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatCatchP1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de843615-38d3-40f7-bbe5-5d97fa3b1509",
+                    "path": "<Keyboard>/numpad4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatCatchP2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5b673e1-2c2a-45d5-9c87-07f36962fad8",
+                    "path": "<Keyboard>/numpad5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnLife",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf068e40-4d06-48f6-9691-f73bfca9e54b",
+                    "path": "<Keyboard>/numpad6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnLaser",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80de3b84-b0a8-4fa9-9f97-f16a029c0f2e",
+                    "path": "<Keyboard>/numpad7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnCatch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d115c49-5013-4533-8276-0f1b031d19a2",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnMegaBall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59214dc9-45eb-4943-875f-97cba0e68c1e",
+                    "path": "<Keyboard>/numpadMultiply",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnMultiBall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c81a4411-5d96-4daa-8d6a-e3d3ed185ea6",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnGrowBat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83ffc196-6a29-44be-93b7-73bf995a70b1",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnShrinkBat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7bc8da6-13ee-4798-8483-ec1779b87102",
+                    "path": "<Keyboard>/numpadDivide",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnSmallScore",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ace382f3-ebc6-4c40-ac99-e01da8148f1b",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnBigScore",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a2f4e1a8-da57-497f-b707-bc98849b8208",
+                    "path": "<Keyboard>/numpadPeriod",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnWinLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4c92298-6a77-458a-aa25-7a7bd8a4fedf",
+                    "path": "<Keyboard>/delete",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnRandom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6b7a917-4cc5-4a83-b4dd-72e593419934",
+                    "path": "<Keyboard>/numpad8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSpawnSlowBall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "020f7e29-3a98-4079-8d99-38519d5cd932",
+                    "path": "<Keyboard>/end",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CheatSkipLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+using UnityEngine;
+
+namespace #NAMESPACE#
+{
+    public class #SCRIPTNAME#
+    {
+        // Public serializable properties
+        [Header("General Settings")]
+        public string setting1;
+        
+        // Public properties
+        public string Setting2
+        {
+            get { return _setting3; }
+            set { _setting3 = value; }
+        }
+        
+        // Private fields
+        private string _setting3;
+    }
+}
