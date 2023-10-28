@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1472027489
-  m_SortingLayer: 1
+  m_SortingLayerID: -830056517
+  m_SortingLayer: 4
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 664fbb104e0f30144a1ec34ef2a14543, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -106,6 +106,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 795a804904376264f8972953f32b353a, type: 3}
   - {fileID: 21300000, guid: 8a3342efddd5fb04ea68e01e7b1506c7, type: 3}
   - {fileID: 21300000, guid: 93a584d3c1e2bac4ea3eb30edf3527a7, type: 3}
+  - {fileID: 21300000, guid: 3a7e5a951dbd0b744bf61edc08c87a7b, type: 3}
+  - {fileID: 21300000, guid: 7e5d2a01824af9e44a6f82e56eb228d1, type: 3}
   LaserBoltCollideEvent:
     m_PersistentCalls:
       m_Calls: []

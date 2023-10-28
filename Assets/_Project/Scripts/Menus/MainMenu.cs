@@ -1,3 +1,5 @@
+using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftApplesGames.RetroRacketRevolution.Game;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -10,12 +12,34 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
     {
         [BoxGroup("UI Settings")] public TMP_Dropdown p1ControlsDropDown;
         [BoxGroup("UI Settings")] public TMP_Dropdown p2ControlsDropDown;
+        [BoxGroup("Game Data")] public GameData gameData;
+
+        public override void Awake()
+        {
+            base.Awake();
+        }
 
         /// <summary>
         /// Setup the Main Menu
         /// </summary>
         public void Start()
         {
+#if UNITY_STANDALONE_LINUX
+            // Linux default is keyboard and gamepad
+            p1ControlsDropDown.value = 0;
+            p2ControlsDropDown.value = 2;
+            SetP1Controls(0);
+            SetP2Controls(2);
+#elif PLATFORM_ANDROID
+            SetP1Controls(2);
+#else
+            // Windows default is mouse and keyboard
+            p1ControlsDropDown.value = 1;
+            p2ControlsDropDown.value = 0;
+            SetP1Controls(1);
+            SetP2Controls(0);
+
+#endif
             Show();
         }
 
@@ -32,7 +56,8 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// </summary>
         public void SetP1Controls(int controlIndex)
         {
-            GameController.Instance.PlayerOneControlScheme = GetControlScheme(controlIndex);
+            gameData.playerOneControlScheme = GetControlScheme(controlIndex);
+
             if (p1ControlsDropDown.value == p2ControlsDropDown.value)
             {
                 p2ControlsDropDown.value = p2ControlsDropDown.value < 2 ? p2ControlsDropDown.value + 1 : 0;
@@ -45,7 +70,8 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// <param name="controlIndex"></param>
         public void SetP2Controls(int controlIndex)
         {
-            GameController.Instance.PlayerTwoControlScheme = GetControlScheme(controlIndex);
+            gameData.playerTwoControlScheme = GetControlScheme(controlIndex);
+
             if (p1ControlsDropDown.value == p2ControlsDropDown.value)
             {
                 p1ControlsDropDown.value = p1ControlsDropDown.value < 2 ? p1ControlsDropDown.value + 1 : 0;
@@ -91,7 +117,14 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// </summary>
         public void Start1P()
         {
-            GameController.Instance.IsTwoPlayer = false;
+            gameData.isTwoPlayer = false;
+        }
+
+        /// <summary>
+        /// Start the game
+        /// </summary>
+        public void StartGame()
+        {
             SceneManager.LoadScene("GameScene");
         }
 
@@ -100,8 +133,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// </summary>
         public void Start2P()
         {
-            GameController.Instance.IsTwoPlayer = true;
-            SceneManager.LoadScene("GameScene");
+            gameData.isTwoPlayer = true;
         }
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
             //create a new gameobject to be used as drop shadow
             _shadowGameObject = new GameObject("Shadow");
             _shadowGameObject.transform.SetParent(transform);
-            _shadowGameObject.transform.localPosition = transform.localPosition + (Vector3)ShadowOffset;
+            _shadowGameObject.transform.localPosition = /* transform.localPosition + */ (Vector3)ShadowOffset;
             _shadowGameObject.transform.localScale = new Vector3(1, 1, 1);
             //create a new SpriteRenderer for Shadow gameobject
             SpriteRenderer shadowSpriteRenderer = _shadowGameObject.AddComponent<SpriteRenderer>();

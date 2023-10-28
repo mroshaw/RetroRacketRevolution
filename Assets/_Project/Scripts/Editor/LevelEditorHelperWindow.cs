@@ -1,16 +1,12 @@
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
+using TMPro;
 
 namespace DaftApplesGames.RetroRacketRevolution.Editor
 {
-
-
     public class LevelEditorHelperWindow : OdinEditorWindow
     {
         [MenuItem("Level Editor/Helper Window")]

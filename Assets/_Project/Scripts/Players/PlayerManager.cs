@@ -1,15 +1,14 @@
-using MoreMountains.Tools;
-using System.Collections;
-using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftApplesGames.RetroRacketRevolution.Balls;
+using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftApplesGames.RetroRacketRevolution.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftApplesGames.RetroRacketRevolution.Players
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour, IBonusRecipient
     {
         [BoxGroup("Players")] public Player playerOne;
         [BoxGroup("Players")] public Player playerTwo;
@@ -21,6 +20,8 @@ namespace DaftApplesGames.RetroRacketRevolution
         [BoxGroup("Player 1 Bound Settings")] public float player1MaxX;
         [BoxGroup("Player 2 Bound Settings")] public float player2MinX;
         [BoxGroup("Player 2 Bound Settings")] public float player2MaxX;
+        [BoxGroup("Game Data")] public GameData gameData;
+        [BoxGroup("Managers")] public BallManager ballManager;
 
         public bool PlayerTwoIsActive => playerTwo.gameObject.activeSelf;
 
@@ -32,6 +33,12 @@ namespace DaftApplesGames.RetroRacketRevolution
         private void Awake()
         {
             _lifeForce = GetComponent<LifeForce>();
+
+            playerOne.defaultBatScale =
+                new Vector2(gameData.difficulty.defaultBatLength, playerOne.defaultBatScale.y);
+
+            playerTwo.defaultBatScale =
+                new Vector2(gameData.difficulty.defaultBatLength, playerTwo.defaultBatScale.y);
         }
 
         /// <summary>
@@ -39,7 +46,20 @@ namespace DaftApplesGames.RetroRacketRevolution
         /// </summary>
         private void Start()
         {
-            ConfigurePlayerArea(GameController.Instance.IsTwoPlayer);
+            ConfigurePlayerArea(gameData.isTwoPlayer);
+            _lifeForce.NumLives = gameData.difficulty.startingLives;
+            
+            // Enable player 2, if appropriate
+            if (gameData.isTwoPlayer)
+            {
+                playerOne.gameObject.SetActive(true);
+                playerOne.gameObject.transform.localPosition = new Vector2(-100.0f, 0);
+                playerTwo.gameObject.transform.localPosition = new Vector2(100.0f, 0);
+            }
+            else
+            {
+                playerOne.gameObject.transform.localPosition = new Vector2(0, 0);
+            }
         }
 
         /// <summary>
@@ -108,6 +128,15 @@ namespace DaftApplesGames.RetroRacketRevolution
         }
 
         /// <summary>
+        /// Spawns a ball for the player to use
+        /// </summary>
+        /// <returns></returns>
+        public Ball SpawnNewBall()
+        {
+            return ballManager.GetNewBall();
+        }
+
+        /// <summary>
         /// Setup the desired control scheme when the player controller is started.
         /// </summary>
         /// <param name="input"></param>
@@ -118,18 +147,26 @@ namespace DaftApplesGames.RetroRacketRevolution
             switch (input.gameObject.name)
             {
                 case "Player 1":
-                    if (GameController.Instance != null)
-                    {
-                        SetControlScheme(playerOneInput, GameController.Instance.PlayerOneControlScheme);
-                    }
+                    SetControlScheme(playerOneInput,gameData.playerOneControlScheme);
                     break;
 
                 case "Player 2":
-                    if (GameController.Instance != null)
-                    {
-                        SetControlScheme(playerTwoInput, GameController.Instance.PlayerTwoControlScheme);
-                    }
+                    SetControlScheme(playerTwoInput, gameData.playerTwoControlScheme);
+                    break;
+            }
+        }
 
+        /// <summary>
+        /// Handler the BonusApplied event
+        /// </summary>
+        /// <param name="bonus"></param>
+        /// <param name="targetGameObject"></param>
+        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
+        {
+            switch (bonus.bonusType)
+            {
+                case BonusType.ExtraLife:
+                    AddLife();
                     break;
             }
         }

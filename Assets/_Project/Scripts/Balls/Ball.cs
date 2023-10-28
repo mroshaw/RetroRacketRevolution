@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using DaftApplesGames.RetroRacketRevolution.Bricks;
 using DaftApplesGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
-using Tayx.Graphy.Ram;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -246,7 +246,14 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
                     break;
                 case BrickType.DoubleStrong:
                 case BrickType.TripleStrong:
-                    _audioSource.PlayOneShot(hitMultibrickClip);
+                    if (brick.Health > 1)
+                    {
+                        _audioSource.PlayOneShot(hitMultibrickClip);
+                    }
+                    else
+                    {
+                        _audioSource.PlayOneShot(hitBrickClip);
+                    }
                     break;
                 case BrickType.Invincible:
                     _audioSource.PlayOneShot(hitInvincibleBrickClip);
@@ -271,9 +278,11 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
             LastTouchedByPlayer = player;
 
             // Calculate hit Factor
-            float x = HitFactor(transform.position,
-                other.transform.position,
-                other.collider.bounds.size.x);
+            float x = GetHorizontalVelocityFactor(transform.position,
+                other.transform.position, other.collider.bounds.size.x);
+
+            float y = GetVerticalVelocityFactor(transform.position,
+                other.transform.position, other.collider.bounds.size.x);
 
             // Calculate direction, set length to 1
             Vector2 dir = new Vector2(x, 1).normalized;
@@ -299,16 +308,35 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
         }
 
         /// <summary>
-        /// Calculate the angle to bounce
+        /// Calculate the horizontal angle of the bounce
         /// </summary>
         /// <param name="ballPos"></param>
         /// <param name="playerPos"></param>
         /// <param name="playerWidth"></param>
         /// <returns></returns>
-        private float HitFactor(Vector2 ballPos, Vector2 playerPos,
+        private float GetHorizontalVelocityFactor(Vector2 ballPos, Vector2 playerPos,
             float playerWidth)
         {
-            return (ballPos.x - playerPos.x) / playerWidth;
+            float xFactor = (ballPos.x - playerPos.x) / playerWidth;
+            Debug.Log($"X factor: {xFactor}");
+            return xFactor;
+        }
+
+        /// <summary>
+        /// Calculate the vertical angle of the bounce
+        /// </summary>
+        /// <param name="ballPos"></param>
+        /// <param name="playerPos"></param>
+        /// <param name="playerWidth"></param>
+        /// <returns></returns>
+        private float GetVerticalVelocityFactor(Vector2 ballPos, Vector2 playerPos, float playerWidth)
+        {
+            float n = (ballPos.x - playerPos.x) / playerWidth;
+            // float yFactor = n < 0 ? n - 1.0f : n + 1.0f;
+            float yFactor = 1.0f + Math.Abs(n);
+            Debug.Log($"Y factor: {yFactor}");
+            // return n < 0 ? n - 1.0f : n + 1.0f;
+            return yFactor;
         }
 
         /// <summary>

@@ -275,5 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4129731d47eeb4896132eea0f88db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShadowOffset: {x: 0.5, y: -0.5}
+  ShadowOffset: {x: 0.1, y: -0.1}
   ShadowMaterial: {fileID: 2100000, guid: 54959f40b867da14db62a5dfcd0b367b, type: 2}
+  updateShadow: 0
+  matchTransform: {fileID: 0}

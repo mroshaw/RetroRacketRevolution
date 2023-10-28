@@ -8,7 +8,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
     public class PlayerControls : MonoBehaviour
     {
         [BoxGroup("Movement")] public float keyboardSpeedMultiplier = 1000.0f;
-        [BoxGroup("Movement")] public float dpadSpeedMultiplier = 1000.0f;
+        [BoxGroup("Movement")] public float dpadSpeedMultiplier = 100.0f;
         [BoxGroup("Movement")] public float minX = -200.0f;
         [BoxGroup("Movement")] public float maxX = 200.0f;
 
@@ -80,11 +80,6 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         /// <param name="value"></param>
         private void OnMove(InputValue value)
         {
-            if (!ControlsEnabled)
-            {
-                return;
-            }
-
             _moveVector = value.Get<Vector2>();
             _horizontal = _moveVector.normalized.x;
         }
@@ -95,11 +90,6 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         /// <param name="value"></param>
         private void OnMoveAnalogue(InputValue value)
         {
-            if (!ControlsEnabled)
-            {
-                return;
-            }
-
             if (_playerInput.currentControlScheme == "Mouse")
             {
                 Vector2 mousePosition = value.Get<Vector2>();
@@ -117,7 +107,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
 
                 gameObject.transform.localPosition = position;
 #if !UNITY_EDITOR
-                Mouse.current.WarpCursorPosition(Camera.main.WorldToScreenPoint(position));
+                if (ControlsEnabled && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer))
+                {
+                    Mouse.current.WarpCursorPosition(Camera.main.WorldToScreenPoint(position));
+                }
 #endif
             }
             else

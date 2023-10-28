@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftApplesGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DaftApplesGames.RetroRacketRevolution.Balls
 {
-    public class BallManager : MonoBehaviour
+    public class BallManager : MonoBehaviour, IBonusRecipient
     {
-        public static BallManager Instance { get; private set; }
-
         [BoxGroup("Ball Settings")] public GameObject ballPrefab;
         [BoxGroup("Ball Settings")] public GameObject ballContainer;
+        [BoxGroup("Game Data")] public GameData gameData;
         [BoxGroup("Debug")] [SerializeField] private List<Ball> _ballList;
 
         // Events
@@ -25,17 +27,6 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
         /// </summary>
         private void Awake()
         {
-            // If there is an instance, and it's not me, delete myself.
-
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-            }
-
             _maxBallSpeed = 0;
         }
         
@@ -49,9 +40,16 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
             newBall.transform.SetParent(ballContainer.transform, true);
             Ball ball = newBall.GetComponent<Ball>();
             ball.DefaultParent = ballContainer;
+
+            // Configure per difficulty settings
+            ball.defaultBallSpeed = gameData.difficulty.defaultBallSpeed;
+            ball.speedUpAfterDuration = gameData.difficulty.ballSpeedUpAfterDuration;
+            ball.speedMultiplier = gameData.difficulty.ballSpeedMultiplier;
+
             ball.BallDestroyedEvent.AddListener(DestroyBall);
             ball.BallSpeedMultiplierChangeEvent.AddListener(BallSpeedChanged);
             _ballList.Add(ball);
+            newBall.SetActive(true);
             return newBall.GetComponent<Ball>();
         }
 
@@ -187,6 +185,27 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
             foreach (Ball ball in _ballList)
             {
                 ball.SetDefaultSpeed();
+            }
+        }
+
+        /// <summary>
+        /// Handler the BonusApplied event
+        /// </summary>
+        /// <param name="bonus"></param>
+        /// <param name="targetGameObject"></param>
+        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
+        {
+            switch (bonus.bonusType)
+            {
+                case BonusType.MultiBall:
+                    SpawnTripleBall();
+                    break;
+                case BonusType.SlowBall:
+                    SlowAllBalls();
+                    break;
+                case BonusType.MegaBall:
+                    MakeMegaBalls();
+                    break;
             }
         }
     }

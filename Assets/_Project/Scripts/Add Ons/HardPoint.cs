@@ -1,3 +1,4 @@
+using System.Collections;
 using DaftApplesGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -85,6 +86,27 @@ namespace DaftApplesGames.RetroRacketRevolution
             }
             RetractEvent.Invoke();
             _isDeployed = false;
+        }
+
+        /// <summary>
+        /// Wrapper for async method to remove the add-on
+        /// </summary>
+        /// <param name="delay"></param>
+        public void DeactivateHardPointAfterDelay(float delay)
+        {
+            StartCoroutine(DeactivateHardPointAfterDelayAsync(delay));
+        }
+
+        /// <summary>
+        /// Removes add-on from hardpoint after a given delay
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        private IEnumerator DeactivateHardPointAfterDelayAsync(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            // hardPoint.DetachAddOn(true, true);
+            DisableAddOn();
         }
     }
 }

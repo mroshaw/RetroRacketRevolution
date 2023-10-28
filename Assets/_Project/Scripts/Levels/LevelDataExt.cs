@@ -22,9 +22,11 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         [BoxGroup("Level Layout")] private const int numberOfBricksPerRow = 15;
 
 #if UNITY_EDITOR
-        public static string LevelDataPath = "C:\\Games\\Retro Racket Revolution\\LevelData";
+        public static string OgLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\LevelData";
+        public static string CustomLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\CustomLevelData";
 #else
-         public static string LevelDataPath = Path.Combine(Path.GetFullPath("./"), "LevelData");
+        public static string OgLevelDataPath = Path.Combine(Path.GetFullPath("./"), "LevelData");
+        public static string CustomLevelDataPath = Path.Combine(Path.GetFullPath("./"), "CustomLevelData");
 #endif
         /// <summary>
         /// Add / update a brick
@@ -94,21 +96,51 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         }
 
         /// <summary>
+        /// Prints the Brick Array to the Debug log
+        /// </summary>
+        public static void Print(LevelDataExt levelData)
+        {
+            for (int currRow = 0; currRow < numberOfRows; currRow++)
+            {
+                for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
+                {
+                    BrickData brickData = levelData.BrickDataArray.RowArray[currRow].RowBricks[currCol];
+                    Debug.Log($"Brick: ({brickData.ColumnNumber}, {brickData.RowNumber}), Color: {brickData.BrickColor.ToString()}. Type: {brickData.BrickType}, Bonus: {brickData.BrickBonus}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes the given instance file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="isCustomLevels"></param>
+        public static void DeleteLevelInstanceFile(string fileName, bool isCustomLevels)
+        {
+            string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
+            string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
+
+            File.Delete(levelFilePath);
+            Debug.Log($"File deleted: {levelFilePath}");
+        }
+
+        /// <summary>
         /// Save the instance to a file
         /// </summary>
         /// <param name="fileName"></param>
-        public void SaveInstanceToFile(string fileName)
+        /// <param name="isCustomLevels"></param>
+        public void SaveInstanceToFile(string fileName, bool isCustomLevels)
         {
-            string path = Path.GetFullPath("./");
-            string levelDataPath = Path.Combine(@path, "LevelData");
-            if (!File.Exists(levelDataPath))
+            string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
+
+            if (!File.Exists(levelPath))
             {
-                Debug.Log($"Save: Creating folder: {LevelDataPath}");
-                Directory.CreateDirectory(LevelDataPath);
+                Debug.Log($"Save: Creating folder: {OgLevelDataPath}");
+                Directory.CreateDirectory(OgLevelDataPath);
             }
 
             // Derive the full save file path
-            string levelFilePath = Path.Combine(LevelDataPath, Path.ChangeExtension(fileName, ".json"));
+            string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
 
            // Serialise the data
             string json = JsonUtility.ToJson(this, true);
@@ -125,24 +157,34 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// Loads an instance from a file
         /// </summary>
         /// <param name="fileName"></param>
+        /// <param name="isCustomLevels"></param>
         /// <returns></returns>
-        public static LevelDataExt LoadInstanceFromFile(string fileName)
+        public static LevelDataExt LoadInstanceFromFile(string fileName, bool isCustomLevels)
         {
-            string levelFilePath = Path.Combine(LevelDataPath, Path.ChangeExtension(fileName, ".json"));
+            string json;
+#if PLATFORM_ANDROID
+            TextAsset level = Resources.Load<TextAsset>($"LevelData\\{fileName}");
+            json = level.text;
+#else
+            string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
+
+            string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
+            Debug.Log($"Loaded data from file: {levelFilePath}");
+
             if (!File.Exists(levelFilePath))
             {
                 return null;
             }
 
-            string json;
             // Write the JSON to file
             using (StreamReader inputFile = new StreamReader(levelFilePath))
             {
                 json = inputFile.ReadToEnd();
             }
-
+#endif
             LevelDataExt levelDataExt = JsonUtility.FromJson<LevelDataExt>(json);
-
+            
+            // Print(levelDataExt);
             return levelDataExt;
         }
 
@@ -150,15 +192,27 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// Gets a list of all files in the saved level folder
         /// </summary>
         /// <returns></returns>
-        public static string[] GetLevelsNames()
+        public static List<string> GetLevelsNames(bool isCustomLevels)
         {
             List<string> levelPathsList = new List<string>();
-            foreach (string currFile in Directory.GetFiles(LevelDataPath))
+
+            string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
+#if PLATFORM_ANDROID
+            TextAsset[] allLevels = Resources.LoadAll<TextAsset>("LevelData");
+
+            // Load levels from Resource folder
+            foreach (TextAsset level in allLevels)
+            {
+                levelPathsList.Add(level.name);
+            }
+#else
+            foreach (string currFile in Directory.GetFiles(levelPath, "*.json"))
             {
                 levelPathsList.Add(Path.GetFileName(currFile));
             }
-            levelPathsList.Sort();
-            return levelPathsList.ToArray();
+#endif
+                levelPathsList.Sort();
+            return levelPathsList;
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using DaftApplesGames.RetroRacketRevolution.Bonuses;
 using DaftApplesGames.RetroRacketRevolution.Bricks;
 using DaftApplesGames.RetroRacketRevolution.Players;

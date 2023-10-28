@@ -9,11 +9,15 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         [BoxGroup("UI Settings")] public GameObject highScoreContainer;
         [BoxGroup("UI Settings")] public GameObject templateGameObject;
 
+        private HighScores _highScores;
+
         /// <summary>
         /// Update with the latest High Scores
         /// </summary>
         private void Start()
         {
+            _highScores = new HighScores();
+            _highScores.LoadHighScores();
             RefreshHighScores();
         }
 
@@ -26,11 +30,11 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
             base.Show();
         }
 
+        /// <summary>
+        /// Refresh the High Score window
+        /// </summary>
         private void RefreshHighScores()
         {
-
-            HighScores highScores = GameController.Instance.HighScores;
-
             // Clear down high scores
             foreach (Transform childTransform in highScoreContainer.transform)
             {
@@ -38,7 +42,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
             }
 
             // Recreate them
-            foreach (HighScores.HighScore highScore in highScores.HighScoreArray)
+            foreach (HighScores.HighScore highScore in _highScores.HighScoreArray)
             {
                 GameObject newEntry = Instantiate(templateGameObject);
                 newEntry.transform.SetParent(highScoreContainer.transform);

@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DaftAppletGames.BattyRemake.Audio
+namespace SimpleAudioManager
 {
     [CreateAssetMenu(fileName = "Song", menuName = "SimpleAudioManager/Song", order = 0)]
     public class Song : ScriptableObject

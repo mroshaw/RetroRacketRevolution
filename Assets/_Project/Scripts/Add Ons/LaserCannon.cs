@@ -112,14 +112,17 @@ namespace DaftApplesGames.RetroRacketRevolution
             if (CanFire())
             {
                 // Fire!
-                _audioSource.PlayOneShot(fireClip);
-                lastShotCounter = 0.0f;
-                GameObject laserBoltObject = laserBoltPool.Get();
-                LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
-                laserBolt.LaserBoltCollideEvent.AddListener(OnReturnLaserBoltToPool);
-                laserBolt.LaserCannon = this;
-                laserBoltObject.gameObject.transform.position = barrelEndTransform.position;
-                laserBoltObject.gameObject.transform.localScale = new Vector2(40, 80);
+                if (_audioSource.enabled)
+                {
+                    _audioSource.PlayOneShot(fireClip);
+                    lastShotCounter = 0.0f;
+                    GameObject laserBoltObject = laserBoltPool.Get();
+                    LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
+                    laserBolt.LaserBoltCollideEvent.AddListener(OnReturnLaserBoltToPool);
+                    laserBolt.LaserCannon = this;
+                    laserBoltObject.gameObject.transform.position = barrelEndTransform.position;
+                    laserBoltObject.gameObject.transform.localScale = new Vector2(40, 80);
+                }
             }
         }
     }

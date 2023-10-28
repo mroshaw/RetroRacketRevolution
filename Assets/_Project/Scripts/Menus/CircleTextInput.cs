@@ -23,7 +23,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         [BoxGroup("Buttons")] public Button doneButton;
         [BoxGroup("Buttons")] public Button delButton;
         [FoldoutGroup("Events")] public UnityEvent<Player, string> NameSubmittedEvent;
-
+        [FoldoutGroup("Events")] public UnityEvent WindowReadyEvent;
         private int _numLetters;
 
         private Player _player;
@@ -57,6 +57,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
             base.Show();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            WindowReadyEvent.Invoke();
         }
 
         /// <summary>

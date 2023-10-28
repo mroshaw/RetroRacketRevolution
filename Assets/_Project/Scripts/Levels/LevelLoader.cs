@@ -1,4 +1,6 @@
-using DaftAppleGames.RetroRacketRevolution.Audio;
+using System.Collections.Generic;
+using System.Linq;
+using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftApplesGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,9 +18,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         [BoxGroup("Level Layout")] public float brickWidthBuffer = 0.1f;
         [BoxGroup("Level Layout")] public float brickHeightBuffer = 0.1f;
         [BoxGroup("Level Graphics")] public SpriteRenderer backgroundSpriteRenderer;
-        [BoxGroup("Objects")] public Vector2 brickScale = new Vector2(5.0f, 2.5f);
+        [BoxGroup("Objects")] public Vector2 brickScale = new Vector2(5.2f, 2.7f);
         [BoxGroup("Objects")] public Vector2 disruptorScale = new Vector2(1.0f, 1.0f);
-        [BoxGroup("Levels")] public string[] levelFiles;
+        [BoxGroup("Levels")] public List<string> levelFiles;
+        [BoxGroup("Game Data")] public GameData gameData;
         [FoldoutGroup("Background Sprites")] public LevelBackgroundSprites backgroundSprites;
         [FoldoutGroup("Events")] public UnityEvent<LevelDataExt> LevelLoadedEvent;
         
@@ -32,7 +35,24 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// </summary>
         private void Awake()
         {
-            levelFiles = LevelDataExt.GetLevelsNames();
+            List<string> ogLevelFiles = LevelDataExt.GetLevelsNames(false);
+            List<string> customLevelFiles = LevelDataExt.GetLevelsNames(true);
+
+            switch (gameData.levelSelect)
+            {
+                case LevelSelect.Original:
+                    levelFiles = ogLevelFiles;
+                    break;
+                case LevelSelect.Custom:
+                    levelFiles = customLevelFiles;
+                    break;
+                case LevelSelect.OgPlusCustom:
+                    levelFiles = (List<string>)ogLevelFiles.Concat(customLevelFiles);
+                    break;
+                case LevelSelect.CustomPlusOg:
+                    levelFiles = (List<string>)customLevelFiles.Concat(ogLevelFiles);
+                    break;
+            }
         }
 
         /// <summary>
@@ -72,7 +92,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// <returns></returns>
         public bool IsLastLevel()
         {
-            return (CurrentLevel == levelFiles.Length);
+            return (CurrentLevel == levelFiles.Count);
         }
 
         /// <summary>
@@ -80,7 +100,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// </summary>
         public bool LoadNextLevelPlease()
         {
-            if (CurrentLevel == levelFiles.Length)
+            if (CurrentLevel == levelFiles.Count)
             {
                 return false;
             }
@@ -95,7 +115,18 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// <param name="levelFileName"></param>
         private void LoadLevel(string levelFileName)
         {
-            LevelDataExt levelData = LevelDataExt.LoadInstanceFromFile(levelFileName);
+            LevelDataExt levelData = null;
+
+            switch (gameData.levelSelect)
+            {
+                case LevelSelect.Custom:
+                    levelData = LevelDataExt.LoadInstanceFromFile(levelFileName, true);
+                    break;
+
+                case LevelSelect.Original:
+                    levelData = LevelDataExt.LoadInstanceFromFile(levelFileName, false);
+                    break;
+            }
             LoadLevelData(levelData);
         }
 

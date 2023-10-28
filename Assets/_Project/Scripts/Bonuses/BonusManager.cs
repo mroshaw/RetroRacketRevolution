@@ -1,58 +1,28 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Levels;
-using DaftApplesGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DaftApplesGames.RetroRacketRevolution.Bonuses
 {
-    public enum BonusType { None, MultiBall, Laser, SlowBall, MegaBall, ExtraLife, FinishLevel, Random, SmallScore, BigScore, ShrinkBat, GrowBat, Catcher }
-
     public class BonusManager : MonoBehaviour
     {
-        public static BonusManager Instance { get; private set; }
-
-        [BoxGroup("Managers")] public BallManager ballManager;
-        [BoxGroup("Managers")] public AddOnManager addOnManager;
-        [BoxGroup("Managers")] public PlayerManager playerManager;
-        [BoxGroup("Managers")] public LevelLoader levelLoader;
         [BoxGroup("Prefabs")] public Transform bonusContainer;
-        [BoxGroup("Prefabs")] public GameObject bonusPrefab;
-        [BoxGroup("Settings")] public BonusCollectable[] bonusItemArray;
+        [BoxGroup("Settings")] public BonusData bonusData;
+        [BoxGroup("Settings")] public GameObject container;
+        [BoxGroup("Random")] public Vector2 randomSpawnPosition;
 
-        private Dictionary<BonusType, BonusCollectable> bonusItemDict;
+        [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> BonusAppliedEvent;
 
         private AudioSource _audioSource;
-
-        [SerializeField]
-        private Dictionary<BonusType, BonusCollectable> _bonusDict = new Dictionary<BonusType, BonusCollectable>();
-
-        [BoxGroup("Settings")] public GameObject container;
 
         /// <summary>
         /// Set up the Bonus Manager
         /// </summary>
         private void Awake()
         {
-            // If there is an instance, and it's not me, delete myself.
-
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-
-                // Convert the array to dictionary for easier/quicker
-                // lookup
-                bonusItemDict = bonusItemArray.ToDictionary(x => x.BonusType);
-                _audioSource = GetComponent<AudioSource>();
-            }
+            _audioSource = GetComponent<AudioSource>();
         }
 
         /// <summary>
@@ -62,7 +32,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bonuses
         /// <param name="spawnPosition"></param>
         public void SpawnBonus(BonusType bonusType, Vector2 spawnPosition)
         {
-            GameObject newBonus = Instantiate(bonusItemDict[bonusType].Prefab, bonusContainer);
+            GameObject newBonus = Instantiate(bonusData.GetBonusByType(bonusType).SpawnPrefab, bonusContainer);
             Bonus bonus = newBonus.GetComponent<Bonus>();
             newBonus.transform.position = spawnPosition;
             bonus.MainBonusManager = this;
@@ -82,47 +52,16 @@ namespace DaftApplesGames.RetroRacketRevolution.Bonuses
             // Play bonus audio
             _audioSource.PlayOneShot(bonus.collectAudioClip);
 
-            Player player = targetGameObject.GetComponentInParent<Player>();
-
-            // Process the bonus
-            switch (bonus.bonusType)
+            // If Random, spawn a random bonus
+            if (bonus.bonusType == BonusType.Random)
             {
-                case BonusType.MultiBall:
-                    ballManager.SpawnTripleBall();
-                    break;
-                case BonusType.ExtraLife:
-                    playerManager.AddLife();
-                    break;
-                case BonusType.SlowBall:
-                    ballManager.SlowAllBalls();
-                    break;
-                case BonusType.SmallScore:
-                case BonusType.BigScore:
-                player.AddScore(bonus.scoreToAdd);
-                    break;
-                case BonusType.MegaBall:
-                    ballManager.MakeMegaBalls();
-                    break;
-                case BonusType.Laser:
-                case BonusType.Catcher:
-                case BonusType.FinishLevel:
-                    HardPoint playerHardPoint = player.GetFreeHardPoint(bonus.hardPointLocation);
-                    if (playerHardPoint != null)
-                    {
-                        playerHardPoint.EnableAddOn();
-                        if (bonus.duration > 0.0f)
-                        {
-                            RemoveBonusAddOnAfterDelay(playerHardPoint, bonus.duration);
-                        }
-                    }
-                    break;
-                case BonusType.ShrinkBat:
-                    player.ShrinkBat();
-                    break;
-                case BonusType.GrowBat:
-                    player.GrowBat();
-                    break;
+                BonusType randomBonus = GetRandomBonus(BonusType.Random);
+                Debug.Log($"Spawning random bonus... {randomBonus.ToString()}");
+                SpawnBonus(randomBonus, randomSpawnPosition);
+                return;
             }
+
+            BonusAppliedEvent.Invoke(bonus, targetGameObject);
         }
 
         /// <summary>
@@ -152,11 +91,18 @@ namespace DaftApplesGames.RetroRacketRevolution.Bonuses
         /// Gets a random bonus
         /// </summary>
         /// <returns></returns>
-        private BonusType GetRandomBonus()
+        private BonusType GetRandomBonus(BonusType excludeType)
         {
             Array values = Enum.GetValues(typeof(BonusType));
             System.Random random = new System.Random();
-            BonusType randomBonus = (BonusType)values.GetValue(random.Next(values.Length));
+            int randomIndex = random.Next(1, values.Length - 1);
+
+            if ((BonusType)randomIndex == excludeType)
+            {
+                randomIndex++;
+            }
+
+            BonusType randomBonus = (BonusType)values.GetValue(randomIndex);
             return randomBonus;
         }
 
@@ -191,47 +137,5 @@ namespace DaftApplesGames.RetroRacketRevolution.Bonuses
             public BonusType BonusType;
             public GameObject Prefab;
         }
-
-        #region PoolRegion
-        /// <summary>
-        /// Create action for pool
-        /// </summary>
-        /// <returns></returns>
-        private GameObject CreateBonus()
-        {
-            GameObject newBonusGameObject = Instantiate(bonusPrefab);
-            newBonusGameObject.transform.parent = bonusContainer.transform;
-            Bonus bonus = newBonusGameObject.GetComponent<Bonus>();
-            bonus.MainBonusManager = this;
-            return newBonusGameObject;
-        }
-
-        /// <summary>
-        /// Take action for pool
-        /// </summary>
-        /// <param name="bonus"></param>
-        private void OnTakeBonusFromPool(GameObject bonus)
-        {
-            bonus.SetActive(true);
-        }
-
-        /// <summary>
-        /// Return action for pool
-        /// </summary>
-        /// <param name="bonus"></param>
-        private void OnReturnBonusToPool(GameObject bonus)
-        {
-            bonus.SetActive(false);
-        }
-
-        /// <summary>
-        /// Destroy action for pool
-        /// </summary>
-        /// <param name="bonus"></param>
-        private void OnDestroyBonus(GameObject bonus)
-        {
-            Destroy(bonus);
-        }
-        #endregion
     }
 }

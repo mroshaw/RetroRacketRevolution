@@ -1,7 +1,6 @@
 using DaftApplesGames.RetroRacketRevolution.Bonuses;
 using DaftApplesGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -19,23 +18,30 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
 
         [BoxGroup("Sprites")] public SpriteRenderer spriteRenderer;
         [BoxGroup("Sprites")] public Sprite normalBrickSprite;
-        [BoxGroup("Sprites")] public Sprite health2Sprite;
-        [BoxGroup("Sprites")] public Sprite health1Sprite;
-        [BoxGroup("Brick Type")] public GameObject normalBrickGameObject;
-        [BoxGroup("Brick Type")] public GameObject invincibleBrickGameObject;
-        [BoxGroup("Brick Type")] public SortingGroup invincibleBrickSortingGroup;
+        [BoxGroup("Sprites")] public Sprite doubleStrongSprite;
+        [BoxGroup("Sprites")] public Sprite tripleStrongSprite;
+        [BoxGroup("Sprites")] public Sprite invincibleSprite;
+
+        [BoxGroup("Damage")] public SpriteRenderer health2SpriteRenderer;
+        [BoxGroup("Damage")] public SpriteRenderer health1SpriteRenderer;
 
         [BoxGroup("Debug")] public int row;
         [BoxGroup("Debug")] public int col;
 
         // Public properties
         public BrickManager BrickManager { set; get; }
+        public float Health => _health;
 
         // Private properties
         [BoxGroup("Debug")] [SerializeField] private int _health = 1;
         private int _scoreValue = 10;
         // Components
         private AudioSource _audioSource;
+        private BrickGlint _brickGlint;
+
+        private SortingGroup _spriteSortingGroup;
+        private SortingGroup _glintSortingGroup;
+        private SpriteMask _spriteMask;
 
         private void OnEnable()
         {
@@ -48,6 +54,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _spriteSortingGroup = spriteRenderer.GetComponent<SortingGroup>();
+            _brickGlint = GetComponentInChildren<BrickGlint>(true);
+            _glintSortingGroup = _brickGlint.GetComponentInChildren<SpriteRenderer>(true).GetComponent<SortingGroup>();
+            _spriteMask = _brickGlint.GetComponentInChildren<SpriteMask>(true);
         }
 
         /// <summary>
@@ -77,25 +87,22 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
                 case BrickType.Normal:
                     _health = 1;
                     spriteRenderer.sprite = normalBrickSprite;
-                    invincibleBrickGameObject.SetActive(false);
-                    normalBrickGameObject.SetActive(true);
+                    _brickGlint.gameObject.SetActive(false);
                     break;
                 case BrickType.DoubleStrong:
-                    invincibleBrickGameObject.SetActive(false);
-                    normalBrickGameObject.SetActive(true);
-                    spriteRenderer.sprite = normalBrickSprite;
+                    spriteRenderer.sprite = doubleStrongSprite;
+                    _brickGlint.gameObject.SetActive(false);
                     _health = 2;
                     break;
                 case BrickType.TripleStrong:
-                    invincibleBrickGameObject.SetActive(false);
-                    normalBrickGameObject.SetActive(true);
-                    spriteRenderer.sprite = normalBrickSprite;
+                    spriteRenderer.sprite = tripleStrongSprite;
+                    _brickGlint.gameObject.SetActive(false);
                     _health = 3;
                     break;
                 case BrickType.Invincible:
-                    invincibleBrickGameObject.SetActive(true);
-                    invincibleBrickGameObject.GetComponent<BrickGlint>().Reset();
-                    normalBrickGameObject.SetActive(false);
+                    spriteRenderer.sprite = invincibleSprite;
+                    _brickGlint.gameObject.SetActive(true);
+                    _brickGlint.Reset();
                     _health = -1;
                     break;
             }
@@ -117,6 +124,20 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
             // Set colour
             SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
             sprite.color = brickColor;
+
+            // Init cracks
+            health2SpriteRenderer.gameObject.SetActive(false);
+            health1SpriteRenderer.gameObject.SetActive(false);
+            if (IsDarkColor(brickColor))
+            {
+                health2SpriteRenderer.color = Color.white;
+                health1SpriteRenderer.color = Color.white;
+            }
+            else
+            {
+                health2SpriteRenderer.color = Color.black;
+                health1SpriteRenderer.color = Color.black;
+            }
         }
 
         /// <summary>
@@ -131,14 +152,14 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
             _health--;
 
             // Change sprite for multi-hit bricks
-            if (_health == 2 && health2Sprite)
+            if (_health == 2)
             {
-                spriteRenderer.sprite = health2Sprite;
+                health2SpriteRenderer.gameObject.SetActive(true);
             }
 
-            if (_health == 1 && health1Sprite)
+            if (_health == 1)
             {
-                spriteRenderer.sprite = health1Sprite;
+                health1SpriteRenderer.gameObject.SetActive(true);
             }
 
             if (_health == 0)
@@ -157,11 +178,15 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         {
             if (mainGroup)
             {
-                invincibleBrickSortingGroup.sortingLayerName = "Brick1";
+                _spriteSortingGroup.sortingLayerName = "Brick1";
+                _glintSortingGroup.sortingLayerName = "Brick1";
+                _spriteMask.frontSortingLayerID = SortingLayer.NameToID("Brick1");
             }
             else
             {
-                invincibleBrickSortingGroup.sortingLayerName = "Brick2";
+                _spriteSortingGroup.sortingLayerName = "Brick2";
+                _glintSortingGroup.sortingLayerName = "Brick2";
+                _spriteMask.frontSortingLayerID = SortingLayer.NameToID("Brick2");
             }
         }
 
@@ -174,7 +199,18 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
             {
                 return;
             }
-            BonusManager.Instance.SpawnBonus(brickBonus, transform.position);
+            BrickManager.BrickSpawnBonus(brickBonus, transform.position);
+            // BonusManager.Instance.SpawnBonus(brickBonus, transform.position);
+        }
+
+        /// <summary>
+        /// Determine if color is dark
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        private bool IsDarkColor(Color color)
+        {
+            return (color.r * 0.2126 + color.g * 0.7152 + color.b * 0.0722 < 255 / 2);
         }
     }
 }

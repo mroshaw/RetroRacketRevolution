@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DaftApplesGames.RetroRacketRevolution.Balls;
+using DaftApplesGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
 {
     public enum HardPointLocation { Outer, Center, Bottom }
     
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IBonusRecipient
     {
         // Public settings
         [BoxGroup("Player Settings")] public Vector2 defaultBatScale;
@@ -88,7 +89,6 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
             _audioSource = GetComponent<AudioSource>();
             _playerSpriteGameObject = playerSprite.gameObject;
             _playerManager = GetComponentInParent<PlayerManager>();
-            SetDefaultBatSize();
             // Init score
             Score = 0;
         }
@@ -98,6 +98,8 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         /// </summary>
         private void Start()
         {
+            SetDefaultBatSize();
+
             // Spawn the ball, if set
             if (spawnBallOnStart)
             {
@@ -149,8 +151,56 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         {
             if (_attachedBalls.Count == 0)
             {
-                Ball newBall = BallManager.Instance.GetNewBall();
+                Ball newBall = _playerManager.SpawnNewBall();
                 newBall.Attach(this, defaultBallAttachPoint.position);
+            }
+        }
+
+        /// <summary>
+        /// Handle Bonus Applied events
+        /// </summary>
+        /// <param name="bonus"></param>
+        /// <param name="targetGameObject"></param>
+        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
+        {
+            // Check if the target is for me
+            Player targetPlayer = targetGameObject.GetComponentInParent<Player>();
+            if (targetPlayer == null)
+            {
+                return;
+            }
+
+            if (targetPlayer != this)
+            {
+                return;
+            }
+
+            // Bonus is for me, so apply it
+            switch (bonus.bonusType)
+            {
+                case BonusType.SmallScore:
+                case BonusType.BigScore:
+                    AddScore(bonus.scoreToAdd);
+                    break;
+                case BonusType.Laser:
+                case BonusType.Catcher:
+                case BonusType.FinishLevel:
+                    HardPoint playerHardPoint = GetFreeHardPoint(bonus.hardPointLocation);
+                    if (playerHardPoint != null)
+                    {
+                        playerHardPoint.EnableAddOn();
+                        if (bonus.duration > 0.0f)
+                        {
+                            playerHardPoint.DeactivateHardPointAfterDelay(bonus.duration);
+                        }
+                    }
+                    break;
+                case BonusType.ShrinkBat:
+                    ShrinkBat();
+                    break;
+                case BonusType.GrowBat:
+                    GrowBat();
+                    break;
             }
         }
 

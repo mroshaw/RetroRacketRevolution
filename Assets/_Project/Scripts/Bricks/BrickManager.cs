@@ -9,8 +9,6 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
 {
     public class BrickManager : MonoBehaviour
     {
-        public static BrickManager Instance { get; private set; }
-
         [BoxGroup("Audio")] public AudioClip destroyedClip;
         [BoxGroup("Prefabs")] public GameObject brickPrefab;
         [BoxGroup("Prefabs")] public GameObject disruptorPrefab;
@@ -23,6 +21,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         [BoxGroup("Events")] public UnityEvent<Brick> BrickAddedEvent;
         [BoxGroup("Events")] public UnityEvent<Brick> BrickDestroyedEvent;
         [BoxGroup("Events")] public UnityEvent LastBrickDestroyedEvent;
+        [BoxGroup("Events")] public UnityEvent<BonusType, Vector2> BrickSpawnBonusEvent;
 
         // Private properties
         private AudioSource _audioSource;
@@ -37,20 +36,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         /// </summary>
         private void Awake()
         {
-            // If there is an instance, and it's not me, delete myself.
-
-            if (Instance != null && Instance != this)
+            _audioSource = GetComponent<AudioSource>();
+            if (usePooling)
             {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-                _audioSource = GetComponent<AudioSource>();
-                if (usePooling)
-                {
-                    brickPool = new ObjectPool<GameObject>(CreateBrick, OnTakeBrickFromPool, OnReturnBrickToPool, OnDestroyBrick, true, defaultPoolSize);
-                }
+                brickPool = new ObjectPool<GameObject>(CreateBrick, OnTakeBrickFromPool, OnReturnBrickToPool, OnDestroyBrick, true, defaultPoolSize);
             }
         }
 
@@ -107,6 +96,14 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
             }
             brick.OnSpawn();
             return brick;
+        }
+
+        /// <summary>
+        /// Destroyed brick has a bonus to spawn
+        /// </summary>
+        public void BrickSpawnBonus(BonusType bonusType, Vector2 spawnPosition)
+        {
+            BrickSpawnBonusEvent.Invoke(bonusType, spawnPosition);
         }
 
         /// <summary>
@@ -185,7 +182,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         /// <param name="brick"></param>
         public void DestroyBrick(Brick brick)
         {
-            _audioSource.PlayOneShot(destroyedClip);
+            if (brick.brickType != BrickType.Invincible)
+            {
+                _audioSource.PlayOneShot(destroyedClip);
+            }
             bricks.Remove(brick);
             if (brick.brickType != BrickType.Invincible)
             {

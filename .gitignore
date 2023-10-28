@@ -95,3 +95,9 @@ crashlytics-build.properties
 /[Aa]ssets/_Project/Scenes/Test Scenes.meta
 /[Aa]ssets/_Project/Scenes/Test Scenes/
 /Screenshots
+/[Aa]ssets/BuildReport/
+/[Aa]ssets/BuildReport.meta
+/[Aa]ssets/Joystick Pack/
+/[Aa]ssets/Joystick Pack.meta
+/[Pp]ackages/
+/[Ss]erializedBuildInfo/
