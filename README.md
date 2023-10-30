@@ -19,7 +19,7 @@ You'll need:
 
 The following 3rd party assets are used, and for licensing reasons are not included in the repository. These can easily be removed and / or substituted for other assets:
 
-- Odin Inspector (paid) - https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041 - used in all source code files for their amazing Editor enhancements.
+- Odin Inspector (paid) - https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041 - used in all source code files for their amazing Editor enhancements. Only impacts the editor, no features used in gameplay.
 - Graphy (free) - https://assetstore.unity.com/packages/tools/gui/graphy-ultimate-fps-counter-stats-monitor-debugger-105778 - used to debug performance.
 - Epic Toon VFX 2 (paid) - https://assetstore.unity.com/packages/vfx/particles/spells/epic-toon-vfx-2-157651 - used for the explosion VFX.
 - Retro Aesthetics (paid) - https://assetstore.unity.com/packages/tools/particles-effects/retro-aesthetics-79538 - used for the retro camera VFX.
