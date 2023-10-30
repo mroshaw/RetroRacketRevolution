@@ -101,3 +101,7 @@ crashlytics-build.properties
 /[Aa]ssets/Joystick Pack.meta
 /[Pp]ackages/
 /[Ss]erializedBuildInfo/
+/[Aa]ssets/_Project/Audio/SFX/
+/[Aa]ssets/_Project/Audio/SFX.meta
+/[Aa]ssets/_Project/Textures/Bricks/
+/[Aa]ssets/_Project/Textures/Bricks.meta
