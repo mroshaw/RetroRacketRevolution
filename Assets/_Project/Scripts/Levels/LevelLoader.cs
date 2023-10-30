@@ -20,7 +20,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         [BoxGroup("Level Graphics")] public SpriteRenderer backgroundSpriteRenderer;
         [BoxGroup("Objects")] public Vector2 brickScale = new Vector2(5.2f, 2.7f);
         [BoxGroup("Objects")] public Vector2 disruptorScale = new Vector2(1.0f, 1.0f);
-        [BoxGroup("Levels")] public List<string> levelFiles;
+        [BoxGroup("Levels")] public List<LevelLoadEntry> levelFiles;
         [BoxGroup("Game Data")] public GameData gameData;
         [FoldoutGroup("Background Sprites")] public LevelBackgroundSprites backgroundSprites;
         [FoldoutGroup("Events")] public UnityEvent<LevelDataExt> LevelLoadedEvent;
@@ -30,6 +30,18 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
 
         public int CurrentLevel { get; private set; }
 
+        public class LevelLoadEntry
+        {
+            public string LevelFileName;
+            public bool IsCustomLevel;
+
+            public LevelLoadEntry(string levelFileName, bool isCustomLevel)
+            {
+                LevelFileName = levelFileName;
+                IsCustomLevel = isCustomLevel;
+            }
+        }
+
         /// <summary>
         /// Init the component
         /// </summary>
@@ -38,21 +50,40 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
             List<string> ogLevelFiles = LevelDataExt.GetLevelsNames(false);
             List<string> customLevelFiles = LevelDataExt.GetLevelsNames(true);
 
-            switch (gameData.levelSelect)
+            levelFiles = GetLevelLoadEntries(gameData.levelSelect);
+        }
+
+        /// <summary>
+        /// Get list of levels to load
+        /// </summary>
+        /// <param name="levelSelect"></param>
+        /// <returns></returns>
+        private List<LevelLoadEntry> GetLevelLoadEntries(LevelSelect levelSelect)
+        {
+            List<string> ogLevelFiles = LevelDataExt.GetLevelsNames(false);
+            List<string> customLevelFiles = LevelDataExt.GetLevelsNames(true);
+
+            List<LevelLoadEntry> levelLoadEntries = new List<LevelLoadEntry>();
+
+            // Add Original levels
+            if (levelSelect == LevelSelect.Original || levelSelect == LevelSelect.OgPlusCustom)
             {
-                case LevelSelect.Original:
-                    levelFiles = ogLevelFiles;
-                    break;
-                case LevelSelect.Custom:
-                    levelFiles = customLevelFiles;
-                    break;
-                case LevelSelect.OgPlusCustom:
-                    levelFiles = (List<string>)ogLevelFiles.Concat(customLevelFiles);
-                    break;
-                case LevelSelect.CustomPlusOg:
-                    levelFiles = (List<string>)customLevelFiles.Concat(ogLevelFiles);
-                    break;
+                foreach (string levelFileName in ogLevelFiles)
+                {
+                    levelLoadEntries.Add(new LevelLoadEntry(levelFileName, false));
+                }
             }
+
+            // Add Custom levels
+            if (levelSelect == LevelSelect.Custom || levelSelect == LevelSelect.OgPlusCustom)
+            {
+                foreach (string levelFileName in customLevelFiles)
+                {
+                    levelLoadEntries.Add(new LevelLoadEntry(levelFileName, true));
+                }
+            }
+
+            return levelLoadEntries;
         }
 
         /// <summary>
@@ -62,7 +93,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         {
             // LoadLevel(levels[0]);
             CurrentLevel = 0; 
-            LoadNextLevelPlease();
+            LoadNextLevel();
         }
 
 #if UNITY_EDITOR
@@ -98,7 +129,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Loads the next level
         /// </summary>
-        public bool LoadNextLevelPlease()
+        public bool LoadNextLevel()
         {
             if (CurrentLevel == levelFiles.Count)
             {
@@ -112,20 +143,14 @@ namespace DaftApplesGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Loads the given level file
         /// </summary>
-        /// <param name="levelFileName"></param>
-        private void LoadLevel(string levelFileName)
+        /// <param name="levelLoadEntry"></param>
+        private void LoadLevel(LevelLoadEntry levelLoadEntry)
         {
-            LevelDataExt levelData = null;
-
-            switch (gameData.levelSelect)
+            LevelDataExt levelData = LevelDataExt.LoadInstanceFromFile(levelLoadEntry.LevelFileName, levelLoadEntry.IsCustomLevel);
+            if (levelData == null)
             {
-                case LevelSelect.Custom:
-                    levelData = LevelDataExt.LoadInstanceFromFile(levelFileName, true);
-                    break;
-
-                case LevelSelect.Original:
-                    levelData = LevelDataExt.LoadInstanceFromFile(levelFileName, false);
-                    break;
+                Debug.Log($"An error occurred loading: {levelLoadEntry.LevelFileName} with IsCustomLevel set to: {levelLoadEntry.IsCustomLevel}");
+                return;
             }
             LoadLevelData(levelData);
         }

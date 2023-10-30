@@ -1,3 +1,4 @@
+using System;
 using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftApplesGames.RetroRacketRevolution.Game;
 using Sirenix.OdinInspector;
@@ -12,6 +13,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
     {
         [BoxGroup("UI Settings")] public TMP_Dropdown p1ControlsDropDown;
         [BoxGroup("UI Settings")] public TMP_Dropdown p2ControlsDropDown;
+        [BoxGroup("UI Settings")] public TextMeshProUGUI versionText;
         [BoxGroup("Game Data")] public GameData gameData;
 
         public override void Awake()
@@ -24,6 +26,9 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// </summary>
         public void Start()
         {
+            // Update the version text
+            versionText.text = $"Build: {Version.Parse(Application.version).ToString()}";
+            // Set the default controls, depending on platform
 #if UNITY_STANDALONE_LINUX
             // Linux default is keyboard and gamepad
             p1ControlsDropDown.value = 0;
@@ -31,6 +36,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
             SetP1Controls(0);
             SetP2Controls(2);
 #elif PLATFORM_ANDROID
+            // Android default is gamepad
             SetP1Controls(2);
 #else
             // Windows default is mouse and keyboard

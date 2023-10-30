@@ -54,7 +54,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
             {
                 if (brick.brickType != BrickType.Invincible)
                 {
-                    DestroyBrickCallBack(brick);
+                    DestroyBrickCallBack(brick, false);
                 }
             }
         }
@@ -161,9 +161,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         /// Callback from Brick destroyed event
         /// </summary>
         /// <param name="brick"></param>
-        public void DestroyBrickCallBack(Brick brick)
+        /// <param name="playSound"></param>
+        public void DestroyBrickCallBack(Brick brick, bool playSound)
         {
-            DestroyBrick(brick);
+            DestroyBrick(brick, playSound);
 
             // Check if this is the last destructable brick
             if (HasLastBrickBeenDestroyed())
@@ -180,9 +181,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         /// Destroy a brick
         /// </summary>
         /// <param name="brick"></param>
-        public void DestroyBrick(Brick brick)
+        /// <param name="playSound"></param>
+        public void DestroyBrick(Brick brick, bool playSound)
         {
-            if (brick.brickType != BrickType.Invincible)
+            if (brick.brickType != BrickType.Invincible && playSound)
             {
                 _audioSource.PlayOneShot(destroyedClip);
             }
@@ -209,7 +211,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         {
             foreach (Brick brick in bricks.ToArray())
             {
-                DestroyBrick(brick);
+                DestroyBrick(brick, false);
             }
         }
 

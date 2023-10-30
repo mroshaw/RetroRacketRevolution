@@ -1,4 +1,4 @@
 D:
 cd d:\Games\butler
-butler.exe push "C:\Games\Retro Racket Revolution Android\RetroRacketRevolution.apk" DaftAppleGames/retro-racket:android-release
+butler.exe push "E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution Android\RetroRacketRevolution.apk" DaftAppleGames/retro-racket:android-release
 pause

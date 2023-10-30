@@ -1,4 +1,4 @@
 D:
 cd d:\Games\butler
-butler.exe push "C:\Games\Retro Racket Revolution" DaftAppleGames/retro-racket:release
+butler.exe push "E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution Windows" DaftAppleGames/retro-racket:release
 pause

@@ -1,115 +1,157 @@
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System.IO;
+using DaftAppleGames.RetroRacketRevolution.Editor;
 using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace DaftAppleGames.Editor
 {
-    public enum BuildPlatform { Windows, Linux, Android }
-
     public class BuildTool : OdinEditorWindow
     {
-        public static string WinGameFolder = @"C:\Games\Retro Racket Revolution";
-        public static string LinuxGameFolder = @"C:\Games\Retro Racket Revolution Linux";
-        public static string AndroidGameFolder = @"C:\Games\Retro Racket Revolution Android";
+        public static string WinGameFolder = @"E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution Windows";
+        public static string LinuxGameFolder = @"E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution Linux";
+        public static string AndroidGameFolder = @"E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution Android";
 
         public static string WinFileName = @"Retro Racket Revolution.exe";
         public static string LinuxFileName = @"RetroRacketRevolution.x86_64";
         public static string AndroidFileName = @"RetroRacketRevolution.apk";
 
-        [MenuItem("Build Tools/Build")]
+        [MenuItem("Build Tools/Build Tool Window")]
         public static void ShowWindow()
         {
             GetWindow(typeof(BuildTool));
         }
-        
+
+        [MenuItem("Build Tools/Build All")]
         [Button("BuildAll", ButtonSizes.Large), GUIColor(0, 1, 0)]
-        private void BuildAll()
+        private static void BuildAll()
         {
+            VersionIncrementor.IncreaseBuild();
             BuildAndroidGame();
             BuildLinuxGame();
             BuildWinGame();
         }
         
         [Button("Build Windows Game")]
-        private void BuildWinGame()
+        private static void BuildWinGame()
         {
-            BuildGame(BuildPlatform.Windows);
+            BuildGame(BuildTarget.StandaloneWindows64);
+            CopyLevels(BuildTarget.StandaloneWindows64);
         }
 
         [Button("Build Linux Game")]
-        private void BuildLinuxGame()
+        private static void BuildLinuxGame()
         {
-            BuildGame(BuildPlatform.Windows);
+            BuildGame(BuildTarget.StandaloneLinux64);
+            CopyLevels(BuildTarget.StandaloneLinux64);
         }
 
         [Button("Build Android Game")]
-        private void BuildAndroidGame()
+        private static void BuildAndroidGame()
         {
-            BuildGame(BuildPlatform.Android);
+            BuildGame(BuildTarget.Android);
+            CopyLevels(BuildTarget.Android);
+        }
+
+        [MenuItem("Build Tools/Update Levels")]
+        [Button("Update Levels")]
+        private static void UpdateLevels()
+        {
+            CopyLevels(BuildTarget.Android);
+            CopyLevels(BuildTarget.StandaloneWindows64);
+            CopyLevels(BuildTarget.StandaloneLinux64);
         }
 
         /// <summary>
         /// Build the game for the given platform
         /// </summary>
-        /// <param name="buildPlatform"></param>
-        private static void BuildGame(BuildPlatform buildPlatform)
+        /// <param name="buildTarget"></param>
+        private static void BuildGame(BuildTarget buildTarget)
         {
             // Scenes to build
             string[] scenesToBuild = new string[] { "Assets/_Project/Scenes/MainMenuScene.unity", "Assets/_Project/Scenes/GameScene.unity", "Assets/_Project/Scenes/LevelEditorScene.unity" };
-            
-            // Determine filename, build options
-            string path = "";
-            string fileName = "";
-            BuildTarget buildTarget;
 
-            switch (buildPlatform)
+            BuildOptions buildOptions = BuildOptions.CompressWithLz4HC;
+
+            // Set up options
+            switch (buildTarget)
             {
-                case BuildPlatform.Windows:
-                    path = WinGameFolder;
-                    fileName = WinFileName;
-                    buildTarget = BuildTarget.StandaloneWindows64;
+                case BuildTarget.StandaloneWindows64:
                     break;
-                case BuildPlatform.Android:
-                    path = AndroidGameFolder;
-                    fileName = AndroidFileName;
-                    buildTarget = BuildTarget.Android;
+                case BuildTarget.Android:
                     break;
-                case BuildPlatform.Linux:
-                    path = LinuxGameFolder;
-                    fileName = LinuxFileName;
-                    buildTarget = BuildTarget.StandaloneLinux64;
-                    break;
-
-                default:
-                    buildTarget = BuildTarget.StandaloneWindows;
-                    path = WinGameFolder;
-                    fileName = WinFileName;
+                case BuildTarget.StandaloneLinux64:
                     break;
             }
 
-            Debug.Log($"Building: {buildPlatform} to {path + "//" + fileName}");
+            // Get build paths
+            GetBuildPaths(buildTarget, out string path, out string fileName);
 
-            // Set up options
+            Debug.Log($"Building: {buildTarget} to {path + "//" + fileName}");
 
             // Build player.
-            BuildPipeline.BuildPlayer(scenesToBuild, path + "//" + fileName, buildTarget, BuildOptions.CompressWithLz4HC);
+            BuildPipeline.BuildPlayer(scenesToBuild, path + "//" + fileName, buildTarget, buildOptions);
+        }
 
-            // Copy level files, if not mobile platform
-            if (buildPlatform == BuildPlatform.Windows || buildPlatform == BuildPlatform.Linux)
+        /// <summary>
+        /// Get build path and filename
+        /// </summary>
+        /// <param name="buildTarget"></param>
+        /// <param name="outputPath"></param>
+        /// <param name="outputFilename"></param>
+        private static void GetBuildPaths(BuildTarget buildTarget, out string outputPath, out string outputFilename)
+        {
+            string path = "";
+            string fileName = "";
+
+            switch (buildTarget)
             {
-                // Copy the level files
+                case BuildTarget.StandaloneWindows64:
+                    path = WinGameFolder;
+                    fileName = WinFileName;
+                    break;
+                case BuildTarget.Android:
+                    path = AndroidGameFolder;
+                    fileName = AndroidFileName;
+                    break;
+                case BuildTarget.StandaloneLinux64:
+                    path = LinuxGameFolder;
+                    fileName = LinuxFileName;
+                    break;
+            }
+            outputPath = path;
+            outputFilename = fileName;
+        }
+
+        /// <summary>
+        /// Copy levels to target
+        /// </summary>
+        /// <param name="buildTarget"></param>
+        private static void CopyLevels(BuildTarget buildTarget)
+        {
+            // Copy level files, if not mobile platform
+            if (buildTarget ==BuildTarget.StandaloneWindows64 || buildTarget == BuildTarget.StandaloneLinux64)
+            {
+                // Get build paths
+                GetBuildPaths(buildTarget, out string path, out string fileName);
+
                 string levelDataPath = $@"{path}//LevelData";
                 string customLevelDataPath = $@"{path}//CustomLevelData";
 
                 Debug.Log($"Copying level data to {levelDataPath}");
 
+                // Create target directories, if it doesn't exist
                 if (!Directory.Exists(levelDataPath))
                 {
+                    Debug.Log($"Creating directory: {levelDataPath}");
                     Directory.CreateDirectory(levelDataPath);
+                }
+
+                if (!Directory.Exists(customLevelDataPath))
+                {
+                    Debug.Log($"Creating directory: {customLevelDataPath}");
+                    Directory.CreateDirectory(customLevelDataPath);
                 }
 
                 // Copy main game levels
@@ -133,3 +175,4 @@ namespace DaftAppleGames.Editor
         }
     }
 }
+

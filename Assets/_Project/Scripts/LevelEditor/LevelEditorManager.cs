@@ -153,7 +153,7 @@ namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
             LevelDataExt levelData = LevelDataExt.LoadInstanceFromFile(levelFileName, isCustomLevels);
             if (levelData == null)
             {
-                Debug.Log($"Error: Asset not found at path {levelFileName}");
+                Debug.Log($"Error: Level data file not found at path {levelFileName}");
                 return;
             }
 

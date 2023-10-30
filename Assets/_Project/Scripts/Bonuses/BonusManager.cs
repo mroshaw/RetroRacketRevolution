@@ -56,7 +56,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bonuses
             if (bonus.bonusType == BonusType.Random)
             {
                 BonusType randomBonus = GetRandomBonus(BonusType.Random);
-                Debug.Log($"Spawning random bonus... {randomBonus.ToString()}");
+                // Debug.Log($"Spawning random bonus... {randomBonus.ToString()}");
                 SpawnBonus(randomBonus, randomSpawnPosition);
                 return;
             }

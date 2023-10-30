@@ -108,7 +108,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Game
         /// </summary>
         private void LoadNextLevel()
         {
-            if(levelLoader.LoadNextLevelPlease() == false)
+            if(levelLoader.LoadNextLevel() == false)
             {
                 GameComplete();
             }

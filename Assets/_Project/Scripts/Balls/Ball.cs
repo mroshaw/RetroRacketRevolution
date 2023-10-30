@@ -318,7 +318,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
             float playerWidth)
         {
             float xFactor = (ballPos.x - playerPos.x) / playerWidth;
-            Debug.Log($"X factor: {xFactor}");
+            // Debug.Log($"X factor: {xFactor}");
             return xFactor;
         }
 
@@ -334,7 +334,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Balls
             float n = (ballPos.x - playerPos.x) / playerWidth;
             // float yFactor = n < 0 ? n - 1.0f : n + 1.0f;
             float yFactor = 1.0f + Math.Abs(n);
-            Debug.Log($"Y factor: {yFactor}");
+            // Debug.Log($"Y factor: {yFactor}");
             // return n < 0 ? n - 1.0f : n + 1.0f;
             return yFactor;
         }

@@ -14,7 +14,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
         [BoxGroup("Settings")] public Color brickColor;
         [BoxGroup("Settings")] public BrickType brickType;
         [BoxGroup("Settings")] public BonusType brickBonus;
-        [BoxGroup("Events")] public UnityEvent<Brick> BrickDestroyedEvent;
+        [BoxGroup("Events")] public UnityEvent<Brick, bool> BrickDestroyedEvent;
 
         [BoxGroup("Sprites")] public SpriteRenderer spriteRenderer;
         [BoxGroup("Sprites")] public Sprite normalBrickSprite;
@@ -167,7 +167,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Bricks
                 // Add score to player who destroyed
                 hitByPlayer.AddScore(_scoreValue);
                 SpawnBonus();
-                BrickDestroyedEvent.Invoke(this);
+                BrickDestroyedEvent.Invoke(this, true);
             }
         }
 

@@ -25,7 +25,7 @@ namespace DaftApplesGames.RetroRacketRevolution
                 }
             }
             BackgroundSprites = newList;
-            Debug.Log($"Total: {newList.Count}");
+            // Debug.Log($"Total: {newList.Count}");
         }
 
         /// <summary>
