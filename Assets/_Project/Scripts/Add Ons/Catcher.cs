@@ -1,8 +1,8 @@
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Catcher : AddOn
     {

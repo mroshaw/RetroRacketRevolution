@@ -1,9 +1,9 @@
 using System;
-using DaftApplesGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Balls;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Unsticker : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class LaserCannon : AddOn
     {

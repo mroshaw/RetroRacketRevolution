@@ -1,10 +1,10 @@
 using System.Collections;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class HardPoint : MonoBehaviour
     {

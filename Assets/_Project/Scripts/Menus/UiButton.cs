@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class UiButton : MonoBehaviour
     {

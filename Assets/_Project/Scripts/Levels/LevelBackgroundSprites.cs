@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     [CreateAssetMenu(fileName = "BackgroundSprites", menuName = "Level Editor/BackgroundSprites", order = 1)]
     public class LevelBackgroundSprites : ScriptableObject

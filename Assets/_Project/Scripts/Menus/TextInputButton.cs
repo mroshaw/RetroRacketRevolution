@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class TextInputButton : MonoBehaviour
     {

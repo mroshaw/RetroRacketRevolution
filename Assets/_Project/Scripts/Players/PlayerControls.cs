@@ -3,12 +3,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace DaftApplesGames.RetroRacketRevolution.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
+    public enum ControlScheme { Keyboard, Mouse, Gamepad, Touchpad }
+
     public class PlayerControls : MonoBehaviour
     {
-        [BoxGroup("Movement")] public float keyboardSpeedMultiplier = 1000.0f;
-        [BoxGroup("Movement")] public float dpadSpeedMultiplier = 100.0f;
+        [BoxGroup("Movement")] public float defaultKeyboardSpeedMultiplier = 2000.0f;
+        [BoxGroup("Movement")] public float defaultDpadSpeedMultiplier = 200.0f;
         [BoxGroup("Movement")] public float minX = -200.0f;
         [BoxGroup("Movement")] public float maxX = 200.0f;
 
@@ -34,7 +36,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         private Rigidbody2D _rb;
 
         private Vector2 noVelocity = new Vector2(0, 0);
-        
+
+        private float _keyboardSpeedMultiplier;
+        private float _dpadSpeedMultiplier;
+
         [BoxGroup("Events")] public UnityEvent FireButtonEvent;
 
         /// <summary>
@@ -45,6 +50,10 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
             _rb = GetComponent<Rigidbody2D>();
             _playerInput = GetComponent<PlayerInput>();
             _currentControlScheme = _playerInput.currentControlScheme;
+
+            _keyboardSpeedMultiplier = defaultKeyboardSpeedMultiplier;
+            _dpadSpeedMultiplier = defaultDpadSpeedMultiplier;
+
             ControlsEnabled = true;
         }
 
@@ -75,6 +84,24 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
         }
 
         /// <summary>
+        /// Handle settings change to control sensitivity
+        /// </summary>
+        /// <param name="newValue"></param>
+        public void KeyboardSensitivityChanged(float newValue)
+        {
+            _keyboardSpeedMultiplier = defaultKeyboardSpeedMultiplier * newValue;
+        }
+
+        /// <summary>
+        /// Handle settings change to control sensitivity
+        /// </summary>
+        /// <param name="newValue"></param>
+        public void DpadSensitivityChanged(float newValue)
+        {
+            _dpadSpeedMultiplier = defaultDpadSpeedMultiplier * newValue;
+        }
+
+        /// <summary>
         /// Handle the "Move" message from Player Controls
         /// </summary>
         /// <param name="value"></param>
@@ -94,30 +121,50 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
             {
                 Vector2 mousePosition = value.Get<Vector2>();
                 Vector2 moveVector = Camera.main.ScreenToWorldPoint(mousePosition);
-                float x = moveVector.x;
-                if (moveVector.x < minX)
+                Vector2 position = new Vector2(moveVector.x, gameObject.transform.position.y);
+                
+                if (CheckBoundaries(position, out Vector2 newPosition))
                 {
-                    x = minX;
-                }
-                else if (moveVector.x > maxX)
-                {
-                    x = maxX;
-                }
-                Vector2 position = new Vector2(x, 0);
-
-                gameObject.transform.localPosition = position;
+                    gameObject.transform.position = newPosition;
 #if !UNITY_EDITOR
-                if (ControlsEnabled && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer))
-                {
-                    Mouse.current.WarpCursorPosition(Camera.main.WorldToScreenPoint(position));
-                }
+                    if (ControlsEnabled && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer))
+                    {
+                        Mouse.current.WarpCursorPosition(Camera.main.WorldToScreenPoint(newPosition));
+                    }
 #endif
+                }
+                else
+                {
+                    gameObject.transform.position = position;
+                }
+
+
             }
             else
             {
                 // Gamepad
                 _horizontal = value.Get<Vector2>().normalized.x;
             }
+        }
+
+        /// <summary>
+        /// Reposition if exceeded boundary limits
+        /// </summary>
+        private bool CheckBoundaries(Vector2 position, out Vector2 newPosition)
+        {
+            if (position.x < minX)
+            {
+                newPosition = new Vector2(minX, position.y);
+                return true;
+            }
+
+            if (position.x > maxX)
+            {
+                newPosition = new Vector2(maxX, position.y);
+                return true;
+            }
+            newPosition = position;
+            return false;
         }
 
         /// <summary>
@@ -129,13 +176,12 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
             {
                 _playerInput = GetComponent<PlayerInput>();
             }
-            Debug.Log($"Control Scheme Changed: {_playerInput.currentControlScheme}");
+            Debug.Log($"Control Scheme Changed: {_playerInput.gameObject.name} to {_playerInput.currentControlScheme}");
         }
 
         /// <summary>
         /// Handle the "Fire" message from Player Controls
         /// </summary>
-        /// <param name="value"></param>
         private void OnFire()
         {
             if (!ControlsEnabled)
@@ -143,6 +189,22 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
                 return;
             }
             FireButtonEvent.Invoke();
+        }
+
+        /// <summary>
+        /// Check player against screen boundaries
+        /// </summary>
+        private void Update()
+        {
+            if (_playerInput.currentControlScheme == "Mouse")
+            {
+                return;
+            }
+            // Check boundaries
+            if (CheckBoundaries(gameObject.transform.localPosition, out Vector2 newPosition))
+            {
+               gameObject.transform.localPosition = newPosition;
+            }
         }
 
         /// <summary>
@@ -158,23 +220,13 @@ namespace DaftApplesGames.RetroRacketRevolution.Players
                     _rb.velocity = noVelocity;
                     return;
                 case "Keyboard":
-                    multiplier = keyboardSpeedMultiplier;
+                    multiplier = _keyboardSpeedMultiplier;
                     break;
                 case "Gamepad":
-                    multiplier = dpadSpeedMultiplier;
+                    multiplier = _dpadSpeedMultiplier;
                     break;
             }
-
             _rb.velocity = Vector2.right * _horizontal * _speed * multiplier;
-
-            if (transform.localPosition.x < minX)
-            {
-                transform.localPosition = new Vector2(minX, 0);
-            }
-            else if (transform.localPosition.x > maxX)
-            {
-                transform.localPosition = new Vector2(maxX, 0);
-            }
         }
     }
 }

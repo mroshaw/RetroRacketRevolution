@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bonuses
+namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public enum BonusType { None, MultiBall, Laser, SlowBall, MegaBall, ExtraLife, FinishLevel, Random, SmallScore, BigScore, ShrinkBat, GrowBat, Catcher }
 

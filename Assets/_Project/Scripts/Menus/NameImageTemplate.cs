@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class NameImageTemplate : MonoBehaviour
     {

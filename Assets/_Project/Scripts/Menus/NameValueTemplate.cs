@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class NameValueTemplate : MonoBehaviour
     {

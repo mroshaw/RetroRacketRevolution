@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Effects
+namespace DaftAppleGames.RetroRacketRevolution.Effects
 {
     public class Flicker : MonoBehaviour
     {

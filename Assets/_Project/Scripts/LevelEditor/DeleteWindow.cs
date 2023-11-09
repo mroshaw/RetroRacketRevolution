@@ -1,7 +1,8 @@
+using DaftAppleGames.RetroRacketRevolution.Menus;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class DeleteWindow : WindowBase
     {

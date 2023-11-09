@@ -1,10 +1,10 @@
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class PauseGame : WindowBase
     {
@@ -50,9 +50,9 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// <summary>
         /// Init the component
         /// </summary>
-        private void Start()
+        public override void Start()
         {
-            Hide();
+            base.Start();
         }
 
         /// <summary>

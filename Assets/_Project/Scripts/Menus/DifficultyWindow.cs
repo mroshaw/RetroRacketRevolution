@@ -1,10 +1,8 @@
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution;
-using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace DaftAppleGames.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class DifficultyWindow : WindowBase
     {

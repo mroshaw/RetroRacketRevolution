@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class BrickGlint : MonoBehaviour
     {

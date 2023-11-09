@@ -1,11 +1,11 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class EnemyManager : MonoBehaviour
     {
@@ -167,9 +167,7 @@ namespace DaftApplesGames.RetroRacketRevolution
             Vector2 newPosition = new Vector2(horizontal, spawnAtY);
             enemyGameObject.transform.position = newPosition;
             Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
-            FadeIn fadeIn = enemyGameObject.GetComponent<FadeIn>();
-            fadeIn.FadeInNow();
-
+            newEnemy.OnSpawn();
             return newEnemy;
         }
 
@@ -181,6 +179,7 @@ namespace DaftApplesGames.RetroRacketRevolution
         {
             GameObject projectileGameObject = projectilePool.Get();
             Projectile newProjectile = projectileGameObject.GetComponent<Projectile>();
+            newProjectile.OnSpawn();
             return newProjectile;
         }
 

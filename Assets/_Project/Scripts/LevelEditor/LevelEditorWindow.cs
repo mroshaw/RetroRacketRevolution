@@ -1,17 +1,17 @@
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
-using DaftApplesGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using System.Collections.Generic;
 using System.IO;
 using System;
 using UnityEngine.SceneManagement;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class LevelEditorWindow : MonoBehaviour
     {

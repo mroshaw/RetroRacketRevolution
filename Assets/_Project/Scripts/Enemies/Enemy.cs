@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Enemy : MonoBehaviour
     {
@@ -33,6 +33,7 @@ namespace DaftApplesGames.RetroRacketRevolution
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private AudioSource _audioSource;
+        private FadeIn _fadeIn;
 
         /// <summary>
         /// Initialise this component
@@ -44,6 +45,10 @@ namespace DaftApplesGames.RetroRacketRevolution
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _audioSource = GetComponent<AudioSource>();
+            _fadeIn = GetComponent<FadeIn>();
+
+            _audioSource.clip = movingAudioClip;
+            _audioSource.loop = true;
         }
 
         /// <summary>
@@ -51,15 +56,13 @@ namespace DaftApplesGames.RetroRacketRevolution
         /// </summary>
         private void Start()
         {
-            _audioSource.clip = movingAudioClip;
-            _audioSource.loop = true;
-            _audioSource.Play();
+
         }
 
         /// <summary>
         /// Move and fire when ready to do so
         /// </summary>
-        void Update()
+        private void Update()
         {
             _moveTimeLeft -= Time.deltaTime;
             if (_moveTimeLeft <= 0)
@@ -77,6 +80,15 @@ namespace DaftApplesGames.RetroRacketRevolution
 
                 _attackTime = 0.0f;
             }
+        }
+
+        /// <summary>
+        /// Call this when spawning or retrieving from pool
+        /// </summary>
+        public void OnSpawn()
+        {
+            _audioSource.Play();
+            _fadeIn.FadeInNow();
         }
 
         /// <summary>

@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class LifeForce : MonoBehaviour
     {

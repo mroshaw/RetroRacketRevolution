@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class CircleTextInput : WindowBase
     {
@@ -41,8 +41,9 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// <summary>
         /// Setup other components
         /// </summary>
-        private void Start()
+        public override void Start()
         {
+            base.Start();
             CreateLetterButtons();
         }
 

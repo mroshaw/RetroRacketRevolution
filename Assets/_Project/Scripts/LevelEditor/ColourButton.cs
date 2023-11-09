@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class ColourButton : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Megaball : MonoBehaviour
     {

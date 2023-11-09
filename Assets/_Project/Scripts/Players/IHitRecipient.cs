@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public interface IHitRecipient
     {

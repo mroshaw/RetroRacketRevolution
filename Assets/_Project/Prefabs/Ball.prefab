@@ -570,8 +570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stuckTimeBeforeIntervention: 3
-  verticalVelocityThreshold: 0.1
-  horizontalVelocityThreshold: 0.1
+  verticalVelocityThreshold: 2
+  horizontalVelocityThreshold: 2
   nudgeForce: 1
   _rbVelocityX: 0
   _rbVelocityY: 0

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
 using System.IO;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Levels
+namespace DaftAppleGames.RetroRacketRevolution.Levels
 {
     public class LevelDataExt
     {

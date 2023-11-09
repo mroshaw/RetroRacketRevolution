@@ -1,6 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using DaftApplesGames.RetroRacketRevolution.Menus;
+using DaftAppleGames.RetroRacketRevolution.Menus;
 
 namespace DaftAppleGames.RetroRacketRevolution.Game
 {
@@ -14,7 +14,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
     {
         // Public serializable properties
         [BoxGroup("Controls")] public string playerOneControlScheme;
+        [BoxGroup("Controls")] public int playerOneControlSchemeIndex;
         [BoxGroup("Controls")] public string playerTwoControlScheme;
+        [BoxGroup("Controls")] public int playerTwoControlSchemeIndex;
         [BoxGroup("Options Selected")] public bool isTwoPlayer;
         [BoxGroup("Options Selected")] public DifficultyData difficulty;
         [BoxGroup("Options Selected")] public LevelSelect levelSelect;

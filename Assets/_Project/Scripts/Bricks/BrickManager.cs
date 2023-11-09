@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bricks
+namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     public class BrickManager : MonoBehaviour
     {

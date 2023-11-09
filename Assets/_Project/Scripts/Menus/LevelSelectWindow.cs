@@ -1,6 +1,5 @@
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution;
-using UnityEngine;
+using DaftAppleGames.RetroRacketRevolution.Menus;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 

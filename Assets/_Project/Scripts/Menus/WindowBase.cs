@@ -4,11 +4,12 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class WindowBase : MonoBehaviour
     {
         [BoxGroup("UI Settings")] public GameObject uiPanelGameObject;
+        [BoxGroup("UI Settings")] public bool hidePanelOnAwake = true;
         [BoxGroup("UI Settings")] public GameObject firstSelectedGameObject;
         
         [FoldoutGroup("Events")] public UnityEvent WindowShowEvent;
@@ -21,6 +22,17 @@ namespace DaftApplesGames.RetroRacketRevolution
         /// Initialise this component
         /// </summary>
         public virtual void Awake()
+        {
+            if (hidePanelOnAwake)
+            {
+                uiPanelGameObject.SetActive(false);
+            }
+        }
+
+        /// <summary>
+        /// Setup other components
+        /// </summary>
+        public virtual void Start()
         {
         }
 

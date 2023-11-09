@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class HighScores
     {

@@ -1,12 +1,11 @@
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Game;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DaftApplesGames.RetroRacketRevolution.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class PlayerManager : MonoBehaviour, IBonusRecipient
     {

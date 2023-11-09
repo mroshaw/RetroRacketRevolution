@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Balls
+namespace DaftAppleGames.RetroRacketRevolution.Balls
 {
     public class BallManager : MonoBehaviour, IBonusRecipient
     {

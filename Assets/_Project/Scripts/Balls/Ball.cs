@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Balls
+namespace DaftAppleGames.RetroRacketRevolution.Balls
 {
     public class Ball : MonoBehaviour
     {

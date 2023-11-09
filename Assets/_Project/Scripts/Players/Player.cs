@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public enum HardPointLocation { Outer, Center, Bottom }
     

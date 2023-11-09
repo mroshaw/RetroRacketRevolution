@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using TMPro;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class AlertText : MonoBehaviour
     {

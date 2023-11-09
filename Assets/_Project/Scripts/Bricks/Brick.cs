@@ -1,11 +1,11 @@
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bricks
+namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     public enum BrickType { Normal, Invincible, DoubleStrong, TripleStrong, DisruptorOut, DisruptorIn, DisruptorBoth }
 

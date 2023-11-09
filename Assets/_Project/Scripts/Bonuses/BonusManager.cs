@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bonuses
+namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public class BonusManager : MonoBehaviour
     {

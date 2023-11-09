@@ -1,8 +1,8 @@
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bonuses
+namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public class Bonus : MonoBehaviour
     {

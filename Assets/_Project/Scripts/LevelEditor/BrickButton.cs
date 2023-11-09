@@ -1,14 +1,14 @@
 using System;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
-using DaftApplesGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class BrickButton : MonoBehaviour
     {

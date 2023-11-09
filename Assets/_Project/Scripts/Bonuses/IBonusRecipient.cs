@@ -1,7 +1,7 @@
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public interface IBonusRecipient
     {

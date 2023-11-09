@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class HighScoreWindow : WindowBase
     {
@@ -14,8 +14,9 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         /// <summary>
         /// Update with the latest High Scores
         /// </summary>
-        private void Start()
+        public override void Start()
         {
+            base.Start();
             _highScores = new HighScores();
             _highScores.LoadHighScores();
             RefreshHighScores();

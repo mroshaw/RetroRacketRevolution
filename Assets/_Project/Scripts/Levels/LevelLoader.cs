@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.Levels
+namespace DaftAppleGames.RetroRacketRevolution.Levels
 {
     public class LevelLoader : MonoBehaviour
     {

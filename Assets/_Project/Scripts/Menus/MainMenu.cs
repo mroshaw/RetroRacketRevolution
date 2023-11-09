@@ -1,52 +1,67 @@
 using System;
+using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution.Game;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-namespace DaftApplesGames.RetroRacketRevolution.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class MainMenu : WindowBase
     {
         [BoxGroup("UI Settings")] public TMP_Dropdown p1ControlsDropDown;
         [BoxGroup("UI Settings")] public TMP_Dropdown p2ControlsDropDown;
         [BoxGroup("UI Settings")] public TextMeshProUGUI versionText;
+        [BoxGroup("Control Defaults")] public ControlScheme windowsControlSchemeDefaultP1;
+        [BoxGroup("Control Defaults")] public ControlScheme windowsControlSchemeDefaultP2;
+        [BoxGroup("Control Defaults")] public ControlScheme linuxControlSchemeDefaultP1;
+        [BoxGroup("Control Defaults")] public ControlScheme linuxControlSchemeDefaultP2;
+        [BoxGroup("Control Defaults")] public ControlScheme androidControlSchemeDefault;
+
         [BoxGroup("Game Data")] public GameData gameData;
+
+        private static string P1ControlsIndexKey = "Player1Controls";
+        private static string P2ControlsIndexKey = "Player2Controls";
+
+        private int _p1ControlIndex;
+        private int _p2ControlIndex;
 
         public override void Awake()
         {
             base.Awake();
+            // Disable Touch for anything other than mobile
+#if !PLATFORM_ANDROID
+            RemoveDropDownOption(p1ControlsDropDown, 3);
+            RemoveDropDownOption(p2ControlsDropDown, 3);
+#endif
         }
 
         /// <summary>
         /// Setup the Main Menu
         /// </summary>
-        public void Start()
+        public override void Start()
         {
+            base.Start();
             // Update the version text
             versionText.text = $"Build: {Version.Parse(Application.version).ToString()}";
+ 
             // Set the default controls, depending on platform
-#if UNITY_STANDALONE_LINUX
-            // Linux default is keyboard and gamepad
-            p1ControlsDropDown.value = 0;
-            p2ControlsDropDown.value = 2;
-            SetP1Controls(0);
-            SetP2Controls(2);
-#elif PLATFORM_ANDROID
-            // Android default is gamepad
-            SetP1Controls(2);
-#else
-            // Windows default is mouse and keyboard
-            p1ControlsDropDown.value = 1;
-            p2ControlsDropDown.value = 0;
-            SetP1Controls(1);
-            SetP2Controls(0);
+            SetControlSchemes();
 
-#endif
+            // Show the main menu
             Show();
+        }
+
+        /// <summary>
+        /// Sets up the control scheme drop downs
+        /// </summary>
+        private void SetControlSchemes()
+        {
+            LoadControlSettings();
+            UpdateP1Controls((ControlScheme)_p1ControlIndex);
+            UpdateP2Controls((ControlScheme)_p2ControlIndex);
         }
 
         /// <summary>
@@ -58,66 +73,97 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         }
 
         /// <summary>
+        /// Set the UI state
+        /// </summary>
+        /// <param name="controlScheme"></param>
+        private void UpdateP1Controls(ControlScheme controlScheme)
+        {
+            p1ControlsDropDown.SetValueWithoutNotify((int)controlScheme);
+            gameData.playerOneControlScheme = controlScheme.ToString();
+        }
+
+        /// <summary>
+        /// Set the UI state
+        /// </summary>
+        /// <param name="controlScheme"></param>
+        private void UpdateP2Controls(ControlScheme controlScheme)
+        {
+            p2ControlsDropDown.SetValueWithoutNotify((int)controlScheme);
+            gameData.playerTwoControlScheme = controlScheme.ToString();
+        }
+
+        /// <summary>
+        /// Public method for UI event
+        /// </summary>
+        /// <param name="controlSchemeIndex"></param>
+        public void SetP1Controls(int controlSchemeIndex)
+        {
+            SetP1Controls((ControlScheme)controlSchemeIndex);
+            SaveControlSettings();
+        }
+
+        /// <summary>
+        /// Public method for UI event
+        /// </summary>
+        /// <param name="controlSchemeIndex"></param>
+        public void SetP2Controls(int controlSchemeIndex)
+        {
+            SetP2Controls((ControlScheme)controlSchemeIndex);
+            SaveControlSettings();
+        }
+
+        /// <summary>
         /// Sets the Player 1 Control Scheme
         /// </summary>
-        public void SetP1Controls(int controlIndex)
+        /// <param name="controlScheme"></param>
+        public void SetP1Controls(ControlScheme controlScheme)
         {
-            gameData.playerOneControlScheme = GetControlScheme(controlIndex);
+            gameData.playerOneControlScheme = controlScheme.ToString();
 
             if (p1ControlsDropDown.value == p2ControlsDropDown.value)
             {
                 p2ControlsDropDown.value = p2ControlsDropDown.value < 2 ? p2ControlsDropDown.value + 1 : 0;
             }
+
+            _p1ControlIndex = p1ControlsDropDown.value;
+            _p2ControlIndex = p2ControlsDropDown.value;
+
+            p1ControlsDropDown.RefreshShownValue();
+            p2ControlsDropDown.RefreshShownValue();
         }
 
         /// <summary>
         /// Sets the Player 2 Control Scheme
         /// </summary>
-        /// <param name="controlIndex"></param>
-        public void SetP2Controls(int controlIndex)
+        /// <param name="controlScheme"></param>
+        public void SetP2Controls(ControlScheme controlScheme)
         {
-            gameData.playerTwoControlScheme = GetControlScheme(controlIndex);
+            gameData.playerTwoControlScheme = controlScheme.ToString();
 
             if (p1ControlsDropDown.value == p2ControlsDropDown.value)
             {
                 p1ControlsDropDown.value = p1ControlsDropDown.value < 2 ? p1ControlsDropDown.value + 1 : 0;
             }
+
+            _p1ControlIndex = p1ControlsDropDown.value;
+            _p2ControlIndex = p2ControlsDropDown.value;
+
+            p1ControlsDropDown.RefreshShownValue();
+            p2ControlsDropDown.RefreshShownValue();
         }
 
         /// <summary>
         /// Disables the dropdown item at given index
         /// </summary>
         /// <param name="dropDown"></param>
-        /// <param name="controlIndex"></param>
-        private void DisableDropDownToggle(TMP_Dropdown dropDown, int controlIndex)
+        /// <param name="optionIndex"></param>
+        private void RemoveDropDownOption(TMP_Dropdown dropDown, int optionIndex)
         {
-            Toggle[] toggles = dropDown.GetComponentsInChildren<Toggle>(true);
-            foreach (Toggle toggle in toggles)
-            {
-                toggle.interactable = true;
-            }
-            toggles[controlIndex].interactable = false;
+            List<TMP_Dropdown.OptionData> optionList = dropDown.options;
+            optionList.RemoveAt(optionIndex);
+            dropDown.options = optionList;
         }
 
-        /// <summary>
-        /// Gets the control scheme name
-        /// </summary>
-        /// <param name="controlIndex"></param>
-        /// <returns></returns>
-        private string GetControlScheme(int controlIndex)
-        {
-            switch (controlIndex)
-            {
-                case 0:
-                    return "Keyboard";
-                case 1:
-                    return "Mouse";
-                case 2:
-                    return "Gamepad";
-                default:
-                    return "Keyboard";
-            }
-        }
         /// <summary>
         /// Start a one player game
         /// </summary>
@@ -156,6 +202,31 @@ namespace DaftApplesGames.RetroRacketRevolution.Menus
         public void ExitToDesktop()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Save control settings
+        /// </summary>
+        private void SaveControlSettings()
+        {
+            PlayerPrefs.SetInt(P1ControlsIndexKey, _p1ControlIndex);
+            PlayerPrefs.SetInt(P2ControlsIndexKey, _p2ControlIndex);
+        }
+
+        /// <summary>
+        /// Load control settings
+        /// </summary>
+        private void LoadControlSettings()
+        {
+#if UNITY_STANDALONE_LINUX
+            _p1ControlIndex = PlayerPrefs.GetInt(P1ControlsIndexKey, (int)linuxControlSchemeDefaultP1);
+            _p2ControlIndex = PlayerPrefs.GetInt(P2ControlsIndexKey, (int)linuxControlSchemeDefaultP2);
+#elif PLATFORM_ANDROID
+            _p1ControlIndex = PlayerPrefs.GetInt(P1ControlsIndexKey, (int)androidControlSchemeDefault);
+#else
+            _p1ControlIndex = PlayerPrefs.GetInt(P1ControlsIndexKey, (int)windowsControlSchemeDefaultP1);
+            _p2ControlIndex = PlayerPrefs.GetInt(P2ControlsIndexKey, (int)windowsControlSchemeDefaultP2);
+#endif
         }
     }
 }

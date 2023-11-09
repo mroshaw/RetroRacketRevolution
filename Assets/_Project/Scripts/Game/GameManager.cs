@@ -2,20 +2,20 @@ using System;
 using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Game;
-using DaftApplesGames.RetroRacketRevolution.Balls;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
-using DaftApplesGames.RetroRacketRevolution.Levels;
-using DaftApplesGames.RetroRacketRevolution.Menus;
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Menus;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using static DaftApplesGames.RetroRacketRevolution.Menus.HighScores;
+using static DaftAppleGames.RetroRacketRevolution.Menus.HighScores;
 
-namespace DaftApplesGames.RetroRacketRevolution.Game
+namespace DaftAppleGames.RetroRacketRevolution.Game
 {
     public enum AlertType {StartLevel, FinishLevel, GameOver, GameComplete }
 

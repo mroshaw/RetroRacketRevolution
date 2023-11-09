@@ -1,4 +1,4 @@
-using DaftApplesGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine;
 using Sirenix.OdinInspector;
 

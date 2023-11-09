@@ -1139,6 +1139,8 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 6e084119d0413b24d8468d9111be0e0b, type: 3}
     - m_Text: 
       m_Image: {fileID: 21300000, guid: 2e06003428ef0ef469f07683ac28d46d, type: 3}
+    - m_Text: 
+      m_Image: {fileID: 21300000, guid: 8896809d37be41e4f844b00ecd167fe4, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

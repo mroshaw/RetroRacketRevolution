@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace DaftApplesGames.RetroRacketRevolution.Audio
+namespace DaftAppleGames.RetroRacketRevolution.Audio
 {
     public enum PlayBackMode { PlayOne, PlayAll, Shuffle }
 
@@ -77,8 +77,9 @@ namespace DaftApplesGames.RetroRacketRevolution.Audio
             }
 
             // Current song has finished
-            if (!_audioSource.isPlaying)
+            if (!_audioSource.isPlaying && _audioSource.time == 0f && Time.timeScale != 0)
             {
+                Debug.Log($"MusicManager: AudioSource has stopped, choosing next action: {playbackMode}...");
                 switch (playbackMode)
                 {
                     case PlayBackMode.PlayAll:
@@ -261,6 +262,7 @@ namespace DaftApplesGames.RetroRacketRevolution.Audio
                 yield return null;
             }
             _audioSource.volume = _playVolume;
+            _isPlaying = true;
         }
 
         /// <summary>
@@ -279,6 +281,8 @@ namespace DaftApplesGames.RetroRacketRevolution.Audio
                 yield return null;
             }
             _audioSource.volume = _silentVolume;
+
+            _isPlaying = false;
 
             // Call the callback function
             if (callBack != null)

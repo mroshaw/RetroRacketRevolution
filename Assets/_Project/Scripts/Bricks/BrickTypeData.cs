@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace DaftApplesGames.RetroRacketRevolution.Bricks
+namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     /// <summary>
     /// Scriptable Object: TODO Purpose and Summary

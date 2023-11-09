@@ -1,12 +1,12 @@
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using static DaftApplesGames.RetroRacketRevolution.Bonuses.BonusManager;
+using static DaftAppleGames.RetroRacketRevolution.Bonuses.BonusManager;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public enum AddOnType { None, LaserCannon, Catcher, LevelBooster }
 

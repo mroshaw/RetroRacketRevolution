@@ -1,13 +1,13 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
-using DaftApplesGames.RetroRacketRevolution.Bonuses;
-using DaftApplesGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Bricks;
 using UnityEngine;
-using DaftApplesGames.RetroRacketRevolution.Levels;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution.LevelEditor
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class LevelEditorManager2 : MonoBehaviour
     {

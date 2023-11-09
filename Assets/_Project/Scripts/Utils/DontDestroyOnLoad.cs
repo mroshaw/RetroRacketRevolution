@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DaftApplesGames.RetroRacketRevolution.Utils
+namespace DaftAppleGames.RetroRacketRevolution.Utils
 {
     public class DontDestroyOnLoad : MonoBehaviour
     {

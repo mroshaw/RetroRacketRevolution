@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DaftApplesGames.RetroRacketRevolution.Editor
+namespace DaftAppleGames.RetroRacketRevolution.Editor
 {
     public class LevelEditorHelperWindow : OdinEditorWindow
     {

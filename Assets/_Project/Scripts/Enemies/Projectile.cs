@@ -1,9 +1,9 @@
-using DaftApplesGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftApplesGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Projectile : MonoBehaviour
     {
@@ -28,7 +28,7 @@ namespace DaftApplesGames.RetroRacketRevolution
         /// </summary>
         private void Start()
         {
-        _audioSource.PlayOneShot(fallingAudioClip);
+
         }
 
         /// <summary>
@@ -57,6 +57,14 @@ namespace DaftApplesGames.RetroRacketRevolution
                 ProjectileDestroyedEvent.Invoke(this);
             }
 
+        }
+
+        /// <summary>
+        /// Call this when spawning / fetching from pool
+        /// </summary>
+        public void OnSpawn()
+        {
+            _audioSource.PlayOneShot(fallingAudioClip);
         }
     }
 }
