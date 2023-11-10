@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
-using Sirenix.OdinInspector;
 
 namespace DaftAppleGames.Menus
 {
@@ -8,6 +6,7 @@ namespace DaftAppleGames.Menus
     {
         // Private fields
         private Rigidbody2D _rb;
+
         #region UnityMethods
         /// <summary>
         /// Initialise this component

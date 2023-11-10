@@ -1,6 +1,4 @@
-using System;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
-using DaftAppleGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

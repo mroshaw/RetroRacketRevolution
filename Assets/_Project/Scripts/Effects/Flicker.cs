@@ -35,7 +35,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
         {
             if (flickerOnStart)
             {
-                FadeInNow();
+                FlickerNow();
             }
         }
 
@@ -47,7 +47,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
             _startColor = new Color(_color.r, _color.g, _color.b, 0);
             _targetColor = new Color(_color.r, _color.g, _color.b, 1);
 
-            FadeInNow();
+            FlickerNow();
         }
 
         [Button("Stop")]
@@ -59,7 +59,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
         /// <summary>
         /// Public, sync wrapper to async function
         /// </summary>
-        public void FadeInNow()
+        public void FlickerNow()
         {
             StartCoroutine(FlickerAsync());
         }

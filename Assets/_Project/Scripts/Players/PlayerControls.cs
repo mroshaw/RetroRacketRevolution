@@ -14,23 +14,23 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [BoxGroup("Movement")] public float minX = -200.0f;
         [BoxGroup("Movement")] public float maxX = 200.0f;
 
+        [BoxGroup("Debug")][SerializeField] private string _currentControlScheme;
+        [BoxGroup("Debug")][SerializeField] private Vector2 _moveVector;
+        [BoxGroup("Debug")][SerializeField] private float _horizontal;
+        [BoxGroup("Debug")][SerializeField] private bool _fire;
+        [BoxGroup("Debug")]public float debugXLastFrame;
+        [BoxGroup("Debug")]public float debugCurrentX;
+        
+        [BoxGroup("Events")] public UnityEvent FireButtonEvent;
+        [BoxGroup("Events")] public UnityEvent MovingLeftEvent;
+        [BoxGroup("Events")] public UnityEvent MovingRightEvent;
+        [BoxGroup("Events")] public UnityEvent StoppedEvent;
+
         public bool ControlsEnabled { get; private set; }
 
         private float _speed = 1.0f;
+        private float _xLastFrame;
 
-        [BoxGroup("Debug")]
-        [SerializeField]
-        private string _currentControlScheme;
-
-        [BoxGroup("Debug")]
-        [SerializeField]
-        private Vector2 _moveVector;
-        [BoxGroup("Debug")]
-        [SerializeField]
-        private float _horizontal;
-        [BoxGroup("Debug")]
-        [SerializeField]
-        private bool _fire;
 
         private PlayerInput _playerInput;
         private Rigidbody2D _rb;
@@ -40,7 +40,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private float _keyboardSpeedMultiplier;
         private float _dpadSpeedMultiplier;
 
-        [BoxGroup("Events")] public UnityEvent FireButtonEvent;
 
         /// <summary>
         /// Init the player controls
@@ -125,20 +124,19 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 
                 if (CheckBoundaries(position, out Vector2 newPosition))
                 {
-                    gameObject.transform.position = newPosition;
 #if !UNITY_EDITOR
                     if (ControlsEnabled && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer))
                     {
                         Mouse.current.WarpCursorPosition(Camera.main.WorldToScreenPoint(newPosition));
                     }
 #endif
+                    gameObject.transform.position = newPosition;
+
                 }
                 else
                 {
                     gameObject.transform.position = position;
                 }
-
-
             }
             else
             {
@@ -196,6 +194,26 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void Update()
         {
+            // DEBUG
+            debugXLastFrame = _xLastFrame;
+            debugCurrentX = transform.position.x;
+
+            // Determine if we're moving
+            if (transform.position.x > _xLastFrame)
+            {
+                MovingRightEvent.Invoke();
+            }
+            else if (transform.position.x < _xLastFrame)
+            {
+                MovingLeftEvent.Invoke();
+            }
+            else
+            {
+                StoppedEvent.Invoke();
+            }
+
+            _xLastFrame = transform.position.x;
+
             if (_playerInput.currentControlScheme == "Mouse")
             {
                 return;

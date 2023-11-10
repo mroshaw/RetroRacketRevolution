@@ -563,7 +563,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 32d103b502da234479ff239d8403b719, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -631,7 +631,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.33, y: 2.53}
+    oldSize: {x: 5.12, y: 1.92}
     newSize: {x: 2.56, y: 1.58}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -748,8 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fa3b1e583ae0d4d91beac68a364e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardSpeedMultiplier: 150
-  dpadSpeedMultiplier: 1000
+  defaultKeyboardSpeedMultiplier: 2000
+  defaultDpadSpeedMultiplier: 200
   minX: -200
   maxX: 200
   _currentControlScheme: 

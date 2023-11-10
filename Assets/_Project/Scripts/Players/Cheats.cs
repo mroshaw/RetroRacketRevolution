@@ -5,6 +5,7 @@ using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DaftAppleGames.RetroRacketRevolution
 {
@@ -21,11 +22,15 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("UI")] public float notificationFadeTime;
         [BoxGroup("UI")] public float notificationVisibleTime;
 
+        [FoldoutGroup("Events")] public UnityEvent CheatUsedEvent;
+
         // Variables for notification fader
         private Color _visibleColor;
         private Color _hiddenColor;
 
         private AudioSource _audioSource;
+
+        private bool _cheatsUsed;
 
         private void Awake()
         {
@@ -34,6 +39,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             _hiddenColor = new Color(textColor.r, textColor.g, textColor.b, 0);
             notificationText.color = _visibleColor;
             _audioSource = GetComponent<AudioSource>();
+            _cheatsUsed = false;
         }
 
         /// <summary>
@@ -259,6 +265,14 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <param name="message"></param>
         private void Notify(string message)
         {
+            // Notify any listeners that cheats have been used
+            if (!_cheatsUsed)
+            {
+                _cheatsUsed = true;
+                CheatUsedEvent.Invoke();
+            }
+
+            // Notify the player
             _audioSource.Play();
             StartCoroutine(NotifyFade(message));
         }

@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace DaftAppleGames.RetroRacketRevolution.Menus
 {

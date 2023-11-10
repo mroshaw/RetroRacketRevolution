@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,7 +34,8 @@ namespace DaftAppleGames.RetroRacketRevolution
         private Rigidbody2D _rb;
         private SpriteRenderer _spriteRenderer;
         private AudioSource _audioSource;
-        private FadeIn _fadeIn;
+        private FadeIn[] _fadeIns;
+        private Flicker _flicker;
 
         /// <summary>
         /// Initialise this component
@@ -45,8 +47,8 @@ namespace DaftAppleGames.RetroRacketRevolution
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _audioSource = GetComponent<AudioSource>();
-            _fadeIn = GetComponent<FadeIn>();
-
+            _fadeIns = GetComponentsInChildren<FadeIn>();
+            _flicker = GetComponentInChildren<Flicker>();
             _audioSource.clip = movingAudioClip;
             _audioSource.loop = true;
         }
@@ -88,7 +90,12 @@ namespace DaftAppleGames.RetroRacketRevolution
         public void OnSpawn()
         {
             _audioSource.Play();
-            _fadeIn.FadeInNow();
+            foreach (FadeIn fadeIn in _fadeIns)
+            {
+                fadeIn.FadeInNow();
+            }
+
+            _flicker.FlickerNow();
         }
 
         /// <summary>
@@ -157,7 +164,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <param name="other"></param>
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("OutOfBounds"))
+            if (other.gameObject.CompareTag("OutOfBounds") || other.gameObject.CompareTag("LogoSprite"))
             {
                 EnemyDestroyedEvent.Invoke(this);
             }

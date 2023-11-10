@@ -27,6 +27,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         [BoxGroup("Managers")] public AddOnManager addOnManager;
         [BoxGroup("Managers")] public PlayerManager playerManager;
 
+        [BoxGroup("Game Data")] public GameData gameData;
+
         [BoxGroup("UI")] public GameObject infoPanel;
         [BoxGroup("UI")] public GameObject startLevel;
         [BoxGroup("UI")] public TextMeshProUGUI startLevelNameText;
@@ -54,6 +56,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         [FoldoutGroup("Alert Events")] public UnityEvent BeforeAlertEvent;
         [FoldoutGroup("Alert Events")] public UnityEvent AfterAlertEvent;
 
+        public bool CheatsUsed { get; set; }
+
         private HighScores highScores;
 
         private const string HighScore = "HighScore";
@@ -65,9 +69,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void Awake()
         {
-
             _audioSource = GetComponent<AudioSource>();
             HideAlert();
+            CheatsUsed = false;
         }
 
         /// <summary>
@@ -181,7 +185,31 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         public void HighScoreSubmitted(Player player, string playerInitials)
         {
             // Debug.Log($"Submitting high score. Player: {{player.name}}, Initials: {playerInitials}, Score: {player.Score}");
-            highScores.SubmitHighScore(playerInitials, player.Score);
+
+            // Determine values to send to High Score system
+            string levelsPlayed = "Original";
+            string difficulty = "Normal";
+            string cheatsUsed = "No";
+
+            // Get "Friendly" name for levels selected.
+            switch (gameData.levelSelect)
+            {
+                case LevelSelect.Original:
+                    levelsPlayed = "Original";
+                    break;
+                case LevelSelect.Custom:
+                    levelsPlayed = "Custom";
+                    break;
+                case LevelSelect.OgPlusCustom:
+                case LevelSelect.CustomPlusOg:
+                    levelsPlayed = "All";
+                    break;
+            }
+
+            difficulty = gameData.difficulty.difficultyName;
+            cheatsUsed = CheatsUsed ? "Yes" : "No";
+
+            highScores.SubmitHighScore(playerInitials, player.Score,difficulty, levelsPlayed, cheatsUsed);
 
             int playerTwoScore = playerManager.playerTwo.Score;
             if (player == playerManager.playerOne && highScores.IsHighScore(playerTwoScore))
