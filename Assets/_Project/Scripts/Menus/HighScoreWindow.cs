@@ -49,7 +49,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
                 newEntry.transform.SetParent(highScoreContainer.transform);
                 newEntry.transform.localScale = new Vector3(1, 1, 1);
                 newEntry.transform.localPosition = new Vector3(0, 0, 0);
-                newEntry.GetComponent<NameValueTemplate>().SetEntryText(highScore.PlayerName, highScore.Score.ToString());
+                newEntry.GetComponent<HighScoreEntryTemplate>().SetEntryText(highScore.PlayerName, highScore.Score.ToString(), highScore.Difficulty, highScore.LevelsPlayed, highScore.CheatsUsed);
                 newEntry.SetActive(true);
             }
         }
@@ -58,7 +58,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
         public class EntryTemplate
         {
             public GameObject templateGameObject;
-
         }
     }
 }

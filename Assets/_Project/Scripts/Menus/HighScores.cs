@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
@@ -12,7 +11,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
 
         private const string HighScoreNameKey = "HighScoreName";
         private const string HighScoreValueKey = "HighScoreValue";
-
+        private const string HighScoreDifficultyKey = "HighScoreDifficulty";
+        private const string HighScoreLevelsKey = "HighScoreLevels";
+        private const string HighScoreCheatsKey = "HighScoreCheats";
         public HighScores()
         {
             for (int entry = 0; entry < HighScoreArray.Length; entry++)
@@ -27,11 +28,18 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
         {
             public string PlayerName;
             public int Score;
+            public string Difficulty;
+            public string LevelsPlayed;
+            public string CheatsUsed;
 
             public HighScore()
             {
                 PlayerName = "";
                 Score = 0;
+                Difficulty = "Normal";
+                LevelsPlayed = "Original";
+                CheatsUsed = "No";
+
             }
 
             /// <summary>
@@ -39,10 +47,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
             /// </summary>
             /// <param name="playerName"></param>
             /// <param name="score"></param>
-            public HighScore(string playerName, int score)
+            public HighScore(string playerName, int score, string difficulty, string levelsPlayed, string cheatsUsed)
             {
                 PlayerName = playerName;
                 Score = score;
+                Difficulty = difficulty;
+                LevelsPlayed = levelsPlayed;
+                CheatsUsed = cheatsUsed;
             }
 
             /// <summary>
@@ -62,7 +73,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
         /// <param name="playerName"></param>
         /// <param name="score"></param>
         /// <returns></returns>
-        public bool SubmitHighScore(string playerName, int score)
+        public bool SubmitHighScore(string playerName, int score, string difficulty, string levelsPlayed, string cheatsUsed)
         {
             Array.Sort(HighScoreArray);
             int position = 0;
@@ -72,7 +83,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
                 {
                     // We have a new High Score
                     List<HighScore> highScoreList = HighScoreArray.ToList();
-                    HighScore newHighScore = new HighScore(playerName, score);
+                    HighScore newHighScore = new HighScore(playerName, score, difficulty, levelsPlayed, cheatsUsed);
                     highScoreList.Insert(position, newHighScore);
                     highScoreList.Remove(highScoreList.LastOrDefault());
                     HighScoreArray = highScoreList.ToArray();
@@ -122,6 +133,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
             {
                 PlayerPrefs.SetString(HighScoreNameKey+count.ToString(), highScore.PlayerName);
                 PlayerPrefs.SetInt(HighScoreValueKey + count.ToString(), highScore.Score);
+                PlayerPrefs.SetString(HighScoreDifficultyKey + count.ToString(), highScore.Difficulty);
+                PlayerPrefs.SetString(HighScoreLevelsKey + count.ToString(), highScore.LevelsPlayed);
+                PlayerPrefs.SetString(HighScoreCheatsKey + count.ToString(), highScore.CheatsUsed);
                 count++;
             }
         }
@@ -136,6 +150,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
             {
                 highScore.PlayerName = PlayerPrefs.GetString(HighScoreNameKey + count.ToString(), "AAA");
                 highScore.Score = PlayerPrefs.GetInt(HighScoreValueKey + count.ToString(), (count + 1) * 1000);
+                highScore.Difficulty = PlayerPrefs.GetString(HighScoreDifficultyKey + count.ToString(), "Normal");
+                highScore.LevelsPlayed = PlayerPrefs.GetString(HighScoreLevelsKey + count.ToString(), "Original");
+                highScore.CheatsUsed = PlayerPrefs.GetString(HighScoreCheatsKey + count.ToString(), "No");
                 count++;
             }
             Array.Sort(HighScoreArray);
