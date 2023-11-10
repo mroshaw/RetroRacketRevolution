@@ -39,7 +39,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("UI - Level")] public TMP_InputField maxTimeBetweenEnemiesText;
         [BoxGroup("UI - Level")] public Toggle isCustomLevels;
 
-        [BoxGroup("UI - Other")] public DeleteWindow deleteWindow;
+        [BoxGroup("UI - Other")] public ConfirmWindow deleteWindow;
         [BoxGroup("UI - Other")] public AlertText alertText;
         #endregion
         #region Data
@@ -74,8 +74,10 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelDeleteClickedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent LevelClearClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent MainMenuClickedEvent;
+        [FoldoutGroup("Events - Other")] public UnityEvent LevelShareClickedEvent;
+        [FoldoutGroup("Events - Other")] public UnityEvent LevelAddClickedEvent;
         #endregion
-        
+
         // Public properties
 
         // Private fields
@@ -317,6 +319,19 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         public void DeleteHandler()
         {
             deleteWindow.Show();
+        }
+
+        /// <summary>
+        /// Handler to Share level button
+        /// </summary>
+        public void ShareHandler()
+        {
+            LevelShareClickedEvent.Invoke();
+        }
+
+        public void AddHandler()
+        {
+            LevelAddClickedEvent.Invoke();
         }
 
         /// <summary>

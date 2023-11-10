@@ -26,6 +26,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events")] public UnityEvent<float> MinEnemyTimeChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<float> MaxEnemyTimeChangedEvent;
 
+        [FoldoutGroup("Events")] public UnityEvent<string> LevelEncodedEvent;
+
         // Level Public properties
         public int MaxEnemies { get; set; } = 0;
         public float MinEnemyTime { get; set; } = 0.0f;
@@ -144,6 +146,20 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         }
 
         /// <summary>
+        /// Submits the level for review
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="playerName"></param>
+        /// <param name="isCustomLevels"></param>
+        public void SubmitLevelFile(string levelName, string playerName, bool isCustomLevels)
+        {
+            LevelDataExt levelData = CreateLevelData();
+            levelData.levelAuthor = playerName;
+            string encodedLevel = levelData.BaseEncodeLevel();
+            Debug.Log($"Encoded level: {encodedLevel}");
+        }
+
+        /// <summary>
         /// Loads a level from the given named asset file
         /// </summary>
         /// <param name="levelFileName"></param>
@@ -157,6 +173,36 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 return;
             }
 
+            ProcessLevelData(levelData);
+        }
+
+        /// <summary>
+        /// Generates an encoded view of current data
+        /// </summary>
+        public void GetLevelAsEncodedData(string playerName)
+        {
+            LevelDataExt levelData = CreateLevelData();
+            levelData.levelAuthor = playerName;
+            string encodedLevel = levelData.BaseEncodeLevel();
+            LevelEncodedEvent.Invoke(encodedLevel);
+        }
+
+        /// <summary>
+        /// Loads a given encoded level into internal structures
+        /// </summary>
+        /// <param name="encodedLevelData"></param>
+        public void LoadLevelByEncodedData(string encodedLevelData)
+        {
+            LevelDataExt levelData = LevelDataExt.BaseDecodeLevel(encodedLevelData);
+            ProcessLevelData(levelData);
+        }
+
+        /// <summary>
+        /// Process level data into internal data structures
+        /// </summary>
+        /// <param name="levelData"></param>
+        private void ProcessLevelData(LevelDataExt levelData)
+        {
             for (int currRow = 0; currRow < numberOfRows; currRow++)
             {
                 for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
@@ -193,16 +239,29 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <param name="isCustomLevel"></param>
         public void SaveLevelAsNew(string levelName, bool isCustomLevel)
         {
-            // LevelData newLevelData = ScriptableObject.CreateInstance<LevelData>();
+            LevelDataExt newLevelData = CreateLevelData();
+            newLevelData.SaveInstanceToFile(levelName, isCustomLevel);
+            GetCurrentLevels(isCustomLevel);
+        }
+
+        /// <summary>
+        /// Creates an instance of LevelDataExt from current level design
+        /// </summary>
+        /// <returns></returns>
+        private LevelDataExt CreateLevelData()
+        {
+            // Init new instance
             LevelDataExt newLevelData = new LevelDataExt();
             newLevelData.Init();
 
+            // Set level properties
             newLevelData.levelName = LevelDesc;
             newLevelData.levelBackgroundIndex = BackgroundSpriteIndex;
             newLevelData.maxEnemies = MaxEnemies;
             newLevelData.minTimeBetweenEnemies = MinEnemyTime;
             newLevelData.maxTimeBetweenEnemies = MaxEnemyTime;
 
+            // Parse current level grid
             for (int currRow = 0; currRow < numberOfRows; currRow++)
             {
                 for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
@@ -215,8 +274,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                     newLevelData.BrickDataArray.RowArray[currRow].RowBricks[currCol].ColumnNumber = _brickDataArray[currRow, currCol].ColumnNumber;
                 }
             }
-            newLevelData.SaveInstanceToFile(levelName, isCustomLevel);
-            GetCurrentLevels(isCustomLevel);
+
+            return newLevelData;
         }
     }
 }

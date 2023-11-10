@@ -3,6 +3,7 @@ using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
 using System.IO;
+using DaftAppleGames.RetroRacketRevolution.Utils;
 using UnityEngine;
 
 namespace DaftAppleGames.RetroRacketRevolution.Levels
@@ -10,6 +11,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
     public class LevelDataExt
     {
         [BoxGroup("Level Details")] public string levelName;
+        [BoxGroup("Level Details")] public string levelFileName;
+        [BoxGroup("Level Details")] public string levelAuthor;
         [BoxGroup("Level Details")] public string levelBackgroundName;
         [BoxGroup("Level Details")] public int levelBackgroundIndex;
         [BoxGroup("Enemies")] public int maxEnemies = 0;
@@ -125,6 +128,42 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         }
 
         /// <summary>
+        /// Return a compressed Base64 encoded version of the level
+        /// </summary>
+        /// <returns></returns>
+        public string BaseEncodeLevel()
+        {
+            // Serialize the data
+            string json = JsonUtility.ToJson(this, false);
+
+            // Base64 encode
+            byte[] plainTextBytes = System.Text.Encoding.UTF8.GetBytes(json);
+            return System.Convert.ToBase64String(plainTextBytes).Compress();
+        }
+
+        /// <summary>
+        /// Decodes a compressed Base64 encoded level, returns a LevelDataExt instance
+        /// </summary>
+        /// <param name="encodedCompressedLevel"></param>
+        /// <returns></returns>
+        public static LevelDataExt BaseDecodeLevel(string encodedCompressedLevel)
+        {
+            byte[] base64EncodedBytes = System.Convert.FromBase64String(encodedCompressedLevel.Decompress());
+            LevelDataExt newLevelData = JsonUtility.FromJson<LevelDataExt>(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
+            return newLevelData;
+        }
+
+        /// <summary>
+        /// Decodes the level and saves to disk as JSON
+        /// </summary>
+        /// <param name="encodedLevel"></param>
+        public void BaseDecodeLevelAndSave(string encodedLevel)
+        {
+            LevelDataExt newLevelDataExt = BaseDecodeLevel(encodedLevel);
+            newLevelDataExt.SaveInstanceToFile(newLevelDataExt.levelFileName, true);
+        }
+
+        /// <summary>
         /// Save the instance to a file
         /// </summary>
         /// <param name="fileName"></param>
@@ -141,6 +180,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
 
             // Derive the full save file path
             string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
+
+            // Add / update the filename
+            this.levelFileName = fileName;
 
            // Serialise the data
             string json = JsonUtility.ToJson(this, true);
