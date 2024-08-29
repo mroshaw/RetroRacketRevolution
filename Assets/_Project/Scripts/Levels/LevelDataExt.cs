@@ -15,11 +15,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         [BoxGroup("Level Details")] public string levelAuthor;
         [BoxGroup("Level Details")] public string levelBackgroundName;
         [BoxGroup("Level Details")] public int levelBackgroundIndex;
+        [BoxGroup("Level Details")] public int levelBackgroundMusicIndex;
+        [BoxGroup("Level Details")] public bool isBossLevel;
+        [BoxGroup("Level Details")] public int levelBossIndex;
         [BoxGroup("Enemies")] public int maxEnemies = 0;
         [BoxGroup("Enemies")] public float minTimeBetweenEnemies = 5.0f;
         [BoxGroup("Enemies")] public float maxTimeBetweenEnemies = 100.0f;
-        [BoxGroup("Level Data")]
-        [SerializeField] public Rows BrickDataArray = new Rows();
+        [BoxGroup("Level Data")] public Rows BrickDataArray = new Rows();
 
         [BoxGroup("Level Layout")] private const int numberOfRows = 12;
         [BoxGroup("Level Layout")] private const int numberOfBricksPerRow = 15;
@@ -28,16 +30,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         public static string OgLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\LevelData";
         public static string CustomLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\CustomLevelData";
 #else
-        public static string OgLevelDataPath = Path.Combine(Path.GetFullPath("./"), "LevelData");
-        public static string CustomLevelDataPath = Path.Combine(Path.GetFullPath("./"), "CustomLevelData");
+        public static string OgLevelDataPath = Path.Combine(Application.persistentDataPath, "LevelData");
+        public static string CustomLevelDataPath = Path.Combine(Application.persistentDataPath, "CustomLevelData");
 #endif
         /// <summary>
         /// Add / update a brick
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// Where (x) is the row, (y) is the number of bricks from the left of the row
-        /// <param name="brickData"></param>
         public void SetBrick(int row, int column, BrickData brickData)
         {
             if (row < 0 || column < 0 || row > numberOfRows || column > numberOfBricksPerRow)
@@ -51,9 +49,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Sets a slot IsEmpty state to given boolean
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="isEmpty"></param>
         public void SetSlotState(int row, int column, bool isEmpty)
         {
             if (row < 0 || column < 0 || row > numberOfRows || column > numberOfBricksPerRow)
@@ -204,14 +199,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         public static LevelDataExt LoadInstanceFromFile(string fileName, bool isCustomLevels)
         {
             string json;
-#if PLATFORM_ANDROID
-            TextAsset level = Resources.Load<TextAsset>($"LevelData\\{fileName}");
-            json = level.text;
-#else
             string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
-
             string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
-            Debug.Log($"Loaded data from file: {levelFilePath}");
+
+            Debug.Log($"Loading data from file: {levelFilePath}");
 
             if (!File.Exists(levelFilePath))
             {
@@ -223,7 +214,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             {
                 json = inputFile.ReadToEnd();
             }
-#endif
             LevelDataExt levelDataExt = JsonUtility.FromJson<LevelDataExt>(json);
             
             // Print(levelDataExt);
@@ -239,7 +229,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             List<string> levelPathsList = new List<string>();
 
             string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
-#if PLATFORM_ANDROID
+#if PLATFORM_ANDROID && !UNITY_EDITOR
             TextAsset[] allLevels = Resources.LoadAll<TextAsset>("LevelData");
 
             // Load levels from Resource folder

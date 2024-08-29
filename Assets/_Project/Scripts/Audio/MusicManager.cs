@@ -109,6 +109,22 @@ namespace DaftAppleGames.RetroRacketRevolution.Audio
         }
 
         /// <summary>
+        /// Toggles between playing and stopping given song at index
+        /// </summary>
+        /// <param name="songIndex"></param>
+        public void ToggleSong(int songIndex)
+        {
+            if (_isPlaying)
+            {
+                Stop();
+            }
+            else
+            {
+                PlaySong(songIndex);
+            }
+        }
+
+        /// <summary>
         /// Play the given song by index
         /// </summary>
         /// <param name="songIndex"></param>
@@ -165,8 +181,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Audio
             int songIndex = rand.Next(0, _numberOfMusicClips - 1);
             PlaySong(songIndex);
         }
-        #endregion
-
         /// <summary>
         /// Pause current playing song
         /// </summary>
@@ -215,8 +229,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Audio
             FadeOut(StopMusic);
             _currSongIndex = 0;
         }
-
-	    #region PrivateMethods
+        #endregion
+        #region PrivateMethods
 
         /// <summary>
         /// Stops the audiosource and resets playlist
@@ -253,7 +267,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Audio
         {
             float time = 0;
             _audioSource.volume = _silentVolume;
-            _audioSource.clip = playList.GetSongAtIndex(clipIndex);
+            _audioSource.clip = playList.GetAudioClipAtIndex(clipIndex);
             _audioSource.Play();
             while (time < fadeTimeInSeconds)
             {

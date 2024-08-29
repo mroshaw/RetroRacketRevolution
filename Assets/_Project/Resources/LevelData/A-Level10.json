@@ -1,7 +1,10 @@
 {
     "levelName": "Level 10",
+    "levelFileName": "A-Level10",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 4,
+    "levelBackgroundMusicIndex": 9,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 30.0,

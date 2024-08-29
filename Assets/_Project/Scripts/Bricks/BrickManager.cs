@@ -14,12 +14,17 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         [BoxGroup("Prefabs")] public GameObject disruptorPrefab;
         [BoxGroup("Prefabs")] public GameObject brickContainer;
         [BoxGroup("Prefabs")] public GameObject disruptorContainer;
+
+        [BoxGroup("Prefabs")] public GameObject brickExplosionPrefab;
+        [BoxGroup("Prefabs")] public GameObject brickExplosionContainer;
+
         [BoxGroup("Prefabs")] public bool usePooling=false;
         [BoxGroup("Prefabs")] public int defaultPoolSize = 200;
         [BoxGroup("Debug")] [SerializeField] private List<Brick> bricks = new List<Brick>();
         [BoxGroup("Debug")] [SerializeField] private List<Disruptor> disruptors = new List<Disruptor>();
         [BoxGroup("Events")] public UnityEvent<Brick> BrickAddedEvent;
         [BoxGroup("Events")] public UnityEvent<Brick> BrickDestroyedEvent;
+        [BoxGroup("Events")] public UnityEvent<Transform> BrickDestroyedAtPositionEvent;
         [BoxGroup("Events")] public UnityEvent LastBrickDestroyedEvent;
         [BoxGroup("Events")] public UnityEvent<BonusType, Vector2> BrickSpawnBonusEvent;
 
@@ -30,7 +35,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 
         // Brick prefab pool
         [BoxGroup("Pool")] public ObjectPool<GameObject> brickPool;
-
+        [BoxGroup("Pool")] public ObjectPool<GameObject> brickExplosionPool;
         /// <summary>
         /// Set up the Brick Manager
         /// </summary>
@@ -40,6 +45,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             if (usePooling)
             {
                 brickPool = new ObjectPool<GameObject>(CreateBrick, OnTakeBrickFromPool, OnReturnBrickToPool, OnDestroyBrick, true, defaultPoolSize);
+                brickExplosionPool = new ObjectPool<GameObject>(CreateBrickExplosion, OnTakeBrickExplosionFromPool,
+                    OnReturnBrickExplosionToPool, OnDestroyBrickExplosion, true, defaultPoolSize);
             }
         }
 
@@ -184,18 +191,23 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <param name="playSound"></param>
         public void DestroyBrick(Brick brick, bool playSound)
         {
-            if (brick.brickType != BrickType.Invincible && playSound)
+            if (brick.brickType == BrickType.Invincible)
             {
-                _audioSource.PlayOneShot(destroyedClip);
+                playSound = false;
             }
             bricks.Remove(brick);
             if (brick.brickType != BrickType.Invincible)
             {
                 _destructableBricks--;
             }
-            
+
+            BrickDestroyedAtPositionEvent.Invoke(brick.transform);
+
             if (usePooling)
             {
+                GameObject brickExplosionGameObject = brickExplosionPool.Get();
+                brickExplosionGameObject.transform.position = brick.transform.position;
+                brickExplosionGameObject.GetComponent<Explosion>().Explode(playSound);
                 brickPool.Release(brick.gameObject);
             }
             else
@@ -279,6 +291,55 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             Brick brick = brickGameObject.GetComponent<Brick>();
             // Debug.Log($"Brick destroyed to pool. {brick.brickType}, {brick.brickColor}. Pool size is: {brickPool.CountAll} of which {brickPool.CountActive} are active.");
             Destroy(brickGameObject);
+        }
+
+        /// <summary>
+        /// Create action for pool
+        /// </summary>
+        /// <returns></returns>
+        private GameObject CreateBrickExplosion()
+        {
+            GameObject newBrickExplosionGameObject = Instantiate(brickExplosionPrefab);
+            newBrickExplosionGameObject.transform.parent = brickExplosionContainer.transform;
+            Explosion explosion = newBrickExplosionGameObject.GetComponent<Explosion>();
+            explosion.ReturnToPoolEvent.AddListener(ReturnBrickExplosionToPool);
+            return newBrickExplosionGameObject;
+        }
+
+        /// <summary>
+        /// Take action for pool
+        /// </summary>
+        /// <param name="brickExplosionGameObject"></param>
+        private void OnTakeBrickExplosionFromPool(GameObject brickExplosionGameObject)
+        {
+            brickExplosionGameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Release an explosion back to the pool
+        /// </summary>
+        /// <param name="explosion"></param>
+        private void ReturnBrickExplosionToPool(Explosion explosion)
+        {
+            brickExplosionPool.Release(explosion.gameObject);
+        }
+
+        /// <summary>
+        /// Return action for pool
+        /// </summary>
+        /// <param name="brickExplosionGameObject"></param>
+        private void OnReturnBrickExplosionToPool(GameObject brickExplosionGameObject)
+        {
+            brickExplosionGameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Destroy action for pool
+        /// </summary>
+        /// <param name="brickExplosionGameObject"></param>
+        private void OnDestroyBrickExplosion(GameObject brickExplosionGameObject)
+        {
+            Destroy(brickExplosionGameObject);
         }
         #endregion
     }

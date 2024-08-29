@@ -1,7 +1,10 @@
 {
     "levelName": "Level 8",
+    "levelFileName": "8-Level8",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 16,
+    "levelBackgroundMusicIndex": 7,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 30.0,

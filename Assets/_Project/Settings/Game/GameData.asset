@@ -18,4 +18,4 @@ MonoBehaviour:
   playerTwoControlSchemeIndex: 0
   isTwoPlayer: 0
   difficulty: {fileID: 11400000, guid: 9cbe93477a1a55e4cb8525f17f122162, type: 2}
-  levelSelect: 0
+  levelSelect: 1

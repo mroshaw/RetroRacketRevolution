@@ -1,7 +1,10 @@
 {
     "levelName": "Cloudy Day",
+    "levelFileName": "E-Clouds",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 26,
+    "levelBackgroundMusicIndex": 4,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 20.0,

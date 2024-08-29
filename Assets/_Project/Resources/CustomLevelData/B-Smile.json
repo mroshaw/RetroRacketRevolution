@@ -1,7 +1,12 @@
 {
     "levelName": "Smile!",
+    "levelFileName": "B-Smile",
+    "levelAuthor": "",
     "levelBackgroundName": "",
-    "levelBackgroundIndex": 30,
+    "levelBackgroundIndex": 41,
+    "levelBackgroundMusicIndex": 6,
+    "isBossLevel": false,
+    "levelBossIndex": 0,
     "maxEnemies": 0,
     "minTimeBetweenEnemies": 0.0,
     "maxTimeBetweenEnemies": 0.0,

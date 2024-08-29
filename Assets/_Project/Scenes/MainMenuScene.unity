@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1570,6 +1569,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &145507948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,6 +1634,56 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!21 &168402492
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/RetroCameraEffect
+  m_Shader: {fileID: 4800000, guid: 2cfdcae76c757405786f1219a383da6e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ChromaticAberration: 0
+    - _DisplacementAmplitude: 0.001
+    - _DisplacementFrequency: 100
+    - _DisplacementSpeed: 1
+    - _NoiseBottomHeight: 0.04
+    - _NoiseBottomIntensity: 1
+    - _OffsetNoiseX: 0
+    - _OffsetNoiseY: 0
+    - _StaticIntensity: 1
+    - _UseChromaticAberration: 1
+    - _UseDisplacement: 1
+    - _UseStaticNoise: 1
+    - _UseVignette: 0
+    - _Vignette: 0
+    m_Colors:
+    - _OffsetPos: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &170303656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +1992,7 @@ MonoBehaviour:
     WigglePermitted: 0
     WiggleType: 3
     UseUnscaledTime: 0
+    TimeMultiplier: 1
     StartWigglingAutomatically: 1
     SmoothPingPong: 1
     UseSpeedCurve: 0
@@ -2045,6 +2096,7 @@ MonoBehaviour:
     WigglePermitted: 1
     WiggleType: 1
     UseUnscaledTime: 0
+    TimeMultiplier: 1
     StartWigglingAutomatically: 1
     SmoothPingPong: 1
     UseSpeedCurve: 0
@@ -2148,6 +2200,7 @@ MonoBehaviour:
     WigglePermitted: 1
     WiggleType: 1
     UseUnscaledTime: 0
+    TimeMultiplier: 1
     StartWigglingAutomatically: 1
     SmoothPingPong: 1
     UseSpeedCurve: 0
@@ -6572,6 +6625,15 @@ MonoBehaviour:
     OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
+    OnInitializationComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
   DebugActive: 0
   FeedbacksList:
   - rid: 7881851607098851328
@@ -6583,7 +6645,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 7881851607098851328
-      type: {class: MMF_CameraZoom, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      type: {class: MMF_CameraZoom, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
         UniqueID: 1611268279
@@ -6603,6 +6665,10 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
           MMFeedbacksDirectionCondition: 0
           PlayDirection: 0
           ConstantIntensity: 0
@@ -6648,6 +6714,8 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
         Owner: {fileID: 781871846}
         DebugActive: 0
         ZoomMode: 0
@@ -6833,56 +6901,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 90}
   m_Pivot: {x: 0.5, y: 1}
---- !u!21 &805367966
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/RetroCameraEffect
-  m_Shader: {fileID: 4800000, guid: 2cfdcae76c757405786f1219a383da6e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondaryTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ChromaticAberration: 0
-    - _DisplacementAmplitude: 0.001
-    - _DisplacementFrequency: 100
-    - _DisplacementSpeed: 1
-    - _NoiseBottomHeight: 0.04
-    - _NoiseBottomIntensity: 1
-    - _OffsetNoiseX: 0
-    - _OffsetNoiseY: 0
-    - _StaticIntensity: 1
-    - _UseChromaticAberration: 1
-    - _UseDisplacement: 1
-    - _UseStaticNoise: 1
-    - _UseVignette: 0
-    - _Vignette: 0
-    m_Colors:
-    - _OffsetPos: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1001 &806882095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7433,7 +7451,6 @@ MonoBehaviour:
     - {fileID: 1647575183}
     objectsToDisable:
     - {fileID: 474361820}
-    - {fileID: 1300433498}
     - {fileID: 1429717031}
     - {fileID: 1367840156}
     - {fileID: 1136435829}
@@ -10755,11 +10772,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2409576454981330116, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
   m_PrefabInstance: {fileID: 1300433496}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1300433498 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2086435711889056632, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
-  m_PrefabInstance: {fileID: 1300433496}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1354517900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12088,8 +12100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 0}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchoredPosition: {x: -10, y: 10}
+  m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1546193346
 MonoBehaviour:
@@ -13533,15 +13545,28 @@ MonoBehaviour:
   enemyPrefab: {fileID: 3139021586948825785, guid: add28447bbc6aae4fa103312f3eee043, type: 3}
   projectilePrefab: {fileID: 8747238381050574416, guid: 3d680fa0bdf07d84486183e09daa35b1, type: 3}
   explosionPrefab: {fileID: 6962061638949621102, guid: fe5bd7acf66806745ad55fa7e1095740, type: 3}
+  bossEnemies: {fileID: 0}
   spawnAtY: 3
   minSpawnX: -7
   maxSpawnX: 7
-  activeEnemies: []
+  _activeEnemies: []
   _nextSpawnTime: 0
   _timeSinceLastSpawn: 0
   _maxEnemies: 5
   _minTimeBetweenEnemies: 0
   _maxTimeBetweenEnemies: 2
+  EnemySpawnedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  EnemyDestroyedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AllEnemiesDestroyedPreEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AllEnemiesDestroyedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1754505472
 Transform:
   m_ObjectHideFlags: 0
@@ -15704,7 +15729,7 @@ MonoBehaviour:
   useScanlines: 1
   scanlineSize: 512
   scanlineIntensity: 0.5
-  _material: {fileID: 805367966}
+  _material: {fileID: 168402492}
 --- !u!1001 &2030166693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16399,11 +16424,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3577528479177558413, guid: c299706c039b78f44a3586d24a8943a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3027582
+      value: 12.466368
       objectReference: {fileID: 0}
     - target: {fileID: 3577528479177558413, guid: c299706c039b78f44a3586d24a8943a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.20773496
+      value: 10.261583
       objectReference: {fileID: 0}
     - target: {fileID: 3577528479177558413, guid: c299706c039b78f44a3586d24a8943a2, type: 3}
       propertyPath: m_LocalPosition.z

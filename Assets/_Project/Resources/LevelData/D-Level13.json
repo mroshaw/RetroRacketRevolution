@@ -1,7 +1,10 @@
 {
     "levelName": "Level 13",
+    "levelFileName": "D-Level13",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 56,
+    "levelBackgroundMusicIndex": 12,
     "maxEnemies": 3,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 90.0,

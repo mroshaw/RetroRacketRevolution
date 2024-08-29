@@ -22,10 +22,12 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events")] public UnityEvent<BrickData> BrickUpdatedEvent;
         [FoldoutGroup("Events")] public UnityEvent<string> LevelDescChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<int> LevelBackgroundIndexChangedEvent;
+        [FoldoutGroup("Events")] public UnityEvent<int> LevelBackgroundMusicIndexChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<int> MaxEnemiesChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<float> MinEnemyTimeChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<float> MaxEnemyTimeChangedEvent;
-
+        [FoldoutGroup("Events")] public UnityEvent<int> LevelBossIndexChangedEvent;
+        [FoldoutGroup("Events")] public UnityEvent<bool> IsBossLevelChangedEvent;
         [FoldoutGroup("Events")] public UnityEvent<string> LevelEncodedEvent;
 
         // Level Public properties
@@ -33,8 +35,11 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         public float MinEnemyTime { get; set; } = 0.0f;
         public float MaxEnemyTime { get; set; } = 0.0f;
         public int BackgroundSpriteIndex { get; set; } = 0;
+        public int BackgroundMusicIndex { get; set; } = 0;
         public string FileName { get; set; }
         public string LevelDesc { get; set; }
+        public bool IsBossLevel { get; set; }
+        public int BossSpriteIndex { get; set; } = 0;
 
         // Internal 2 dimension array of brick data
         private BrickData[,] _brickDataArray;
@@ -81,12 +86,20 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             MinEnemyTime = 0.0f;
             MaxEnemyTime = 0.0f;
             BackgroundSpriteIndex = 0;
+            BackgroundMusicIndex = 0;
+            IsBossLevel = false;
+            BossSpriteIndex = 0;
+            IsBossLevel = false;
 
             LevelDescChangedEvent.Invoke(LevelDesc);
             MaxEnemiesChangedEvent.Invoke(MaxEnemies);
             MinEnemyTimeChangedEvent.Invoke(MinEnemyTime);
             MaxEnemyTimeChangedEvent.Invoke(MaxEnemyTime);
             LevelBackgroundIndexChangedEvent.Invoke(BackgroundSpriteIndex);
+            LevelBackgroundMusicIndexChangedEvent.Invoke(BackgroundMusicIndex);
+            LevelBossIndexChangedEvent.Invoke(BossSpriteIndex);
+            IsBossLevelChangedEvent.Invoke(IsBossLevel);
+
         }
 
         /// <summary>
@@ -224,12 +237,18 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             MinEnemyTime = levelData.minTimeBetweenEnemies;
             MaxEnemyTime = levelData.maxTimeBetweenEnemies;
             BackgroundSpriteIndex = levelData.levelBackgroundIndex;
+            BackgroundMusicIndex = levelData.levelBackgroundMusicIndex;
+            BossSpriteIndex = levelData.levelBossIndex;
+            IsBossLevel = levelData.isBossLevel;
 
             LevelDescChangedEvent.Invoke(LevelDesc);
             MaxEnemiesChangedEvent.Invoke(MaxEnemies);
             MinEnemyTimeChangedEvent.Invoke(MinEnemyTime);
             MaxEnemyTimeChangedEvent.Invoke(MaxEnemyTime);
             LevelBackgroundIndexChangedEvent.Invoke(BackgroundSpriteIndex);
+            LevelBackgroundMusicIndexChangedEvent.Invoke(BackgroundMusicIndex);
+            LevelBossIndexChangedEvent.Invoke(BossSpriteIndex);
+            IsBossLevelChangedEvent.Invoke(IsBossLevel);
         }
 
         /// <summary>
@@ -257,9 +276,12 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             // Set level properties
             newLevelData.levelName = LevelDesc;
             newLevelData.levelBackgroundIndex = BackgroundSpriteIndex;
+            newLevelData.levelBackgroundMusicIndex = BackgroundMusicIndex;
             newLevelData.maxEnemies = MaxEnemies;
             newLevelData.minTimeBetweenEnemies = MinEnemyTime;
             newLevelData.maxTimeBetweenEnemies = MaxEnemyTime;
+            newLevelData.isBossLevel = IsBossLevel;
+            newLevelData.levelBossIndex = BossSpriteIndex;
 
             // Parse current level grid
             for (int currRow = 0; currRow < numberOfRows; currRow++)

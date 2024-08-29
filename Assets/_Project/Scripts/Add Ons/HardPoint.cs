@@ -31,12 +31,27 @@ namespace DaftAppleGames.RetroRacketRevolution
         }
 
         /// <summary>
+        /// Setup the component
+        /// </summary>
+        private void Start()
+        {
+            if (deployOnStart)
+            {
+                EnableAddOn();
+            }
+            else
+            {
+                DisableAddOn();
+            }
+        }
+
+        /// <summary>
         /// Enable attached add-on
         /// </summary>
         public void EnableAddOn()
         {
             attachedAddOn.gameObject.SetActive(true);
-            attachedAddOn.Deploy();
+            Deploy();
         }
 
         /// <summary>
@@ -45,21 +60,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         public void DisableAddOn()
         {
             attachedAddOn.gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Setup the component
-        /// </summary>
-        private void Start()
-        {
-            if (deployOnStart)
-            {
-                Deploy();
-            }
-            else
-            {
-                _isDeployed = false;
-            }
+            Retract();
         }
 
         /// <summary>

@@ -1,7 +1,10 @@
 {
     "levelName": "The Maze",
+    "levelFileName": "D-Maze",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 34,
+    "levelBackgroundMusicIndex": 17,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 60.0,

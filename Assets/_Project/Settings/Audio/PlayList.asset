@@ -12,19 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69deb915737c5b74fba91ce0a724c694, type: 3}
   m_Name: PlayList
   m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: 4a2bd36f8192bb34996fcbe7e50e23fc, type: 3}
-  - {fileID: 8300000, guid: c4b4d6129404fe245808c81d3bb338ee, type: 3}
-  - {fileID: 8300000, guid: 7a60b44ae5af6db4ab7ca00fbf7bd9ae, type: 3}
-  - {fileID: 8300000, guid: 38a725ed6a9897a4792abf9a0836ab3d, type: 3}
-  - {fileID: 8300000, guid: 709c2f859f979364f9a0c1ed7f81917d, type: 3}
-  - {fileID: 8300000, guid: 5c96e600fc241a543b7500b416aefa21, type: 3}
-  - {fileID: 8300000, guid: c90f0b9c54566d443a484d68ffa6699b, type: 3}
-  - {fileID: 8300000, guid: 5047761d2188dfb4aa1bb9ff3828fd4a, type: 3}
-  - {fileID: 8300000, guid: 41a58aac597ad41438043a3f3cf7bc9f, type: 3}
-  - {fileID: 8300000, guid: 94485228eb91df54796dadf988c614dd, type: 3}
-  - {fileID: 8300000, guid: 034491ecb3af4ac48a308f3c1b486167, type: 3}
-  - {fileID: 8300000, guid: 4b23be4ae939db64d929d46393cfefa7, type: 3}
-  - {fileID: 8300000, guid: e4394e7a17466034fa57a936207d71b8, type: 3}
-  - {fileID: 8300000, guid: e73013173569a7e45a38ac49e386a9c6, type: 3}
-  - {fileID: 8300000, guid: 6549a10043ee92046964b30f952e37a5, type: 3}
+  Songs:
+  - AudioClip: {fileID: 8300000, guid: 4a2bd36f8192bb34996fcbe7e50e23fc, type: 3}
+    SongName: Action Cool
+  - AudioClip: {fileID: 8300000, guid: c4b4d6129404fe245808c81d3bb338ee, type: 3}
+    SongName: Action Fun
+  - AudioClip: {fileID: 8300000, guid: 7a60b44ae5af6db4ab7ca00fbf7bd9ae, type: 3}
+    SongName: Action Mystery
+  - AudioClip: {fileID: 8300000, guid: 38a725ed6a9897a4792abf9a0836ab3d, type: 3}
+    SongName: Action Suspense
+  - AudioClip: {fileID: 8300000, guid: 709c2f859f979364f9a0c1ed7f81917d, type: 3}
+    SongName: Chilled Fun
+  - AudioClip: {fileID: 8300000, guid: 5c96e600fc241a543b7500b416aefa21, type: 3}
+    SongName: Confused
+  - AudioClip: {fileID: 8300000, guid: c90f0b9c54566d443a484d68ffa6699b, type: 3}
+    SongName: Happy
+  - AudioClip: {fileID: 8300000, guid: 5047761d2188dfb4aa1bb9ff3828fd4a, type: 3}
+    SongName: Victory
+  - AudioClip: {fileID: 8300000, guid: 41a58aac597ad41438043a3f3cf7bc9f, type: 3}
+    SongName: Casual
+  - AudioClip: {fileID: 8300000, guid: 94485228eb91df54796dadf988c614dd, type: 3}
+    SongName: Chilled Fun 2
+  - AudioClip: {fileID: 8300000, guid: 034491ecb3af4ac48a308f3c1b486167, type: 3}
+    SongName: Evil Lair
+  - AudioClip: {fileID: 8300000, guid: 4b23be4ae939db64d929d46393cfefa7, type: 3}
+    SongName: Fun Work
+  - AudioClip: {fileID: 8300000, guid: e4394e7a17466034fa57a936207d71b8, type: 3}
+    SongName: Happy Chill
+  - AudioClip: {fileID: 8300000, guid: e73013173569a7e45a38ac49e386a9c6, type: 3}
+    SongName: Panic
+  - AudioClip: {fileID: 8300000, guid: 6549a10043ee92046964b30f952e37a5, type: 3}
+    SongName: Work Work Work
+  - AudioClip: {fileID: 8300000, guid: dee282cea0046104aacd3ffec0a77782, type: 3}
+    SongName: Defeat
+  - AudioClip: {fileID: 8300000, guid: 3e6d6ba68aae0004b96f763b45bbc383, type: 3}
+    SongName: Evil
+  - AudioClip: {fileID: 8300000, guid: 1f613487bf825dc459aa946c11c642a5, type: 3}
+    SongName: Depressed
+  - AudioClip: {fileID: 8300000, guid: 62fd19ce22c040845a60b13634c212bf, type: 3}
+    SongName: Grudge
+  - AudioClip: {fileID: 8300000, guid: 709ebb5d2a5a5e04cb39e7ef2aae672b, type: 3}
+    SongName: Grouch

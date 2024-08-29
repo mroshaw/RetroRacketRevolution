@@ -50,7 +50,14 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         public virtual void Deploy()
         {
-
         }
+
+        /// <summary>
+        /// Deploy add-on functionality
+        /// </summary>
+        public virtual void Retract()
+        {
+        }
+
     }
 }

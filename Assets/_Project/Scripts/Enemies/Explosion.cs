@@ -29,15 +29,20 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
         }
 
+
         /// <summary>
         /// Trigger explosion
         /// </summary>
-        public void Explode()
+        [Button("Explode!")]
+        public void Explode(bool playSound)
         {
             if (_audioSource != null && _particleSystem != null)
             {
-                _audioSource.Play();
-                _particleSystem.Emit(100);
+                if (playSound)
+                {
+                    _audioSource.Play();
+                }
+                _particleSystem.Play(true);
                 StartCoroutine(ReturnToPoolAsync());
             }
         }

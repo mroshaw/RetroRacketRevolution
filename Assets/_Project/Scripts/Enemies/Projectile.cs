@@ -9,11 +9,14 @@ namespace DaftAppleGames.RetroRacketRevolution
     {
 
         [BoxGroup("Audio")] public AudioClip fallingAudioClip;
+        [BoxGroup("Visual")] public Sprite sprite;
         [FoldoutGroup("Events")] public UnityEvent<Projectile> ProjectileDestroyedEvent;
 
         public EnemyManager EnemyManager { get; set; }
 
         private AudioSource _audioSource;
+        private SpriteRenderer _spriteRenderer;
+        private BoxCollider2D _collider;
 
         /// <summary>
         /// Initialise this component
@@ -21,14 +24,27 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<BoxCollider2D>();
         }
 
         /// <summary>
-        /// Set up components
+        /// Initialise the projectile
         /// </summary>
-        private void Start()
+        /// <param name="projectileSprite"></param>
+        /// <param name="projectilveFallingAudioClip"></param>
+        /// <param name="scale"></param>
+        public void InitProjectile(Sprite projectileSprite, AudioClip projectilveFallingAudioClip, float scale)
         {
+            // Set the sp[rite, audio and scale
+            _spriteRenderer.sprite = projectileSprite;
+            fallingAudioClip = projectilveFallingAudioClip;
+            gameObject.transform.localScale = new Vector2(scale, scale);
 
+            // Set the collider size
+            _collider.size = new Vector2(_spriteRenderer.size.x, _spriteRenderer.size.y);
+
+            _audioSource.PlayOneShot(fallingAudioClip);
         }
 
         /// <summary>
@@ -57,14 +73,6 @@ namespace DaftAppleGames.RetroRacketRevolution
                 ProjectileDestroyedEvent.Invoke(this);
             }
 
-        }
-
-        /// <summary>
-        /// Call this when spawning / fetching from pool
-        /// </summary>
-        public void OnSpawn()
-        {
-            _audioSource.PlayOneShot(fallingAudioClip);
         }
     }
 }

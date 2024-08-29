@@ -1,7 +1,10 @@
 {
     "levelName": "Level 12",
+    "levelFileName": "C-Level12",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 48,
+    "levelBackgroundMusicIndex": 11,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 25.0,
     "maxTimeBetweenEnemies": 45.0,

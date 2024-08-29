@@ -1,7 +1,10 @@
 {
     "levelName": "Level 14",
+    "levelFileName": "E-Level14",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 33,
+    "levelBackgroundMusicIndex": 13,
     "maxEnemies": 3,
     "minTimeBetweenEnemies": 55.0,
     "maxTimeBetweenEnemies": 90.0,
@@ -21,9 +24,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -37,9 +41,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -53,9 +58,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -69,9 +75,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -85,9 +92,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -101,9 +109,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -117,9 +126,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -133,9 +143,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -149,9 +160,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -165,9 +177,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -181,9 +194,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -197,9 +211,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -213,9 +228,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -229,9 +245,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 0,
@@ -245,9 +262,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -265,9 +283,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -281,9 +300,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -297,9 +317,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -313,9 +334,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -329,9 +351,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -345,9 +368,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -361,9 +385,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -377,9 +402,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -393,9 +419,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -409,9 +436,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -425,9 +453,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -441,9 +470,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -457,9 +487,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -473,9 +504,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 1,
@@ -489,9 +521,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -509,9 +542,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -525,9 +559,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -541,9 +576,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -557,9 +593,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -573,9 +610,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -589,9 +627,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -605,9 +644,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -621,9 +661,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -637,9 +678,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -653,9 +695,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -669,9 +712,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -685,9 +729,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -701,9 +746,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 5,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -717,9 +763,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 2,
@@ -733,9 +780,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -753,9 +801,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -769,9 +818,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -785,9 +835,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -801,9 +852,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -817,9 +869,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -833,9 +886,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -849,9 +903,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -865,9 +920,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -881,9 +937,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -897,9 +954,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -913,9 +971,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -929,9 +988,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -945,9 +1005,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -961,9 +1022,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 3,
@@ -977,9 +1039,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -997,9 +1060,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1013,9 +1077,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1029,9 +1094,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1045,9 +1111,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 1,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1061,9 +1128,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1077,9 +1145,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1093,9 +1162,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1109,9 +1179,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1125,9 +1196,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1141,9 +1213,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1157,9 +1230,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1173,9 +1247,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1189,9 +1264,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1205,9 +1281,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 4,
@@ -1221,9 +1298,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -1241,9 +1319,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 4,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1257,9 +1336,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1273,9 +1353,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1289,9 +1370,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1305,9 +1387,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1321,9 +1404,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1337,9 +1421,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1353,9 +1438,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 2,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1369,9 +1455,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1385,9 +1472,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 2,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1401,9 +1489,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1417,9 +1506,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 2,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1433,9 +1523,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1449,9 +1540,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 2,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 5,
@@ -1465,9 +1557,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -1485,9 +1578,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1501,9 +1595,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1517,9 +1612,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1533,9 +1629,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 3,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1549,9 +1646,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1565,9 +1663,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1581,9 +1680,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1597,9 +1697,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1613,9 +1714,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1629,9 +1731,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 1,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1645,9 +1748,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1661,9 +1765,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1677,9 +1782,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1693,9 +1799,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 6,
@@ -1709,9 +1816,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -1729,9 +1837,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1745,9 +1854,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1761,9 +1871,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1777,9 +1888,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1793,9 +1905,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1809,9 +1922,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1825,9 +1939,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1841,9 +1956,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1857,9 +1973,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1873,9 +1990,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1889,9 +2007,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1905,9 +2024,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1921,9 +2041,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1937,9 +2058,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 7,
@@ -1953,9 +2075,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -1973,9 +2096,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 1,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -1989,9 +2113,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2005,9 +2130,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2021,9 +2147,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2037,9 +2164,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2053,9 +2181,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2069,9 +2198,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2085,9 +2215,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2101,9 +2232,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2117,9 +2249,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2133,9 +2266,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2149,9 +2283,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2165,9 +2300,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2181,9 +2317,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 8,
@@ -2197,9 +2334,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -2217,9 +2355,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2233,9 +2372,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2249,9 +2389,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2265,9 +2406,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2281,9 +2423,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2297,9 +2440,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2313,9 +2457,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2329,9 +2474,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2345,9 +2491,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2361,9 +2508,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2377,9 +2525,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2393,9 +2542,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2409,9 +2559,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2425,9 +2576,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 9,
@@ -2441,9 +2593,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -2461,9 +2614,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2477,9 +2631,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2493,9 +2648,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2509,9 +2665,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2525,9 +2682,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2541,9 +2699,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2557,9 +2716,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2573,9 +2733,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2589,9 +2750,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2605,9 +2767,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2621,9 +2784,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2637,9 +2801,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2653,9 +2818,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2669,9 +2835,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 10,
@@ -2685,9 +2852,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             },
@@ -2705,9 +2873,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2721,9 +2890,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2737,9 +2907,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2753,9 +2924,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2769,9 +2941,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2785,9 +2958,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2801,9 +2975,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2817,9 +2992,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2833,9 +3009,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2849,9 +3026,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2865,9 +3043,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2881,9 +3060,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2897,9 +3077,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2913,9 +3094,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     },
                     {
                         "RowNumber": 11,
@@ -2929,9 +3111,10 @@
                             "a": 1.0
                         },
                         "BrickBonus": 0,
-                        "bonusSprite": {
-                            "instanceID": 0
-                        }
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
                     }
                 ]
             }

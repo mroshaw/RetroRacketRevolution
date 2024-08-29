@@ -1,60 +1,39 @@
 using System.IO;
 using DaftAppleGames.RetroRacketRevolution.Levels;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
-using Sirenix.OdinInspector;
 
 namespace DaftAppleGames.Levels
 {
     public class LevelDataResources : MonoBehaviour
     {
-        // Public serializable properties
-        [BoxGroup("General Settings")]
-        public string setting1;
-        
-        [FoldoutGroup("Events")]
-        public UnityEvent MyEvent;
-
-        // Public properties
-        
-        // Private fields
+        [BoxGroup("Events")] public UnityEvent filesUnpackedEvent;
 
         #region UnityMethods
-        /// <summary>
-        /// Initialise this component
-        /// </summary>   
-        private void Awake()
-        {
-            
-        }
-    
-        /// <summary>
-        /// Configure the component on Start
-        /// </summary>
         private void Start()
         {
-#if !UNITY_EDITOR
             UnpackAllLevels();
-#endif
         }
         #endregion
 
         #region PublicMethods
-
         /// <summary>
         /// Force an overwrite of level data, e.g. for an upgrade
         /// </summary>
         public void UnpackLevelData()
         {
             // Unpack original levels
-            UnpackResourceToTarget("LevelData", LevelDataExt.OgLevelDataPath);
+            UnpackResourceToTarget("LevelData", LevelDataExt.OgLevelDataPath, true);
 
-            // Unpack original levels
-            UnpackResourceToTarget("LevelData", LevelDataExt.OgLevelDataPath);
+            // Unpack custom levels
+            UnpackResourceToTarget("CustomLevelData", LevelDataExt.CustomLevelDataPath, true);
+
+            filesUnpackedEvent.Invoke();
         }
         #endregion
 
-        #region PrivateMethods
+        #region Private Methods
         private void UnpackAllLevels()
         {
             // Create Original Level Data Folders, if not there
@@ -64,7 +43,7 @@ namespace DaftAppleGames.Levels
                 Directory.CreateDirectory(LevelDataExt.OgLevelDataPath);
 
                 // Unpack original levels
-                UnpackResourceToTarget("LevelData", LevelDataExt.OgLevelDataPath);
+                UnpackResourceToTarget("LevelData", LevelDataExt.OgLevelDataPath, false);
             }
 
             // Create Custom Level Data Folders, if not there
@@ -74,16 +53,16 @@ namespace DaftAppleGames.Levels
                 Directory.CreateDirectory(LevelDataExt.CustomLevelDataPath);
 
                 // Unpack custom levels
-                UnpackResourceToTarget("CustomLevelData", LevelDataExt.CustomLevelDataPath);
+                UnpackResourceToTarget("CustomLevelData", LevelDataExt.CustomLevelDataPath, false);
             }
+
+            filesUnpackedEvent.Invoke();
         }
         
         /// <summary>
         /// Unpack level resources from location to the target
         /// </summary>
-        /// <param name="resourcePath"></param>
-        /// <param name="targetPath"></param>
-        private void UnpackResourceToTarget(string resourcePath, string targetPath)
+        private void UnpackResourceToTarget(string resourcePath, string targetPath, bool overwrite)
         {
             TextAsset[] allLevels = Resources.LoadAll<TextAsset>(resourcePath);
             
@@ -91,9 +70,10 @@ namespace DaftAppleGames.Levels
             foreach (TextAsset level in allLevels)
             {
                 string targetFile = level.name + ".json";
-                Debug.Log($"Unpacking level: {targetFile} to {Path.Join(targetPath, targetFile)}");
-                using (StreamWriter outputFile = new StreamWriter(Path.Join(targetPath, targetFile), false))
+                if (overwrite || !File.Exists(targetFile))
                 {
+                    Debug.Log($"Unpacking level: {targetFile} to {Path.Join(targetPath, targetFile)}");
+                    using StreamWriter outputFile = new StreamWriter(Path.Join(targetPath, targetFile), false);
                     outputFile.WriteLine(level.ToString());
                 }
             }

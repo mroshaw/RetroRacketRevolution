@@ -1,8 +1,10 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Events;
 
 
 namespace DaftAppleGames.RetroRacketRevolution
@@ -12,22 +14,26 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("Settings")] public GameObject enemyContainer;
         [BoxGroup("Settings")] public GameObject projectileContainer;
         [BoxGroup("Settings")] public GameObject explosionContainer;
+
         [BoxGroup("Prefabs")] public GameObject enemyPrefab;
         [BoxGroup("Prefabs")] public GameObject projectilePrefab;
         [BoxGroup("Prefabs")] public GameObject explosionPrefab;
+
+        [BoxGroup("Bosses")] public EnemiesData bossEnemies;
+
         [BoxGroup("Spawn")] public float spawnAtY;
         [BoxGroup("Spawn")] public int minSpawnX;
         [BoxGroup("Spawn")] public int maxSpawnX;
+        [SerializeField]
+        [BoxGroup("Spawn")] private List<Enemy> _activeEnemies;
 
         [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> enemyPool;
         [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> projectilePool;
         [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> explosionPool;
 
-        [SerializeField]
-        [BoxGroup("Debug")] private List<Enemy> activeEnemies;
-
         private bool _isSpawning;
-        private int _numActiveEnemies;
+        private bool _isBossEnemy = false;
+        private int _bossEnemyIndex;
 
         private System.Random _rand = new System.Random();
         private AudioSource _audioSource;
@@ -37,6 +43,11 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("Debug")] [SerializeField] private int _maxEnemies;
         [BoxGroup("Debug")] [SerializeField] private float _minTimeBetweenEnemies;
         [BoxGroup("Debug")] [SerializeField] private float _maxTimeBetweenEnemies;
+
+        [FoldoutGroup("Events")] public UnityEvent EnemySpawnedEvent;
+        [FoldoutGroup("Events")] public UnityEvent EnemyDestroyedEvent;
+        [FoldoutGroup("Events")] public UnityEvent AllEnemiesDestroyedPreEvent;
+        [FoldoutGroup("Events")] public UnityEvent AllEnemiesDestroyedEvent;
 
         /// <summary>
         /// Initialise this component and pools
@@ -73,7 +84,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             }
 
             // Do nothing if we've already got max enemies
-            if (_numActiveEnemies >= _maxEnemies || _maxEnemies == 0)
+            if (_activeEnemies.Count >= _maxEnemies || _maxEnemies == 0)
             {
                 return;
             }
@@ -81,7 +92,15 @@ namespace DaftAppleGames.RetroRacketRevolution
             // If we're passed max spawn time, spawn
             if (_timeSinceLastSpawn > _nextSpawnTime)
             {
-                SpawnEnemy();
+                if (_isBossEnemy)
+                {
+                    SpawnEnemy(true, _bossEnemyIndex);
+                }
+                else
+                {
+                    SpawnEnemy(false, 0);
+                }
+
                 _timeSinceLastSpawn = 0.0f;
                 _nextSpawnTime = GetNextSpawnTime();
                 return;
@@ -128,19 +147,23 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <param name="levelData"></param>
         public void HandleLevelLoadedEvent(LevelDataExt levelData)
         {
-            _maxEnemies = levelData.maxEnemies;
-            _minTimeBetweenEnemies = levelData.minTimeBetweenEnemies;
-            _maxTimeBetweenEnemies = levelData.maxTimeBetweenEnemies;
-            StartSpawning();
-        }
-
-        /// <summary>
-        /// Destroy any active enemies when level is complete
-        /// </summary>
-        public void HandleLevelEndedEvent()
-        {
             StopSpawning();
-            RemoveAllEnemies();
+  
+            _isBossEnemy = levelData.isBossLevel;
+            if (_isBossEnemy)
+            {
+                _bossEnemyIndex = levelData.levelBossIndex;
+                _maxEnemies = 1;
+                _minTimeBetweenEnemies = 0;
+                _maxTimeBetweenEnemies = 0;
+            }
+            else
+            {
+                _maxEnemies = levelData.maxEnemies;
+                _minTimeBetweenEnemies = levelData.minTimeBetweenEnemies;
+                _maxTimeBetweenEnemies = levelData.maxTimeBetweenEnemies;
+                StartSpawning();
+            }
         }
 
         /// <summary>
@@ -148,9 +171,9 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         public void RemoveAllEnemies()
         {
-            foreach (Enemy enemy in activeEnemies.ToArray())
+            foreach (Enemy enemy in _activeEnemies.ToArray())
             {
-                enemyPool.Release(enemy.gameObject);
+                enemy.DestroyEnemy();
             }
         }
 
@@ -158,28 +181,51 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Spawn an Enemy from the Pool
         /// </summary>
         /// <returns></returns>
-        public Enemy SpawnEnemy()
+        public Enemy SpawnEnemy(bool isBossEnemy, int bossEnemyIndex)
         {
-            System.Random rand = new System.Random();
-            float horizontal = rand.Next(minSpawnX, maxSpawnX);
+            if (isBossEnemy)
+            {
+                System.Random rand = new System.Random();
+                float horizontal = rand.Next(minSpawnX, maxSpawnX);
+                GameObject enemyGameObject = Instantiate(bossEnemies.EnemyList[bossEnemyIndex].enemyPrefab);
+                enemyGameObject.transform.SetParent(enemyContainer.transform);
+                Vector2 newPosition = new Vector2(horizontal, spawnAtY);
+                enemyGameObject.transform.position = newPosition;
+                Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
+                newEnemy.EnemyManager = this;
+                newEnemy.EnemyDestroyedEvent.AddListener(EnemyDestroyed);
+                newEnemy.OnSpawn();
+                _activeEnemies.Add(newEnemy);
+                EnemySpawnedEvent.Invoke();
+                return newEnemy;
+            }
+            else
+            {
+                System.Random rand = new System.Random();
+                float horizontal = rand.Next(minSpawnX, maxSpawnX);
 
-            GameObject enemyGameObject = enemyPool.Get();
-            Vector2 newPosition = new Vector2(horizontal, spawnAtY);
-            enemyGameObject.transform.position = newPosition;
-            Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
-            newEnemy.OnSpawn();
-            return newEnemy;
+                GameObject enemyGameObject = enemyPool.Get();
+                Vector2 newPosition = new Vector2(horizontal, spawnAtY);
+                enemyGameObject.transform.position = newPosition;
+                Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
+                newEnemy.OnSpawn();
+                EnemySpawnedEvent.Invoke();
+                return newEnemy;
+            }
         }
 
         /// <summary>
         /// Spawn a Projectile from the Pool
         /// </summary>
         /// <returns></returns>
-        public Projectile SpawnProjectile()
+        public Projectile SpawnProjectile(Sprite projectileSprite, AudioClip fallingAudioClip, float projectileScale)
         {
             GameObject projectileGameObject = projectilePool.Get();
             Projectile newProjectile = projectileGameObject.GetComponent<Projectile>();
-            newProjectile.OnSpawn();
+            newProjectile.sprite = projectileSprite;
+            newProjectile.fallingAudioClip = fallingAudioClip;
+            newProjectile.gameObject.transform.localScale = new Vector2(projectileScale, projectileScale);
+            newProjectile.InitProjectile(projectileSprite, fallingAudioClip, projectileScale);
             return newProjectile;
         }
 
@@ -201,8 +247,37 @@ namespace DaftAppleGames.RetroRacketRevolution
             // Spawn explosion
             GameObject explosion = explosionPool.Get();
             explosion.transform.position = enemy.gameObject.transform.position;
-            explosion.GetComponent<Explosion>().Explode();
-            enemyPool.Release(enemy.gameObject);
+            explosion.GetComponent<Explosion>().Explode(true);
+            if (_isBossEnemy)
+            {
+                _activeEnemies.Remove(enemy);
+                Destroy(enemy.gameObject);
+            }
+            else
+            {
+                enemyPool.Release(enemy.gameObject);
+            }
+            EnemyDestroyedEvent.Invoke();
+            // Check if this is the last enemy destroyed. Used mainly for Boss enemies
+            if (_activeEnemies.Count == 0)
+            {
+                if (_isBossEnemy)
+                {
+                    StopSpawning();
+                    AllEnemiesDestroyedPreEvent.Invoke();
+                    StartCoroutine(WaitAndAnnounceLastEnemyDestroyed());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Waits for 2 seconds then reports last enemy destroyed. Allows destruction animation to play
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator WaitAndAnnounceLastEnemyDestroyed()
+        {
+            yield return new WaitForSeconds(2);
+            AllEnemiesDestroyedEvent.Invoke();
         }
 
         #region PoolRegion
@@ -227,8 +302,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             enemy.SetActive(true);
             enemy.GetComponent<Enemy>().EnemyDestroyedEvent.AddListener(EnemyDestroyed);
-            activeEnemies.Add(enemy.GetComponent<Enemy>());
-            _numActiveEnemies++;
+            _activeEnemies.Add(enemy.GetComponent<Enemy>());
         }
 
         /// <summary>
@@ -239,8 +313,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             enemy.GetComponent<Enemy>().EnemyDestroyedEvent.RemoveListener(EnemyDestroyed);
             enemy.SetActive(false);
-            activeEnemies.Remove(enemy.GetComponent<Enemy>());
-            _numActiveEnemies--;
+            _activeEnemies.Remove(enemy.GetComponent<Enemy>());
         }
 
         /// <summary>
@@ -250,8 +323,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void OnDestroyEnemy(GameObject enemy)
         {
             enemy.GetComponent<Enemy>().EnemyDestroyedEvent.RemoveListener(EnemyDestroyed);
-            activeEnemies.Remove(enemy.GetComponent<Enemy>());
-            _numActiveEnemies--;
+            _activeEnemies.Remove(enemy.GetComponent<Enemy>());
             Destroy(enemy);
         }
 

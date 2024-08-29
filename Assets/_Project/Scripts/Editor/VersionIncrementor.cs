@@ -1,11 +1,8 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-// Modified by dredhorse5
-
-namespace DaftAppleGames.RetroRacketRevolution.Editor
+namespace DaftAppleGames.Editor
 {
     [InitializeOnLoad]
     class VersionIncrementor
@@ -100,4 +97,3 @@ namespace DaftAppleGames.RetroRacketRevolution.Editor
         }
     }
 }
-#endif

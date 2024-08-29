@@ -1,7 +1,10 @@
 {
     "levelName": "The Funnel",
+    "levelFileName": "C-Funnel",
+    "levelAuthor": "",
     "levelBackgroundName": "",
     "levelBackgroundIndex": 40,
+    "levelBackgroundMusicIndex": 2,
     "maxEnemies": 2,
     "minTimeBetweenEnemies": 15.0,
     "maxTimeBetweenEnemies": 25.0,

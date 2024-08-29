@@ -4,6 +4,7 @@ using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,7 +46,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
         {
             base.Start();
             // Update the version text
-            versionText.text = $"Build: {Version.Parse(Application.version).ToString()}";
+            versionText.text = $"Version: {Application.version}";
  
             // Set the default controls, depending on platform
             SetControlSchemes();

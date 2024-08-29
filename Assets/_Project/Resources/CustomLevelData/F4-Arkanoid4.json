@@ -1,0 +1,3123 @@
+{
+    "levelName": "Arkanoid Level 4",
+    "levelFileName": "F0-Arkanoid4",
+    "levelAuthor": "",
+    "levelBackgroundName": "",
+    "levelBackgroundIndex": 16,
+    "levelBackgroundMusicIndex": 3,
+    "maxEnemies": 2,
+    "minTimeBetweenEnemies": 20.0,
+    "maxTimeBetweenEnemies": 45.0,
+    "BrickDataArray": {
+        "RowArray": [
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 0.39150941371917727,
+                            "g": 1.0,
+                            "b": 0.9759286642074585,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 8,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 9,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 9,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 2,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 0,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 3,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 8,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": false,
+                        "BrickType": 6,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 1,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 2,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 1,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 2,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 3,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 9,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": false,
+                        "BrickType": 1,
+                        "BrickColor": {
+                            "r": 0.22641509771347047,
+                            "g": 0.22641509771347047,
+                            "b": 0.22641509771347047,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 9,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 4,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": false,
+                        "BrickType": 5,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": false,
+                        "BrickType": 4,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 1,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 5,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 7,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.39150941371917727,
+                            "g": 1.0,
+                            "b": 0.9759286642074585,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 7,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 6,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 8,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 8,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 7,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 8,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 9,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 2,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 10,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 2,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            },
+            {
+                "RowBricks": [
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 0,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 1,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 2,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.0,
+                            "b": 0.9342737197875977,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 3,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 4,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 5,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 6,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 7,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 8,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 9,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 10,
+                        "IsEmptySlot": true,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 11,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.6839622259140015,
+                            "b": 0.6839622259140015,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 12,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 0.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 13,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 0.0,
+                            "g": 1.0,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    },
+                    {
+                        "RowNumber": 11,
+                        "ColumnNumber": 14,
+                        "IsEmptySlot": false,
+                        "BrickType": 0,
+                        "BrickColor": {
+                            "r": 1.0,
+                            "g": 0.484579861164093,
+                            "b": 0.0,
+                            "a": 1.0
+                        },
+                        "BrickBonus": 0,
+                        "HasIsEmptySlotChanged": false,
+                        "HasBrickTypeChanged": false,
+                        "HasBrickColorChanged": false,
+                        "HasBrickBonusChanged": false
+                    }
+                ]
+            }
+        ]
+    }
+}

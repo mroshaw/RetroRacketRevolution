@@ -1,4 +1,3 @@
-using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,18 +11,15 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("Laser Settings")] public Transform barrelEndTransform;
         [BoxGroup("Settings")] public GameObject projectileContainer;
         [BoxGroup("Audio")] public AudioClip fireClip;
-        
-        private float lastShotCounter;
-        
-        private Sprite[] laserBoltSprites;
-        private AudioSource _audioSource;
 
         public HardPoint AttachedHardPoint => _hardPoint;
 
-        private HardPoint _hardPoint;
-
         // Laser bolt pool
-        [BoxGroup("Pool")] public ObjectPool<GameObject> laserBoltPool;
+        private ObjectPool<GameObject> _laserBoltPool;
+        private float _lastShotCounter;
+        private Sprite[] _laserBoltSprites;
+        private AudioSource _audioSource;
+        private HardPoint _hardPoint;
 
         /// <summary>
         /// Create the object pool and initialise
@@ -31,8 +27,8 @@ namespace DaftAppleGames.RetroRacketRevolution
         public override void Awake()
         {
             base.Awake();
-            laserBoltPool = new ObjectPool<GameObject>(CreateLaserBolt, OnTakeLaserBoltFromPool, OnReturnLaserBoltToPool, OnDestroyLaserBolt, true, 20);
-            lastShotCounter = 0.0f;
+            _laserBoltPool = new ObjectPool<GameObject>(CreateLaserBolt, OnTakeLaserBoltFromPool, OnReturnLaserBoltToPool, OnDestroyLaserBolt, true, 20);
+            _lastShotCounter = 0.0f;
             _audioSource = GetComponent<AudioSource>();
             _hardPoint = GetComponentInParent<HardPoint>();
         }
@@ -42,7 +38,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void Start()
         {
-            // Unparent the bolt container, to prevent it following the player
+            // Un-parent the bolt container, to prevent it following the player
             projectileContainer.transform.SetParent(null);
 
         }
@@ -52,7 +48,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void Update()
         {
-            lastShotCounter += Time.deltaTime;
+            _lastShotCounter += Time.deltaTime;
         }
 
         /// <summary>
@@ -61,8 +57,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <returns></returns>
         private GameObject CreateLaserBolt()
         {
-            GameObject laserBoltGameObject = Instantiate(laserBoltPrefab);
-            laserBoltGameObject.transform.parent = projectileContainer.transform;
+            GameObject laserBoltGameObject = Instantiate(laserBoltPrefab, projectileContainer.transform, true);
             LaserBolt laserBolt = laserBoltGameObject.GetComponent<LaserBolt>();
             laserBolt.LaserCannon = this;
             return laserBoltGameObject;
@@ -72,7 +67,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Take action for pool
         /// </summary>
         /// <param name="laserBolt"></param>
-        private void OnTakeLaserBoltFromPool(GameObject laserBolt)
+        private static void OnTakeLaserBoltFromPool(GameObject laserBolt)
         {
             laserBolt.SetActive(true);
         }
@@ -81,7 +76,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Return action for pool
         /// </summary>
         /// <param name="laserBolt"></param>
-        private void OnReturnLaserBoltToPool(GameObject laserBolt)
+        private static void OnReturnLaserBoltToPool(GameObject laserBolt)
         {
             laserBolt.SetActive(false);
         }
@@ -90,7 +85,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Destroy action for pool
         /// </summary>
         /// <param name="laserBolt"></param>
-        private void OnDestroyLaserBolt(GameObject laserBolt)
+        private static void OnDestroyLaserBolt(GameObject laserBolt)
         {
             Destroy(laserBolt);
         }
@@ -101,7 +96,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <returns></returns>
         private bool CanFire()
         {
-            return lastShotCounter > delayBetweenShots;
+            return _lastShotCounter > delayBetweenShots;
         }
 
         /// <summary>
@@ -115,8 +110,8 @@ namespace DaftAppleGames.RetroRacketRevolution
                 if (_audioSource.enabled)
                 {
                     _audioSource.PlayOneShot(fireClip);
-                    lastShotCounter = 0.0f;
-                    GameObject laserBoltObject = laserBoltPool.Get();
+                    _lastShotCounter = 0.0f;
+                    GameObject laserBoltObject = _laserBoltPool.Get();
                     LaserBolt laserBolt = laserBoltObject.GetComponent<LaserBolt>();
                     laserBolt.LaserBoltCollideEvent.AddListener(OnReturnLaserBoltToPool);
                     laserBolt.LaserCannon = this;

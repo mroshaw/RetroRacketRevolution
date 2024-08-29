@@ -140,7 +140,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void Kill()
         {
-            explosion.Explode();
+            explosion.Explode(true);
             DestroyedEvent.Invoke();
         }
 

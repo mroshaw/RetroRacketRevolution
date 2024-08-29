@@ -9,6 +9,8 @@ using DaftAppleGames.RetroRacketRevolution.Levels;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using DaftAppleGames.RetroRacketRevolution.Audio;
+using DaftAppleGames.RetroRacketRevolution.Enemies;
 using UnityEngine.SceneManagement;
 
 namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
@@ -34,10 +36,13 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("UI - Level")] public TMP_InputField levelDescriptionText;
         [BoxGroup("UI - Level")] public TMP_Dropdown loadLevelDropDown;
         [BoxGroup("UI - Level")] public TMP_Dropdown backGroundSpriteDropDown;
+        [BoxGroup("UI - Level")] public TMP_Dropdown backGroundMusicDropDown;
         [BoxGroup("UI - Level")] public TMP_InputField maxEnemiesText;
         [BoxGroup("UI - Level")] public TMP_InputField minTimeBetweenEnemiesText;
         [BoxGroup("UI - Level")] public TMP_InputField maxTimeBetweenEnemiesText;
-        [BoxGroup("UI - Level")] public Toggle isCustomLevels;
+        [BoxGroup("UI - Level")] public Toggle isCustomLevelsToggle;
+        [BoxGroup("UI - Level")] public Toggle levelIsBossLevelToggle;
+        [BoxGroup("UI - Level")] public TMP_Dropdown levelBossSpriteDropDown;
 
         [BoxGroup("UI - Other")] public ConfirmWindow deleteWindow;
         [BoxGroup("UI - Other")] public AlertText alertText;
@@ -46,6 +51,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("Data")] public BrickTypeData brickTypeData;
         [BoxGroup("Data")] public BonusData bonusData;
         [BoxGroup("Data")] public LevelBackgroundSprites backgroundData;
+        [BoxGroup("Data")] public PlayList backgroundMusicData;
+        [BoxGroup("Data")] public EnemiesData levelBossData;
         #endregion
         #region Events
         [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> BrickGridClickedEvent;
@@ -65,6 +72,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMinChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMaxChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundChangedEvent;
+        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundMusicChangedEvent;
+        [FoldoutGroup("Events - Level")] public UnityEvent<int>LevelMusicPlayClickedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelFileNameChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelDescChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelSaveClickedEvent;
@@ -73,9 +82,12 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelLoadClickedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelDeleteClickedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent LevelClearClickedEvent;
+        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBossChangedEvent;
+        [FoldoutGroup("Events - Level")] public UnityEvent<bool> LevelIsBossLevelChangedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent MainMenuClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent LevelShareClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent LevelAddClickedEvent;
+        
         #endregion
 
         // Public properties
@@ -91,16 +103,18 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             // Enable switching between custom and OG levels in Editor only
 #if UNITY_EDITOR
-            isCustomLevels.gameObject.SetActive(true);
-            isCustomLevels.SetIsOnWithoutNotify(false);
+            isCustomLevelsToggle.gameObject.SetActive(true);
+            isCustomLevelsToggle.SetIsOnWithoutNotify(false);
 #else
-            isCustomLevels.gameObject.SetActive(false);
-            isCustomLevels.SetIsOnWithoutNotify(true);
+            isCustomLevelsToggle.gameObject.SetActive(false);
+            isCustomLevelsToggle.SetIsOnWithoutNotify(true);
 #endif
             GetBrickButtons();
             SetUpBrickButtons();
             SetUpColorButtons();
             PopulateBackgroundSprites();
+            PopulateBackgroundMusic();
+            PopulateBossSprites();
             PopulateBrickTypeDropDown();
             PopulateBonusTypeDropDown();
         }
@@ -234,6 +248,41 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         }
 
         /// <summary>
+        /// Handler for Level Background Music
+        /// </summary>
+        /// <param name="value"></param>
+        public void LevelBackgroundMusicHandler(int value)
+        {
+            LevelBackgroundMusicChangedEvent.Invoke(value);
+        }
+
+        /// <summary>
+        /// Handler for Boss sprite
+        /// </summary>
+        /// <param name="value"></param>
+        public void LevelBossSpriteHandler(int value)
+        {
+            LevelBossChangedEvent.Invoke(value);
+        }
+
+        /// <summary>
+        /// Handler for Is Boss Level
+        /// </summary>
+        /// <param name="value"></param>
+        public void LevelIsBossLevelHandler(bool value)
+        {
+            LevelIsBossLevelChangedEvent.Invoke(value);
+        }
+
+        /// <summary>
+        /// Handler for Level Background Music button click
+        /// </summary>
+        public void LevelMusicPlayClickedHandler()
+        {
+            LevelMusicPlayClickedEvent.Invoke(backGroundMusicDropDown.value);
+        }
+
+        /// <summary>
         /// Handler for Level Name
         /// </summary>
         /// <param name="value"></param>
@@ -275,7 +324,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 return;
             }
 
-            LevelSaveClickedEvent.Invoke(fileName, isCustomLevels.isOn);
+            LevelSaveClickedEvent.Invoke(fileName, isCustomLevelsToggle.isOn);
             alertText.DisplayAlert($"Saved {fileName} successfully.", false);
         }
 
@@ -308,7 +357,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 alertText.DisplayAlert("Please select a level to load!", true);
                 return;
             }
-            LevelLoadClickedEvent.Invoke(loadLevelDropDown.options[loadLevelDropDown.value].text, isCustomLevels.isOn);
+            LevelLoadClickedEvent.Invoke(loadLevelDropDown.options[loadLevelDropDown.value].text, isCustomLevelsToggle.isOn);
             levelFileNameText.text = loadLevelDropDown.options[loadLevelDropDown.value].text;
             alertText.DisplayAlert($"Loaded {loadLevelDropDown.options[loadLevelDropDown.value].text} successfully.", false);
         }
@@ -358,7 +407,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         public void DeleteFile()
         {
             string fileToDelete = loadLevelDropDown.options[loadLevelDropDown.value].text;
-            LevelDeleteClickedEvent.Invoke(fileToDelete, isCustomLevels.isOn);
+            LevelDeleteClickedEvent.Invoke(fileToDelete, isCustomLevelsToggle.isOn);
             alertText.DisplayAlert($"Deleted {fileToDelete} successfully.", false);
         }
 
@@ -412,6 +461,34 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             backGroundSpriteDropDown.SetValueWithoutNotify(spriteIndex);
             gridBackgroundImage.sprite = backgroundData.BackgroundSprites[spriteIndex];
 
+        }
+
+        /// <summary>
+        /// Updates the selected music index
+        /// </summary>
+        /// <param name="musicIndex"></param>
+        public void SetBackgroundMusic(int musicIndex)
+        {
+            backGroundMusicDropDown.SetValueWithoutNotify(musicIndex);
+        }
+
+        /// <summary>
+        /// Updates the selected Boss Sprite index
+        /// </summary>
+        /// <param name="levelBossIndex"></param>
+        public void SetLevelBossSprite(int levelBossIndex)
+        {
+            levelBossSpriteDropDown.SetValueWithoutNotify(levelBossIndex);
+        }
+
+        /// <summary>
+        /// Updates the selected Is Level Boss toggle
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetIsBossLevel(bool value)
+        {
+            levelIsBossLevelToggle.SetIsOnWithoutNotify(value);
+            levelBossSpriteDropDown.interactable = value;
         }
 
         /// <summary>
@@ -477,6 +554,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                  button.BrickData = brickDataArray[button.ColumnNumber, button.RowNumber];
              }
          }
+
         #endregion
         #endregion
         #region PrivateMethods
@@ -548,7 +626,36 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             }
             backGroundSpriteDropDown.options = options;
         }
-        
+
+        /// <summary>
+        /// Populates the available boss sprites
+        /// </summary>
+        private void PopulateBossSprites()
+        {
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+            foreach (EnemyData bossData in levelBossData.EnemyList)
+            {
+                options.Add(new TMP_Dropdown.OptionData(bossData.enemyName, bossData.sprite));
+            }
+            levelBossSpriteDropDown.options = options;
+        }
+
+        /// <summary>
+        /// Populates the available background music
+        /// </summary>
+        private void PopulateBackgroundMusic()
+        {
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+            foreach (PlayList.PlayListSong songp in backgroundMusicData.Songs)
+            {
+                options.Add(new TMP_Dropdown.OptionData(songp.SongName));
+            }
+
+            backGroundMusicDropDown.options = options;
+        }
+
         /// <summary>
         /// Adds listeners to all Color Buttons
         /// </summary>

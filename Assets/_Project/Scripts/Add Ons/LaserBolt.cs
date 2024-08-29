@@ -77,7 +77,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                enemy.Hit(this.LaserCannon.AttachedPlayer.gameObject);
+                enemy.Hit(this.gameObject);
             }
             LaserBoltCollideEvent.Invoke(this.gameObject);
         }

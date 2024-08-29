@@ -51,7 +51,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             // Enable player 2, if appropriate
             if (gameData.isTwoPlayer)
             {
-                playerOne.gameObject.SetActive(true);
+                playerTwo.gameObject.SetActive(true);
                 playerOne.gameObject.transform.localPosition = new Vector2(-100.0f, 0);
                 playerTwo.gameObject.transform.localPosition = new Vector2(100.0f, 0);
             }

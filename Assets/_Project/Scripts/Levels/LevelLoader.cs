@@ -24,7 +24,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         [BoxGroup("Game Data")] public GameData gameData;
         [FoldoutGroup("Background Sprites")] public LevelBackgroundSprites backgroundSprites;
         [FoldoutGroup("Events")] public UnityEvent<LevelDataExt> LevelLoadedEvent;
-        
+        [FoldoutGroup("Events")] public UnityEvent<int> LevelLoadedMusicEvent;
+
         private float _brickWidthScale = 0.0f;
         private float _brickHeightScale = 0.0f;
 
@@ -91,7 +92,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// </summary>
         private void Start()
         {
-            // LoadLevel(levels[0]);
             CurrentLevel = 0; 
             LoadNextLevel();
         }
@@ -248,6 +248,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
                 currBrickVert -= brickHeight;
             }
             LevelLoadedEvent.Invoke(levelData);
+            LevelLoadedMusicEvent.Invoke(levelData.levelBackgroundMusicIndex);
         }
     }
 }

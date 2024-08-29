@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Effects;
-using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using DaftAppleGames.RetroRacketRevolution.Levels;
@@ -12,8 +11,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using static DaftAppleGames.RetroRacketRevolution.Menus.HighScores;
 
 namespace DaftAppleGames.RetroRacketRevolution.Game
 {
@@ -63,6 +60,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         private const string HighScore = "HighScore";
 
         private AudioSource _audioSource;
+        private LevelDataExt _currentLevelData;
+
+        private bool _allBricksDestroyed;
+        private bool _allEnemiesDestroyed;
 
         /// <summary>
         /// Set up the Game Manager
@@ -72,6 +73,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             _audioSource = GetComponent<AudioSource>();
             HideAlert();
             CheatsUsed = false;
+            _allBricksDestroyed = false;
+            _allEnemiesDestroyed = false;
         }
 
         /// <summary>
@@ -96,11 +99,49 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         }
 
         /// <summary>
+        /// Public setter for All Bricks Destroyed
+        /// Used in Events to tell GameManager
+        /// </summary>
+        public void SetAllBricksDestroyed()
+        {
+            _allBricksDestroyed = true;
+            CheckLevelComplete();
+        }
+
+        /// <summary>
+        /// Public setter for All Enemies Destroyed
+        /// Used in Events to tell GameManager that boss is dead
+        /// </summary>
+        public void SetAllEnemiesDestroyed()
+        {
+            _allEnemiesDestroyed = true;
+            CheckLevelComplete();
+        }
+
+        /// <summary>
+        /// Check to see if the level is complete
+        /// </summary>
+        public void CheckLevelComplete()
+        {
+            // In Boss Level and boss has been destroyed
+            if (_currentLevelData.isBossLevel && _allBricksDestroyed && _allEnemiesDestroyed)
+            {
+                LevelComplete();
+                return;
+            }
+
+            // Not in boss level and all bricks have been destroyed
+            if (!_currentLevelData.isBossLevel && _allBricksDestroyed)
+            {
+                LevelComplete();
+            }
+        }
+
+        /// <summary>
         /// Handle Level Complete
         /// </summary>
         public void LevelComplete()
         {
-            // Debug.Log("Level Complete Called...");
             ballManager.DestroyAllBalls();
             _audioSource.PlayOneShot(levelCompleteClip);
             ShowAlert(AlertType.FinishLevel, levelCompletePanelDuration, LoadNextLevel);
@@ -123,6 +164,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         public void LevelStart(LevelDataExt levelData)
         {
+            _currentLevelData = levelData;
+            _allBricksDestroyed = false;
+            _allEnemiesDestroyed = false;
             ShowAlert(AlertType.StartLevel, levelStartPanelDuration, null, levelData.levelName);
         }
 

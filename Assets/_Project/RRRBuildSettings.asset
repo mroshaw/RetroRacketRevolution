@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bc3964142ff4248952c2a3e60394d9, type: 3}
+  m_Name: RRRBuildSettings
+  m_EditorClassIdentifier: 
+  versionIncrementType: 1
+  winBuildTargetSettings:
+    buildTarget: 19
+    buildOptions: 524288
+    gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
+      Windows
+    fileName: Retro Racket Revolution.exe
+    itchDeployBatchFullPath: 
+    itchDeployAppName: 
+    itchDeployAppStage: 
+  winBuildStatus:
+    buildVersion:
+      majorVersionNumber: 1
+      minorVersionNumber: 2
+      patchVersionNumber: 2
+      buildStage: 4
+    lastSuccessfulBuild:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 30
+      second: 34
+    lastBuildAttempt:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 30
+      second: 20
+    lastBuildState: 1
+    lastBuildLog: 
+    lastSuccessfulDeploy:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 13
+      minute: 24
+      second: 23
+    lastDeployState: 0
+    lastDeployLog: 
+  linuxBuildTargetSettings:
+    buildTarget: 24
+    buildOptions: 524288
+    gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
+      Linux
+    fileName: RetroRacketRevolution.x86_64
+    itchDeployBatchFullPath: 
+    itchDeployAppName: 
+    itchDeployAppStage: 
+  linuxBuildStatus:
+    buildVersion:
+      majorVersionNumber: 1
+      minorVersionNumber: 2
+      patchVersionNumber: 1
+      buildStage: 4
+    lastSuccessfulBuild:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 51
+      second: 17
+    lastBuildAttempt:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 50
+      second: 13
+    lastBuildState: 1
+    lastBuildLog: 
+    lastSuccessfulDeploy:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 13
+      minute: 24
+      second: 23
+    lastDeployState: 0
+    lastDeployLog: 
+  androidBuildTargetSettings:
+    buildTarget: 13
+    buildOptions: 524288
+    gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
+      Android
+    fileName: RetroRacketRevolution.apk
+    itchDeployBatchFullPath: 
+    itchDeployAppName: 
+    itchDeployAppStage: 
+  androidBuildStatus:
+    buildVersion:
+      majorVersionNumber: 1
+      minorVersionNumber: 2
+      patchVersionNumber: 1
+      buildStage: 4
+    lastSuccessfulBuild:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 51
+      second: 55
+    lastBuildAttempt:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 15
+      minute: 51
+      second: 28
+    lastBuildState: 1
+    lastBuildLog: 
+    lastSuccessfulDeploy:
+      day: 28
+      month: 8
+      year: 2024
+      hour: 13
+      minute: 24
+      second: 23
+    lastDeployState: 0
+    lastDeployLog: 
+  latestBuildTarget: 19
+  latestBuildDateTime: 28/08/2024 15:51:28
+  latestBuildResult: SuccessWithWarnings
+  latestBuildVersion: 1.2.0 (Live)

@@ -14,7 +14,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Ball Settings")] public float defaultBallSpeed = 100.0f;
         [BoxGroup("Ball Settings")] public float speedUpAfterDuration = 20.0f;
         [BoxGroup("Ball Settings")] public float speedMultiplier = 1.2f;
-
         [BoxGroup("MegaBall")] public SpriteRenderer normalBallSpriteRenderer;
         [BoxGroup("MegaBall")] public SpriteRenderer megaBallSpriteRenderer;
         [BoxGroup("MegaBall")] public float megaBallDuration = 5.0f;
@@ -26,6 +25,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Audio")] public AudioClip hitInvincibleBrickClip;
 
         // Events
+        [BoxGroup("Events")] public UnityEvent AttachEvent;
+        [BoxGroup("Events")] public UnityEvent DetachEvent;
         [BoxGroup("Events")] public UnityEvent<Ball> BallDestroyedEvent;
         [BoxGroup("Events")] public UnityEvent<Ball> BallSpeedMultiplierChangeEvent;
 
@@ -358,7 +359,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             gameObject.transform.SetParent(player.gameObject.transform, true);
             gameObject.transform.position = attachPosition;
             player.AttachBall(this);
-            _trailRenderer.enabled = false;
+            AttachEvent.Invoke();
         }
 
         /// <summary>
@@ -372,8 +373,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             _rb.isKinematic = false;
             _speedChangeTimer = 0.0f;
             _rb.velocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
-            _trailRenderer.enabled = true;
             player.DetachBall(this);
+            DetachEvent.Invoke();
         }
 
         /// <summary>

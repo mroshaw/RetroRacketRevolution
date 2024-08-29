@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -11,18 +12,25 @@ namespace DaftAppleGames.RetroRacketRevolution.Audio
     {
         // Public serializable properties
         [BoxGroup("General Settings")]
-        public AudioClip[] audioClips;
+        public PlayListSong[] Songs;
 
         // Public properties
-        public int NumberOfSongs => audioClips.Length;
+        public int NumberOfSongs => Songs.Length;
 
         /// <summary>
         /// Returns the song at given index
         /// </summary>
         /// <param name="index"></param>
-        public AudioClip GetSongAtIndex(int index)
+        public AudioClip GetAudioClipAtIndex(int index)
         {
-            return audioClips[index];
+            return Songs[index].AudioClip;
+        }
+
+        [Serializable]
+        public class PlayListSong
+        {
+            public AudioClip AudioClip;
+            public string SongName;
         }
     }
 }
