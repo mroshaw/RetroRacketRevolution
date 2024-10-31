@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bc3964142ff4248952c2a3e60394d9, type: 3}
-  m_Name: RRRBuildSettings
+  m_Script: {fileID: 11500000, guid: 759928136046a304099bbab2ed2a274c, type: 3}
+  m_Name: RetroRacketBuildSettings
   m_EditorClassIdentifier: 
+  sceneAssets:
+  - {fileID: 102900000, guid: 8db2c8d74ed499d408a62a59155e621d, type: 3}
+  - {fileID: 102900000, guid: 775730824eba23d479c91c2506707c18, type: 3}
+  emptySceneAsset: {fileID: 102900000, guid: 04a36e80578d85c46b7e69b0d84e0426, type: 3}
   versionIncrementType: 1
   winBuildTargetSettings:
     buildTarget: 19
@@ -19,9 +23,9 @@ MonoBehaviour:
     gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
       Windows
     fileName: Retro Racket Revolution.exe
-    itchDeployBatchFullPath: 
-    itchDeployAppName: 
-    itchDeployAppStage: 
+    itchDeployBatchFullPath: E:\Dev\DAG\Retro Racket Revolution\Itch\upload-release-windows.bat
+    itchDeployAppName: retro-racket
+    itchDeployAppStage: release
   winBuildStatus:
     buildVersion:
       majorVersionNumber: 1
@@ -29,28 +33,28 @@ MonoBehaviour:
       patchVersionNumber: 2
       buildStage: 4
     lastSuccessfulBuild:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 30
-      second: 34
+      hour: 11
+      minute: 25
+      second: 16
     lastBuildAttempt:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 30
-      second: 20
+      hour: 11
+      minute: 22
+      second: 13
     lastBuildState: 1
     lastBuildLog: 
     lastSuccessfulDeploy:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 13
-      minute: 24
-      second: 23
+      hour: 11
+      minute: 14
+      second: 43
     lastDeployState: 0
     lastDeployLog: 
   linuxBuildTargetSettings:
@@ -59,38 +63,38 @@ MonoBehaviour:
     gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
       Linux
     fileName: RetroRacketRevolution.x86_64
-    itchDeployBatchFullPath: 
-    itchDeployAppName: 
-    itchDeployAppStage: 
+    itchDeployBatchFullPath: E:\Dev\DAG\Retro Racket Revolution\Itch\upload-release-linux.bat
+    itchDeployAppName: retro-racket
+    itchDeployAppStage: linux-release
   linuxBuildStatus:
     buildVersion:
       majorVersionNumber: 1
       minorVersionNumber: 2
-      patchVersionNumber: 1
-      buildStage: 4
+      patchVersionNumber: 2
+      buildStage: 2
     lastSuccessfulBuild:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 51
-      second: 17
+      hour: 11
+      minute: 38
+      second: 39
     lastBuildAttempt:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 50
-      second: 13
+      hour: 11
+      minute: 37
+      second: 39
     lastBuildState: 1
     lastBuildLog: 
     lastSuccessfulDeploy:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 13
-      minute: 24
-      second: 23
+      hour: 11
+      minute: 14
+      second: 43
     lastDeployState: 0
     lastDeployLog: 
   androidBuildTargetSettings:
@@ -99,41 +103,42 @@ MonoBehaviour:
     gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
       Android
     fileName: RetroRacketRevolution.apk
-    itchDeployBatchFullPath: 
-    itchDeployAppName: 
-    itchDeployAppStage: 
+    itchDeployBatchFullPath: E:\Dev\DAG\Retro Racket Revolution\Itch\upload-release-android.bat
+    itchDeployAppName: retro-racket
+    itchDeployAppStage: android-release
   androidBuildStatus:
     buildVersion:
       majorVersionNumber: 1
       minorVersionNumber: 2
-      patchVersionNumber: 1
-      buildStage: 4
+      patchVersionNumber: 3
+      buildStage: 1
     lastSuccessfulBuild:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 51
-      second: 55
+      hour: 11
+      minute: 46
+      second: 15
     lastBuildAttempt:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 15
-      minute: 51
-      second: 28
+      hour: 11
+      minute: 45
+      second: 21
     lastBuildState: 1
-    lastBuildLog: 
+    lastBuildLog: Game scripts or other custom code contains OnMouse_ event handlers.
+      Presence of such handlers might impact performance on handheld devices.
     lastSuccessfulDeploy:
-      day: 28
-      month: 8
+      day: 31
+      month: 10
       year: 2024
-      hour: 13
-      minute: 24
-      second: 23
+      hour: 11
+      minute: 14
+      second: 43
     lastDeployState: 0
     lastDeployLog: 
-  latestBuildTarget: 19
-  latestBuildDateTime: 28/08/2024 15:51:28
+  latestBuildTarget: 13
+  latestBuildDateTime: 31/10/2024 11:45:21
   latestBuildResult: SuccessWithWarnings
-  latestBuildVersion: 1.2.0 (Live)
+  latestBuildVersion: 1.2.2 (Alpha)

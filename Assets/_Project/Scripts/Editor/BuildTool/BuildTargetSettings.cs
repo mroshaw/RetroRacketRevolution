@@ -3,7 +3,7 @@ using System.IO;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
-namespace DaftAppleGames.Editor
+namespace DaftAppleGames.Editor.BuildTool
 {
     [Serializable]
     public class BuildTargetSettings

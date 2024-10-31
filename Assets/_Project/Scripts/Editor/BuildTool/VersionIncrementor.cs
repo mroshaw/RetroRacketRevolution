@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace DaftAppleGames.Editor
+namespace DaftAppleGames.Editor.BuildTool
 {
     [InitializeOnLoad]
     class VersionIncrementor

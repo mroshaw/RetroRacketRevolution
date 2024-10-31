@@ -1,41 +1,43 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
-using UnityEngine;
 using Unity.EditorCoroutines.Editor;
+using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
-namespace DaftAppleGames.Editor.ProjectTools
+namespace DaftAppleGames.Editor.BuildTool
 {
     public class BuildToolsEditorWindow : OdinEditorWindow
     {
-        private const string BuildConfig = "Assets/_Project/RRRBuildSettings.asset";
+        private const string BuildConfig = "Assets/_Project/Settings/BuildTool/RetroRacketBuildSettings.asset";
 
         // Display Editor Window
-        [MenuItem("Daft Apple Games/Build tool")]
+        [MenuItem("Daft Apple Games/Build and Deploy/Build Tool")]
         public static void ShowWindow()
         {
             GetWindow(typeof(BuildToolsEditorWindow));
         }
 
-        [BoxGroup("Latest Build")] [SerializeField] [ReadOnly] private BuildTarget latestBuildTarget;
-        [BoxGroup("Latest Build")] [SerializeField] [ReadOnly] private string latestBuildDateTime;
-        [BoxGroup("Latest Build")] [SerializeField] [ReadOnly] private string latestBuildResult;
-        [BoxGroup("Latest Build")] [SerializeField] [ReadOnly] private string latestBuildVersion;
+        [BoxGroup("Latest Build")][SerializeField][ReadOnly] private BuildTarget latestBuildTarget;
+        [BoxGroup("Latest Build")][SerializeField][ReadOnly] private string latestBuildDateTime;
+        [BoxGroup("Latest Build")][SerializeField][ReadOnly] private string latestBuildResult;
+        [BoxGroup("Latest Build")][SerializeField][ReadOnly] private string latestBuildVersion;
 
-        [BoxGroup("Platform Build")] [SerializeField] [ReadOnly] private BuildStatus winBuildStatus;
-        [BoxGroup("Platform Build")] [SerializeField] [ReadOnly] private BuildStatus linuxBuildStatus;
-        [BoxGroup("Platform Build")] [SerializeField] [ReadOnly] private BuildStatus androidBuildStatus;
+        [BoxGroup("Platform Build")][SerializeField][ReadOnly] private BuildStatus winBuildStatus;
+        [BoxGroup("Platform Build")][SerializeField][ReadOnly] private BuildStatus linuxBuildStatus;
+        [BoxGroup("Platform Build")][SerializeField][ReadOnly] private BuildStatus androidBuildStatus;
 
         private BuildSettings _buildSettings;
+
+        private bool _lightmapBaking = false;
 
         /// <summary>
         /// Initialise the build status when window is enabled
@@ -46,74 +48,92 @@ namespace DaftAppleGames.Editor.ProjectTools
             LoadBuildSettings();
         }
 
+        /*
         [BoxGroup("Build Control")] [Button("Build All", ButtonSizes.Large), GUIColor(0, 1, 0)]
         private void BuildAll()
         {
             BuildWinGame();
-            BuildAndroidGame();
             BuildLinuxGame();
         }
+        */
 
-        [BoxGroup("Build Control")] [Button("Build Windows Game")]
-        private void BuildWinGame()
+        [BoxGroup("Build Control")]
+        [Button("Build Windows Game", ButtonSizes.Large), GUIColor(0, 1, 0)]
+        private void BuildIncrementalWinGame()
         {
-            BuildPlayer(_buildSettings.winBuildTargetSettings, _buildSettings.winBuildStatus);
-            // CopyLevels(_buildSettings.winBuildTargetSettings);
+            BuildPlayer(_buildSettings.winBuildTargetSettings, _buildSettings.winBuildStatus, false);
         }
 
-        [BoxGroup("Build Control")] [Button("Build Linux Game")]
+        [BoxGroup("Build Control")]
+        [Button("Show in Explorer")]
+        private void OpenWindowsBuildInExplorer()
+        {
+            EditorUtility.RevealInFinder(Path.Join(_buildSettings.winBuildTargetSettings.gameFolder, "/."));
+        }
+
+        [BoxGroup("Build Control")]
+        [Button("Build Linux Game", ButtonSizes.Large), GUIColor(1, 0, 0)]
         private void BuildLinuxGame()
         {
-            BuildPlayer(_buildSettings.linuxBuildTargetSettings, _buildSettings.linuxBuildStatus);
-            // CopyLevels(_buildSettings.linuxBuildTargetSettings);
+            BuildPlayer(_buildSettings.linuxBuildTargetSettings, _buildSettings.linuxBuildStatus, false);
         }
 
-        [BoxGroup("Build Control")] [Button("Build Android Game")]
+        [BoxGroup("Build Control")]
+        [Button("Show in Explorer")]
+        private void OpenLinuxBuildInExplorer()
+        {
+            EditorUtility.RevealInFinder(Path.Join(_buildSettings.linuxBuildTargetSettings.gameFolder, "/."));
+        }
+
+        [BoxGroup("Build Control")]
+        [Button("Build Android Game", ButtonSizes.Large), GUIColor(0, 0, 1)]
         private void BuildAndroidGame()
         {
-            BuildPlayer(_buildSettings.androidBuildTargetSettings, _buildSettings.androidBuildStatus);
-            // CopyLevels(_buildSettings.androidBuildTargetSettings);
+            BuildPlayer(_buildSettings.androidBuildTargetSettings, _buildSettings.androidBuildStatus, false);
         }
 
-
-        [BoxGroup("Deploy Control")] [Button("Deploy Windows to Itch", ButtonSizes.Large), GUIColor(1, 0, 0)]
-        private void DeployWindowsToItch()
+        [BoxGroup("Build Control")]
+        [Button("Show in Explorer")]
+        private void OpenAndroidBuildInExplorer()
         {
-            Thread newThead = DeployToItchInThread(_buildSettings.winBuildTargetSettings, _buildSettings.winBuildStatus);
-        }
-
-
-        [BoxGroup("Deploy Control")] [Button("Deploy Linux to Itch", ButtonSizes.Large), GUIColor(1, 0, 0)]
-        private void DeployLinuxToItch()
-        {
-            Thread newThead = DeployToItchInThread(_buildSettings.linuxBuildTargetSettings, _buildSettings.linuxBuildStatus);
-        }
-
-        [BoxGroup("Deploy Control")] [Button("Deploy Linux to Itch", ButtonSizes.Large), GUIColor(1, 0, 0)]
-        private void DeployAndroidToItch()
-        {
-            Thread newThead = DeployToItchInThread(_buildSettings.androidBuildTargetSettings, _buildSettings.androidBuildStatus);
+            EditorUtility.RevealInFinder(Path.Join(_buildSettings.androidBuildTargetSettings.gameFolder, "/."));
         }
 
         /// <summary>
         /// Run the built game executable, to test prior to deployment to itch.io
         /// </summary>
-        [BoxGroup("Run Control")] [Button("Run Windows Game"), GUIColor(0, 1, 0)]
+        [BoxGroup("Run Control")]
+        [Button("Run Windows Game", ButtonSizes.Small), GUIColor(0, 1, 0)]
         private void RunGame()
-        {            Thread newThread = new Thread(RunGameInThread);
+        {
+            Thread newThread = new Thread(RunGameInThread);
             newThread.Start();
 
         }
 
-        [BoxGroup("Other Control")] [Button("Update Levels")]
-        private void UpdateLevels()
+        [BoxGroup("Deploy Control")]
+        [Button("Deploy Windows to Itch", ButtonSizes.Medium), GUIColor(0, 1, 0)]
+        private void DeployWindowsToItch()
         {
-            // CopyLevels(_buildSettings.winBuildTargetSettings);
-            // CopyLevels(_buildSettings.linuxBuildTargetSettings);
-            // CopyLevels(_buildSettings.androidBuildTargetSettings);
+            Thread newThead = DeployToItchInThread(_buildSettings.winBuildTargetSettings, _buildSettings.winBuildStatus);
         }
 
-        [BoxGroup("Other Control")] [Button("Refresh Build Settings")]
+        [BoxGroup("Deploy Control")]
+        [Button("Deploy Linux to Itch", ButtonSizes.Medium), GUIColor(1, 0, 0)]
+        private void DeployLinuxToItch()
+        {
+            Thread newThead = DeployToItchInThread(_buildSettings.linuxBuildTargetSettings, _buildSettings.linuxBuildStatus);
+        }
+
+        [BoxGroup("Deploy Control")]
+        [Button("Deploy Android to Itch", ButtonSizes.Medium), GUIColor(0, 0, 1)]
+        private void DeployAndroidToItch()
+        {
+            Thread newThead = DeployToItchInThread(_buildSettings.androidBuildTargetSettings, _buildSettings.androidBuildStatus);
+        }
+
+        [BoxGroup("Other Control")]
+        [Button("Refresh Build Settings")]
         private void RefreshBuildSettings()
         {
             LoadBuildSettings();
@@ -157,11 +177,12 @@ namespace DaftAppleGames.Editor.ProjectTools
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.FileName = _buildSettings.winBuildTargetSettings.fileName;
+            process.StartInfo.FileName = _buildSettings.winBuildTargetSettings.FullPath;
             int exitCode = -1;
             string output = null;
 
-            try {
+            try
+            {
                 process.Start();
 
                 // do not wait for the child process to exit before
@@ -172,10 +193,12 @@ namespace DaftAppleGames.Editor.ProjectTools
                 output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError("Run error" + e.ToString()); // or throw new Exception
             }
-            finally {
+            finally
+            {
                 exitCode = process.ExitCode;
 
                 process.Dispose();
@@ -209,7 +232,8 @@ namespace DaftAppleGames.Editor.ProjectTools
             int exitCode = -1;
             string output = null;
 
-            try {
+            try
+            {
                 process.Start();
 
                 // do not wait for the child process to exit before
@@ -220,10 +244,12 @@ namespace DaftAppleGames.Editor.ProjectTools
                 output = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError("Run error" + e.ToString()); // or throw new Exception
             }
-            finally {
+            finally
+            {
                 exitCode = process.ExitCode;
 
                 process.Dispose();
@@ -246,40 +272,39 @@ namespace DaftAppleGames.Editor.ProjectTools
                 buildStatus.lastDeployState = DeployState.Failed;
             }
 
+            // FlushBuildStats();
             RefreshBuildStatus();
-        }
-
-        /// <summary>
-        /// Saves all open scenes
-        /// </summary>
-        private void SaveAllScenes()
-        {
-            int numScenes = EditorSceneManager.sceneCount;
-            for (int currSceneIndex = 0; currSceneIndex < numScenes; currSceneIndex++)
-            {
-                EditorSceneManager.SaveScene(SceneManager.GetSceneAt(currSceneIndex));
-            }
         }
 
         /// <summary>
         /// Call the aSync build player co-coroutine
         /// </summary>
-        private void BuildPlayer(BuildTargetSettings buildTargetSettings, BuildStatus buildStatus)
+        private void BuildPlayer(BuildTargetSettings buildTargetSettings, BuildStatus buildStatus, bool cleanBuild)
         {
-            EditorCoroutineUtility.StartCoroutine(BuildPlayerAsync(buildTargetSettings, buildStatus), this);
+            LoadEmptyScene();
+            EditorCoroutineUtility.StartCoroutine(BuildPlayerAsync(buildTargetSettings, buildStatus, cleanBuild), this);
         }
 
         /// <summary>
         /// Async build player method, so we can monitor progress and update status
         /// </summary>
         /// <returns></returns>
-        private IEnumerator BuildPlayerAsync(BuildTargetSettings buildTargetSettings, BuildStatus buildStatus)
+        private IEnumerator BuildPlayerAsync(BuildTargetSettings buildTargetSettings, BuildStatus buildStatus, bool cleanBuild)
         {
+            // Save all open scenes
+            EditorSceneManager.SaveOpenScenes();
+
             PlayerSettings.bundleVersion = buildStatus.buildVersion.ToString();
 
             buildStatus.lastBuildAttempt.SetNow();
 
-            BuildReport buildReport = BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, buildTargetSettings.FullPath, buildTargetSettings.buildTarget, buildTargetSettings.buildOptions);
+            if (cleanBuild)
+            {
+                CleanFolder(buildTargetSettings.gameFolder);
+            }
+
+            BuildOptions newBuildOptions = cleanBuild ? _buildSettings.winBuildTargetSettings.buildOptions | BuildOptions.CleanBuildCache : _buildSettings.winBuildTargetSettings.buildOptions & ~BuildOptions.CleanBuildCache;
+            BuildReport buildReport = BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, buildTargetSettings.FullPath, buildTargetSettings.buildTarget, newBuildOptions);
             while (BuildPipeline.isBuildingPlayer)
             {
                 yield return null;
@@ -321,7 +346,32 @@ namespace DaftAppleGames.Editor.ProjectTools
             _buildSettings.latestBuildTarget = buildTargetSettings.buildTarget;
             _buildSettings.latestBuildDateTime = buildStatus.lastBuildAttempt.ToString();
 
+            FlushBuildStats();
             RefreshBuildStatus();
+        }
+
+        private void CleanFolder(string installFolderPath)
+        {
+            System.IO.DirectoryInfo directory = new DirectoryInfo(installFolderPath);
+
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in directory.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
+
+        /// <summary>
+        /// Pushes any updates to the local build stats instance back to the asset
+        /// </summary>
+        private void FlushBuildStats()
+        {
+            AssetDatabase.Refresh();
+            EditorUtility.SetDirty(_buildSettings);
+            AssetDatabase.SaveAssets();
         }
 
         /// <summary>
@@ -342,53 +392,6 @@ namespace DaftAppleGames.Editor.ProjectTools
             }
         }
 
-        /// <summary>
-        /// Copy levels to target
-        /// </summary>
-        private void CopyLevels(BuildTargetSettings buildTargetSettings)
-        {
-            // Copy level files, if not mobile platform
-            if (buildTargetSettings.buildTarget == BuildTarget.StandaloneWindows64 || buildTargetSettings.buildTarget == BuildTarget.StandaloneLinux64)
-            {
-                string levelPath = buildTargetSettings.gameFolder;
-
-                string levelDataPath = Path.Join(levelPath, "LevelData");
-                string customLevelDataPath = Path.Join(levelPath, "CustomLevelData");
-
-                Debug.Log($"Copying level data to {levelDataPath}");
-
-                // Create target directories, if it doesn't exist
-                if (!Directory.Exists(levelDataPath))
-                {
-                    Debug.Log($"Creating directory: {levelDataPath}");
-                    Directory.CreateDirectory(levelDataPath);
-                }
-
-                if (!Directory.Exists(customLevelDataPath))
-                {
-                    Debug.Log($"Creating directory: {customLevelDataPath}");
-                    Directory.CreateDirectory(customLevelDataPath);
-                }
-
-                // Copy main game levels
-                foreach (string currFile in Directory.GetFiles("E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\LevelData", "*.json"))
-                {
-                    string destFilePath = $"{levelDataPath}\\{Path.GetFileName(currFile)}";
-                    Debug.Log($"Copying {currFile} level data to {destFilePath}");
-
-                    FileUtil.ReplaceFile(currFile, destFilePath);
-                }
-
-                // Copy example custom levels
-                foreach (string currFile in Directory.GetFiles("E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\CustomLevelData", "*.json"))
-                {
-                    string destFilePath = $"{customLevelDataPath}\\{Path.GetFileName(currFile)}";
-                    Debug.Log($"Copying {currFile} level data to {destFilePath}");
-
-                    FileUtil.ReplaceFile(currFile, destFilePath);
-                }
-            }
-        }
 
         /// <summary>
         /// Output a high level build summary
@@ -413,6 +416,11 @@ namespace DaftAppleGames.Editor.ProjectTools
             {
                 Debug.LogWarning($"Warning, build for platform {platform} failed with warnings!");
             }
+        }
+
+        private void LoadEmptyScene()
+        {
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(_buildSettings.emptySceneAsset));
         }
 
     }

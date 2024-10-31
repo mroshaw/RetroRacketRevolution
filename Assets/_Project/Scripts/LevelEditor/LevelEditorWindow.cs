@@ -1,17 +1,17 @@
+using DaftAppleGames.RetroRacketRevolution.Audio;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
-using UnityEngine;
-using UnityEngine.Events;
-using Sirenix.OdinInspector;
-using TMPro;
-using UnityEngine.UI;
+using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Levels;
+using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
-using DaftAppleGames.RetroRacketRevolution.Audio;
-using DaftAppleGames.RetroRacketRevolution.Enemies;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
@@ -73,7 +73,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMaxChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundMusicChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int>LevelMusicPlayClickedEvent;
+        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelMusicPlayClickedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelFileNameChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelDescChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelSaveClickedEvent;
@@ -87,7 +87,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Other")] public UnityEvent MainMenuClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent LevelShareClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent LevelAddClickedEvent;
-        
+
         #endregion
 
         // Public properties
@@ -132,7 +132,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         private void OnDestroy()
         {
-            
+
         }
         #endregion
         #region PublicMethods
@@ -518,7 +518,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             maxTimeBetweenEnemiesText.SetTextWithoutNotify(maxEnemyTime.ToString());
         }
 
-         /// <summary>
+        /// <summary>
         /// Populate the drop down with current level list
         /// </summary>
         public void SetCurrentLevels(List<string> levelNames)
@@ -534,26 +534,26 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             // levelFileNameText.SetTextWithoutNotify(options[0].text);
         }
 
-         /// <summary>
-         /// Refresh a single brick
-         /// </summary>
-         /// <param name="brickData"></param>
-         public void RefreshBrick(BrickData brickData)
-         {
-             BrickUpdatedEvent.Invoke(brickData);
-         }
+        /// <summary>
+        /// Refresh a single brick
+        /// </summary>
+        /// <param name="brickData"></param>
+        public void RefreshBrick(BrickData brickData)
+        {
+            BrickUpdatedEvent.Invoke(brickData);
+        }
 
-         /// <summary>
-         /// Refresh the Level Editor UI
-         /// </summary>
-         public void RefreshAllBricks(BrickData[,] brickDataArray)
-         {
-             BrickButton[] allButtons = grid.GetComponentsInChildren<BrickButton>(false);
-             foreach (BrickButton button in allButtons)
-             {
-                 button.BrickData = brickDataArray[button.ColumnNumber, button.RowNumber];
-             }
-         }
+        /// <summary>
+        /// Refresh the Level Editor UI
+        /// </summary>
+        public void RefreshAllBricks(BrickData[,] brickDataArray)
+        {
+            BrickButton[] allButtons = grid.GetComponentsInChildren<BrickButton>(false);
+            foreach (BrickButton button in allButtons)
+            {
+                button.BrickData = brickDataArray[button.ColumnNumber, button.RowNumber];
+            }
+        }
 
         #endregion
         #endregion
@@ -607,7 +607,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
             foreach (BonusData.BonusDef bonusDef in bonusData.Bonuses)
             {
-                options.Add(new TMP_Dropdown.OptionData(bonusDef.Type.ToString(), bonusDef.SpawnSprite));
+                options.Add(new TMP_Dropdown.OptionData(bonusDef.Type.ToString(), bonusDef.SpawnSprite, Color.clear));
             }
 
             brickBonusDropDown.options = options;
@@ -622,7 +622,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 
             foreach (Sprite sprite in backgroundData.BackgroundSprites)
             {
-                options.Add(new TMP_Dropdown.OptionData(sprite.name, sprite));
+                options.Add(new TMP_Dropdown.OptionData(sprite.name, sprite, Color.clear));
             }
             backGroundSpriteDropDown.options = options;
         }
@@ -636,7 +636,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 
             foreach (EnemyData bossData in levelBossData.EnemyList)
             {
-                options.Add(new TMP_Dropdown.OptionData(bossData.enemyName, bossData.sprite));
+                options.Add(new TMP_Dropdown.OptionData(bossData.enemyName, bossData.sprite, Color.clear));
             }
             levelBossSpriteDropDown.options = options;
         }

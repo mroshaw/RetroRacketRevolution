@@ -235,7 +235,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             switch (_currentControlScheme)
             {
                 case "Mouse":
-                    _rb.velocity = noVelocity;
+                    _rb.linearVelocity = noVelocity;
                     return;
                 case "Keyboard":
                     multiplier = _keyboardSpeedMultiplier;
@@ -244,7 +244,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                     multiplier = _dpadSpeedMultiplier;
                     break;
             }
-            _rb.velocity = Vector2.right * _horizontal * _speed * multiplier;
+            _rb.linearVelocity = Vector2.right * _horizontal * _speed * multiplier;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void CheckHorizontal()
         {
-            _rbVelocityX = Math.Abs(_rb.velocity.x);
+            _rbVelocityX = Math.Abs(_rb.linearVelocity.x);
             if (_rbVelocityX < horizontalVelocityThreshold)
             {
                 _horizontalStuckTime += Time.deltaTime;
@@ -77,7 +77,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void CheckVertical()
         {
-            _rbVelocityY = Math.Abs(_rb.velocity.y);
+            _rbVelocityY = Math.Abs(_rb.linearVelocity.y);
 
             if (_rbVelocityY < verticalVelocityThreshold)
             {
@@ -101,7 +101,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <param name="direction"></param>
         private void Nudge(Vector2 direction)
         {
-            _rb.velocity += (direction * nudgeForce);
+            _rb.linearVelocity += (direction * nudgeForce);
         }
     }
 }

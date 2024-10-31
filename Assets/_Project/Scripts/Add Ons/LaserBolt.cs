@@ -40,7 +40,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void Start()
         {
-            _rb.velocity = Vector3.up * speed;
+            _rb.linearVelocity = Vector3.up * speed;
         }
 /*
         /// <summary>

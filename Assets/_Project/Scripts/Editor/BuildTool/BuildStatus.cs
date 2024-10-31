@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
-namespace DaftAppleGames.Editor
+namespace DaftAppleGames.Editor.BuildTool
 {
     public enum BuildStage { Prototype, Alpha, Beta, EarlyAccess, Live }
     public enum BuildState { Success, SuccessWithWarnings, SuccessWithErrors, Failed }

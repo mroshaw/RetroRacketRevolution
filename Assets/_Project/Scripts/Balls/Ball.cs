@@ -289,7 +289,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             Vector2 dir = new Vector2(x, 1).normalized;
 
             // Set Velocity with dir * speed
-            GetComponent<Rigidbody2D>().velocity = dir * _currSpeed;
+            GetComponent<Rigidbody2D>().linearVelocity = dir * _currSpeed;
             if (_audioSource.enabled)
             {
                 _audioSource.PlayOneShot(hitPlayerClip);
@@ -354,7 +354,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             _attachedPlayer = player;
             LastTouchedByPlayer = player;
             _rb.angularVelocity = 0.0f;
-            _rb.velocity = new Vector2(0.0f, 0.0f);
+            _rb.linearVelocity = new Vector2(0.0f, 0.0f);
             _rb.isKinematic = true;
             gameObject.transform.SetParent(player.gameObject.transform, true);
             gameObject.transform.position = attachPosition;
@@ -372,7 +372,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             _attachedPlayer = null;
             _rb.isKinematic = false;
             _speedChangeTimer = 0.0f;
-            _rb.velocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
+            _rb.linearVelocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
             player.DetachBall(this);
             DetachEvent.Invoke();
         }
@@ -393,7 +393,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <param name="vectorDirection"></param>
         public void Nudge(Vector2 vectorDirection)
         {
-            _rb.velocity = vectorDirection * defaultBallSpeed;
+            _rb.linearVelocity = vectorDirection * defaultBallSpeed;
         }
 
         /// <summary>

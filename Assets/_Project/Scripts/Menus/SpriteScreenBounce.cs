@@ -29,14 +29,14 @@ namespace DaftAppleGames.Menus
         /// </summary>
         private void Update()
         {
-            if (_rb.velocity.x == 0)
+            if (_rb.linearVelocity.x == 0)
             {
-                _rb.velocity = new Vector2(Random.Range(1, 3), _rb.velocity.y);
+                _rb.linearVelocity = new Vector2(Random.Range(1, 3), _rb.linearVelocity.y);
             }
 
-            if (_rb.velocity.y == 0)
+            if (_rb.linearVelocity.y == 0)
             {
-                _rb.velocity = new Vector2(_rb.velocity.x, Random.Range(1, 3));
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, Random.Range(1, 3));
             }
         }
         #endregion
