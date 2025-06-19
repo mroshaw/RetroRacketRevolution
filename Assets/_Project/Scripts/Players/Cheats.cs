@@ -1,4 +1,5 @@
 using System.Collections;
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using DaftAppleGames.RetroRacketRevolution.Players;
@@ -64,7 +65,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             HardPoint playerHardPoint = player1.GetFreeHardPoint(HardPointLocation.Outer);
             if (playerHardPoint != null)
             {
-                playerHardPoint.EnableAddOn();
+                playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
             Notify($"Player 1 laser enabled for {addOnDuration} seconds");
@@ -80,7 +81,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             HardPoint playerHardPoint = player2.GetFreeHardPoint(HardPointLocation.Outer);
             if (playerHardPoint != null)
             {
-                playerHardPoint.EnableAddOn();
+                playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
             Notify($"Player 2 laser enabled for {addOnDuration} seconds");
@@ -96,7 +97,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             HardPoint playerHardPoint = player1.GetFreeHardPoint(HardPointLocation.Center);
             if (playerHardPoint != null)
             {
-                playerHardPoint.EnableAddOn();
+                playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
             Notify($"Player 1 catch enabled for {addOnDuration} seconds");
@@ -113,7 +114,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             HardPoint playerHardPoint = player2.GetFreeHardPoint(HardPointLocation.Center);
             if (playerHardPoint != null)
             {
-                playerHardPoint.EnableAddOn();
+                playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
             Notify($"Player 2 catch enabled for {addOnDuration} seconds");
@@ -320,7 +321,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         private IEnumerator DisableAddOnAfterDelay(HardPoint hardPoint, float delay)
         {
             yield return new WaitForSeconds(delay);
-            hardPoint.DisableAddOn();
+            hardPoint.Retract();
         }
     }
 }

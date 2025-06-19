@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Ball
   - Collectible
@@ -15,6 +15,7 @@ TagManager:
   - Enemy
   - EnemyProjectile
   - LogoSprite
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Walls
   - Player2
   - MegaBall
-  - LaserBolt
+  - Projectile
   - Catcher
   - Enemy
   - EnemyProjectile
@@ -67,3 +68,5 @@ TagManager:
   - name: UI
     uniqueID: 3302592333
     locked: 0
+  m_RenderingLayers:
+  - Default

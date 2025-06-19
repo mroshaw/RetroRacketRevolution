@@ -26,7 +26,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Enemies
         /// <summary>
         /// Configure the component on Start
         /// </summary>
-        public override void Start()
+        internal override void Start()
         {
             base.Start();
         }

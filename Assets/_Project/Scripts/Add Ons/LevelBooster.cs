@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
+using DaftAppleGames.Players;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public class LevelBooster : AddOn
     {
-        [BoxGroup("Booster Settings")] public float boostTime = 3.0f;
-        [BoxGroup("Booster Settings")] public float boostHeight = 150.0f;
+        [BoxGroup("Settings")] [SerializeField] float boostTime = 3.0f;
+        [BoxGroup("Settings")] [SerializeField] float boostHeight = 150.0f;
+        [BoxGroup("Settings")] [SerializeField] private Engine engine1;
+        [BoxGroup("Settings")] [SerializeField] private Engine engine2;
 
         [FoldoutGroup("Events")] public UnityEvent StartBoostEvent;
         [FoldoutGroup("Events")] public UnityEvent EndBoostEvent;
@@ -28,23 +31,39 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Initialise this component
         /// </summary>
-        public override void Awake()
+        internal void Awake()
         {
-            base.Awake();
             _parentGameObject = GetComponentInParent<Player>().gameObject;
-            _audioSource = GetComponent<AudioSource>();
             _startHeight = this._parentGameObject.transform.position.y;
             _startHorizontal = this._parentGameObject.transform.position.x;
             _startPosition = new Vector2(_startHorizontal, _startHeight);
             _endPosition = new Vector2(_startHorizontal, boostHeight);
         }
 
+        internal override void Fire()
+        {
+        }
+
+        internal override void StopFire()
+        {
+        }
+
         /// <summary>
         /// Deploy override
         /// </summary>
-        public override void Deploy()
+        protected internal override void Deploy(Action callBack, bool immediate = false)
         {
+            engine1.gameObject.SetActive(true);
+            engine2.gameObject.SetActive(true);
             Boost();
+            callBack?.Invoke();
+        }
+
+        protected internal override void Retract(Action callBack, bool immediate = false)
+        {
+            engine1.gameObject.SetActive(false);
+            engine2.gameObject.SetActive(false);
+            callBack?.Invoke();
         }
 
         /// <summary>
@@ -52,8 +71,15 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         public void Boost()
         {
-            _audioSource.Play();
+            engine1.FireEngine();
+            engine2.FireEngine();
             StartCoroutine(BoostAsync());
+        }
+
+        private void EndBoost()
+        {
+            engine1.StopFiringEngine();
+            engine2.StopFiringEngine();
         }
 
         /// <summary>

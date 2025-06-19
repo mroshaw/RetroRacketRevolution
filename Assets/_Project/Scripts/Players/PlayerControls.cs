@@ -9,19 +9,20 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 
     public class PlayerControls : MonoBehaviour
     {
-        [BoxGroup("Movement")] public float defaultKeyboardSpeedMultiplier = 2000.0f;
-        [BoxGroup("Movement")] public float defaultDpadSpeedMultiplier = 200.0f;
-        [BoxGroup("Movement")] public float minX = -200.0f;
-        [BoxGroup("Movement")] public float maxX = 200.0f;
+        [BoxGroup("Movement")] [SerializeField] private float defaultKeyboardSpeedMultiplier = 2000.0f;
+        [BoxGroup("Movement")] [SerializeField] private float defaultDpadSpeedMultiplier = 200.0f;
+        [BoxGroup("Movement")] [SerializeField] private float minX = -200.0f;
+        [BoxGroup("Movement")] [SerializeField] private float maxX = 200.0f;
 
-        [BoxGroup("Debug")][SerializeField] private string _currentControlScheme;
-        [BoxGroup("Debug")][SerializeField] private Vector2 _moveVector;
-        [BoxGroup("Debug")][SerializeField] private float _horizontal;
-        [BoxGroup("Debug")][SerializeField] private bool _fire;
-        [BoxGroup("Debug")]public float debugXLastFrame;
-        [BoxGroup("Debug")]public float debugCurrentX;
+        [BoxGroup("Debug")] [SerializeField] private string currentControlScheme;
+        [BoxGroup("Debug")] [SerializeField] private Vector2 moveVector;
+        [BoxGroup("Debug")] [SerializeField] private float horizontal;
+        [BoxGroup("Debug")] [SerializeField] private bool fire;
+        [BoxGroup("Debug")] [SerializeField] private float debugXLastFrame;
+        [BoxGroup("Debug")] [SerializeField] private float debugCurrentX;
         
-        [BoxGroup("Events")] public UnityEvent FireButtonEvent;
+        [BoxGroup("Events")] public UnityEvent FireButtonPressedEvent;
+        [BoxGroup("Events")] public UnityEvent FireButtonReleasedEvent;
         [BoxGroup("Events")] public UnityEvent MovingLeftEvent;
         [BoxGroup("Events")] public UnityEvent MovingRightEvent;
         [BoxGroup("Events")] public UnityEvent StoppedEvent;
@@ -31,24 +32,20 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private float _speed = 1.0f;
         private float _xLastFrame;
 
-
         private PlayerInput _playerInput;
-        private Rigidbody2D _rb;
-
-        private Vector2 noVelocity = new Vector2(0, 0);
+        private Rigidbody _rb;
 
         private float _keyboardSpeedMultiplier;
         private float _dpadSpeedMultiplier;
 
-
         /// <summary>
         /// Init the player controls
         /// </summary>
-        void Awake()
+        private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
             _playerInput = GetComponent<PlayerInput>();
-            _currentControlScheme = _playerInput.currentControlScheme;
+            currentControlScheme = _playerInput.currentControlScheme;
 
             _keyboardSpeedMultiplier = defaultKeyboardSpeedMultiplier;
             _dpadSpeedMultiplier = defaultDpadSpeedMultiplier;
@@ -64,13 +61,18 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             Cursor.visible = false;
         }
 
+        internal void ConfigurePlayer(float newMinX, float newMaxX)
+        {
+            minX = newMinX;
+            maxX = newMaxX;
+        }
+
         /// <summary>
         /// Enable controls
         /// </summary>
         public void EnableControls()
         {
             ControlsEnabled = true;
-            // Debug.Log($"{this.GetComponent<Player>().gameObject.name} controls enabled.");
         }
 
         /// <summary>
@@ -94,7 +96,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle settings change to control sensitivity
         /// </summary>
-        /// <param name="newValue"></param>
         public void DpadSensitivityChanged(float newValue)
         {
             _dpadSpeedMultiplier = defaultDpadSpeedMultiplier * newValue;
@@ -103,26 +104,24 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle the "Move" message from Player Controls
         /// </summary>
-        /// <param name="value"></param>
-        private void OnMove(InputValue value)
+        public void OnMove(InputAction.CallbackContext context)
         {
-            _moveVector = value.Get<Vector2>();
-            _horizontal = _moveVector.normalized.x;
+            moveVector = context.ReadValue<Vector2>();
+            horizontal = moveVector.normalized.x;
         }
 
         /// <summary>
         /// Handles the "MoveAnalogue" message from Player Controls
         /// </summary>
-        /// <param name="value"></param>
-        private void OnMoveAnalogue(InputValue value)
+        public void OnMoveAnalogue(InputAction.CallbackContext context)
         {
             if (_playerInput.currentControlScheme == "Mouse")
             {
-                Vector2 mousePosition = value.Get<Vector2>();
+                Vector2 mousePosition = context.ReadValue<Vector2>();
                 Vector2 moveVector = Camera.main.ScreenToWorldPoint(mousePosition);
                 Vector2 position = new Vector2(moveVector.x, gameObject.transform.position.y);
                 
-                if (CheckBoundaries(position, out Vector2 newPosition))
+                if (CheckBoundaries(position, out Vector3 newPosition))
                 {
 #if !UNITY_EDITOR
                     if (ControlsEnabled && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer))
@@ -141,24 +140,24 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             else
             {
                 // Gamepad
-                _horizontal = value.Get<Vector2>().normalized.x;
+                horizontal = context.ReadValue<Vector2>().normalized.x;
             }
         }
 
         /// <summary>
         /// Reposition if exceeded boundary limits
         /// </summary>
-        private bool CheckBoundaries(Vector2 position, out Vector2 newPosition)
+        private bool CheckBoundaries(Vector3 position, out Vector3 newPosition)
         {
             if (position.x < minX)
             {
-                newPosition = new Vector2(minX, position.y);
+                newPosition = new Vector3(minX, position.y, position.z);
                 return true;
             }
 
             if (position.x > maxX)
             {
-                newPosition = new Vector2(maxX, position.y);
+                newPosition = new Vector3(maxX, position.y, position.z);
                 return true;
             }
             newPosition = position;
@@ -180,13 +179,26 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle the "Fire" message from Player Controls
         /// </summary>
-        private void OnFire()
+        public void OnFire(InputAction.CallbackContext context)
         {
             if (!ControlsEnabled)
             {
                 return;
             }
-            FireButtonEvent.Invoke();
+
+            if (context.started)
+            {
+                Debug.Log("Fire Pressed");
+                FireButtonPressedEvent.Invoke();
+                return;
+            }
+
+            if (context.canceled)
+            {
+                Debug.Log("Fire Released");
+                FireButtonReleasedEvent.Invoke();
+                return;
+            }
         }
 
         /// <summary>
@@ -197,6 +209,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             // DEBUG
             debugXLastFrame = _xLastFrame;
             debugCurrentX = transform.position.x;
+
+            // Check boundaries
+            if (CheckBoundaries(gameObject.transform.localPosition, out Vector3 newPosition))
+            {
+                gameObject.transform.localPosition = newPosition;
+                horizontal = 0;
+            }
 
             // Determine if we're moving
             if (transform.position.x > _xLastFrame)
@@ -218,11 +237,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 return;
             }
-            // Check boundaries
-            if (CheckBoundaries(gameObject.transform.localPosition, out Vector2 newPosition))
-            {
-               gameObject.transform.localPosition = newPosition;
-            }
+
         }
 
         /// <summary>
@@ -232,10 +247,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             float multiplier = 1.0f;
 
-            switch (_currentControlScheme)
+            switch (currentControlScheme)
             {
                 case "Mouse":
-                    _rb.linearVelocity = noVelocity;
+                    _rb.linearVelocity = Vector3.zero;
                     return;
                 case "Keyboard":
                     multiplier = _keyboardSpeedMultiplier;
@@ -244,7 +259,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                     multiplier = _dpadSpeedMultiplier;
                     break;
             }
-            _rb.linearVelocity = Vector2.right * _horizontal * _speed * multiplier;
+            _rb.linearVelocity = Vector2.right * horizontal * _speed * multiplier;
         }
     }
 }

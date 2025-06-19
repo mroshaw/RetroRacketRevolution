@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
     {
         [BoxGroup("Prefabs")] public Transform bonusContainer;
         [BoxGroup("Settings")] public BonusData bonusData;
-        [BoxGroup("Settings")] public GameObject container;
         [BoxGroup("Random")] public Vector2 randomSpawnPosition;
 
         [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> BonusAppliedEvent;
@@ -28,9 +28,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Spawns a bonus at the given location
         /// </summary>
-        /// <param name="bonusType"></param>
-        /// <param name="spawnPosition"></param>
-        public void SpawnBonus(BonusType bonusType, Vector2 spawnPosition)
+        internal void SpawnBonus(BonusType bonusType, Vector2 spawnPosition)
         {
             GameObject newBonus = Instantiate(bonusData.GetBonusByType(bonusType).SpawnPrefab, bonusContainer);
             Bonus bonus = newBonus.GetComponent<Bonus>();
@@ -45,9 +43,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Applies the bonus effect on the target
         /// </summary>
-        /// <param name="bonus"></param>
-        /// <param name="targetGameObject"></param>
-        public void ApplyBonusEffect(Bonus bonus, GameObject targetGameObject)
+        internal void ApplyBonusEffect(Bonus bonus, GameObject targetGameObject)
         {
             // Play bonus audio
             _audioSource.PlayOneShot(bonus.collectAudioClip);
@@ -67,8 +63,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Wrapper for async method to remove the add-on
         /// </summary>
-        /// <param name="hardPoint"></param>
-        /// <param name="delay"></param>
         private void RemoveBonusAddOnAfterDelay(HardPoint hardPoint, float delay)
         {
             StartCoroutine(RemoveBonusAddOnAfterDelayAsync(hardPoint, delay));
@@ -77,20 +71,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Removes add-on from hardpoint after a given delay
         /// </summary>
-        /// <param name="hardPoint"></param>
-        /// <param name="delay"></param>
-        /// <returns></returns>
         private IEnumerator RemoveBonusAddOnAfterDelayAsync(HardPoint hardPoint, float delay)
         {
             yield return new WaitForSeconds(delay);
-            // hardPoint.DetachAddOn(true, true);
-            hardPoint.DisableAddOn();
+            hardPoint.Retract();
         }
 
         /// <summary>
         /// Gets a random bonus
         /// </summary>
-        /// <returns></returns>
         private BonusType GetRandomBonus(BonusType excludeType)
         {
             Array values = Enum.GetValues(typeof(BonusType));
@@ -109,8 +98,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Wrapper around async run action after delay
         /// </summary>
-        /// <param name="delay"></param>
-        /// <param name="callBack"></param>
         private void RunCallBackAfterDelay(float delay, Action callBack)
         {
             StartCoroutine(RunCallBackAfterDelayAsync(delay, callBack));
@@ -119,8 +106,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Runs the callback action after a delay
         /// </summary>
-        /// <param name="delay"></param>
-        /// <param name="callBack"></param>
         /// <returns></returns>
         private IEnumerator RunCallBackAfterDelayAsync(float delay, Action callBack)
         {
@@ -132,10 +117,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// Bonus type and prefab pairs
         /// </summary>
         [Serializable]
-        public class BonusCollectable
+        internal class BonusCollectable
         {
-            public BonusType BonusType;
-            public GameObject Prefab;
+            public BonusType bonusType;
+            public GameObject prefab;
         }
     }
 }

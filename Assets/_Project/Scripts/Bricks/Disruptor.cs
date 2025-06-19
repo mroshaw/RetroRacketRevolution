@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,7 +17,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         private VortexDirection _currentDirection;
         private float _nextDirectionChangeTime;
 
-        private SpriteRenderer _spriteRenderer;
 
         /// <summary>
         /// Initialise this component
@@ -27,7 +24,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Awake()
         {
             _currentDirection = direction;
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             UpdateColor();
         }
 
@@ -35,7 +31,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Handle the ball passing through
         /// </summary>
         /// <param name="other"></param>
-        private void OnTriggerStay2D(Collider2D other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag("Ball"))
             {
@@ -50,17 +46,17 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void ApplyForce(GameObject ballGameObject)
         {
             // Get the ball RigidBody           
-            Rigidbody2D rb = ballGameObject.GetComponent<Rigidbody2D>();
+            Rigidbody rb = ballGameObject.GetComponent<Rigidbody>();
 
             if (_currentDirection == VortexDirection.Inward)
             {
                 // rb.velocity *= RotateLeft(rb.velocity);
-                rb.AddForce(rb.transform.right * disruptiveForce, ForceMode2D.Impulse);
+                rb.AddForce(rb.transform.right * disruptiveForce, ForceMode.Impulse);
             }
             else
             {
                 // rb.velocity *= RotateRight(rb.velocity);
-                rb.AddForce(-rb.transform.right * disruptiveForce, ForceMode2D.Impulse);
+                rb.AddForce(-rb.transform.right * disruptiveForce, ForceMode.Impulse);
             }
         }
 
@@ -69,17 +65,17 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         /// <param name="vector"></param>
         /// <returns></returns>
-        private Vector2 RotateLeft(Vector2 vector)
+        private Vector3 RotateLeft(Vector3 vector)
         {
-            return new Vector2(vector.y * -0.1f, vector.x).normalized;
+            return new Vector3(vector.y * -0.1f, vector.x, vector.z).normalized;
         }
 
         /// <summary>
         /// Rotate to right by one degree
         /// </summary>
-        private Vector2 RotateRight(Vector2 vector)
+        private Vector3 RotateRight(Vector3 vector)
         {
-            return new Vector2(vector.y, vector.x * -0.1f).normalized;
+            return new Vector3(vector.y, vector.x * -0.1f, vector.z).normalized;
         }
 
         /// <summary>
@@ -118,7 +114,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void UpdateColor()
         {
-            _spriteRenderer.color = _currentDirection == VortexDirection.Inward ? inwardColour : outwardColour;
+
         }
 
         /// <summary>

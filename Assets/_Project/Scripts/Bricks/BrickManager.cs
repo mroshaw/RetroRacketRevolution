@@ -9,19 +9,20 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     public class BrickManager : MonoBehaviour
     {
-        [BoxGroup("Audio")] public AudioClip destroyedClip;
-        [BoxGroup("Prefabs")] public GameObject brickPrefab;
-        [BoxGroup("Prefabs")] public GameObject disruptorPrefab;
-        [BoxGroup("Prefabs")] public GameObject brickContainer;
-        [BoxGroup("Prefabs")] public GameObject disruptorContainer;
+        [BoxGroup("Audio")] [SerializeField] private AudioClip destroyedClip;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject brickPrefab;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject disruptorPrefab;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject brickContainer;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject disruptorContainer;
 
-        [BoxGroup("Prefabs")] public GameObject brickExplosionPrefab;
-        [BoxGroup("Prefabs")] public GameObject brickExplosionContainer;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject brickExplosionPrefab;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject brickExplosionContainer;
 
-        [BoxGroup("Prefabs")] public bool usePooling=false;
-        [BoxGroup("Prefabs")] public int defaultPoolSize = 200;
+        [BoxGroup("Prefabs")] [SerializeField] private bool usePooling=false;
+        [BoxGroup("Prefabs")] [SerializeField] private int defaultPoolSize = 200;
         [BoxGroup("Debug")] [SerializeField] private List<Brick> bricks = new List<Brick>();
         [BoxGroup("Debug")] [SerializeField] private List<Disruptor> disruptors = new List<Disruptor>();
+
         [BoxGroup("Events")] public UnityEvent<Brick> BrickAddedEvent;
         [BoxGroup("Events")] public UnityEvent<Brick> BrickDestroyedEvent;
         [BoxGroup("Events")] public UnityEvent<Transform> BrickDestroyedAtPositionEvent;
@@ -55,11 +56,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// </summary>
         [BoxGroup("Debug")]
         [Button("Destroy All Bricks")]
-        public void DestroyAllBricks()
+        internal void DestroyAllBricks()
         {
             foreach (Brick brick in bricks.ToArray())
             {
-                if (brick.brickType != BrickType.Invincible)
+                if (brick.BrickType != BrickType.Invincible)
                 {
                     DestroyBrickCallBack(brick, false);
                 }
@@ -69,13 +70,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Spawn a new brick with the given properties
         /// </summary>
-        /// <param name="brickType"></param>
-        /// <param name="brickColor"></param>
-        /// <param name="brickBonus"></param>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <param name="isMainSortingGroup"></param>
-        public Brick SpawnBrick(BrickType brickType, Color brickColor, BonusType brickBonus, int row, int col,
+        internal Brick SpawnBrick(BrickType brickType, Color brickColor, BonusType brickBonus, int row, int col,
             bool isMainSortingGroup)
         {
             GameObject newBrickGameObject;
@@ -93,9 +88,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             bricks.Add(brick);
             brick.BrickManager = this;
             brick.transform.SetParent(brickContainer.transform);
-            brick.brickType = brickType;
-            brick.brickColor = brickColor;
-            brick.brickBonus = brickBonus;
+            brick.ReConfigureBrick(brickType, brickColor, brickBonus);
             brick.SetSortingGroup(isMainSortingGroup);
             if (brickType != BrickType.Invincible)
             {
@@ -116,9 +109,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Spawns a Disruptor
         /// </summary>
-        /// <param name="brickType"></param>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
         public Disruptor SpawnDisruptor(BrickType brickType, int row, int col)
         {
             GameObject newDisruptorGameObject = Instantiate(disruptorPrefab, disruptorContainer.transform);
@@ -144,7 +134,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Destroys all disruptors
         /// </summary>
-        public void DestroyAllDisruptors()
+        internal void DestroyAllDisruptors()
         {
             foreach (Disruptor currDisruptor in disruptors.ToArray())
             {
@@ -155,7 +145,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Destroys the given disruptor
         /// </summary>
-        /// <param name="disruptor"></param>
         private void DestroyDisruptor(Disruptor disruptor)
         {
             if (disruptor != null)
@@ -167,9 +156,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Callback from Brick destroyed event
         /// </summary>
-        /// <param name="brick"></param>
-        /// <param name="playSound"></param>
-        public void DestroyBrickCallBack(Brick brick, bool playSound)
+        private void DestroyBrickCallBack(Brick brick, bool playSound)
         {
             DestroyBrick(brick, playSound);
 
@@ -187,16 +174,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Destroy a brick
         /// </summary>
-        /// <param name="brick"></param>
-        /// <param name="playSound"></param>
-        public void DestroyBrick(Brick brick, bool playSound)
+        private void DestroyBrick(Brick brick, bool playSound)
         {
-            if (brick.brickType == BrickType.Invincible)
+            if (brick.BrickType == BrickType.Invincible)
             {
                 playSound = false;
             }
             bricks.Remove(brick);
-            if (brick.brickType != BrickType.Invincible)
+            if (brick.BrickType != BrickType.Invincible)
             {
                 _destructableBricks--;
             }
@@ -230,12 +215,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Are there any destructible bricks left?
         /// </summary>
-        /// <returns></returns>
         private bool HasLastBrickBeenDestroyed()
         {
             foreach (Brick brick in bricks)
             {
-                if (brick.brickType != BrickType.Invincible)
+                if (brick.BrickType != BrickType.Invincible)
                 {
                     return false;
                 }
@@ -247,11 +231,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Create action for pool
         /// </summary>
-        /// <returns></returns>
         private GameObject CreateBrick()
         {
-            GameObject newBrickGameObject = Instantiate(brickPrefab);
-            newBrickGameObject.transform.parent = brickContainer.transform;
+            GameObject newBrickGameObject = Instantiate(brickPrefab, brickContainer.transform, true);
             Brick brick = newBrickGameObject.GetComponent<Brick>();
             brick.BrickManager = this;
             // Debug.Log($"Created brick in pool. Pool size is: {brickPool.CountAll} of which {brickPool.CountActive} are active.");
@@ -261,7 +243,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Take action for pool
         /// </summary>
-        /// <param name="brickGameObject"></param>
         private void OnTakeBrickFromPool(GameObject brickGameObject)
         {
             Brick brick = brickGameObject.GetComponent<Brick>();
@@ -273,7 +254,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Return action for pool
         /// </summary>
-        /// <param name="brickGameObject"></param>
         private void OnReturnBrickToPool(GameObject brickGameObject)
         {
             Brick brick = brickGameObject.GetComponent<Brick>();
@@ -285,7 +265,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Destroy action for pool
         /// </summary>
-        /// <param name="brickGameObject"></param>
         private void OnDestroyBrick(GameObject brickGameObject)
         {
             Brick brick = brickGameObject.GetComponent<Brick>();
@@ -296,7 +275,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Create action for pool
         /// </summary>
-        /// <returns></returns>
         private GameObject CreateBrickExplosion()
         {
             GameObject newBrickExplosionGameObject = Instantiate(brickExplosionPrefab);
@@ -309,7 +287,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Take action for pool
         /// </summary>
-        /// <param name="brickExplosionGameObject"></param>
         private void OnTakeBrickExplosionFromPool(GameObject brickExplosionGameObject)
         {
             brickExplosionGameObject.SetActive(true);
@@ -318,16 +295,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Release an explosion back to the pool
         /// </summary>
-        /// <param name="explosion"></param>
         private void ReturnBrickExplosionToPool(Explosion explosion)
         {
+            explosion.ResetExplosion();
             brickExplosionPool.Release(explosion.gameObject);
         }
 
         /// <summary>
         /// Return action for pool
         /// </summary>
-        /// <param name="brickExplosionGameObject"></param>
         private void OnReturnBrickExplosionToPool(GameObject brickExplosionGameObject)
         {
             brickExplosionGameObject.SetActive(false);
@@ -336,7 +312,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// <summary>
         /// Destroy action for pool
         /// </summary>
-        /// <param name="brickExplosionGameObject"></param>
         private void OnDestroyBrickExplosion(GameObject brickExplosionGameObject)
         {
             Destroy(brickExplosionGameObject);

@@ -4,23 +4,28 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
+    public enum DeploymentState { Deploying, Deployed, Retracting, Retracted }
+
     public class HardPoint : MonoBehaviour
     {
-        [BoxGroup("Settings")] public bool deployOnStart = false;
-        [BoxGroup("Settings")] public AddOn attachedAddOn;
+        [BoxGroup("Settings")] [SerializeField] private bool deployOnStart;
+        [BoxGroup("Settings")] [SerializeField] private AddOn defaultAddOn;
+        [BoxGroup("Debug")] [SerializeField] private AddOn attachedAddOn;
+        [BoxGroup("Debug")] [SerializeField] private DeploymentState deploymentState;
 
-        [FoldoutGroup("Events")] public UnityEvent DeployEvent;
-        [FoldoutGroup("Events")] public UnityEvent RetractEvent;
+        [FoldoutGroup("Events")] public UnityEvent deployEvent;
+        [FoldoutGroup("Events")] public UnityEvent retractEvent;
 
-        public bool IsHardPointOccupied => attachedAddOn != null;
-        public bool IsHardPointEnabled => attachedAddOn.gameObject.activeSelf;
-        public Player HardPointPlayer => _hardPointPlayer;
+        internal bool IsDeployed => deploymentState == DeploymentState.Deployed;
+        internal DeploymentState DeploymentState => deploymentState;
 
+        internal Player HardPointPlayer => _hardPointPlayer;
+
+
+        private bool IsHardPointOccupied => attachedAddOn != null;
         private Player _hardPointPlayer;
-
-        private bool _isDeployed;
 
         /// <summary>
         /// Set up the Hard Point
@@ -28,6 +33,44 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Awake()
         {
             _hardPointPlayer = GetComponentInParent<Player>();
+
+            if (defaultAddOn)
+            {
+                AttachAddOn(defaultAddOn, true);
+            }
+
+            if (!IsHardPointOccupied)
+            {
+                return;
+            }
+
+            if (deployOnStart)
+            {
+                Deploy(true);
+            }
+            else
+            {
+                Retract(true);
+            }
+        }
+
+        internal void AttachAddOn(AddOn addOn, bool forceReplace)
+        {
+            if (attachedAddOn == addOn || (IsHardPointOccupied && !forceReplace))
+            {
+                return;
+            }
+
+            attachedAddOn = addOn;
+            addOn.Attach(this);
+        }
+
+        internal void DetachAddOn()
+        {
+            if (!IsHardPointOccupied)
+            {
+                attachedAddOn.Detach();
+            }
         }
 
         /// <summary>
@@ -37,57 +80,70 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             if (deployOnStart)
             {
-                EnableAddOn();
+                Deploy();
             }
             else
             {
-                DisableAddOn();
+                Retract();
             }
         }
 
-        /// <summary>
-        /// Enable attached add-on
-        /// </summary>
-        public void EnableAddOn()
+        public void FirePressed()
         {
-            attachedAddOn.gameObject.SetActive(true);
-            Deploy();
+            if (deploymentState != DeploymentState.Deployed)
+            {
+                return;
+            }
+
+            attachedAddOn.Fire();
         }
 
-        /// <summary>
-        /// Disable the add-on
-        /// </summary>
-        public void DisableAddOn()
+        public void FireReleased()
         {
-            attachedAddOn.gameObject.SetActive(false);
-            Retract();
+            attachedAddOn.StopFire();
         }
+
 
         /// <summary>
         /// Deploys the hardpoint
         /// </summary>
-        public void Deploy()
+        [Button("Deploy")]
+        public void Deploy(bool immediate = false)
         {
-            if (_isDeployed)
+            if (deploymentState != DeploymentState.Retracted || !IsHardPointOccupied)
             {
                 return;
             }
-            DeployEvent.Invoke();
-            _isDeployed = true;
+            deploymentState = DeploymentState.Deploying;
+            attachedAddOn.Deploy(DeployedCallBack, immediate);
+            deployEvent.Invoke();
+        }
+
+        private void DeployedCallBack()
+        {
+            deploymentState = DeploymentState.Deployed;
         }
 
         /// <summary>
         /// Retracts the hardpoint
         /// </summary>
-        public void Retract()
+        [Button("Retract")]
+        public void Retract(bool immediate = false)
         {
-            if (!_isDeployed)
+            if (deploymentState != DeploymentState.Deployed || !IsHardPointOccupied)
             {
                 return;
             }
-            RetractEvent.Invoke();
-            _isDeployed = false;
+            deploymentState = DeploymentState.Retracting;
+            attachedAddOn.Retract(RetractCallBack, immediate);
+            retractEvent.Invoke();
         }
+
+        private void RetractCallBack()
+        {
+            deploymentState = DeploymentState.Retracted;
+        }
+
 
         /// <summary>
         /// Wrapper for async method to remove the add-on
@@ -107,7 +163,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             yield return new WaitForSeconds(delay);
             // hardPoint.DetachAddOn(true, true);
-            DisableAddOn();
+            Retract();
         }
     }
 }

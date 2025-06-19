@@ -9,20 +9,24 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class PlayerManager : MonoBehaviour, IBonusRecipient
     {
-        [BoxGroup("Players")] public Player playerOne;
-        [BoxGroup("Players")] public Player playerTwo;
-        [BoxGroup("Player Input Settings")] public PlayerInput playerOneInput;
-        [BoxGroup("Player Input Settings")] public PlayerInput playerTwoInput;
-        [BoxGroup("Bound Settings")] public GameObject playerOneBounds;
-        [BoxGroup("Bound Settings")] public GameObject playerTwoBounds;
-        [BoxGroup("Player 1 Bound Settings")] public float player1MinX;
-        [BoxGroup("Player 1 Bound Settings")] public float player1MaxX;
-        [BoxGroup("Player 2 Bound Settings")] public float player2MinX;
-        [BoxGroup("Player 2 Bound Settings")] public float player2MaxX;
-        [BoxGroup("Game Data")] public GameData gameData;
-        [BoxGroup("Managers")] public BallManager ballManager;
+        [BoxGroup("Players")] [SerializeField] private Player playerOne;
+        [BoxGroup("Players")] [SerializeField] private Player playerTwo;
+        [BoxGroup("Player Input Settings")] [SerializeField] private PlayerInput playerOneInput;
+        [BoxGroup("Player Input Settings")] [SerializeField] private PlayerInput playerTwoInput;
+        [BoxGroup("Player 1 Bound Settings")] [SerializeField] private float player1MinX;
+        [BoxGroup("Player 1 Bound Settings")] [SerializeField] private float player1MaxX;
+        [BoxGroup("Player 2 Bound Settings")] [SerializeField] private float player2MinX;
+        [BoxGroup("Player 2 Bound Settings")] [SerializeField] private float player2MaxX;
+        [BoxGroup("Game Data")] [SerializeField] private GameData gameData;
+        [BoxGroup("Managers")] [SerializeField] private BallManager ballManager;
 
-        public bool PlayerTwoIsActive => playerTwo.gameObject.activeSelf;
+        internal Player PlayerOne => playerOne;
+        internal Player PlayerTwo => playerTwo;
+
+        internal int PlayerOneScore => playerOne.Score;
+        internal int PlayerTwoScore => playerTwo.Score;
+
+        private bool PlayerTwoIsActive => playerTwo.gameObject.activeSelf;
 
         private LifeForce _lifeForce;
 
@@ -33,11 +37,17 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             _lifeForce = GetComponent<LifeForce>();
 
-            playerOne.defaultBatScale =
-                new Vector2(gameData.difficulty.defaultBatLength, playerOne.defaultBatScale.y);
+            if (playerOne)
+            {
+                playerOne.PlayerManager = this;
+                playerOne.SetBatScale(gameData.difficulty.defaultBatLength);
+            }
 
-            playerTwo.defaultBatScale =
-                new Vector2(gameData.difficulty.defaultBatLength, playerTwo.defaultBatScale.y);
+            if (playerTwo)
+            {
+                playerTwo.PlayerManager = this;
+                playerTwo.SetBatScale(gameData.difficulty.defaultBatLength);
+            }
         }
 
         /// <summary>
@@ -47,25 +57,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             ConfigurePlayerArea(gameData.isTwoPlayer);
             _lifeForce.NumLives = gameData.difficulty.startingLives;
-            
-            // Enable player 2, if appropriate
-            if (gameData.isTwoPlayer)
-            {
-                playerTwo.gameObject.SetActive(true);
-                playerOne.gameObject.transform.localPosition = new Vector2(-100.0f, 0);
-                playerTwo.gameObject.transform.localPosition = new Vector2(100.0f, 0);
-            }
-            else
-            {
-                playerOne.gameObject.transform.localPosition = new Vector2(0, 0);
-            }
         }
 
         /// <summary>
         /// Set the control scheme for the given player input
         /// </summary>
-        /// <param name="input"></param>
-        /// <param name="controlScheme"></param>
         private void SetControlScheme(PlayerInput input, string controlScheme)
         {
             switch (controlScheme)
@@ -85,21 +81,20 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Sets up the player play areas
         /// </summary>
-        /// <param name="isTwoPlayer"></param>
         private void ConfigurePlayerArea(bool isTwoPlayer)
         {
+
+            Transform player1Transform = playerOne.transform;
+            Transform player2Transform = playerTwo.transform;
+
             // Single player game
             PlayerControls playerOneControls = playerOne.GetComponent<PlayerControls>();
             if (!isTwoPlayer)
             {
-                playerOneControls.minX = player1MinX;
-                playerOneControls.maxX = player2MaxX;
-                playerOneBounds.SetActive(false);
-                playerTwoBounds.SetActive(false);
+                playerOneControls.ConfigurePlayer(player1MinX, player2MaxX);
 
                 // Position players
-                Vector2 player1Position = new Vector2((player1MaxX - player1MinX) / 2, 0);
-
+                Vector3 player1Position = new((player1MaxX - player1MinX) / 2, player1Transform.position.y, player1Transform.position.z);
                 playerOne.gameObject.transform.localPosition = player1Position;
 
             }
@@ -107,19 +102,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             else
             {
                 PlayerControls playerTwoControls = playerTwo.GetComponent<PlayerControls>();
-                playerOneControls.minX = player1MinX;
-                playerOneControls.maxX = player1MaxX;
-
-                playerTwoControls.minX = player2MinX;
-                playerTwoControls.maxX = player2MaxX;
-
-                playerOneBounds.SetActive(true);
-                playerTwoBounds.SetActive(true);
+                playerOneControls.ConfigurePlayer(player1MinX, player1MaxX);
+                playerTwoControls.ConfigurePlayer(player2MinX, player2MaxX);
 
                 // Position players
-                Vector2 player1Position = new Vector2((player1MaxX - player1MinX) / 2, 0);
-
-                Vector2 player2Position = new Vector2((player2MaxX - player2MinX) / 2, 0);
+                Vector3 player1Position = new Vector3((player1MaxX - player1MinX) / 2, player1Transform.position.y, player1Transform.position.z);
+                Vector3 player2Position = new Vector3((player2MaxX - player2MinX) / 2, player2Transform.position.y, player2Transform.position.z);
  
                 playerOne.gameObject.transform.localPosition = player1Position;
                 playerTwo.gameObject.transform.localPosition = player2Position;
@@ -129,7 +117,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Spawns a ball for the player to use
         /// </summary>
-        /// <returns></returns>
         public Ball SpawnNewBall()
         {
             return ballManager.GetNewBall();
@@ -138,7 +125,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Setup the desired control scheme when the player controller is started.
         /// </summary>
-        /// <param name="input"></param>
         public void OnPlayerJoined(PlayerInput input)
         {
             Debug.Log($"Player has joined: {input.gameObject}");
@@ -158,8 +144,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handler the BonusApplied event
         /// </summary>
-        /// <param name="bonus"></param>
-        /// <param name="targetGameObject"></param>
         public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
         {
             switch (bonus.bonusType)
@@ -173,7 +157,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Add a life to the players
         /// </summary>
-        public void AddLife()
+        private void AddLife()
         {
             _lifeForce.AddLife();
         }
@@ -194,7 +178,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Toggle Unlimited lives
         /// </summary>
-        /// <param name="state"></param>
         public bool ToggleUnlimitedLives()
         {
             _lifeForce.UnlimitedLives = !_lifeForce.UnlimitedLives;

@@ -1,6 +1,5 @@
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Balls;
-using DaftAppleGames.RetroRacketRevolution.Effects;
-using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,43 +9,41 @@ namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Enemy : MonoBehaviour
     {
-        [BoxGroup("Movement")] public float accelerationTime = 2f;
-        [BoxGroup("Movement")] public float maxSpeed = 5f;
+        [BoxGroup("Movement")] [SerializeField] private float accelerationTime = 2f;
+        [BoxGroup("Movement")] [SerializeField] private float maxSpeed = 5f;
+        [BoxGroup("Movement")] [SerializeField] private AudioClip movingAudioClip;
 
-        [BoxGroup("Attack")] public float timeBetweenAttacks = 3.0f;
-        [BoxGroup("Attack")] public int percentAttackChance = 20;
-        [BoxGroup("Attack")] public Transform bombSpawnTransform;
-        [BoxGroup("Attack")] public Sprite projectileSprite;
-        [BoxGroup("Attack")] public AudioClip projectileAudioClip;
-        [BoxGroup("Attack")] public float projectileScale;
-        [BoxGroup("Attack")] public Vector2 colliderSize;
+        [BoxGroup("Attack")] [SerializeField] private float timeBetweenAttacks = 3.0f;
+        [BoxGroup("Attack")] [SerializeField] private int percentAttackChance = 20;
+        [BoxGroup("Attack")] [SerializeField] private Transform bombSpawnTransform;
+        [BoxGroup("Attack")] [SerializeField] private AudioClip attackAudioClip;
 
-        [BoxGroup("Collision")] public bool canKillPlayer;
-        [BoxGroup("Collision")] public bool canBeKilledByPlayer;
-        [BoxGroup("Collision")] public bool canBeKilledByOutOfBounds;
+        [BoxGroup("Collision")] [SerializeField] private bool canKillPlayer;
+        [BoxGroup("Collision")] [SerializeField] private bool canBeKilledByPlayer;
+        [BoxGroup("Collision")] [SerializeField] private bool canBeKilledByOutOfBounds;
 
-        [BoxGroup("Sprites")] public Sprite[] sprites;
-        [BoxGroup("Audio")] public AudioClip movingAudioClip;
-        [BoxGroup("Settings")] public int score;
-        [BoxGroup("Settings")] public int startingHealth = 1;
+        [BoxGroup("Settings")] [SerializeField] private Transform model;
+        [BoxGroup("Settings")] [SerializeField] private int score;
+        [BoxGroup("Settings")] [SerializeField] private int startingHealth = 1;
 
-        [FoldoutGroup("Events")] public UnityEvent OnSpawnEvent;
-        [FoldoutGroup("Events")] public UnityEvent<Enemy> EnemyDestroyedEvent;
-        [FoldoutGroup("Events")] public UnityEvent<Enemy> EnemyHitEvent;
-        [FoldoutGroup("Events")] public UnityEvent<int> EnemyHealthChangedEvent;
-        [FoldoutGroup("Events")] public UnityEvent<int> EnemyHealthInitEvent;
+        [FoldoutGroup("Events")] public UnityEvent onSpawn;
+        [FoldoutGroup("Events")] public UnityEvent<Enemy> onDestroyed;
+        [FoldoutGroup("Events")] public UnityEvent<Enemy> onHit;
+        [FoldoutGroup("Events")] public UnityEvent<int> onHealthChanged;
+        [FoldoutGroup("Events")] public UnityEvent<int> onHealthInit;
 
         public EnemyManager EnemyManager { get; set; }
 
-        private Vector2 movement;
+        private Vector3 _movement;
         private float _moveTimeLeft;
         private float _attackTime;
         private int _health;
 
-        private Rigidbody2D _rb;
-        private SpriteRenderer _spriteRenderer;
+        private Rigidbody _rb;
         private AudioSource _audioSource;
-        private Flicker _flicker;
+        private Explosion _explosion;
+
+        private Collider _collider;
 
         /// <summary>
         /// Initialise this component
@@ -55,34 +52,33 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             _moveTimeLeft = accelerationTime;
             _attackTime = 0.0f;
-            _rb = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _rb = GetComponent<Rigidbody>();
             _audioSource = GetComponent<AudioSource>();
-            _flicker = GetComponentInChildren<Flicker>();
             _audioSource.clip = movingAudioClip;
             _audioSource.loop = true;
-
             _health = startingHealth;
+            _explosion = GetComponentInChildren<Explosion>();
+            _collider = GetComponent<Collider>();
         }
 
         /// <summary>
         /// Initialise other components
         /// </summary>
-        public virtual void Start()
+        internal virtual void Start()
         {
             // Notify listeners of starting health
-            EnemyHealthInitEvent.Invoke(startingHealth);
+            onHealthInit.Invoke(startingHealth);
         }
 
         /// <summary>
         /// Move and fire when ready to do so
         /// </summary>
-        public virtual void Update()
+        internal virtual void Update()
         {
             _moveTimeLeft -= Time.deltaTime;
             if (_moveTimeLeft <= 0)
             {
-                movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                _movement = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                 _moveTimeLeft += accelerationTime;
             }
             _attackTime += Time.deltaTime;
@@ -104,22 +100,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             _health = startingHealth;
             _audioSource.Play();
-            if (_flicker)
-            {
-                _flicker.FlickerNow();
-            }
-            
-            OnSpawnEvent.Invoke();
-        }
-
-        /// <summary>
-        /// Sets a random sprite
-        /// </summary>
-        public void SetRandomSprite()
-        {
-            System.Random rnd = new System.Random();
-            int spriteIndex = rnd.Next(0, sprites.Length);
-            _spriteRenderer.sprite = sprites[spriteIndex];
+            onSpawn.Invoke();
         }
 
         /// <summary>
@@ -128,16 +109,24 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Attack()
         {
             // Spawn a projectile instance
-            Projectile newProjectile = EnemyManager.SpawnProjectile(projectileSprite, projectileAudioClip, projectileScale);
+            /*
+            EnemyProjectile newProjectile = EnemyManager.SpawnProjectile(projectileSprite, attackAudioClip, projectileScale);
             newProjectile.gameObject.transform.position = bombSpawnTransform.position;
+            */
         }
 
         /// <summary>
         /// Enemy has been hit by weapon, ball or player
         /// </summary>
-        /// <param name="hitByGameObject"></param>
         public void Hit(GameObject hitByGameObject)
         {
+            // Hit by boundary
+            if(hitByGameObject.layer == LayerMask.NameToLayer("OutOfBounds"))
+            {
+                Die();
+                return;
+            }
+
             // Hit by player
             Player player = hitByGameObject.GetComponent<Player>();
             if (player)
@@ -146,7 +135,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 if (canBeKilledByPlayer)
                 {
                     player.AddScore(score);
-                    DestroyEnemy();
+                    Die();
                     return;
                 }
 
@@ -158,17 +147,17 @@ namespace DaftAppleGames.RetroRacketRevolution
                 }
             }
 
-            // Hit my laser fire
-            LaserBolt laserBolt = hitByGameObject.GetComponent<LaserBolt>();
-            if (laserBolt)
+            // Hit by projectile
+            Projectile projectile = hitByGameObject.GetComponent<Projectile>();
+            if (projectile)
             {
                 _health--;
-                EnemyHitEvent.Invoke(this);
-                EnemyHealthChangedEvent.Invoke(_health);
+                onHit.Invoke(this);
+                onHealthChanged.Invoke(_health);
                 if (_health <= 0)
                 {
-                    laserBolt.LaserCannon.AttachedPlayer.AddScore(score);
-                    DestroyEnemy();
+                    projectile.WeaponAddOn.AttachedPlayer.AddScore(score);
+                    Die();
                 }
 
                 return;
@@ -179,12 +168,12 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (ball)
             {
                 _health--;
-                EnemyHitEvent.Invoke(this);
-                EnemyHealthChangedEvent.Invoke(_health);
+                onHit.Invoke(this);
+                onHealthChanged.Invoke(_health);
                 if (_health <= 0)
                 {
                     ball.LastTouchedByPlayer.AddScore(score);
-                    DestroyEnemy();
+                    Die();
                 }
             }
         }
@@ -192,15 +181,33 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Destroys this enemy
         /// </summary>
-        public void DestroyEnemy()
+        public void Die()
         {
-            EnemyDestroyedEvent.Invoke(this);
+            model.gameObject.SetActive(false);
+            _collider.enabled = false;
+            _explosion.Explode(true);
+            Invoke(nameof(DieAfterDelay), 5.0f);
+        }
+
+        private void DieAfterDelay()
+        {
+            _explosion.ResetExplosion();
+            gameObject.SetActive(false);
+            onDestroyed.Invoke(this);
+        }
+
+        /// <summary>
+        /// Reset for re-use in pool
+        /// </summary>
+        internal void Reset()
+        {
+            model.gameObject.SetActive(true);
+            _collider.enabled = true;
         }
 
         /// <summary>
         /// Does alien want to fire?
         /// </summary>
-        /// <returns></returns>
         private bool DoesWantToAttack()
         {
             System.Random rand = new System.Random();
@@ -212,18 +219,17 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void FixedUpdate()
         {
-            _rb.AddForce(movement * maxSpeed);
+            _rb.AddForce(_movement * maxSpeed);
         }
 
         /// <summary>
         /// Check for out of bounds
         /// </summary>
-        /// <param name="other"></param>
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("LogoSprite"))
             {
-                EnemyDestroyedEvent.Invoke(this);
+                onDestroyed.Invoke(this);
                 return;
             }
 
@@ -236,8 +242,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Check for collision with players
         /// </summary>
-        /// <param name="other"></param>
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
             {

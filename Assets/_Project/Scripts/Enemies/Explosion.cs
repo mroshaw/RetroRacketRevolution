@@ -1,18 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DaftAppleGames.RetroRacketRevolution
 {
+    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(ParticleSystem))]
     public class Explosion : MonoBehaviour
     {
-        [BoxGroup("Settings")] public float returnToPoolDelay = 5.0f;
+        [BoxGroup("Settings")] [SerializeField] private float returnToPoolDelay = 5.0f;
+        [BoxGroup("Settings")] [SerializeField] private AudioClip[] audioClips;
         [FoldoutGroup("Events")] public UnityEvent<Explosion> ReturnToPoolEvent;
 
         private AudioSource _audioSource;
         private ParticleSystem _particleSystem;
+
+        private int _numClips;
 
         /// <summary>
         /// Initialise this component
@@ -21,14 +25,11 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             _audioSource = GetComponent<AudioSource>();
             _particleSystem = GetComponent<ParticleSystem>();
-
+            _audioSource.Stop();
             _particleSystem.Stop();
-        }
 
-        private void Start()
-        {
+            _numClips = audioClips.Length;
         }
-
 
         /// <summary>
         /// Trigger explosion
@@ -36,26 +37,41 @@ namespace DaftAppleGames.RetroRacketRevolution
         [Button("Explode!")]
         public void Explode(bool playSound)
         {
-            if (_audioSource != null && _particleSystem != null)
+            if (playSound)
             {
-                if (playSound)
-                {
-                    _audioSource.Play();
-                }
-                _particleSystem.Play(true);
-                StartCoroutine(ReturnToPoolAsync());
+                PlayRandomSound();
             }
+            _particleSystem.Play(true);
+            StartCoroutine(ReturnToPoolAsync());
+        }
+
+        /// <summary>
+        /// Reset when explosion is done or returned to the pool
+        /// </summary>
+        internal void ResetExplosion()
+        {
+            _particleSystem.Stop();
+            _audioSource.Stop();
         }
 
         /// <summary>
         /// Return to the pool after delay
         /// </summary>
-        /// <returns></returns>
         private IEnumerator ReturnToPoolAsync()
         {
             yield return new WaitForSeconds(returnToPoolDelay);
-            _particleSystem.Stop();
             ReturnToPoolEvent.Invoke(this);
+        }
+
+        /// <summary>
+        /// Play a random explosion sound
+        /// </summary>
+        [Button("Play Sound")]
+        private void PlayRandomSound()
+        {
+            // Get a random clip
+            int clipIndex = Random.Range(0, _numClips -1);
+            _audioSource.PlayOneShot(audioClips[clipIndex]);
         }
     }
 }

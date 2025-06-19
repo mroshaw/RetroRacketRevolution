@@ -1,53 +1,47 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.Pool;
 
 namespace DaftAppleGames.RetroRacketRevolution
 {
     public class EnemyManager : MonoBehaviour
     {
-        [BoxGroup("Settings")] public GameObject enemyContainer;
-        [BoxGroup("Settings")] public GameObject projectileContainer;
-        [BoxGroup("Settings")] public GameObject explosionContainer;
+        [BoxGroup("Settings")] [SerializeField] private GameObject enemyContainer;
+        [BoxGroup("Settings")] [SerializeField] private GameObject projectileContainer;
 
-        [BoxGroup("Prefabs")] public GameObject enemyPrefab;
-        [BoxGroup("Prefabs")] public GameObject projectilePrefab;
-        [BoxGroup("Prefabs")] public GameObject explosionPrefab;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject enemyPrefab;
+        [BoxGroup("Prefabs")] [SerializeField] private GameObject projectilePrefab;
 
-        [BoxGroup("Bosses")] public EnemiesData bossEnemies;
+        [BoxGroup("Bosses")] [SerializeField] private EnemiesData bossEnemies;
 
-        [BoxGroup("Spawn")] public float spawnAtY;
-        [BoxGroup("Spawn")] public int minSpawnX;
-        [BoxGroup("Spawn")] public int maxSpawnX;
-        [SerializeField]
-        [BoxGroup("Spawn")] private List<Enemy> _activeEnemies;
+        [BoxGroup("Spawn")] [SerializeField] private int maxEnemies;
+        [BoxGroup("Spawn")] [SerializeField] private float minTimeBetweenEnemies;
+        [BoxGroup("Spawn")] [SerializeField] private float maxTimeBetweenEnemies;
+        [BoxGroup("Spawn")] [SerializeField] private float spawnAtY;
+        [BoxGroup("Spawn")] [SerializeField] private int minSpawnX;
+        [BoxGroup("Spawn")] [SerializeField] private int maxSpawnX;
 
-        [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> enemyPool;
-        [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> projectilePool;
-        [BoxGroup("Pool")] public UnityEngine.Pool.ObjectPool<GameObject> explosionPool;
+        [BoxGroup("Debug")] [SerializeField] private float nextSpawnTime;
+        [BoxGroup("Debug")] [SerializeField] private float timeSinceLastSpawn;
+        [BoxGroup("Debug")] [SerializeField] private List<Enemy> activeEnemies;
+
+        [FoldoutGroup("Events")] public UnityEvent onEnemySpawned;
+        [FoldoutGroup("Events")] public UnityEvent onEnemyDestroyed;
+        [FoldoutGroup("Events")] public UnityEvent onAllEnemiesPreDestroyed;
+        [FoldoutGroup("Events")] public UnityEvent onAllEnemiesDestroyed;
+
+        private ObjectPool<GameObject> _enemyPool;
+        private ObjectPool<GameObject> _projectilePool;
 
         private bool _isSpawning;
-        private bool _isBossEnemy = false;
+        private bool _isBossEnemy;
         private int _bossEnemyIndex;
-
-        private System.Random _rand = new System.Random();
-        private AudioSource _audioSource;
-
-        [BoxGroup("Debug")] [SerializeField] private float _nextSpawnTime;
-        [BoxGroup("Debug")] [SerializeField] private float _timeSinceLastSpawn;
-        [BoxGroup("Debug")] [SerializeField] private int _maxEnemies;
-        [BoxGroup("Debug")] [SerializeField] private float _minTimeBetweenEnemies;
-        [BoxGroup("Debug")] [SerializeField] private float _maxTimeBetweenEnemies;
-
-        [FoldoutGroup("Events")] public UnityEvent EnemySpawnedEvent;
-        [FoldoutGroup("Events")] public UnityEvent EnemyDestroyedEvent;
-        [FoldoutGroup("Events")] public UnityEvent AllEnemiesDestroyedPreEvent;
-        [FoldoutGroup("Events")] public UnityEvent AllEnemiesDestroyedEvent;
 
         /// <summary>
         /// Initialise this component and pools
@@ -55,21 +49,11 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Awake()
         {
             // Initialise the prefab pools
-            enemyPool = new UnityEngine.Pool.ObjectPool<GameObject>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, OnDestroyEnemy, true, 5);
-            projectilePool = new UnityEngine.Pool.ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool, OnReturnProjectileToPool, OnDestroyProjectile, true, 10);
-            explosionPool = new UnityEngine.Pool.ObjectPool<GameObject>(CreateExplosion, OnTakeExplosionFromPool, OnReturnExplosionToPool, OnDestroyExplosion, true, 10);
+            _enemyPool = new ObjectPool<GameObject>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, OnDestroyEnemy, true, 5);
+            _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool, OnReturnProjectileToPool, OnDestroyProjectile, true, 10);
             _isSpawning = false;
-            _timeSinceLastSpawn = 0.0f;
-            _nextSpawnTime = GetNextSpawnTime();
-            _audioSource = GetComponent<AudioSource>();
-        }
-
-        /// <summary>
-        /// Setup other components
-        /// </summary>
-        private void Start()
-        {
-        
+            timeSinceLastSpawn = 0.0f;
+            nextSpawnTime = GetNextSpawnTime();
         }
 
         /// <summary>
@@ -84,13 +68,13 @@ namespace DaftAppleGames.RetroRacketRevolution
             }
 
             // Do nothing if we've already got max enemies
-            if (_activeEnemies.Count >= _maxEnemies || _maxEnemies == 0)
+            if (activeEnemies.Count >= maxEnemies || maxEnemies == 0)
             {
                 return;
             }
-            _timeSinceLastSpawn += Time.deltaTime;
+            timeSinceLastSpawn += Time.deltaTime;
             // If we're passed max spawn time, spawn
-            if (_timeSinceLastSpawn > _nextSpawnTime)
+            if (timeSinceLastSpawn > nextSpawnTime)
             {
                 if (_isBossEnemy)
                 {
@@ -101,30 +85,29 @@ namespace DaftAppleGames.RetroRacketRevolution
                     SpawnEnemy(false, 0);
                 }
 
-                _timeSinceLastSpawn = 0.0f;
-                _nextSpawnTime = GetNextSpawnTime();
-                return;
+                timeSinceLastSpawn = 0.0f;
+                nextSpawnTime = GetNextSpawnTime();
             }
         }
 
         /// <summary>
         /// Get the next spawn time
         /// </summary>
-        /// <returns></returns>
         private float GetNextSpawnTime()
         {
-            double randomTime = _rand.NextDouble() * (_maxTimeBetweenEnemies - _minTimeBetweenEnemies) + _minTimeBetweenEnemies;
+            double randomTime = Random.Range(minTimeBetweenEnemies, maxTimeBetweenEnemies);
             return (float)randomTime;
         }
 
         /// <summary>
         /// Starts spawning enemies
         /// </summary>
+        [Button("Start Spawning")]
         public void StartSpawning()
         {
-            if (_maxEnemies > 0)
+            if (maxEnemies > 0)
             {
-                _nextSpawnTime = GetNextSpawnTime();
+                nextSpawnTime = GetNextSpawnTime();
                 _isSpawning = true;
             }
             else
@@ -136,6 +119,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Stop spawning
         /// </summary>
+        [Button("Stop Spawning")]
         public void StopSpawning()
         {
             _isSpawning = false;
@@ -144,7 +128,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Set enemy properties from loaded level
         /// </summary>
-        /// <param name="levelData"></param>
         public void HandleLevelLoadedEvent(LevelDataExt levelData)
         {
             StopSpawning();
@@ -153,15 +136,15 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (_isBossEnemy)
             {
                 _bossEnemyIndex = levelData.levelBossIndex;
-                _maxEnemies = 1;
-                _minTimeBetweenEnemies = 0;
-                _maxTimeBetweenEnemies = 0;
+                maxEnemies = 1;
+                minTimeBetweenEnemies = 0;
+                maxTimeBetweenEnemies = 0;
             }
             else
             {
-                _maxEnemies = levelData.maxEnemies;
-                _minTimeBetweenEnemies = levelData.minTimeBetweenEnemies;
-                _maxTimeBetweenEnemies = levelData.maxTimeBetweenEnemies;
+                maxEnemies = levelData.maxEnemies;
+                minTimeBetweenEnemies = levelData.minTimeBetweenEnemies;
+                maxTimeBetweenEnemies = levelData.maxTimeBetweenEnemies;
                 StartSpawning();
             }
         }
@@ -171,17 +154,16 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         public void RemoveAllEnemies()
         {
-            foreach (Enemy enemy in _activeEnemies.ToArray())
+            foreach (Enemy enemy in activeEnemies.ToArray())
             {
-                enemy.DestroyEnemy();
+                enemy.Die();
             }
         }
 
         /// <summary>
         /// Spawn an Enemy from the Pool
         /// </summary>
-        /// <returns></returns>
-        public Enemy SpawnEnemy(bool isBossEnemy, int bossEnemyIndex)
+        private Enemy SpawnEnemy(bool isBossEnemy, int bossEnemyIndex)
         {
             if (isBossEnemy)
             {
@@ -189,27 +171,26 @@ namespace DaftAppleGames.RetroRacketRevolution
                 float horizontal = rand.Next(minSpawnX, maxSpawnX);
                 GameObject enemyGameObject = Instantiate(bossEnemies.EnemyList[bossEnemyIndex].enemyPrefab);
                 enemyGameObject.transform.SetParent(enemyContainer.transform);
-                Vector2 newPosition = new Vector2(horizontal, spawnAtY);
+                Vector3 newPosition = new(horizontal, spawnAtY, 0.0f);
                 enemyGameObject.transform.position = newPosition;
                 Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
                 newEnemy.EnemyManager = this;
-                newEnemy.EnemyDestroyedEvent.AddListener(EnemyDestroyed);
+                newEnemy.onDestroyed.AddListener(EnemyDestroyed);
                 newEnemy.OnSpawn();
-                _activeEnemies.Add(newEnemy);
-                EnemySpawnedEvent.Invoke();
+                activeEnemies.Add(newEnemy);
+                onEnemySpawned.Invoke();
                 return newEnemy;
             }
             else
             {
-                System.Random rand = new System.Random();
-                float horizontal = rand.Next(minSpawnX, maxSpawnX);
+                float horizontal = Random.Range(minSpawnX, maxSpawnX);
 
-                GameObject enemyGameObject = enemyPool.Get();
-                Vector2 newPosition = new Vector2(horizontal, spawnAtY);
+                GameObject enemyGameObject = _enemyPool.Get();
+                Vector3 newPosition = new(horizontal, spawnAtY, 0);
                 enemyGameObject.transform.position = newPosition;
                 Enemy newEnemy = enemyGameObject.GetComponent<Enemy>();
                 newEnemy.OnSpawn();
-                EnemySpawnedEvent.Invoke();
+                onEnemySpawned.Invoke();
                 return newEnemy;
             }
         }
@@ -217,54 +198,45 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Spawn a Projectile from the Pool
         /// </summary>
-        /// <returns></returns>
-        public Projectile SpawnProjectile(Sprite projectileSprite, AudioClip fallingAudioClip, float projectileScale)
+        private EnemyProjectile SpawnProjectile(float projectileScale)
         {
-            GameObject projectileGameObject = projectilePool.Get();
-            Projectile newProjectile = projectileGameObject.GetComponent<Projectile>();
-            newProjectile.sprite = projectileSprite;
-            newProjectile.fallingAudioClip = fallingAudioClip;
+            GameObject projectileGameObject = _projectilePool.Get();
+            EnemyProjectile newProjectile = projectileGameObject.GetComponent<EnemyProjectile>();
             newProjectile.gameObject.transform.localScale = new Vector2(projectileScale, projectileScale);
-            newProjectile.InitProjectile(projectileSprite, fallingAudioClip, projectileScale);
+            newProjectile.InitProjectile(projectileScale);
             return newProjectile;
         }
 
         /// <summary>
         /// Call back for the Projectile destroyed event
         /// </summary>
-        /// <param name="projectile"></param>
-        public void ProjectileDestroyed(Projectile projectile)
+        private void ProjectileDestroyed(Projectile projectile)
         {
-            projectilePool.Release(projectile.gameObject);
+            _projectilePool.Release(projectile.gameObject);
         }
 
         /// <summary>
         /// Call back for the Enemy destroyed event
         /// </summary>
-        /// <param name="enemy"></param>
-        public void EnemyDestroyed(Enemy enemy)
+        private void EnemyDestroyed(Enemy enemy)
         {
-            // Spawn explosion
-            GameObject explosion = explosionPool.Get();
-            explosion.transform.position = enemy.gameObject.transform.position;
-            explosion.GetComponent<Explosion>().Explode(true);
             if (_isBossEnemy)
             {
-                _activeEnemies.Remove(enemy);
+                activeEnemies.Remove(enemy);
                 Destroy(enemy.gameObject);
             }
             else
             {
-                enemyPool.Release(enemy.gameObject);
+                _enemyPool.Release(enemy.gameObject);
             }
-            EnemyDestroyedEvent.Invoke();
+            onEnemyDestroyed.Invoke();
             // Check if this is the last enemy destroyed. Used mainly for Boss enemies
-            if (_activeEnemies.Count == 0)
+            if (activeEnemies.Count == 0)
             {
                 if (_isBossEnemy)
                 {
                     StopSpawning();
-                    AllEnemiesDestroyedPreEvent.Invoke();
+                    onAllEnemiesPreDestroyed.Invoke();
                     StartCoroutine(WaitAndAnnounceLastEnemyDestroyed());
                 }
             }
@@ -277,14 +249,13 @@ namespace DaftAppleGames.RetroRacketRevolution
         private IEnumerator WaitAndAnnounceLastEnemyDestroyed()
         {
             yield return new WaitForSeconds(2);
-            AllEnemiesDestroyedEvent.Invoke();
+            onAllEnemiesDestroyed.Invoke();
         }
 
         #region PoolRegion
         /// <summary>
         /// Create action for pool
         /// </summary>
-        /// <returns></returns>
         private GameObject CreateEnemy()
         {
             GameObject enemyGameObject = Instantiate(enemyPrefab);
@@ -297,33 +268,31 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Take action for pool
         /// </summary>
-        /// <param name="enemy"></param>
         private void OnTakeEnemyFromPool(GameObject enemy)
         {
             enemy.SetActive(true);
-            enemy.GetComponent<Enemy>().EnemyDestroyedEvent.AddListener(EnemyDestroyed);
-            _activeEnemies.Add(enemy.GetComponent<Enemy>());
+            enemy.GetComponent<Enemy>().Reset();
+            enemy.GetComponent<Enemy>().onDestroyed.AddListener(EnemyDestroyed);
+            activeEnemies.Add(enemy.GetComponent<Enemy>());
         }
 
         /// <summary>
         /// Return action for pool
         /// </summary>
-        /// <param name="enemy"></param>
         private void OnReturnEnemyToPool(GameObject enemy)
         {
-            enemy.GetComponent<Enemy>().EnemyDestroyedEvent.RemoveListener(EnemyDestroyed);
+            enemy.GetComponent<Enemy>().onDestroyed.RemoveListener(EnemyDestroyed);
             enemy.SetActive(false);
-            _activeEnemies.Remove(enemy.GetComponent<Enemy>());
+            activeEnemies.Remove(enemy.GetComponent<Enemy>());
         }
 
         /// <summary>
         /// Destroy action for pool
         /// </summary>
-        /// <param name="enemy"></param>
         private void OnDestroyEnemy(GameObject enemy)
         {
-            enemy.GetComponent<Enemy>().EnemyDestroyedEvent.RemoveListener(EnemyDestroyed);
-            _activeEnemies.Remove(enemy.GetComponent<Enemy>());
+            enemy.GetComponent<Enemy>().onDestroyed.RemoveListener(EnemyDestroyed);
+            activeEnemies.Remove(enemy.GetComponent<Enemy>());
             Destroy(enemy);
         }
 
@@ -335,7 +304,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         {
             GameObject projectileGameObject = Instantiate(projectilePrefab);
             projectileGameObject.transform.parent = projectileContainer.transform;
-            Projectile projectile = projectileGameObject.GetComponent<Projectile>();
+            EnemyProjectile projectile = projectileGameObject.GetComponent<EnemyProjectile>();
             projectile.EnemyManager = this;
             return projectileGameObject;
         }
@@ -343,83 +312,29 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Take action for pool
         /// </summary>
-        /// <param name="projectile"></param>
         private void OnTakeProjectileFromPool(GameObject projectile)
         {
             projectile.SetActive(true);
-            projectile.GetComponent<Projectile>().ProjectileDestroyedEvent.AddListener(ProjectileDestroyed);
+            projectile.GetComponent<EnemyProjectile>().ProjectileDestroyedEvent.AddListener(ProjectileDestroyed);
         }
 
         /// <summary>
         /// Return action for pool
         /// </summary>
-        /// <param name="projectile"></param>
         private void OnReturnProjectileToPool(GameObject projectile)
         {
-            projectile.GetComponent<Projectile>().ProjectileDestroyedEvent.RemoveListener(ProjectileDestroyed);
+            projectile.GetComponent<EnemyProjectile>().ProjectileDestroyedEvent.RemoveListener(ProjectileDestroyed);
             projectile.SetActive(false);
         }
 
         /// <summary>
         /// Destroy action for pool
         /// </summary>
-        /// <param name="projectile"></param>
         private void OnDestroyProjectile(GameObject projectile)
         {
-            projectile.GetComponent<Projectile>().ProjectileDestroyedEvent.RemoveListener(ProjectileDestroyed);
+            projectile.GetComponent<EnemyProjectile>().ProjectileDestroyedEvent.RemoveListener(ProjectileDestroyed);
             Destroy(projectile);
         }
-
-        /// <summary>
-        /// Create action for pool
-        /// </summary>
-        /// <returns></returns>
-        private GameObject CreateExplosion()
-        {
-            GameObject explosionGameObject = Instantiate(explosionPrefab);
-            explosionGameObject.transform.SetParent(explosionContainer.transform);
-            Explosion explosion = explosionGameObject.GetComponent<Explosion>();
-            explosion.ReturnToPoolEvent.AddListener(ReturnExplosionToPool);
-            return explosionGameObject;
-        }
-
-        /// <summary>
-        /// Release an explosion back to the pool
-        /// </summary>
-        /// <param name="explosion"></param>
-        private void ReturnExplosionToPool(Explosion explosion)
-        {
-            explosionPool.Release(explosion.gameObject);
-        }
-
-        /// <summary>
-        /// Take action for pool
-        /// </summary>
-        /// <param name="explosion"></param>
-        private void OnTakeExplosionFromPool(GameObject explosion)
-        {
-            explosion.SetActive(true);
-        }
-
-        /// <summary>
-        /// Return action for pool
-        /// </summary>
-        /// <param name="explosion"></param>
-        private void OnReturnExplosionToPool(GameObject explosion)
-        {
-            explosion.SetActive(false);
-        }
-
-        /// <summary>
-        /// Destroy action for pool
-        /// </summary>
-        /// <param name="explosion"></param>
-        private void OnDestroyExplosion(GameObject explosion)
-        {
-            Destroy(explosion);
-        }
-
-
         #endregion
     }
 }

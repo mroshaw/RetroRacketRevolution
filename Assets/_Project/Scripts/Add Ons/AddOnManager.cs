@@ -6,7 +6,7 @@ using static DaftAppleGames.RetroRacketRevolution.Bonuses.BonusManager;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public enum AddOnType { None, LaserCannon, Catcher, LevelBooster }
 

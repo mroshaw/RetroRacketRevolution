@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
@@ -195,18 +196,18 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void CheckHighScores()
         {
-            int playerOneScore = playerManager.playerOne.Score;
-            int playerTwoScore = playerManager.playerTwo.Score;
+            int playerOneScore = playerManager.PlayerOneScore;
+            int playerTwoScore = playerManager.PlayerTwoScore;
 
             if (highScores.IsHighScore(playerOneScore))
             {
                 // Debug.Log("Player 1 has a new high score");
-                NewHighScore(playerManager.playerOne);
+                NewHighScore(playerManager.PlayerOne);
             }
             else if (highScores.IsHighScore(playerTwoScore))
             {
                 // Debug.Log("Player 2 has a new high score");
-                NewHighScore(playerManager.playerTwo);
+                NewHighScore(playerManager.PlayerTwo);
             }
             else
             {
@@ -255,10 +256,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
             highScores.SubmitHighScore(playerInitials, player.Score,difficulty, levelsPlayed, cheatsUsed);
 
-            int playerTwoScore = playerManager.playerTwo.Score;
-            if (player == playerManager.playerOne && highScores.IsHighScore(playerTwoScore))
+            int playerTwoScore = playerManager.PlayerTwoScore;
+            if (player == playerManager.PlayerOne && highScores.IsHighScore(playerTwoScore))
             {
-                NewHighScore(playerManager.playerTwo);
+                NewHighScore(playerManager.PlayerTwo);
             }
             else
             {

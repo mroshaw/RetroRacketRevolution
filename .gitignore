@@ -70,37 +70,18 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+/Screenshots
+/[Pp]ackages/
+/[Ss]erializedBuildInfo/
+
+# Project 3rd Party Assets
 /[Aa]ssets/_Project/Audio/Music/
 /[Aa]ssets/_Project/Audio/Music.meta
-/[Aa]ssets/Coffee/
-/[Aa]ssets/Coffee.meta
-/[Aa]ssets/Feel/
-/[Aa]ssets/Feel.meta
-/[Aa]ssets/Graphy - Ultimate Stats Monitor/
-/[Aa]ssets/Graphy - Ultimate Stats Monitor.meta
-/[Aa]ssets/Hovl Studio/
-/[Aa]ssets/Hovl Studio.meta
-/[Aa]ssets/RetroAesthetics/
-/[Aa]ssets/RetroAesthetics.meta
-/[Aa]ssets/Samples/
-/[Aa]ssets/Samples.meta
-/[Aa]ssets/ScienceFictionGUI/
-/[Aa]ssets/ScienceFictionGUI.meta
-/[Aa]ssets/TextMesh Pro/
-/[Aa]ssets/TextMesh Pro.meta
-/[Aa]ssets/Plugins/
-/[Aa]ssets/Plugins.meta
 /[Aa]ssets/_Project/Audio/Music/
 /[Aa]ssets/_Project/Audio/Music.meta
 /[Aa]ssets/_Project/Scenes/Test Scenes.meta
 /[Aa]ssets/_Project/Scenes/Test Scenes/
-/Screenshots
-/[Aa]ssets/BuildReport/
-/[Aa]ssets/BuildReport.meta
-/[Aa]ssets/Joystick Pack/
-/[Aa]ssets/Joystick Pack.meta
-/[Pp]ackages/
-/[Ss]erializedBuildInfo/
 /[Aa]ssets/_Project/Audio/SFX/
 /[Aa]ssets/_Project/Audio/SFX.meta
 /[Aa]ssets/_Project/Textures/Bricks/
@@ -109,7 +90,39 @@ crashlytics-build.properties
 /[Aa]ssets/_Project/Textures/UI.meta
 /[Aa]ssets/_Project/Textures/Cursors/
 /[Aa]ssets/_Project/Textures/Cursors.meta
+
+
+# 3rd Party Assets
+/[Aa]ssets/Coffee/
+/[Aa]ssets/Coffee.meta
+/[Aa]ssets/DuNguyn/
+/[Aa]ssets/DuNguyn.meta
+/[Aa]ssets/Feel/
+/[Aa]ssets/Feel.meta
+/[Aa]ssets/Free Skyboxes - Space/
+/[Aa]ssets/Free Skyboxes - Space.meta
+/[Aa]ssets/Graphy - Ultimate Stats Monitor/
+/[Aa]ssets/Graphy - Ultimate Stats Monitor.meta
+/[Aa]ssets/Gun & Explosion Sounds/
+/[Aa]ssets/Gun & Explosion Sounds.meta
+/[Aa]ssets/Hovl Studio/
+/[Aa]ssets/Hovl Studio.meta
+/[Aa]ssets/Joystick Pack/
+/[Aa]ssets/Joystick Pack.meta
+/[Aa]ssets/KriptoFX/
+/[Aa]ssets/KriptoFX.meta
+/[Aa]ssets/ModularSci-FiWeapons/
+/[Aa]ssets/ModularSci-FiWeapons.meta
+/[Aa]ssets/OccaSoftware/
+/[Aa]ssets/OccaSoftware.meta
+/[Aa]ssets/Plugins/
+/[Aa]ssets/Plugins.meta
+/[Aa]ssets/RetroAesthetics/
+/[Aa]ssets/RetroAesthetics.meta
+/[Aa]ssets/ScienceFictionGUI/
+/[Aa]ssets/ScienceFictionGUI.meta
 /[Aa]ssets/StarfieldMaterials/
 /[Aa]ssets/StarfieldMaterials.meta
-
+/[Aa]ssets/TextMesh Pro/
+/[Aa]ssets/TextMesh Pro.meta
 /.utmp

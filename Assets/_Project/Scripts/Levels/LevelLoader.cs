@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using Sirenix.OdinInspector;
@@ -10,28 +9,27 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
 {
     public class LevelLoader : MonoBehaviour
     {
-        [BoxGroup("Managers")] public BrickManager brickManager;
-        [BoxGroup("Level Layout")] public int numberOfRows = 12;
-        [BoxGroup("Level Layout")] public int numberOfBricksPerRow = 15;
-        [BoxGroup("Level Layout")] public GameObject levelRoot;
-        [BoxGroup("Level Layout")] public Rect playAreaRect;
-        [BoxGroup("Level Layout")] public float brickWidthBuffer = 0.1f;
-        [BoxGroup("Level Layout")] public float brickHeightBuffer = 0.1f;
-        [BoxGroup("Level Graphics")] public SpriteRenderer backgroundSpriteRenderer;
-        [BoxGroup("Objects")] public Vector2 brickScale = new Vector2(5.2f, 2.7f);
-        [BoxGroup("Objects")] public Vector2 disruptorScale = new Vector2(1.0f, 1.0f);
-        [BoxGroup("Levels")] public List<LevelLoadEntry> levelFiles;
-        [BoxGroup("Game Data")] public GameData gameData;
-        [FoldoutGroup("Background Sprites")] public LevelBackgroundSprites backgroundSprites;
+        [BoxGroup("Managers")] [SerializeField] private BrickManager brickManager;
+        [BoxGroup("Level Layout")] [SerializeField] private  int numberOfRows = 12;
+        [BoxGroup("Level Layout")] [SerializeField] private  int numberOfBricksPerRow = 15;
+        [BoxGroup("Level Layout")] [SerializeField] private  GameObject levelRoot;
+        [BoxGroup("Level Layout")] [SerializeField] private  Rect playAreaRect;
+        [BoxGroup("Level Layout")] [SerializeField] private  float brickWidthBuffer = 0.1f;
+        [BoxGroup("Level Layout")] [SerializeField] private  float brickHeightBuffer = 0.1f;
+        [BoxGroup("Objects")] [SerializeField] private  Vector3 brickScale = new Vector3(5.2f, 2.7f, 2.7f);
+        [BoxGroup("Objects")] [SerializeField] private  Vector3 disruptorScale = new Vector3(1.0f, 1.0f, 1.0f);
+        [BoxGroup("Levels")] [SerializeField] private List<LevelLoadEntry> levelFiles;
+        [BoxGroup("Game Data")] [SerializeField] private  GameData gameData;
+
         [FoldoutGroup("Events")] public UnityEvent<LevelDataExt> LevelLoadedEvent;
         [FoldoutGroup("Events")] public UnityEvent<int> LevelLoadedMusicEvent;
 
         private float _brickWidthScale = 0.0f;
         private float _brickHeightScale = 0.0f;
 
-        public int CurrentLevel { get; private set; }
+        private int CurrentLevel { get; set; }
 
-        public class LevelLoadEntry
+        private class LevelLoadEntry
         {
             public string LevelFileName;
             public bool IsCustomLevel;
@@ -57,8 +55,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Get list of levels to load
         /// </summary>
-        /// <param name="levelSelect"></param>
-        /// <returns></returns>
         private List<LevelLoadEntry> GetLevelLoadEntries(LevelSelect levelSelect)
         {
             List<string> ogLevelFiles = LevelDataExt.GetLevelsNames(false);
@@ -156,35 +152,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         }
 
         /// <summary>
-        /// Get Sprite by name
-        /// </summary>
-        /// <param name="textureName"></param>
-        public Sprite GetBackgroundSpriteByName(string spriteName)
-        {
-            foreach (Sprite sprite in backgroundSprites.BackgroundSprites)
-            {
-                if (sprite.name == spriteName)
-                {
-                    return sprite;
-                }
-            }
-            return backgroundSprites.BackgroundSprites[0];
-        }
-
-        /// <summary>
-        /// Get Sprite by index
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public Sprite GetBackgroundSpriteByIndex(int index)
-        {
-            return backgroundSprites.BackgroundSprites[index];
-        }
-
-        /// <summary>
         /// Loads the specified level data load file
         /// </summary>
-        /// <param name="levelData"></param>
         private void LoadLevelData(LevelDataExt levelData)
         {
             float brickWidth = (playAreaRect.width / numberOfBricksPerRow) + brickWidthBuffer;
@@ -195,9 +164,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             float currBrickHor = startingPosition.x;
             float currBrickVert = startingPosition.y;
 
-
-            // Load background
-            backgroundSpriteRenderer.sprite = GetBackgroundSpriteByIndex(levelData.levelBackgroundIndex);
 
             // Alternate sorting groups to allow glint sprite mask
             bool isMainSortingGroup = true;
@@ -232,10 +198,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
                             // Calculate brick width scale, if we haven't calculated it yet
                             if (_brickWidthScale == 0.0f || _brickHeightScale == 0.0f)
                             {
-                                SpriteRenderer spriteRenderer = newBrickGameObject.GetComponentInChildren<SpriteRenderer>();
-                                Sprite sprite = spriteRenderer.sprite;
-                                _brickWidthScale = sprite.rect.width / brickWidth;
-                                _brickHeightScale = sprite.rect.height / brickHeight;
+
                             }
                             // newBrickGameObject.transform.parent = newBricksGameObject.transform;
                             newBrickGameObject.transform.localPosition = new Vector2(currBrickHor, currBrickVert);

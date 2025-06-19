@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
@@ -12,29 +13,25 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
     public class Player : MonoBehaviour, IBonusRecipient
     {
         // Public settings
-        [BoxGroup("Player Settings")] public Vector2 defaultBatScale;
-        [BoxGroup("Player Settings")] public Explosion explosion;
-        [BoxGroup("Bat Settings")] public float sizeChangeFactor = 0.3f;
-        [BoxGroup("Bat Settings")] public float minLength = 1.3f;
-        [BoxGroup("Bat Settings")] public float maxLength = 0.5f;
-        [BoxGroup("Ball Settings")] public Transform defaultBallAttachPoint;
-        [BoxGroup("Ball Settings")] public bool spawnBallOnStart = false;
-        [BoxGroup("Audio Settings")] public AudioClip deathClip;
-        [BoxGroup("Object Settings")] public SpriteRenderer playerSprite;
-        [BoxGroup("Add On Settings")] public HardPoint leftHardPoint;
-        [BoxGroup("Add On Settings")] public Transform leftHardPointTransform;
-        [BoxGroup("Add On Settings")] public HardPoint centerHardPoint;
-        [BoxGroup("Add On Settings")] public Transform centerHardPointTransform;
-        [BoxGroup("Add On Settings")] public HardPoint rightHardPoint;
-        [BoxGroup("Add On Settings")] public Transform rightHardPointTransform;
-        [BoxGroup("Add On Settings")] public HardPoint bottomHardPoint;
-        [BoxGroup("Add On Settings")] public Transform bottomHardPointTransform;
+        [BoxGroup("Player Settings")] [SerializeField] private Vector3 defaultBatScale;
+        [BoxGroup("Bat Settings")] [SerializeField] private float sizeChangeFactor = 0.3f;
+        [BoxGroup("Bat Settings")] [SerializeField] private float minLength = 1.3f;
+        [BoxGroup("Bat Settings")] [SerializeField] private float maxLength = 0.5f;
+        [BoxGroup("Ball Settings")] [SerializeField] private Transform defaultBallAttachPoint;
+        [BoxGroup("Ball Settings")] [SerializeField] private bool spawnBallOnStart;
+        [BoxGroup("Death")] [SerializeField] private AudioClip deathClip;
+        [BoxGroup("Death")] [SerializeField] private Explosion explosion;
+        [BoxGroup("Object Settings")] [SerializeField] private GameObject playerModelGameObject;
+        [BoxGroup("Add On Settings")] [SerializeField] private HardPoint leftHardPoint;
+        [BoxGroup("Add On Settings")] [SerializeField] private HardPoint centerHardPoint;
+        [BoxGroup("Add On Settings")] [SerializeField] private HardPoint rightHardPoint;
+        [BoxGroup("Add On Settings")] [SerializeField] private HardPoint bottomHardPoint;
 
         // Events
-        [FoldoutGroup("Events")] public UnityEvent DestroyedEvent;
-        [FoldoutGroup("Events")] public UnityEvent<int> ScoreUpdatedEvent;
-        [FoldoutGroup("Events")] public UnityEvent PlayerResetEvent;
-        [FoldoutGroup("Events")] public UnityEvent<Player> PlayerHitEvent;
+        [FoldoutGroup("Events")] public UnityEvent onDestroyed;
+        [FoldoutGroup("Events")] public UnityEvent<int> onScoreUpdated;
+        [FoldoutGroup("Events")] public UnityEvent onReset;
+        [FoldoutGroup("Events")] public UnityEvent<Player> onHit;
 
         [BoxGroup("Cheats")]
         [Button("Grow Bat")]
@@ -54,7 +51,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             SetDefaultBatSize();
         }
-        
+
+        /// <summary>
+        /// Sets the player bat scale
+        /// </summary>
+        internal void SetBatScale(float newScale)
+        {
+            defaultBatScale = new Vector3(newScale, defaultBatScale.y, defaultBatScale.z);
+        }
+
         // Public properties
 
 
@@ -62,33 +67,29 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         public int Score
         {
             get => _score;
-            set
+            private set
             {
                 _score = value;
-                ScoreUpdatedEvent.Invoke(value);
+                onScoreUpdated.Invoke(value);
             }
         }
 
         // Private pointers
         private List<Ball> _attachedBalls = new List<Ball>();
         private Transform _ballAttachPoint;
-        private AudioSource _audioSource;
 
         // Private properties
-        private int _score = 0;
-        private Vector2 _batLengthScale;
-        private GameObject _playerSpriteGameObject;
-
+        private int _score;
+        private Vector3 _batLengthScale;
         private PlayerManager _playerManager;
+
+        internal PlayerManager PlayerManager { set => _playerManager = value; }
 
         /// <summary>
         /// Init components
         /// </summary>
         private void Awake()
         {
-            _audioSource = GetComponent<AudioSource>();
-            _playerSpriteGameObject = playerSprite.gameObject;
-            _playerManager = GetComponentInParent<PlayerManager>();
             // Init score
             Score = 0;
         }
@@ -98,7 +99,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void Start()
         {
-            SetDefaultBatSize();
+            // SetDefaultBatSize();
 
             // Spawn the ball, if set
             if (spawnBallOnStart)
@@ -132,7 +133,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void Hit()
         {
-            PlayerHitEvent.Invoke(this);
+            onHit.Invoke(this);
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         public void Kill()
         {
             explosion.Explode(true);
-            DestroyedEvent.Invoke();
+            onDestroyed.Invoke();
         }
 
         /// <summary>
@@ -188,7 +189,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                     HardPoint playerHardPoint = GetFreeHardPoint(bonus.hardPointLocation);
                     if (playerHardPoint != null)
                     {
-                        playerHardPoint.EnableAddOn();
+                        playerHardPoint.Deploy();
                         if (bonus.duration > 0.0f)
                         {
                             playerHardPoint.DeactivateHardPointAfterDelay(bonus.duration);
@@ -226,12 +227,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void SetBatSize()
         {
-            _playerSpriteGameObject.transform.localScale = _batLengthScale;
+            // playerModelGameObject.transform.localScale = _batLengthScale;
 
             // Reposition the hardpoints
-            leftHardPoint.gameObject.transform.position = leftHardPointTransform.position;
-            centerHardPoint.gameObject.transform.position = centerHardPointTransform.position;
-            rightHardPoint.gameObject.transform.position = rightHardPointTransform.position;
+            // leftHardPoint.gameObject.transform.position = leftHardPointTransform.position;
+            // centerHardPoint.gameObject.transform.position = centerHardPointTransform.position;
+            // rightHardPoint.gameObject.transform.position = rightHardPointTransform.position;
         }
 
         /// <summary>
@@ -243,7 +244,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             // Debug.Log($"GrowBat: New Length will be: {newLength}");
             if (newLength < maxLength)
             {
-                _batLengthScale = new Vector2(newLength, _batLengthScale.y);
+                _batLengthScale = new Vector3(newLength, _batLengthScale.y, _batLengthScale.z);
                 SetBatSize();
             }
         }
@@ -257,7 +258,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             // Debug.Log($"ShrinkBat: New Length will be: {newLength}");
             if (newLength > minLength)
             {
-                _batLengthScale = new Vector2(newLength, _batLengthScale.y);
+                _batLengthScale = new Vector3(newLength, _batLengthScale.y, _batLengthScale.z);
                 SetBatSize();
             }
         }
@@ -276,9 +277,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void DeactivateHardPoints()
         {
-            leftHardPoint.DisableAddOn();
-            rightHardPoint.DisableAddOn();
-            centerHardPoint.DisableAddOn();
+            leftHardPoint.Retract();
+            rightHardPoint.Retract();
+            centerHardPoint.Retract();
         }
 
         /// <summary>
@@ -291,8 +292,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 case HardPointLocation.Outer:
                     // If left is free, or both are occupied, use the left
-                    return !leftHardPoint.IsHardPointEnabled ||
-                           (leftHardPoint.IsHardPointEnabled && rightHardPoint.IsHardPointEnabled)
+                    return !leftHardPoint.IsDeployed ||
+                           (leftHardPoint.IsDeployed && rightHardPoint.IsDeployed)
                         ? leftHardPoint
                         :
                         // Otherwise, use the right
@@ -322,8 +323,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <param name="spawnBall"></param>
         public void ResetPlayer(bool spawnBall)
         {
-            // Reset Y position
-            gameObject.transform.localPosition = new Vector2(gameObject.transform.position.x, 0.0f);
             DeactivateHardPoints();
             SetDefaultBatSize();
             if (spawnBall)

@@ -1,63 +1,54 @@
+using System;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public abstract class AddOn : MonoBehaviour
     {
-        public Player AttachedPlayer => _attachedPlayer;
-        private Player _attachedPlayer;
+        [BoxGroup("Debug")] [SerializeField] private Player attachedPlayer;
+        [BoxGroup("Debug")] [SerializeField] private HardPoint attachedHardPoint;
 
-        /// <summary>
-        /// Initialise this component
-        /// </summary>
-        public virtual void Awake()
-        {
-            Attach();
-        }
+        public Player AttachedPlayer => attachedPlayer;
+        public HardPoint AttachedHardPoint => attachedHardPoint;
 
-        /// <summary>
-        /// Set up the components
-        /// </summary>
-        private void Start()
-        {
+        protected bool IsDeployed => attachedHardPoint && attachedHardPoint.IsDeployed;
 
-        }
+        internal abstract void Fire();
+        internal abstract void StopFire();
 
         /// <summary>
         /// Attach the add-on
         /// </summary>
-        private void Attach()
+        internal void Attach(HardPoint hardPoint)
         {
             Player player = GetComponentInParent<Player>();
             if (player != null)
             {
-                _attachedPlayer = player;
+                attachedPlayer = player;
             }
+
+            attachedHardPoint =  hardPoint;
         }
 
         /// <summary>
         /// Detach the add-on
         /// </summary>
-        private void Detach()
+        internal void Detach()
         {
-
+            attachedPlayer = null;
+            attachedHardPoint = null;
         }
 
         /// <summary>
         /// Deploy add-on functionality
         /// </summary>
-        public virtual void Deploy()
-        {
-        }
+        protected internal abstract void Deploy(Action callBack, bool immediate = false);
 
         /// <summary>
         /// Deploy add-on functionality
         /// </summary>
-        public virtual void Retract()
-        {
-        }
-
+        protected internal abstract void Retract(Action callBack, bool immediate = false);
     }
 }
