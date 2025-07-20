@@ -5,6 +5,7 @@ using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace DaftAppleGames.RetroRacketRevolution.Balls
 {
@@ -14,8 +15,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Ball Settings")] [SerializeField] private float defaultBallSpeed = 100.0f;
         [BoxGroup("Ball Settings")] [SerializeField] private float speedUpAfterDuration = 20.0f;
         [BoxGroup("Ball Settings")] [SerializeField] private float speedMultiplier = 1.2f;
-        [BoxGroup("MegaBall")] [SerializeField] private SpriteRenderer normalBallSpriteRenderer;
-        [BoxGroup("MegaBall")] [SerializeField] private SpriteRenderer megaBallSpriteRenderer;
+        [BoxGroup("Ball Settings")] [SerializeField] private float spinForce = 50.0f;
         [BoxGroup("MegaBall")] [SerializeField] private float megaBallDuration = 5.0f;
 
         [BoxGroup("Audio")] [SerializeField] private AudioClip hitPlayerClip;
@@ -24,31 +24,30 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Audio")] [SerializeField] private AudioClip hitMultibrickClip;
         [BoxGroup("Audio")] [SerializeField] private AudioClip hitInvincibleBrickClip;
 
+        [BoxGroup("Debug")] [SerializeField] private float speedChangeTimer;
+        [BoxGroup("Debug")] [SerializeField] private float currSpeed;
+
         // Events
-        [BoxGroup("Events")] [SerializeField] public UnityEvent AttachEvent;
-        [BoxGroup("Events")] [SerializeField] public UnityEvent DetachEvent;
-        [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> BallDestroyedEvent;
-        [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> BallSpeedMultiplierChangeEvent;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent onAttached;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent onDetached;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> onDestroyed;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> onSpeedMultiplierChanged;
 
         // Private pointers
         private Player _attachedPlayer;
 
         // Used for scoring
-        public Player LastTouchedByPlayer { get; set; }
+        internal Player LastTouchedByPlayer { get; set; }
 
         // Public properties
-        public GameObject DefaultParent { get; set; }
+        internal GameObject DefaultParent { get; set; }
 
-        public int CurrSpeedMultiplier { get; private set; }
+        internal int CurrSpeedMultiplier { get; private set; }
 
         // Components
         private Rigidbody _rb;
         private AudioSource _audioSource;
-        private TrailRenderer _trailRenderer;
 
-        [BoxGroup("Debug")] [SerializeField] private float speedChangeTimer;
-        [BoxGroup("Debug")] [SerializeField] private float currSpeed;
-        
         /// <summary>
         /// Setup component references
         /// </summary>
@@ -56,12 +55,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         {
             _rb = GetComponentInChildren<Rigidbody>();
             _audioSource = GetComponent<AudioSource>();
-            _trailRenderer = normalBallSpriteRenderer.gameObject.GetComponentInChildren<TrailRenderer>(true);
             currSpeed = defaultBallSpeed;
             speedChangeTimer = 0;
             CurrSpeedMultiplier = 1;
-
-            SetNormalSprite();
         }
 
         /// <summary>
@@ -69,7 +65,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         private void Start()
         {
-            BallSpeedMultiplierChangeEvent.Invoke(this);
+            onSpeedMultiplierChanged.Invoke(this);
         }
 
         /// <summary>
@@ -87,7 +83,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 speedChangeTimer = 0;
                 currSpeed *= speedMultiplier;
                 CurrSpeedMultiplier++;
-                BallSpeedMultiplierChangeEvent.Invoke(this);
+                onSpeedMultiplierChanged.Invoke(this);
             }
             CheckOutOfBounds();
         }
@@ -116,11 +112,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Makes the ball a MegaBall
         /// </summary>
-        /// <param name="duration"></param>
         [Button("Make Mega Ball")]
-        public void MakeMegaBall()
+        internal void MakeMegaBall()
         {
-            SetMegaBallSprite();
             _rb.excludeLayers |= (1 << LayerMask.NameToLayer("Bricks"));
             StartCoroutine(RevertMegaBallAsync(megaBallDuration));
         }
@@ -129,9 +123,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// Revert the ball to normal
         /// </summary>
         [Button("Make Normal Ball")]
-        public void MakeNormalBall()
+        internal void MakeNormalBall()
         {
-            SetNormalSprite();
             _rb.excludeLayers &= ~(1 << LayerMask.NameToLayer("Bricks"));
         }
 
@@ -147,28 +140,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         }
 
         /// <summary>
-        /// Change the sprite renderer to normal
-        /// </summary>
-        private void SetNormalSprite()
-        {
-            normalBallSpriteRenderer.gameObject.SetActive(true);
-            megaBallSpriteRenderer.gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Change the sprite renderer to the mega ball
-        /// </summary>
-        private void SetMegaBallSprite()
-        {
-            normalBallSpriteRenderer.gameObject.SetActive(false);
-            megaBallSpriteRenderer.gameObject.SetActive(true);
-        }
-
-        /// <summary>
         /// Returns if ball is attached to a player
         /// </summary>
-        /// <returns></returns>
-        public bool IsAttached()
+        internal bool IsAttached()
         {
             return _attachedPlayer != null;
         }
@@ -176,12 +150,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Reset the speed to default
         /// </summary>
-        public void ResetSpeed()
+        internal void ResetSpeed()
         {
             currSpeed = defaultBallSpeed;
             speedChangeTimer = 0;
             CurrSpeedMultiplier = 1;
-            BallSpeedMultiplierChangeEvent.Invoke(this);
+            onSpeedMultiplierChanged.Invoke(this);
         }
 
         /// <summary>
@@ -193,6 +167,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
             {
                 CollideWithPlayer(other);
+                return;
             }
 
             // Hit enemy
@@ -200,12 +175,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             {
                 Enemy enemy = other.gameObject.GetComponent<Enemy>();
                 CollideWithEnemy(enemy);
+                return;
             }
 
             // Hit the boundary
             if (other.gameObject.CompareTag("Boundary"))
             {
                 CollideWithBoundary();
+                return;
             }
 
             // Hit a brick
@@ -219,7 +196,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Handle collision with Enemy
         /// </summary>
-        /// <param name="enemy"></param>
         private void CollideWithEnemy(Enemy enemy)
         {
             enemy.Hit(this.gameObject);
@@ -239,7 +215,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Handles collision with a brick
         /// </summary>
-        public void CollideWithBrick(Brick brick)
+        internal void CollideWithBrick(Brick brick)
         {
             // Play appropriate sound clip
             switch (brick.BrickType)
@@ -268,7 +244,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Handles collision with player
         /// </summary>
-        /// <param name="other"></param>
         private void CollideWithPlayer(Collision other)
         {
             Player player = other.gameObject.GetComponent<Player>();
@@ -301,8 +276,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Check for out of bounds
         /// </summary>
-        /// <param name="other"></param>
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("OutOfBounds"))
             {
@@ -313,10 +287,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Calculate the horizontal angle of the bounce
         /// </summary>
-        /// <param name="ballPos"></param>
-        /// <param name="playerPos"></param>
-        /// <param name="playerWidth"></param>
-        /// <returns></returns>
         private float GetHorizontalVelocityFactor(Vector2 ballPos, Vector2 playerPos,
             float playerWidth)
         {
@@ -328,10 +298,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Calculate the vertical angle of the bounce
         /// </summary>
-        /// <param name="ballPos"></param>
-        /// <param name="playerPos"></param>
-        /// <param name="playerWidth"></param>
-        /// <returns></returns>
         private float GetVerticalVelocityFactor(Vector2 ballPos, Vector2 playerPos, float playerWidth)
         {
             float n = (ballPos.x - playerPos.x) / playerWidth;
@@ -345,7 +311,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Request that the ball be attached to the player
         /// </summary>
-        public void Attach(Player player, Vector3 attachPosition)
+        internal void Attach(Player player, Vector3 attachPosition)
         {
             if (IsAttached())
             {
@@ -359,39 +325,36 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             gameObject.transform.SetParent(player.gameObject.transform, true);
             gameObject.transform.position = attachPosition;
             player.AttachBall(this);
-            AttachEvent.Invoke();
+            onAttached.Invoke();
         }
 
         /// <summary>
         /// Request to detach the ball
         /// </summary>
-        /// <param name="player"></param>
-        public void Detach(Player player)
+        internal void Detach(Player player)
         {
             gameObject.transform.SetParent(DefaultParent.transform, true);
             _attachedPlayer = null;
             _rb.isKinematic = false;
             speedChangeTimer = 0.0f;
             _rb.linearVelocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
+            AddRandomSpin();
             player.DetachBall(this);
-            DetachEvent.Invoke();
+            onDetached.Invoke();
         }
 
         /// <summary>
         /// Get a random left or right vector
         /// </summary>
-        /// <returns></returns>
         private Vector2 RandomVector()
         {
-            System.Random rand = new System.Random();
-            return rand.Next(0, 100) < 50 ? Vector2.left : Vector2.right;
+            return Random.Range(0, 100) < 50 ? Vector2.left : Vector2.right;
         }
 
         /// <summary>
         /// Nudges the ball in the given direction
         /// </summary>
-        /// <param name="vectorDirection"></param>
-        public void Nudge(Vector2 vectorDirection)
+        internal void Nudge(Vector2 vectorDirection)
         {
             _rb.linearVelocity = vectorDirection * defaultBallSpeed;
         }
@@ -399,7 +362,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Returns the ball to default speed
         /// </summary>
-        public void SetDefaultSpeed()
+        internal void SetDefaultSpeed()
         {
             currSpeed = defaultBallSpeed;
             speedChangeTimer = 0.0f;
@@ -408,10 +371,27 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Destroy the ball
         /// </summary>
-        private void DestroyBall()
+        internal void DestroyBall()
         {
-            BallSpeedMultiplierChangeEvent.Invoke(this);
-            BallDestroyedEvent.Invoke(this);
+            onSpeedMultiplierChanged.Invoke(this);
+            onDestroyed.Invoke(this);
+        }
+
+        /// <summary>
+        /// Adds random torque to set the ball spinning
+        /// </summary>
+        private void AddRandomSpin()
+        {
+            // Generate random torque values for each axis
+            float randomX = Random.Range(-spinForce, spinForce);
+            float randomY = Random.Range(-spinForce, spinForce);
+            float randomZ = Random.Range(-spinForce, spinForce);
+
+            // Create a Vector3 with the random torque values
+            Vector3 randomTorque = new Vector3(randomX, randomY, randomZ);
+
+            // Apply the torque to the Rigidbody
+            _rb.AddTorque(randomTorque);
         }
     }
 }

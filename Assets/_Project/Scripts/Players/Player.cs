@@ -19,6 +19,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [BoxGroup("Bat Settings")] [SerializeField] private float maxLength = 0.5f;
         [BoxGroup("Ball Settings")] [SerializeField] private Transform defaultBallAttachPoint;
         [BoxGroup("Ball Settings")] [SerializeField] private bool spawnBallOnStart;
+        [BoxGroup("Audio")] [SerializeField] private AudioClip launchBallClip;
         [BoxGroup("Death")] [SerializeField] private AudioClip deathClip;
         [BoxGroup("Death")] [SerializeField] private Explosion explosion;
         [BoxGroup("Object Settings")] [SerializeField] private GameObject playerModelGameObject;
@@ -75,13 +76,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         }
 
         // Private pointers
-        private List<Ball> _attachedBalls = new List<Ball>();
+        private readonly List<Ball> _attachedBalls = new List<Ball>();
         private Transform _ballAttachPoint;
 
         // Private properties
         private int _score;
         private Vector3 _batLengthScale;
         private PlayerManager _playerManager;
+        private AudioSource _audioSource;
 
         internal PlayerManager PlayerManager { set => _playerManager = value; }
 
@@ -90,6 +92,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void Awake()
         {
+            _audioSource = GetComponent<AudioSource>();
             // Init score
             Score = 0;
         }
@@ -113,18 +116,41 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private bool AreBallsAttached => _attachedBalls.Count > 0;
 
-        /// <summary>
-        /// Handle the fire event
-        /// </summary>
-        public void Fire()
+        public void BeginFiring()
         {
             // If there's a ball attached
             if (AreBallsAttached)
             {
+                _audioSource.PlayOneShot(launchBallClip);
                 foreach (Ball ball in _attachedBalls.ToArray())
                 {
                     ball.Detach(this);
                 }
+            }
+
+            // Fire hardpoints
+            if (leftHardPoint.IsDeployed)
+            {
+                leftHardPoint.FirePressed();
+            }
+
+            if (rightHardPoint.IsDeployed)
+            {
+                rightHardPoint.FirePressed();
+            }
+        }
+
+        public void EndFiring()
+        {
+            // End fire hardpoints
+            if (leftHardPoint.IsDeployed)
+            {
+                leftHardPoint.FireReleased();
+            }
+
+            if (rightHardPoint.IsDeployed)
+            {
+                rightHardPoint.FireReleased();
             }
         }
 
@@ -150,6 +176,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void SpawnBall()
         {
+            if (!_playerManager)
+            {
+                return;
+            }
             if (_attachedBalls.Count == 0)
             {
                 Ball newBall = _playerManager.SpawnNewBall();
@@ -160,8 +190,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle Bonus Applied events
         /// </summary>
-        /// <param name="bonus"></param>
-        /// <param name="targetGameObject"></param>
         public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
         {
             // Check if the target is for me
@@ -208,7 +236,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Attach the ball
         /// </summary>
-        /// <param name="ball"></param>
         public void AttachBall(Ball ball)
         {
             _attachedBalls.Add(ball);

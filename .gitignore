@@ -78,8 +78,6 @@ crashlytics-build.properties
 # Project 3rd Party Assets
 /[Aa]ssets/_Project/Audio/Music/
 /[Aa]ssets/_Project/Audio/Music.meta
-/[Aa]ssets/_Project/Audio/Music/
-/[Aa]ssets/_Project/Audio/Music.meta
 /[Aa]ssets/_Project/Scenes/Test Scenes.meta
 /[Aa]ssets/_Project/Scenes/Test Scenes/
 /[Aa]ssets/_Project/Audio/SFX/
@@ -93,10 +91,18 @@ crashlytics-build.properties
 
 
 # 3rd Party Assets
+/[Aa]ssets/Beautify/
+/[Aa]ssets/Beautify.meta
+/[Aa]ssets/Bullets Pack/
+/[Aa]ssets/Bullets Pack.meta
 /[Aa]ssets/Coffee/
 /[Aa]ssets/Coffee.meta
 /[Aa]ssets/DuNguyn/
 /[Aa]ssets/DuNguyn.meta
+/[Aa]ssets/Enflame/
+/[Aa]ssets/Enflame.meta
+/[Aa]ssets/Epic toon VFX 2/
+/[Aa]ssets/Epic toon VFX 2.meta
 /[Aa]ssets/Feel/
 /[Aa]ssets/Feel.meta
 /[Aa]ssets/Free Skyboxes - Space/
@@ -105,12 +111,18 @@ crashlytics-build.properties
 /[Aa]ssets/Graphy - Ultimate Stats Monitor.meta
 /[Aa]ssets/Gun & Explosion Sounds/
 /[Aa]ssets/Gun & Explosion Sounds.meta
+/[Aa]ssets/GUI Pro-SurvivalClean/
+/[Aa]ssets/GUI Pro-SurvivalClean.meta
 /[Aa]ssets/Hovl Studio/
 /[Aa]ssets/Hovl Studio.meta
+/[Aa]ssets/HSFiles/
+/[Aa]ssets/HSFiles.meta
 /[Aa]ssets/Joystick Pack/
 /[Aa]ssets/Joystick Pack.meta
 /[Aa]ssets/KriptoFX/
 /[Aa]ssets/KriptoFX.meta
+/[Aa]ssets/Layer Lab/
+/[Aa]ssets/Layer Lab.meta
 /[Aa]ssets/ModularSci-FiWeapons/
 /[Aa]ssets/ModularSci-FiWeapons.meta
 /[Aa]ssets/OccaSoftware/
@@ -119,8 +131,14 @@ crashlytics-build.properties
 /[Aa]ssets/Plugins.meta
 /[Aa]ssets/RetroAesthetics/
 /[Aa]ssets/RetroAesthetics.meta
+/[Aa]ssets/Realistic Effects Pack 3/
+/[Aa]ssets/Realistic Effects Pack 3.meta
+/[Aa]ssets/Realistic explosions/
+/[Aa]ssets/Realistic explosions.meta
 /[Aa]ssets/ScienceFictionGUI/
 /[Aa]ssets/ScienceFictionGUI.meta
+/[Aa]ssets/Sci-Fi Weapons Pack 1/
+/[Aa]ssets/Sci-Fi Weapons Pack 1.meta
 /[Aa]ssets/StarfieldMaterials/
 /[Aa]ssets/StarfieldMaterials.meta
 /[Aa]ssets/TextMesh Pro/

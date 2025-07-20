@@ -7,6 +7,10 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public abstract class AddOn : MonoBehaviour
     {
+
+        [BoxGroup("Audio")] [SerializeField] private AudioClip deployClip;
+        [BoxGroup("Audio")] [SerializeField] private AudioClip retractClip;
+
         [BoxGroup("Debug")] [SerializeField] private Player attachedPlayer;
         [BoxGroup("Debug")] [SerializeField] private HardPoint attachedHardPoint;
 
@@ -15,8 +19,15 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
 
         protected bool IsDeployed => attachedHardPoint && attachedHardPoint.IsDeployed;
 
+        protected internal AudioSource AudioSource;
+
         internal abstract void Fire();
         internal abstract void StopFire();
+
+        protected virtual void Awake()
+        {
+            AudioSource = GetComponent<AudioSource>();
+        }
 
         /// <summary>
         /// Attach the add-on
@@ -44,11 +55,23 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <summary>
         /// Deploy add-on functionality
         /// </summary>
-        protected internal abstract void Deploy(Action callBack, bool immediate = false);
+        protected internal virtual void Deploy(Action callBack, bool immediate = false)
+        {
+            if (AudioSource && deployClip)
+            {
+                AudioSource.PlayOneShot(deployClip);
+            }
+        }
 
         /// <summary>
         /// Deploy add-on functionality
         /// </summary>
-        protected internal abstract void Retract(Action callBack, bool immediate = false);
+        protected internal virtual void Retract(Action callBack, bool immediate = false)
+        {
+            if (AudioSource && retractClip)
+            {
+                AudioSource.PlayOneShot(retractClip);
+            }
+        }
     }
 }

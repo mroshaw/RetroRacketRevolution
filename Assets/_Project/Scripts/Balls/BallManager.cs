@@ -42,8 +42,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             // Configure per difficulty settings
             ball.ReconfigureBall(gameData.difficulty.defaultBallSpeed, gameData.difficulty.ballSpeedUpAfterDuration, gameData.difficulty.ballSpeedMultiplier);
 
-            ball.BallDestroyedEvent.AddListener(DestroyBall);
-            ball.BallSpeedMultiplierChangeEvent.AddListener(BallSpeedChanged);
+            ball.onDestroyed.AddListener(DestroyBall);
+            ball.onSpeedMultiplierChanged.AddListener(BallSpeedChanged);
             ballList.Add(ball);
             newBall.SetActive(true);
             return newBall.GetComponent<Ball>();

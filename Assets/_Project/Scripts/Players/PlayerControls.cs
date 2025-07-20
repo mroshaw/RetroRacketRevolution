@@ -31,7 +31,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 
         private float _speed = 1.0f;
         private float _xLastFrame;
-
+        private bool _isMoving;
+        
         private PlayerInput _playerInput;
         private Rigidbody _rb;
 
@@ -108,6 +109,22 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             moveVector = context.ReadValue<Vector2>();
             horizontal = moveVector.normalized.x;
+
+            switch (horizontal)
+            {
+                case 0.0f when _isMoving:
+                    _isMoving = false;
+                    StoppedEvent.Invoke();
+                    break;
+                case < 0.0f when !_isMoving:
+                    _isMoving = true;
+                    MovingLeftEvent.Invoke();
+                    break;
+                case > 0.0f when !_isMoving:
+                    _isMoving = true;
+                    MovingRightEvent.Invoke();
+                    break;
+            }
         }
 
         /// <summary>
@@ -188,14 +205,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 
             if (context.started)
             {
-                Debug.Log("Fire Pressed");
                 FireButtonPressedEvent.Invoke();
                 return;
             }
 
             if (context.canceled)
             {
-                Debug.Log("Fire Released");
                 FireButtonReleasedEvent.Invoke();
                 return;
             }
@@ -216,21 +231,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 gameObject.transform.localPosition = newPosition;
                 horizontal = 0;
             }
-
-            // Determine if we're moving
-            if (transform.position.x > _xLastFrame)
-            {
-                MovingRightEvent.Invoke();
-            }
-            else if (transform.position.x < _xLastFrame)
-            {
-                MovingLeftEvent.Invoke();
-            }
-            else
-            {
-                StoppedEvent.Invoke();
-            }
-
             _xLastFrame = transform.position.x;
 
             if (_playerInput.currentControlScheme == "Mouse")

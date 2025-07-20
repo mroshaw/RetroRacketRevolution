@@ -31,8 +31,9 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <summary>
         /// Initialise this component
         /// </summary>
-        internal void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _parentGameObject = GetComponentInParent<Player>().gameObject;
             _startHeight = this._parentGameObject.transform.position.y;
             _startHorizontal = this._parentGameObject.transform.position.x;

@@ -22,19 +22,17 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         // Projective pool
         private ObjectPool<GameObject> _projectilePool;
         private float _lastShotCounter;
-        private AudioSource _audioSource;
 
         private bool _isFiring;
 
         /// <summary>
         /// Create the object pool and initialise
         /// </summary>
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool, OnReturnProjectileToPool, OnDestroyProjectile, true, 20);
             _lastShotCounter = 0.0f;
-            _audioSource = GetComponent<AudioSource>();
-            _audioSource.clip = fireClip;
         }
 
         /// <summary>
@@ -69,6 +67,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// </summary>
         protected internal override void Deploy(Action callBack, bool immediate = false)
         {
+            base.Deploy(callBack, immediate);
             StartCoroutine(DeployAsync(callBack, immediate));
         }
 
@@ -77,6 +76,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// </summary>
         protected internal override void Retract(Action callBack, bool immediate = false)
         {
+            base.Retract(callBack, immediate);
             StartCoroutine(RetractAsync(callBack, immediate));
         }
 
@@ -171,9 +171,9 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             if (CanFire())
             {
                 // Fire!
-                if (_audioSource.enabled)
+                if (AudioSource.enabled)
                 {
-                    _audioSource.PlayOneShot(fireClip);
+                    AudioSource.PlayOneShot(fireClip);
                 }
 
                 _lastShotCounter = 0.0f;

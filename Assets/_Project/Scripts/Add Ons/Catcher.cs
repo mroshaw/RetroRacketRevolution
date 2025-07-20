@@ -13,8 +13,9 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <summary>
         /// Initialise this component
         /// </summary>
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _collider = GetComponent<Collider>();
         }
 
@@ -24,7 +25,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             {
                 return;
             }
-            AttachedPlayer.Fire();
+            AttachedPlayer.BeginFiring();
             _ball = null;
         }
 
@@ -43,7 +44,6 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <summary>
         /// Ball enters catcher trigger collider
         /// </summary>
-        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Ball"))

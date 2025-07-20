@@ -7,11 +7,10 @@ namespace DaftAppleGames.RetroRacketRevolution
 {
     public class Unsticker : MonoBehaviour
     {
-
-        [BoxGroup("Settings")] public float stuckTimeBeforeIntervention = 3.0f;
-        [BoxGroup("Settings")] public float verticalVelocityThreshold = 0.01f;
-        [BoxGroup("Settings")] public float horizontalVelocityThreshold = 0.01f;
-        [BoxGroup("Settings")] public float nudgeForce = 1.0f;
+        [BoxGroup("Settings")] [SerializeField] private float stuckTimeBeforeIntervention = 3.0f;
+        [BoxGroup("Settings")] [SerializeField] private float verticalVelocityThreshold = 0.01f;
+        [BoxGroup("Settings")] [SerializeField] private float horizontalVelocityThreshold = 0.01f;
+        [BoxGroup("Settings")] [SerializeField] private float nudgeForce = 1.0f;
 
         [BoxGroup("Debug")] [SerializeField] private float _rbVelocityX;
         [BoxGroup("Debug")] [SerializeField] private float _rbVelocityY;
@@ -22,7 +21,7 @@ namespace DaftAppleGames.RetroRacketRevolution
 
         private Ball _ball;
 
-        private Rigidbody2D _rb;
+        private Rigidbody _rb;
 
         /// <summary>
         /// Initialise this component
@@ -32,7 +31,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             _horizontalStuckTime = 0.0f;
             _verticalStuckTime = 0.0f;
 
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
             _ball = GetComponent<Ball>();
         }
 
@@ -98,8 +97,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Check if we're stuck horizontally. If we are, nudge up.
         /// </summary>
-        /// <param name="direction"></param>
-        private void Nudge(Vector2 direction)
+        private void Nudge(Vector3 direction)
         {
             _rb.linearVelocity += (direction * nudgeForce);
         }
