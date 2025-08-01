@@ -1,3 +1,4 @@
+using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
@@ -11,6 +12,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
     {
         [BoxGroup("Players")] [SerializeField] private Player playerOne;
         [BoxGroup("Players")] [SerializeField] private Player playerTwo;
+        [BoxGroup("Players")] [SerializeField] private float respawnDelay = 2.0f;
         [BoxGroup("Player Input Settings")] [SerializeField] private PlayerInput playerOneInput;
         [BoxGroup("Player Input Settings")] [SerializeField] private PlayerInput playerTwoInput;
         [BoxGroup("Player 1 Bound Settings")] [SerializeField] private float player1MinX;
@@ -88,7 +90,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             Transform player2Transform = playerTwo.transform;
 
             // Single player game
-            PlayerControls playerOneControls = playerOne.GetComponent<PlayerControls>();
+            PlayerMovement playerOneControls = playerOne.GetComponent<PlayerMovement>();
             if (!isTwoPlayer)
             {
                 playerOneControls.ConfigurePlayer(player1MinX, player2MaxX);
@@ -101,7 +103,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             // Two player game
             else
             {
-                PlayerControls playerTwoControls = playerTwo.GetComponent<PlayerControls>();
+                PlayerMovement playerTwoControls = playerTwo.GetComponent<PlayerMovement>();
                 playerOneControls.ConfigurePlayer(player1MinX, player1MaxX);
                 playerTwoControls.ConfigurePlayer(player2MinX, player2MaxX);
 
@@ -122,6 +124,51 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             return ballManager.GetNewBall();
         }
 
+        public void KillPlayer(Player player)
+        {
+            player.Kill();
+            _lifeForce.LoseLife();
+        }
+        
+        public void KillBothPlayers()
+        {
+            KillPlayerOne(true);
+            if (gameData.isTwoPlayer)
+            {
+                KillPlayerTwo();
+            }
+            _lifeForce.LoseLife();
+            StartCoroutine(RespawnAsync(playerOne, true));
+            if (gameData.isTwoPlayer)
+            {
+                StartCoroutine(RespawnAsync(playerTwo, false));
+            }
+        }
+
+        public void KillPlayerOne(bool spawnBall)
+        {
+            playerOne.Kill();
+            if (_lifeForce.NumLives == 0)
+            {
+                return;
+            }
+            StartCoroutine(RespawnAsync(playerOne, spawnBall));
+        }
+
+        public void KillPlayerTwo()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Respawns a player after a delay
+        /// </summary>
+        private IEnumerator RespawnAsync(Player player, bool spawnBall)
+        {
+            yield return new WaitForSeconds(respawnDelay);
+            player.ResetPlayer(spawnBall);
+        }
+        
         /// <summary>
         /// Setup the desired control scheme when the player controller is started.
         /// </summary>
@@ -163,19 +210,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         }
 
         /// <summary>
-        /// Remove a life from the players
-        /// </summary>
-        public void RemoveLife()
-        {
-            playerOne.Kill();
-            if (PlayerTwoIsActive)
-            {
-                playerTwo.Kill();
-            }
-            _lifeForce.LoseLife();
-        }
-
-        /// <summary>
         /// Toggle Unlimited lives
         /// </summary>
         public bool ToggleUnlimitedLives()
@@ -184,24 +218,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             return _lifeForce.UnlimitedLives;
         }
 
-        /// <summary>
-        /// Resets both players
-        /// </summary>
-        public void ResetPlayers()
+        private void ResetPlayerOne(bool spawnBall)
         {
-            playerOne.ResetPlayer(true);
-            if (PlayerTwoIsActive)
-            {
-                playerTwo.ResetPlayer(false);
-            }
+            playerOne.ResetPlayer(spawnBall);
         }
 
-        /// <summary>
-        /// Cause players to zoom up the screen
-        /// </summary>
-        public void PlayersZoom()
+        private void ResetPlayerTwo()
         {
-
+            playerTwo.ResetPlayer(false);
         }
     }
 }

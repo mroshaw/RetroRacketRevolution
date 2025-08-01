@@ -9,7 +9,8 @@ namespace DaftAppleGames.RetroRacketRevolution
     [RequireComponent(typeof(ParticleSystem))]
     public class Explosion : MonoBehaviour
     {
-        [BoxGroup("Settings")] [SerializeField] private float returnToPoolDelay = 5.0f;
+        [BoxGroup("Pooling Settings")] [SerializeField] private bool usePooling;
+        [BoxGroup("Pooling Settings")] [SerializeField] private float returnToPoolDelay = 5.0f;
         [BoxGroup("Settings")] [SerializeField] private AudioClip[] audioClips;
         [FoldoutGroup("Events")] public UnityEvent<Explosion> ReturnToPoolEvent;
 
@@ -42,7 +43,10 @@ namespace DaftAppleGames.RetroRacketRevolution
                 PlayRandomSound();
             }
             _particleSystem.Play(true);
-            StartCoroutine(ReturnToPoolAsync());
+            if (usePooling)
+            {
+                StartCoroutine(ReturnToPoolAsync());
+            }
         }
 
         /// <summary>

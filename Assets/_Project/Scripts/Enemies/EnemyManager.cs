@@ -120,9 +120,13 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// Stop spawning
         /// </summary>
         [Button("Stop Spawning")]
-        public void StopSpawning()
+        public void StopSpawning(bool killEnemies)
         {
             _isSpawning = false;
+            if (killEnemies)
+            {
+                RemoveAllEnemies();
+            }
         }
 
         /// <summary>
@@ -130,7 +134,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         public void HandleLevelLoadedEvent(LevelDataExt levelData)
         {
-            StopSpawning();
+            StopSpawning(true);
   
             _isBossEnemy = levelData.isBossLevel;
             if (_isBossEnemy)
@@ -235,7 +239,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             {
                 if (_isBossEnemy)
                 {
-                    StopSpawning();
+                    StopSpawning(false);
                     onAllEnemiesPreDestroyed.Invoke();
                     StartCoroutine(WaitAndAnnounceLastEnemyDestroyed());
                 }
@@ -252,7 +256,6 @@ namespace DaftAppleGames.RetroRacketRevolution
             onAllEnemiesDestroyed.Invoke();
         }
 
-        #region PoolRegion
         /// <summary>
         /// Create action for pool
         /// </summary>
@@ -335,6 +338,5 @@ namespace DaftAppleGames.RetroRacketRevolution
             projectile.GetComponent<EnemyProjectile>().ProjectileDestroyedEvent.RemoveListener(ProjectileDestroyed);
             Destroy(projectile);
         }
-        #endregion
     }
 }

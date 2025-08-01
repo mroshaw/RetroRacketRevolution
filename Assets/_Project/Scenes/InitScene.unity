@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -42,8 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -131,10 +128,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533343958}
+  - component: {fileID: 1533343960}
   - component: {fileID: 1533343959}
-  - component: {fileID: 1533343961}
   m_Layer: 0
-  m_Name: Init Level Files
+  m_Name: Init Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,12 +164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e39879063680041bdf009ea3311f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initOnStart: 0
   filesUnpackedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1533343961}
-        m_TargetAssemblyTypeName: MoreMountains.Tools.MMLoadScene, MoreMountains.Tools
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1533343960}
+        m_TargetAssemblyTypeName: DaftAppleGames.Game.InitGame, DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: InitDone
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -182,7 +180,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1533343961
+--- !u!114 &1533343960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,11 +189,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533343957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9251a9f35d2c384a9e26195e0c63ee9, type: 3}
+  m_Script: {fileID: 11500000, guid: 42658f0110be61b4f8e985a01b7423ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: MainMenuScene
-  LoadingSceneMode: 0
+  mainMenuScene: MainMenuScene3D
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

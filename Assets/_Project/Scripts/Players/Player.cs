@@ -20,7 +20,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [BoxGroup("Ball Settings")] [SerializeField] private Transform defaultBallAttachPoint;
         [BoxGroup("Ball Settings")] [SerializeField] private bool spawnBallOnStart;
         [BoxGroup("Audio")] [SerializeField] private AudioClip launchBallClip;
-        [BoxGroup("Death")] [SerializeField] private AudioClip deathClip;
         [BoxGroup("Death")] [SerializeField] private Explosion explosion;
         [BoxGroup("Object Settings")] [SerializeField] private GameObject playerModelGameObject;
         [BoxGroup("Add On Settings")] [SerializeField] private HardPoint leftHardPoint;
@@ -34,6 +33,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [FoldoutGroup("Events")] public UnityEvent onReset;
         [FoldoutGroup("Events")] public UnityEvent<Player> onHit;
 
+        internal bool Destroyed { get; private set; }
+        
         [BoxGroup("Cheats")]
         [Button("Grow Bat")]
         public void GrowBatCheat()
@@ -167,6 +168,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void Kill()
         {
+            Destroyed = true;
+            playerModelGameObject.SetActive(false);
             explosion.Explode(true);
             onDestroyed.Invoke();
         }
@@ -347,15 +350,17 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Resets the player
         /// </summary>
-        /// <param name="spawnBall"></param>
         public void ResetPlayer(bool spawnBall)
         {
+            playerModelGameObject.SetActive(true);
             DeactivateHardPoints();
             SetDefaultBatSize();
             if (spawnBall)
             {
                 SpawnBall();
             }
+
+            Destroyed = false;
         }
     }
 }

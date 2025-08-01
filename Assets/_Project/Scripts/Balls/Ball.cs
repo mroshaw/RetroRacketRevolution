@@ -191,6 +191,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 Brick brick = other.gameObject.GetComponent<Brick>();
                 CollideWithBrick(brick);
             }
+            
+            // Goes out of bounds, off the bottom of the screen
+            if(other.gameObject.CompareTag("OutOfBounds"))
+            {
+                DestroyBall();
+            }
         }
 
         /// <summary>
@@ -206,7 +212,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         private void CollideWithBoundary()
         {
-            if (_audioSource.enabled)
+            if (_audioSource.enabled && hitBoundaryClip)
             {
                 _audioSource.PlayOneShot(hitBoundaryClip);
             }
@@ -221,17 +227,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             switch (brick.BrickType)
             {
                 case BrickType.Normal:
-                    _audioSource.PlayOneShot(hitBrickClip);
                     break;
                 case BrickType.DoubleStrong:
                 case BrickType.TripleStrong:
                     if (brick.Health > 1)
                     {
                         _audioSource.PlayOneShot(hitMultibrickClip);
-                    }
-                    else
-                    {
-                        _audioSource.PlayOneShot(hitBrickClip);
                     }
                     break;
                 case BrickType.Invincible:
@@ -371,7 +372,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Destroy the ball
         /// </summary>
-        internal void DestroyBall()
+        private void DestroyBall()
         {
             onSpeedMultiplierChanged.Invoke(this);
             onDestroyed.Invoke(this);

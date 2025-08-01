@@ -8,16 +8,17 @@ namespace DaftAppleGames.Levels
 {
     public class LevelDataResources : MonoBehaviour
     {
+        [BoxGroup("Settings")] [SerializeField] private bool initOnStart; 
         [BoxGroup("Events")] public UnityEvent filesUnpackedEvent;
 
-        #region UnityMethods
         private void Start()
         {
-            UnpackAllLevels();
+            if(initOnStart)
+            {
+                UnpackAllLevels();
+            }
         }
-        #endregion
 
-        #region PublicMethods
         /// <summary>
         /// Force an overwrite of level data, e.g. for an upgrade
         /// </summary>
@@ -31,10 +32,8 @@ namespace DaftAppleGames.Levels
 
             filesUnpackedEvent.Invoke();
         }
-        #endregion
 
-        #region Private Methods
-        private void UnpackAllLevels()
+        public void UnpackAllLevels()
         {
             // Create Original Level Data Folders, if not there
             if (!Directory.Exists(LevelDataExt.OgLevelDataPath))
@@ -78,6 +77,5 @@ namespace DaftAppleGames.Levels
                 }
             }
         }
-        #endregion
     }
 }

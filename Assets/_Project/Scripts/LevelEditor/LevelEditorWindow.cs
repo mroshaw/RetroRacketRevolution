@@ -17,57 +17,46 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class LevelEditorWindow : MonoBehaviour
     {
-        // Public serializable properties
-        #region UI
-        [BoxGroup("UI - Brick Grid")] public GameObject grid;
-        [BoxGroup("UI - Brick Grid")] public Image gridBackgroundImage;
-
-        [BoxGroup("UI - Stamp")] public Toggle stampBonusToggle;
-        [BoxGroup("UI - Stamp")] public Toggle stampTypeToggle;
-        [BoxGroup("UI - Stamp")] public Toggle stampColorToggle;
-        [BoxGroup("UI - Stamp")] public Toggle stampIsEmptyToggle;
-
-        [BoxGroup("UI - Brick")] public TMP_Dropdown brickTypeDropDown;
-        [BoxGroup("UI - Brick")] public TMP_Dropdown brickBonusDropDown;
-        [BoxGroup("UI - Brick")] public Toggle brickIsEmptyToggle;
-        [BoxGroup("UI - Brick")] public Button mainColorButton;
-
-        [BoxGroup("UI - Level")] public TMP_InputField levelFileNameText;
-        [BoxGroup("UI - Level")] public TMP_InputField levelDescriptionText;
-        [BoxGroup("UI - Level")] public TMP_Dropdown loadLevelDropDown;
-        [BoxGroup("UI - Level")] public TMP_Dropdown backGroundSpriteDropDown;
-        [BoxGroup("UI - Level")] public TMP_Dropdown backGroundMusicDropDown;
-        [BoxGroup("UI - Level")] public TMP_InputField maxEnemiesText;
-        [BoxGroup("UI - Level")] public TMP_InputField minTimeBetweenEnemiesText;
-        [BoxGroup("UI - Level")] public TMP_InputField maxTimeBetweenEnemiesText;
-        [BoxGroup("UI - Level")] public Toggle isCustomLevelsToggle;
-        [BoxGroup("UI - Level")] public Toggle levelIsBossLevelToggle;
-        [BoxGroup("UI - Level")] public TMP_Dropdown levelBossSpriteDropDown;
-
-        [BoxGroup("UI - Other")] public ConfirmWindow deleteWindow;
-        [BoxGroup("UI - Other")] public AlertText alertText;
-        #endregion
-        #region Data
-        [BoxGroup("Data")] public BrickTypeData brickTypeData;
-        [BoxGroup("Data")] public BonusData bonusData;
-        [BoxGroup("Data")] public LevelBackgroundSprites backgroundData;
-        [BoxGroup("Data")] public PlayList backgroundMusicData;
-        [BoxGroup("Data")] public EnemiesData levelBossData;
-        #endregion
-        #region Events
+        [BoxGroup("UI - Brick Grid")] [SerializeField] private GameObject grid;
+        [BoxGroup("UI - Brick Grid")] [SerializeField] private Image gridBackgroundImage;
+        [BoxGroup("UI - Stamp")] [SerializeField] private Toggle stampBonusToggle;
+        [BoxGroup("UI - Stamp")] [SerializeField] private Toggle stampTypeToggle;
+        [BoxGroup("UI - Stamp")] [SerializeField] private Toggle stampColorToggle;
+        [BoxGroup("UI - Stamp")] [SerializeField] private Toggle stampIsEmptyToggle;
+        [BoxGroup("UI - Brick")] [SerializeField] private TMP_Dropdown brickTypeDropDown;
+        [BoxGroup("UI - Brick")] [SerializeField] private TMP_Dropdown brickBonusDropDown;
+        [BoxGroup("UI - Brick")] [SerializeField] private Toggle brickIsEmptyToggle;
+        [BoxGroup("UI - Brick")] [SerializeField] private Button mainColorButton;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField levelFileNameText;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField levelDescriptionText;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown loadLevelDropDown;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown backGroundSpriteDropDown;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown backGroundMusicDropDown;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField maxEnemiesText;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField minTimeBetweenEnemiesText;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField maxTimeBetweenEnemiesText;
+        [BoxGroup("UI - Level")] [SerializeField] private Toggle isCustomLevelsToggle;
+        [BoxGroup("UI - Level")] [SerializeField] private Toggle levelIsBossLevelToggle;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown levelBossSpriteDropDown;
+        [BoxGroup("UI - Other")] [SerializeField] private ConfirmWindow deleteWindow;
+        [BoxGroup("UI - Other")] [SerializeField] private AlertText alertText;
+        [BoxGroup("UI - Other")] [SerializeField] private string mainMenuScene;
+        
+        [BoxGroup("Data")] [SerializeField] private BrickTypeData brickTypeData;
+        [BoxGroup("Data")] [SerializeField] private BonusData bonusData;
+        [BoxGroup("Data")] [SerializeField] private LevelBackgroundSprites backgroundData;
+        [BoxGroup("Data")] [SerializeField] private PlayList backgroundMusicData;
+        [BoxGroup("Data")] [SerializeField] private EnemiesData levelBossData;
         [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> BrickGridClickedEvent;
         [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> BrickUpdatedEvent;
-
         [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampRewardChangedEvent;
         [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampTypeChangedEvent;
         [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampColorChangedEvent;
         [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampIsEmptyChangedEvent;
-
         [FoldoutGroup("Events - Brick")] public UnityEvent<BrickType> BrickTypeChangedEvent;
         [FoldoutGroup("Events - Brick")] public UnityEvent<BonusType> BrickBonusChangedEvent;
         [FoldoutGroup("Events - Brick")] public UnityEvent<bool> BrickIsEmptyChangedEvent;
         [FoldoutGroup("Events - Brick")] public UnityEvent<Color> BrickColorChangedEvent;
-
         [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelNumEnemiesChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMinChangedEvent;
         [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMaxChangedEvent;
@@ -88,14 +77,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Events - Other")] public UnityEvent LevelShareClickedEvent;
         [FoldoutGroup("Events - Other")] public UnityEvent LevelAddClickedEvent;
 
-        #endregion
-
-        // Public properties
-
-        // Private fields
         private BrickButton[] _allBrickButtons;
 
-        #region UnityMethods
         /// <summary>
         /// Initialise this component
         /// </summary>   
@@ -134,13 +117,10 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
 
         }
-        #endregion
-        #region PublicMethods
-        #region UiHandlers
+
         /// <summary>
         /// Handler for Reward Stamp
         /// </summary>
-        /// <param name="value"></param>
         public void StampSetRewardHandler(bool value)
         {
             StampRewardChangedEvent.Invoke(value);
@@ -149,7 +129,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Type stamp
         /// </summary>
-        /// <param name="value"></param>
         public void StampSetTypeHandler(bool value)
         {
             StampTypeChangedEvent.Invoke(value);
@@ -158,7 +137,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Color stamp
         /// </summary>
-        /// <param name="value"></param>
         public void StampSetColorHandler(bool value)
         {
             StampColorChangedEvent.Invoke(value);
@@ -167,7 +145,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Empty stamp
         /// </summary>
-        /// <param name="value"></param>
         public void StampSetIsEmptyHandler(bool value)
         {
             StampIsEmptyChangedEvent.Invoke(value);
@@ -176,7 +153,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Brick Type
         /// </summary>
-        /// <param name="value"></param>
         public void BrickSetTypeHandler(int value)
         {
             BrickTypeChangedEvent.Invoke((BrickType)value);
@@ -185,7 +161,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Bonus Type
         /// </summary>
-        /// <param name="value"></param>
         public void BrickBonusTypeHandler(int value)
         {
             BrickBonusChangedEvent.Invoke((BonusType)value);
@@ -194,7 +169,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for IsEmpty
         /// </summary>
-        /// <param name="value"></param>
         public void BrickIsEmptyTypeHandler(bool value)
         {
             BrickIsEmptyChangedEvent.Invoke(value);
@@ -203,7 +177,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Brick Color
         /// </summary>
-        /// <param name="value"></param>
         public void BrickColorHandler(Color value)
         {
             mainColorButton.GetComponent<Image>().color = value;
@@ -213,7 +186,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Max Enemy
         /// </summary>
-        /// <param name="value"></param>
         public void LevelEnemiesHandler(string value)
         {
             LevelNumEnemiesChangedEvent.Invoke(int.Parse(value));
@@ -222,7 +194,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Min Enemy time
         /// </summary>
-        /// <param name="value"></param>
         public void LevelMinEnemyHandler(string value)
         {
             LevelEnemyMinChangedEvent.Invoke(float.Parse(value));
@@ -231,7 +202,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Max Enemy time
         /// </summary>
-        /// <param name="value"></param>
         public void LevelMaxEnemyHandler(string value)
         {
             LevelEnemyMaxChangedEvent.Invoke(float.Parse(value));
@@ -240,7 +210,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Level Background
         /// </summary>
-        /// <param name="value"></param>
         public void LevelBackgroundHandler(int value)
         {
             gridBackgroundImage.sprite = backgroundData.BackgroundSprites[value];
@@ -250,7 +219,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Level Background Music
         /// </summary>
-        /// <param name="value"></param>
         public void LevelBackgroundMusicHandler(int value)
         {
             LevelBackgroundMusicChangedEvent.Invoke(value);
@@ -259,7 +227,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Boss sprite
         /// </summary>
-        /// <param name="value"></param>
         public void LevelBossSpriteHandler(int value)
         {
             LevelBossChangedEvent.Invoke(value);
@@ -268,7 +235,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Is Boss Level
         /// </summary>
-        /// <param name="value"></param>
         public void LevelIsBossLevelHandler(bool value)
         {
             LevelIsBossLevelChangedEvent.Invoke(value);
@@ -285,7 +251,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Level Name
         /// </summary>
-        /// <param name="value"></param>
         public void LevelNameHandler(string value)
         {
             LevelFileNameChangedEvent.Invoke(value);
@@ -294,7 +259,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Level Desc
         /// </summary>
-        /// <param name="value"></param>
         public void LevelDescHandler(string value)
         {
             LevelDescChangedEvent.Invoke(value);
@@ -331,7 +295,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Level Load Level
         /// </summary>
-        /// <param name="value"></param>
         public void LevelLoadLevelHandler(int value)
         {
             // levelFileNameText.text = loadLevelDropDown.options[value].text;
@@ -341,7 +304,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Custom Level
         /// </summary>
-        /// <param name="value"></param>
         public void LevelCustomLevelHandler(bool value)
         {
             LevelCustomLevelChangedEvent.Invoke(value);
@@ -399,8 +361,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             MainMenuClickedEvent.Invoke();
         }
-        #endregion
-        #region UiMethods
+        
         /// <summary>
         /// Calls for a file to be deleted
         /// </summary>
@@ -416,14 +377,12 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void MainMenu()
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene(mainMenuScene);
         }
 
         /// <summary>
         /// Handle clicks to the Brick Grid
         /// </summary>
-        /// <param name="column"></param>
-        /// <param name="row"></param>
         public void BrickButtonHandler(int column, int row)
         {
             BrickData newBrickData = new BrickData();
@@ -442,12 +401,10 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             // Send to consumers
             BrickGridClickedEvent.Invoke(newBrickData);
         }
-        #endregion
-        #region UiUpdates
+        
         /// <summary>
         /// Sets the Level Description
         /// </summary>
-        /// <param name="levelDesc"></param>
         public void SetLevelDesc(string levelDesc)
         {
             levelDescriptionText.SetTextWithoutNotify(levelDesc);
@@ -466,7 +423,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Updates the selected music index
         /// </summary>
-        /// <param name="musicIndex"></param>
         public void SetBackgroundMusic(int musicIndex)
         {
             backGroundMusicDropDown.SetValueWithoutNotify(musicIndex);
@@ -475,7 +431,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Updates the selected Boss Sprite index
         /// </summary>
-        /// <param name="levelBossIndex"></param>
         public void SetLevelBossSprite(int levelBossIndex)
         {
             levelBossSpriteDropDown.SetValueWithoutNotify(levelBossIndex);
@@ -494,7 +449,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Sets the Max Enemies
         /// </summary>
-        /// <param name="maxEnemies"></param>
         public void SetMaxEnemies(int maxEnemies)
         {
             maxEnemiesText.SetTextWithoutNotify(maxEnemies.ToString());
@@ -503,7 +457,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Set the Min Enemy Time
         /// </summary>
-        /// <param name="minEnemyTime"></param>
         public void SetMinEnemyTime(float minEnemyTime)
         {
             minTimeBetweenEnemiesText.SetTextWithoutNotify(minEnemyTime.ToString());
@@ -512,7 +465,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Set the Max Enemy Time
         /// </summary>
-        /// <param name="maxEnemyTime"></param>
         public void SetMaxEnemyTime(float maxEnemyTime)
         {
             maxTimeBetweenEnemiesText.SetTextWithoutNotify(maxEnemyTime.ToString());
@@ -537,7 +489,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Refresh a single brick
         /// </summary>
-        /// <param name="brickData"></param>
         public void RefreshBrick(BrickData brickData)
         {
             BrickUpdatedEvent.Invoke(brickData);
@@ -555,15 +506,10 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             }
         }
 
-        #endregion
-        #endregion
-        #region PrivateMethods
 
         /// <summary>
         /// Validate filename
         /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
         private bool IsFilenameValid(string filename)
         {
             foreach (var c in Path.GetInvalidFileNameChars())
@@ -679,6 +625,5 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 BrickUpdatedEvent.AddListener(button.UpdateBrick);
             }
         }
-        #endregion
     }
 }

@@ -39,6 +39,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private float _keyboardSpeedMultiplier;
         private float _dpadSpeedMultiplier;
 
+        private Player _player;
+        
         /// <summary>
         /// Init the player controls
         /// </summary>
@@ -46,6 +48,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             _rb = GetComponent<Rigidbody>();
             _playerInput = GetComponent<PlayerInput>();
+            _player = GetComponent<Player>();
             currentControlScheme = _playerInput.currentControlScheme;
 
             _keyboardSpeedMultiplier = defaultKeyboardSpeedMultiplier;
@@ -82,13 +85,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         public void DisableControls()
         {
             ControlsEnabled = false;
-            // Debug.Log($"{this.GetComponent<Player>().gameObject.name} controls disabled.");
         }
 
         /// <summary>
         /// Handle settings change to control sensitivity
         /// </summary>
-        /// <param name="newValue"></param>
         public void KeyboardSensitivityChanged(float newValue)
         {
             _keyboardSpeedMultiplier = defaultKeyboardSpeedMultiplier * newValue;
@@ -103,10 +104,22 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         }
 
         /// <summary>
+        /// Determines whether the player can be controlled
+        /// </summary>
+        private bool CanControl()
+        {
+            return ControlsEnabled && !_player.Destroyed;
+        }
+        
+        /// <summary>
         /// Handle the "Move" message from Player Controls
         /// </summary>
         public void OnMove(InputAction.CallbackContext context)
         {
+            if (!CanControl())
+            {
+                return;
+            }
             moveVector = context.ReadValue<Vector2>();
             horizontal = moveVector.normalized.x;
 
@@ -132,6 +145,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void OnMoveAnalogue(InputAction.CallbackContext context)
         {
+            if (!CanControl())
+            {
+                return;
+            }
+            
             if (_playerInput.currentControlScheme == "Mouse")
             {
                 Vector2 mousePosition = context.ReadValue<Vector2>();
@@ -198,7 +216,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void OnFire(InputAction.CallbackContext context)
         {
-            if (!ControlsEnabled)
+            if (!CanControl())
             {
                 return;
             }

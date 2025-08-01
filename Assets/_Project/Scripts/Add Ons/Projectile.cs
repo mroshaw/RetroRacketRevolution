@@ -37,17 +37,13 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <param name="collision"></param>
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($"Projectile hit: {collision.gameObject.name}");
-
             if (colliderLayerMask != (colliderLayerMask | (1 << collision.gameObject.layer)))
             {
-                Debug.Log($"Collider not in LayerMask");
                 return;
             }
 
             if (!colliderTags.Any(collision.gameObject.tag.Contains))
             {
-                Debug.Log($"Collider not in Tags");
                 return;
             }
 

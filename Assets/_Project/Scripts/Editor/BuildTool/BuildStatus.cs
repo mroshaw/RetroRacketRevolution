@@ -213,6 +213,7 @@ namespace DaftAppleGames.Editor.BuildTool
             /// <summary>
             /// Increments the Major version
             /// </summary>
+            [Button("Incr Major Version")]
             public void IncrementMajorVersion()
             {
                 MajorVersionNumber++;
@@ -221,6 +222,7 @@ namespace DaftAppleGames.Editor.BuildTool
             /// <summary>
             /// Increments the Minor version
             /// </summary>
+            [Button("Incr Minor Version")]
             public void IncrementMinorVersion()
             {
                 MinorVersionNumber++;
@@ -229,6 +231,7 @@ namespace DaftAppleGames.Editor.BuildTool
             /// <summary>
             /// Increments the Patch version
             /// </summary>
+            [Button("Incr Patch Version")]
             public void IncrementPatchVersion()
             {
                 PatchVersionNumber++;

@@ -1,13 +1,12 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using DaftAppleGames.RetroRacketRevolution.Menus;
 
 namespace DaftAppleGames.RetroRacketRevolution.Game
 {
     public enum LevelSelect { Original, Custom, OgPlusCustom, CustomPlusOg }
 
     /// <summary>
-    /// Scriptable Object: TODO Purpose and Summary
+    /// Persistent SO instance where player selected settings can be shared
     /// </summary>
     [CreateAssetMenu(fileName = "GameData", menuName = "Game/Game Data", order = 1)]
     public class GameData : ScriptableObject

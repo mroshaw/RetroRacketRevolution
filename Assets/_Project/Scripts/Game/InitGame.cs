@@ -1,20 +1,22 @@
 using DaftAppleGames.Levels;
-using UnityEngine;
-using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DaftAppleGames.Game
 {
     public class InitGame : MonoBehaviour
     {
-        #region Unity events
+        [BoxGroup("Settings")] [SerializeField] private string mainMenuScene;
         private void Start()
         {
             LevelDataResources levelDataResources = GetComponent<LevelDataResources>();
-            levelDataResources.UnpackLevelData();
-
+            levelDataResources.UnpackAllLevels();
         }
-        #endregion
 
+        public void InitDone()
+        {
+            SceneManager.LoadScene(mainMenuScene);
+        }
     }
 }

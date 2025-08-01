@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1ebc57a-8a27-48fc-b8a2-de206c36d889" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BeautifyProfile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BeautifyProfile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Balls/Ball.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Balls/Ball.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Bonus Entry Template.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Bonus Entry Template.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Brick Type Entry - Normal.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Brick Type Entry - Normal.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Brick Type Entry Template.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Brick Type Entry Template.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Circle Input Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Circle Input Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Control Dropdown.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Control Dropdown.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Difficulty Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Difficulty Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Follow Mouse.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Follow Mouse.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Header Text.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Header Text.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/High Score Input.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/High Score Input.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/High Score Template.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/High Score Template.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Life Template.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Life Template.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Menu Button.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Menu Button.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Menu Button.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Menu Button.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Scrollbar.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Scrollbar.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Settings.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Settings.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Slider.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Slider.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Sub Header Text.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Sub Header Text.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Toggle.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Toggle.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/A-Rainbow.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/A-Rainbow.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/B-Smile.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/B-Smile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/C-Funnel.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/C-Funnel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/D-Maze.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/D-Maze.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/E-Clouds.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/E-Clouds.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F1-Arkanoid1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F1-Arkanoid1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F2-Arkanoid2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F2-Arkanoid2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F3-Arkanoid3.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F3-Arkanoid3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F4-Arkanoid4.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F4-Arkanoid4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F5-Arkanoid5.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/F5-Arkanoid5.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G1-Xmas 1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G1-Xmas 1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G2-Xmas 2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G2-Xmas 2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G3-BadSanta.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/CustomLevelData/G3-BadSanta.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/1-Level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/1-Level1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/2-Level2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/2-Level2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/3-Level3.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/3-Level3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/4-Level4.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/4-Level4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/5-Level5.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/5-Level5.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/6-Level6.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/6-Level6.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/7-Level7.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/7-Level7.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/8-Level8.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/8-Level8.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/9-Level9.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/9-Level9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/A-Level10.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/A-Level10.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/B-Level11.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/B-Level11.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/C-Level12.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/C-Level12.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/D-Level13.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/D-Level13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/E-Level14.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/E-Level14.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/F-Level15.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/LevelData/F-Level15.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene3D.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene3D.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene3D.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene3D/Game Post Processing Profile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene3D/Game Post Processing Profile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameScene_Profiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/InitScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/InitScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/LevelEditorScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/LevelEditorScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene3D.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenuScene3D.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Add Ons/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Add Ons/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Balls/Ball.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Balls/Ball.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/DaftAppleGames.RetroRacketRevo.Game.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/DaftAppleGames.RetroRacketRevo.Game.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/BuildTool/BuildStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/BuildTool/BuildStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Explosion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Explosion.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Game/GameData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Game/GameData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Game/InitGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Game/InitGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/LevelEditor/LevelEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/LevelEditor/LevelEditorWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Levels/LevelDataResources.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Levels/LevelDataResources.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Menus/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Menus/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Menus/PauseGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Menus/PauseGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/Engine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/Engine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/PlayerControls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/PlayerControls.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Players/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Audio/PlayList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Settings/Audio/PlayList.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/BuildTool/RetroRacketBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Settings/BuildTool/RetroRacketBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Controls/GameControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Settings/Controls/GameControls.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Game/GameData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Settings/Game/GameData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Lighting/Game Profile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Lighting/Game Profile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Lighting/Main Menu Profile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Settings/Lighting/Main Menu Profile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="30gPBEfQgGyYGSp81nx0pQKGA63" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1ebc57a-8a27-48fc-b8a2-de206c36d889" name="Changes" comment="" />
+      <created>1754046105699</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754046105699</updated>
+      <workItem from="1754046107067" duration="157000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityProjectDiscoverer">
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

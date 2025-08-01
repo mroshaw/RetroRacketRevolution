@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: RetroRacketBuildSettings
   m_EditorClassIdentifier: 
   sceneAssets:
-  - {fileID: 102900000, guid: 8db2c8d74ed499d408a62a59155e621d, type: 3}
-  - {fileID: 102900000, guid: 775730824eba23d479c91c2506707c18, type: 3}
+  - {fileID: 102900000, guid: beccc41c8b1b5f548b5f304956f3cc4c, type: 3}
+  - {fileID: 102900000, guid: e46512e803e32f94e9b0cc84646b7878, type: 3}
+  - {fileID: 102900000, guid: c3fa0e50ac4b72e449a0b1e8d1a820c2, type: 3}
   emptySceneAsset: {fileID: 102900000, guid: 04a36e80578d85c46b7e69b0d84e0426, type: 3}
   versionIncrementType: 1
   winBuildTargetSettings:
     buildTarget: 19
-    buildOptions: 524288
+    buildOptions: 0
     gameFolder: E:\Dev\DAG\Itch Builds\Retro Racket Revolution\Retro Racket Revolution
       Windows
     fileName: Retro Racket Revolution.exe
@@ -28,24 +29,24 @@ MonoBehaviour:
     itchDeployAppStage: release
   winBuildStatus:
     buildVersion:
-      majorVersionNumber: 1
-      minorVersionNumber: 2
-      patchVersionNumber: 4
+      majorVersionNumber: 2
+      minorVersionNumber: 0
+      patchVersionNumber: 1
       buildStage: 4
     lastSuccessfulBuild:
-      day: 30
-      month: 3
+      day: 21
+      month: 7
       year: 2025
-      hour: 10
-      minute: 48
-      second: 37
+      hour: 13
+      minute: 46
+      second: 48
     lastBuildAttempt:
-      day: 30
-      month: 3
+      day: 21
+      month: 7
       year: 2025
-      hour: 10
-      minute: 47
-      second: 26
+      hour: 13
+      minute: 46
+      second: 31
     lastBuildState: 1
     lastBuildLog: 
     lastSuccessfulDeploy:
@@ -169,6 +170,6 @@ MonoBehaviour:
     lastDeployState: 0
     lastDeployLog: 
   latestBuildTarget: 19
-  latestBuildDateTime: 30/03/2025 10:47:26
+  latestBuildDateTime: 21/07/2025 13:46:31
   latestBuildResult: SuccessWithWarnings
-  latestBuildVersion: 1.2.3 (Live)
+  latestBuildVersion: 2.0.0 (Live)

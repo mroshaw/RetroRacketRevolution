@@ -50,6 +50,11 @@ namespace DaftAppleGames.Players
 
         private void FadeInAudio()
         {
+            if (!enabled)
+            {
+                return;
+            }
+            
             if (_fadeCoroutine != null)
             {
                 StopCoroutine(_fadeCoroutine);
@@ -60,6 +65,11 @@ namespace DaftAppleGames.Players
         
         private void FadeOutAudio()
         {
+            if (!enabled)
+            {
+                return;
+            }
+            
             if (_fadeCoroutine != null)
             {
                 StopCoroutine(_fadeCoroutine);
@@ -70,26 +80,14 @@ namespace DaftAppleGames.Players
         private IEnumerator FadeAudio(float endValue)
         {
             float startValue = _audioSource.volume;
-            
-            /*
-            float timer = 0f;
-
-            while (timer < fadeTime)
-            {
-                timer += Time.deltaTime;
-                _audioSource.volume = Mathf.Lerp(startValue, endValue, timer / fadeTime);
-                yield return null;
-            }
-            */
             while (!Mathf.Approximately(_audioSource.volume, endValue))
             {
-                _audioSource.volume = Mathf.SmoothDamp(_audioSource.volume, endValue, ref _fadeVelocity, fadeTime);
+                _audioSource.volume = Mathf.SmoothDamp(startValue, endValue, ref _fadeVelocity, fadeTime);
                 yield return null;
             }
             
             _audioSource.volume = endValue;
-            
-            yield return new WaitForSeconds(0.05f); // Give Unity's audio system a moment
+
         }
     }
 }

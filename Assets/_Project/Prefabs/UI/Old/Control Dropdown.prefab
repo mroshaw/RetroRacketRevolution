@@ -252,15 +252,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -638,15 +640,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1015,8 +1019,6 @@ GameObject:
   - component: {fileID: 8845964546046222752}
   - component: {fileID: 6629453677323562017}
   - component: {fileID: 2344305603573482966}
-  - component: {fileID: 3459150836791897584}
-  - component: {fileID: 549867245320648600}
   m_Layer: 5
   m_Name: Control Dropdown
   m_TagString: Untagged
@@ -1133,16 +1135,21 @@ MonoBehaviour:
   m_ItemText: {fileID: 0}
   m_ItemImage: {fileID: 3783221451944958206}
   m_Value: 0
+  m_MultiSelect: 0
   m_Options:
     m_Options:
     - m_Text: 
       m_Image: {fileID: 21300000, guid: cfb1109a4142a1949b89aca6f1aad926, type: 3}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
     - m_Text: 
       m_Image: {fileID: 21300000, guid: 6e084119d0413b24d8468d9111be0e0b, type: 3}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
     - m_Text: 
       m_Image: {fileID: 21300000, guid: 2e06003428ef0ef469f07683ac28d46d, type: 3}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
     - m_Text: 
       m_Image: {fileID: 21300000, guid: 8896809d37be41e4f844b00ecd167fe4, type: 3}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1176,7 +1183,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 549867245320648600}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Coffee.UIExtensions.UIShiny, Assembly-CSharp
           m_MethodName: Play
           m_Mode: 6
@@ -1208,7 +1215,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 549867245320648600}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Coffee.UIExtensions.UIShiny, Assembly-CSharp
           m_MethodName: Stop
           m_Mode: 6
@@ -1236,7 +1243,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 549867245320648600}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Coffee.UIExtensions.UIShiny, Assembly-CSharp
           m_MethodName: Play
           m_Mode: 6
@@ -1252,7 +1259,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 549867245320648600}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Coffee.UIExtensions.UIShiny, Assembly-CSharp
           m_MethodName: Stop
           m_Mode: 6
@@ -1274,7 +1281,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8892740520723059030, guid: 64c16fae9f1ec1c4fa9353e524a215e7, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 546212e8cb8ccd44c8957ae1dc89b6ff, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 546212e8cb8ccd44c8957ae1dc89b6ff, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.02
   m_Pitch: 1
@@ -1370,7 +1378,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8892740520723059030, guid: 64c16fae9f1ec1c4fa9353e524a215e7, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f682e95f9ecc59d42b30daaa3abfdcd6, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f682e95f9ecc59d42b30daaa3abfdcd6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1456,63 +1465,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3459150836791897584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8059261120417062738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb48d82dc0e94a2b9246d17d04f8748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Direction: 2
-  m_Color1: {r: 0.8784314, g: 0.7647059, b: 0, a: 1}
-  m_Color2: {r: 0.8901961, g: 0, b: 0.13333334, a: 1}
-  m_Color3: {r: 1, g: 1, b: 1, a: 1}
-  m_Color4: {r: 1, g: 1, b: 1, a: 1}
-  m_Rotation: -76.7
-  m_Offset1: 0.116
-  m_Offset2: 0
-  m_GradientStyle: 0
-  m_ColorSpace: -1
-  m_IgnoreAspectRatio: 1
---- !u!114 &549867245320648600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8059261120417062738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f19b7e2285c104f6ca47d583f3e5444f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 300
-  m_EffectMaterial: {fileID: 2100000, guid: 9dc7e810a87b444ab96919f3215c2fe5, type: 2}
-  m_spriteOverride: 0
-  m_EffectFactor: 0
-  m_Width: 0.227
-  m_Rotation: 55
-  m_Softness: 1
-  m_Brightness: 1
-  m_Gloss: 1
-  m_EffectArea: 0
-  m_Player:
-    play: 0
-    initialPlayDelay: 0
-    duration: 1
-    loop: 1
-    loopDelay: 3
-    updateMode: 0
-  m_Play: 0
-  m_Loop: 0
-  m_Duration: 1
-  m_LoopDelay: 1
-  m_UpdateMode: 0
 --- !u!1 &8577696227743372748
 GameObject:
   m_ObjectHideFlags: 0

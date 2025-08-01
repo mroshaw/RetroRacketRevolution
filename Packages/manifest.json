@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
+    "com.daftapplegames.daftapple-core": "https://github.com/mroshaw/daftapple-core.git",
     "com.unity.2d.animation": "11.0.0",
     "com.unity.cinemachine": "3.1.2",
     "com.unity.collab-proxy": "2.8.2",
