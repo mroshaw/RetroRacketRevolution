@@ -9,7 +9,7 @@
                     "name": "CheatLives",
                     "type": "Button",
                     "id": "235ffa32-d7e3-47cc-a3d9-65c4ab095845",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -18,7 +18,7 @@
                     "name": "CheatLaserP1",
                     "type": "Button",
                     "id": "a181a6fc-cff1-45c5-a5ab-93ce60443296",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

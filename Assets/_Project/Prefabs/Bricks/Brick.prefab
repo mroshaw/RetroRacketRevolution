@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8141816282832084639}
+  - {fileID: 820380978928081603}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &334846713587151188
@@ -46,10 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3148c635d87d94ca481addc6c8d15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brickModel: {fileID: 8141816282832084639}
   brickColor: {r: 0, g: 0, b: 0, a: 0}
   brickType: 0
   brickBonus: 0
-  BrickDestroyedEvent:
+  onDestroyed:
     m_PersistentCalls:
       m_Calls: []
   health: 1
@@ -190,3 +192,89 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &973036056664572700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9119181159674297436}
+    m_Modifications:
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501177002965079051, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_Name
+      value: Brick Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 537003418056911053, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4.2902996e+24
+      objectReference: {fileID: 0}
+    - target: {fileID: 537003418056911053, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 8.908113e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 537003418056911053, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.0997902e+27
+      objectReference: {fileID: 0}
+    - target: {fileID: 537003418056911053, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.8057863e+28
+      objectReference: {fileID: 0}
+    - target: {fileID: 563311828085977237, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: MaxDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 563311828085977237, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+--- !u!4 &820380978928081603 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 496098564160444895, guid: 05915c840c809024e9e2769050a8bc74, type: 3}
+  m_PrefabInstance: {fileID: 973036056664572700}
+  m_PrefabAsset: {fileID: 0}

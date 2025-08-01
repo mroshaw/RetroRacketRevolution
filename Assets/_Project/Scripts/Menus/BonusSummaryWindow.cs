@@ -9,7 +9,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
         [BoxGroup("Data")] public BonusData bonusData;
         [BoxGroup("UI Settings")] public GameObject bonusContainer;
         [BoxGroup("UI Settings")] public GameObject bonusTemplateGameObject;
-        
+
         /// <summary>
         /// Update with the latest High Scores
         /// </summary>
@@ -39,17 +39,19 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
             }
 
             // Recreate them
-            foreach (BonusData.BonusDef bonusDef in bonusData.Bonuses)
+            foreach (BonusData.BonusDef bonusDef in bonusData.bonuses)
             {
-                if (bonusDef.Type == BonusType.None)
+                if (bonusDef.type == BonusType.None)
                 {
                     continue;
                 }
+
                 GameObject newEntry = Instantiate(bonusTemplateGameObject);
                 newEntry.transform.SetParent(bonusContainer.transform);
                 newEntry.transform.localScale = new Vector3(1, 1, 1);
                 newEntry.transform.localPosition = new Vector3(0, 0, 0);
-                newEntry.GetComponent<NameImageTemplate>().SetEntryContent(bonusDef.FriendlyName, bonusDef.Description, bonusDef.SpawnSprite);
+                newEntry.GetComponent<NameImageTemplate>().SetEntryContent(bonusDef.friendlyName, bonusDef.description,
+                    bonusDef.spawnSprite);
                 newEntry.SetActive(true);
             }
         }

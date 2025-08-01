@@ -3,22 +3,33 @@ using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
-    public enum BrickType { Normal, Invincible, DoubleStrong, TripleStrong, DisruptorOut, DisruptorIn, DisruptorBoth }
+    public enum BrickType
+    {
+        Normal,
+        Invincible,
+        DoubleStrong,
+        TripleStrong,
+        DisruptorOut,
+        DisruptorIn,
+        DisruptorBoth
+    }
 
     public class Brick : MonoBehaviour
     {
+        [BoxGroup("Settings")] [SerializeField] private Transform brickModel;
         [BoxGroup("Settings")] [SerializeField] private Color brickColor;
         [BoxGroup("Settings")] [SerializeField] private BrickType brickType;
         [BoxGroup("Settings")] [SerializeField] private BonusType brickBonus;
-        [BoxGroup("Events")] [SerializeField] public UnityEvent<Brick, bool> BrickDestroyedEvent;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent<Brick> onDestroyed;
 
         [BoxGroup("Debug")] [SerializeField] private int health = 1;
         [BoxGroup("Debug")] [SerializeField] private int row;
         [BoxGroup("Debug")] [SerializeField] private int col;
+
+        private Explosion _explosion;
 
         // Public properties
         public BrickType BrickType => brickType;
@@ -43,7 +54,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
-            _material =  GetComponentInChildren<Renderer>().material;
+            _material = GetComponentInChildren<Renderer>().material;
+            _explosion = GetComponentInChildren<Explosion>();
         }
 
         /// <summary>
@@ -77,6 +89,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// </summary>
         private void InitBrick()
         {
+            brickModel.gameObject.SetActive(true);
+
             // Set health
             switch (brickType)
             {
@@ -114,11 +128,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             // Init cracks
             if (IsDarkColor(brickColor))
             {
-
             }
             else
             {
-
             }
         }
 
@@ -131,26 +143,35 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             {
                 return;
             }
+
             health--;
 
             // Change sprite for multi-hit bricks
             if (health == 2)
             {
-
             }
 
             if (health == 1)
             {
-
             }
 
             if (health == 0)
             {
                 // Add score to player who destroyed
+                Destroy();
                 hitByPlayer.AddScore(_scoreValue);
                 SpawnBonus();
-                BrickDestroyedEvent.Invoke(this, true);
+                onDestroyed.Invoke(this);
             }
+        }
+
+        /// <summary>
+        /// Destroy the brick
+        /// </summary>
+        private void Destroy()
+        {
+            brickModel.gameObject.SetActive(false);
+            _explosion.Explode(true);
         }
 
         /// <summary>
@@ -160,11 +181,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         {
             if (mainGroup)
             {
-
             }
             else
             {
-
             }
         }
 
@@ -173,10 +192,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// </summary>
         private void SpawnBonus()
         {
-            if(brickBonus == BonusType.None)
+            if (brickBonus == BonusType.None)
             {
                 return;
             }
+
             BrickManager.BrickSpawnBonus(brickBonus, transform.position);
             // BonusManager.Instance.SpawnBonus(brickBonus, transform.position);
         }

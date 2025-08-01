@@ -12,69 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893da81341862b24d9a66e948b9e6806, type: 3}
   m_Name: BonusData
   m_EditorClassIdentifier: 
-  Bonuses:
-  - Type: 0
-    SpawnPrefab: {fileID: 0}
-    SpawnSprite: {fileID: 21300000, guid: 92178e91faf911d49b58ed636f2dceec, type: 3}
-    FriendlyName: 
-    Description: 
-  - Type: 1
-    SpawnPrefab: {fileID: 5606003369334716043, guid: 628eb3b3a3018b9428a274fc258d2b6c, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 2f4da39764034e24984614eafaa9275b, type: 3}
-    FriendlyName: Multi Ball
-    Description: Spawns 3 balls.
-  - Type: 2
-    SpawnPrefab: {fileID: 3824996350367816392, guid: f81ad113ed42edd46867f244bc24a220, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: fc4d4caed1e944f4596b0b4f6c81b379, type: 3}
-    FriendlyName: Laser
-    Description: Deploys up to 2 lasers.
-  - Type: 3
-    SpawnPrefab: {fileID: 3765363626422845566, guid: 8d98314014c23ab4c8a5814a42d19c24, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 067f337e81afc194c90bd661da243b27, type: 3}
-    FriendlyName: Slow ball
-    Description: Slows all balls to default.
-  - Type: 4
-    SpawnPrefab: {fileID: 2060553343631601992, guid: 9a2dc011fc44bd442a125691a9ec590e, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: a938166a7b05f0f4ba8c557d1ffa3204, type: 3}
-    FriendlyName: Mega Ball
-    Description: Balls smash through bricks.
-  - Type: 5
-    SpawnPrefab: {fileID: 3842103868394042091, guid: 61efca488282baa468af0746dba3c361, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: d48ea7856374cf445802cfef323cd23e, type: 3}
-    FriendlyName: Extra Life
-    Description: Grants 1 additional life.
-  - Type: 6
-    SpawnPrefab: {fileID: 5606003369334716043, guid: 81109e8d60f916d498a86a1d0c1baa36, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 8741fbbc7f7b3f4439ff91c49f7fe634, type: 3}
-    FriendlyName: Level Booster
-    Description: Boost to the next level.
-  - Type: 7
-    SpawnPrefab: {fileID: 9029456852723257085, guid: ae385f2bde379ed48b5f43eff14f769e, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: a444512717725c1479ba2913bd407305, type: 3}
-    FriendlyName: Random
-    Description: Spawns a random bonus.
-  - Type: 8
-    SpawnPrefab: {fileID: 3451124739252624410, guid: 6a333d428cc94ab41917733c695b6cb4, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 03b94edfce565c84bb99c9bd18e211b9, type: 3}
-    FriendlyName: Small Score
-    Description: Adds a small score bonus.
-  - Type: 9
-    SpawnPrefab: {fileID: 3451124739252624410, guid: 2833e4ab30221984b922c04c4e5aee9f, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: fd31f03a6a61f1749bea196df67a0276, type: 3}
-    FriendlyName: Big Score
-    Description: Adds a large score bonus.
-  - Type: 10
-    SpawnPrefab: {fileID: 3765363626422845566, guid: a24179968b705904c95a62c0c26fe9d3, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 12fda05ca572f9a4187a870f81a6dd35, type: 3}
-    FriendlyName: Shrink Bat
-    Description: Shrinks the player.
-  - Type: 11
-    SpawnPrefab: {fileID: 3765363626422845566, guid: 31ae8d661275ced49a4280748c1290e9, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: ffaf5a6b005ac9045a7b4bfc2f366c2b, type: 3}
-    FriendlyName: Grow Bat
-    Description: Grows the player.
-  - Type: 12
-    SpawnPrefab: {fileID: 3824996350367816392, guid: 905f21c92347f904db3f80c05082cbb5, type: 3}
-    SpawnSprite: {fileID: 21300000, guid: 44493ed7f4427464cb3cf7dba4c22f1c, type: 3}
-    FriendlyName: Catcher
-    Description: Player can catch balls.
+  bonuses:
+  - type: 2
+    spawnPrefab: {fileID: 1948051917597873659, guid: ddecbc719fc172846a18aaf463a0851d, type: 3}
+    spawnSprite: {fileID: 0}
+    friendlyName: Minigun
+    description: Minigun

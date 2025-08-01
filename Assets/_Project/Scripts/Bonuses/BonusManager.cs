@@ -11,9 +11,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
     {
         [BoxGroup("Prefabs")] public Transform bonusContainer;
         [BoxGroup("Settings")] public BonusData bonusData;
-        [BoxGroup("Random")] public Vector2 randomSpawnPosition;
+        [BoxGroup("Random")] public Transform randomSpawnTransform;
 
-        [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> BonusAppliedEvent;
+        [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> onBonusApplied;
 
         private AudioSource _audioSource;
 
@@ -28,9 +28,16 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Spawns a bonus at the given location
         /// </summary>
-        internal void SpawnBonus(BonusType bonusType, Vector2 spawnPosition)
+        public void SpawnBonus(BonusType bonusType, Vector3 spawnPosition)
         {
-            GameObject newBonus = Instantiate(bonusData.GetBonusByType(bonusType).SpawnPrefab, bonusContainer);
+            BonusData.BonusDef bonusDef = bonusData.GetBonusByType(bonusType);
+            if (bonusDef == null)
+            {
+                Debug.LogError($"Bonus Def not found for BonusType: {bonusType}");
+                return;
+            }
+
+            GameObject newBonus = Instantiate(bonusData.GetBonusByType(bonusType).spawnPrefab, bonusContainer);
             Bonus bonus = newBonus.GetComponent<Bonus>();
             newBonus.transform.position = spawnPosition;
             bonus.MainBonusManager = this;
@@ -53,11 +60,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
             {
                 BonusType randomBonus = GetRandomBonus(BonusType.Random);
                 // Debug.Log($"Spawning random bonus... {randomBonus.ToString()}");
-                SpawnBonus(randomBonus, randomSpawnPosition);
+                SpawnBonus(randomBonus, randomSpawnTransform.position);
                 return;
             }
 
-            BonusAppliedEvent.Invoke(bonus, targetGameObject);
+            onBonusApplied.Invoke(bonus, targetGameObject);
         }
 
         /// <summary>
@@ -116,8 +123,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Bonus type and prefab pairs
         /// </summary>
-        [Serializable]
-        internal class BonusCollectable
+        [Serializable] internal class BonusCollectable
         {
             public BonusType bonusType;
             public GameObject prefab;

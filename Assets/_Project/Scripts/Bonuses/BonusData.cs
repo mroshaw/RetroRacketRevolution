@@ -5,42 +5,51 @@ using Sirenix.OdinInspector;
 
 namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
-    public enum BonusType { None, MultiBall, Laser, SlowBall, MegaBall, ExtraLife, FinishLevel, Random, SmallScore, BigScore, ShrinkBat, GrowBat, Catcher }
+    public enum BonusType
+    {
+        None,
+        MultiBall,
+        Laser,
+        SlowBall,
+        MegaBall,
+        ExtraLife,
+        FinishLevel,
+        Random,
+        SmallScore,
+        BigScore,
+        ShrinkBat,
+        GrowBat,
+        Catcher
+    }
 
-    /// <summary>
-    /// Scriptable Object: TODO Purpose and Summary
-    /// </summary>
     [CreateAssetMenu(fileName = "BonusData", menuName = "Bonuses/Bonus Data", order = 1)]
     public class BonusData : ScriptableObject
     {
         // Public serializable properties
-        [BoxGroup("Bonus Data")]
-        public List<BonusDef> Bonuses;
+        [BoxGroup("Bonus Data")] public List<BonusDef> bonuses;
 
-        [Serializable]
-        public class BonusDef
+        [Serializable] public class BonusDef
         {
-            public BonusType Type;
-            public GameObject SpawnPrefab;
-            public Sprite SpawnSprite;
-            public string FriendlyName;
-            public string Description;
+            [BoxGroup("Settings")] public BonusType type;
+            [BoxGroup("Settings")] public GameObject spawnPrefab;
+            [BoxGroup("Level Editor")] public Sprite spawnSprite;
+            [BoxGroup("Level Editor")] public string friendlyName;
+            [BoxGroup("Level Editor")] public string description;
         }
 
         /// <summary>
         /// Gets the BonusDef by type
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
         public BonusDef GetBonusByType(BonusType type)
         {
-            foreach (BonusDef def in Bonuses)
+            foreach (BonusDef def in bonuses)
             {
-                if (def.Type == type)
+                if (def.type == type)
                 {
                     return def;
                 }
             }
+
             return null;
         }
     }

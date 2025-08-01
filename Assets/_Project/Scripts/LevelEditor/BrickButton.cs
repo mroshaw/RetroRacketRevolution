@@ -84,11 +84,14 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             {
                 targetColor = BrickData.BrickColor;
             }
+
             Color newColor = targetColor;
             newColor.a = 0.99f;
             buttonImage.color = newColor;
-            bonusImage.sprite = bonusData.GetBonusByType(BrickData.BrickBonus).SpawnSprite;
-            typeImage.sprite = BrickData.IsEmptySlot ? brickTypeData.NoBrickSprite : brickTypeData.GetBrickByType(BrickData.BrickType).BrickSprite;
+            bonusImage.sprite = bonusData.GetBonusByType(BrickData.BrickBonus).spawnSprite;
+            typeImage.sprite = BrickData.IsEmptySlot
+                ? brickTypeData.NoBrickSprite
+                : brickTypeData.GetBrickByType(BrickData.BrickType).BrickSprite;
         }
 
         /// <summary>
@@ -131,6 +134,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                     brickTypeChar = "D3";
                     break;
             }
+
             return brickTypeChar;
         }
 
@@ -182,8 +186,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 case BonusType.Catcher:
                     brickBonusChar = "CA";
                     break;
-
             }
+
             return brickBonusChar;
         }
 

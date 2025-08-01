@@ -7,7 +7,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public class Bonus : MonoBehaviour
     {
-        [BoxGroup("Settings")]public BonusType bonusType;
+        [BoxGroup("Settings")] public BonusType bonusType;
         [BoxGroup("Settings")] public float duration;
         [BoxGroup("Audio")] public AudioClip spawnAudioClip;
         [BoxGroup("Audio")] public AudioClip collectAudioClip;
@@ -17,7 +17,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 
         public BonusManager MainBonusManager { get; set; }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnCollisionEnter(Collision other)
         {
             if (other == null)
             {
@@ -42,8 +42,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         /// <summary>
         /// Applies whatever bonus effect has been collected
         /// </summary>
-        /// <param name="other"></param>
-        private void ApplyBonus(Collider2D other)
+        private void ApplyBonus(Collision other)
         {
             MainBonusManager.ApplyBonusEffect(this, other.gameObject);
         }

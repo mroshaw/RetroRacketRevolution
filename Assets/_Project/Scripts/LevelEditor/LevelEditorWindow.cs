@@ -41,7 +41,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("UI - Other")] [SerializeField] private ConfirmWindow deleteWindow;
         [BoxGroup("UI - Other")] [SerializeField] private AlertText alertText;
         [BoxGroup("UI - Other")] [SerializeField] private string mainMenuScene;
-        
+
         [BoxGroup("Data")] [SerializeField] private BrickTypeData brickTypeData;
         [BoxGroup("Data")] [SerializeField] private BonusData bonusData;
         [BoxGroup("Data")] [SerializeField] private LevelBackgroundSprites backgroundData;
@@ -107,7 +107,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         private void Start()
         {
-
         }
 
         /// <summary>
@@ -115,7 +114,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         private void OnDestroy()
         {
-
         }
 
         /// <summary>
@@ -319,9 +317,12 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 alertText.DisplayAlert("Please select a level to load!", true);
                 return;
             }
-            LevelLoadClickedEvent.Invoke(loadLevelDropDown.options[loadLevelDropDown.value].text, isCustomLevelsToggle.isOn);
+
+            LevelLoadClickedEvent.Invoke(loadLevelDropDown.options[loadLevelDropDown.value].text,
+                isCustomLevelsToggle.isOn);
             levelFileNameText.text = loadLevelDropDown.options[loadLevelDropDown.value].text;
-            alertText.DisplayAlert($"Loaded {loadLevelDropDown.options[loadLevelDropDown.value].text} successfully.", false);
+            alertText.DisplayAlert($"Loaded {loadLevelDropDown.options[loadLevelDropDown.value].text} successfully.",
+                false);
         }
 
         /// <summary>
@@ -361,7 +362,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             MainMenuClickedEvent.Invoke();
         }
-        
+
         /// <summary>
         /// Calls for a file to be deleted
         /// </summary>
@@ -401,7 +402,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             // Send to consumers
             BrickGridClickedEvent.Invoke(newBrickData);
         }
-        
+
         /// <summary>
         /// Sets the Level Description
         /// </summary>
@@ -417,7 +418,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             backGroundSpriteDropDown.SetValueWithoutNotify(spriteIndex);
             gridBackgroundImage.sprite = backgroundData.BackgroundSprites[spriteIndex];
-
         }
 
         /// <summary>
@@ -481,6 +481,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             {
                 options.Add(new TMP_Dropdown.OptionData(Path.GetFileNameWithoutExtension(fileName)));
             }
+
             loadLevelDropDown.options = options;
             loadLevelDropDown.SetValueWithoutNotify(0);
             // levelFileNameText.SetTextWithoutNotify(options[0].text);
@@ -520,6 +521,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -551,9 +553,9 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         private void PopulateBonusTypeDropDown()
         {
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-            foreach (BonusData.BonusDef bonusDef in bonusData.Bonuses)
+            foreach (BonusData.BonusDef bonusDef in bonusData.bonuses)
             {
-                options.Add(new TMP_Dropdown.OptionData(bonusDef.Type.ToString(), bonusDef.SpawnSprite, Color.clear));
+                options.Add(new TMP_Dropdown.OptionData(bonusDef.type.ToString(), bonusDef.spawnSprite, Color.clear));
             }
 
             brickBonusDropDown.options = options;
@@ -570,6 +572,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             {
                 options.Add(new TMP_Dropdown.OptionData(sprite.name, sprite, Color.clear));
             }
+
             backGroundSpriteDropDown.options = options;
         }
 
@@ -584,6 +587,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             {
                 options.Add(new TMP_Dropdown.OptionData(bossData.enemyName, bossData.sprite, Color.clear));
             }
+
             levelBossSpriteDropDown.options = options;
         }
 

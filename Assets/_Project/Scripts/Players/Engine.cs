@@ -8,22 +8,52 @@ namespace DaftAppleGames.Players
     {
         [BoxGroup("VFX")] [SerializeField] private ParticleSystem engineParticles;
         [BoxGroup("Audio")] [SerializeField] private AudioClip engineSound;
-        [BoxGroup("Audio")] [SerializeField] private float fadeTime = 0.2f;
+        [BoxGroup("Audio")] [SerializeField] private float maxVolume = 0.6f;
+        [BoxGroup("Audio")] [SerializeField] private float audioModifier = 1.0f;
+
         private AudioSource _audioSource;
 
         private bool _isFiring;
-        private Coroutine _fadeCoroutine;
-        private float _fadeVelocity = 0f;
-        
+        private bool _canFire;
+
+        private void OnEnable()
+        {
+            _canFire = true;
+            _audioSource.volume = 0f;
+            _audioSource.Play();
+        }
+
+        private void OnDisable()
+        {
+            _canFire = false;
+        }
+
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             engineParticles.Stop();
-			_audioSource.volume = 0f;
-            _audioSource.Play();
         }
 
-		[Button("Fire Engine")]
+        private void Update()
+        {
+            if (!_canFire ||
+                (_isFiring && _audioSource.volume >= maxVolume) ||
+                (!_isFiring && _audioSource.volume <= 0))
+            {
+                return;
+            }
+
+            if (_isFiring)
+            {
+                _audioSource.volume += Time.deltaTime * audioModifier;
+            }
+            else
+            {
+                _audioSource.volume -= Time.deltaTime * audioModifier;
+            }
+        }
+
+        [Button("Fire Engine")]
         public void FireEngine()
         {
             if (_isFiring)
@@ -31,63 +61,20 @@ namespace DaftAppleGames.Players
                 return;
             }
 
-            FadeInAudio();
             engineParticles.Play();
             _isFiring = true;
         }
 
-		[Button("Stop Firing Engine")]
+        [Button("Stop Firing Engine")]
         public void StopFiringEngine()
         {
             if (!_isFiring)
             {
                 return;
             }
+
             engineParticles.Stop();
-            FadeOutAudio();
             _isFiring = false;
-        }
-
-        private void FadeInAudio()
-        {
-            if (!enabled)
-            {
-                return;
-            }
-            
-            if (_fadeCoroutine != null)
-            {
-                StopCoroutine(_fadeCoroutine);
-            }
-            
-            _fadeCoroutine = StartCoroutine(FadeAudio(1f));
-        }
-        
-        private void FadeOutAudio()
-        {
-            if (!enabled)
-            {
-                return;
-            }
-            
-            if (_fadeCoroutine != null)
-            {
-                StopCoroutine(_fadeCoroutine);
-            }
-            _fadeCoroutine = StartCoroutine(FadeAudio(0f));
-        }
-        
-        private IEnumerator FadeAudio(float endValue)
-        {
-            float startValue = _audioSource.volume;
-            while (!Mathf.Approximately(_audioSource.volume, endValue))
-            {
-                _audioSource.volume = Mathf.SmoothDamp(startValue, endValue, ref _fadeVelocity, fadeTime);
-                yield return null;
-            }
-            
-            _audioSource.volume = endValue;
-
         }
     }
 }

@@ -48,8 +48,9 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Toggle Infinite Lives")]
-        private void OnCheatLives()
-        {   // Toggle unlimited lives
+        public void OnCheatLives()
+        {
+            // Toggle unlimited lives
             bool result = playerManager.ToggleUnlimitedLives();
 
             Notify($"Infinite lives is {result}");
@@ -60,7 +61,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Give Laser (P1)")]
-        private void OnCheatLaserP1()
+        public void OnCheatLaserP1()
         {
             HardPoint playerHardPoint = player1.GetFreeHardPoint(HardPointLocation.Outer);
             if (playerHardPoint != null)
@@ -68,6 +69,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
+
             Notify($"Player 1 laser enabled for {addOnDuration} seconds");
         }
 
@@ -76,7 +78,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Give Laser (P2)")]
-        private void OnCheatLaserP2()
+        public void OnCheatLaserP2()
         {
             HardPoint playerHardPoint = player2.GetFreeHardPoint(HardPointLocation.Outer);
             if (playerHardPoint != null)
@@ -84,15 +86,16 @@ namespace DaftAppleGames.RetroRacketRevolution
                 playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
-            Notify($"Player 2 laser enabled for {addOnDuration} seconds");
 
+            Notify($"Player 2 laser enabled for {addOnDuration} seconds");
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [FoldoutGroup("Cheats")] [Button("Give Catch (P1)")]
-        private void OnCheatCatchP1()
+        [FoldoutGroup("Cheats")]
+        [Button("Give Catch (P1)")]
+        public void OnCheatCatchP1()
         {
             HardPoint playerHardPoint = player1.GetFreeHardPoint(HardPointLocation.Center);
             if (playerHardPoint != null)
@@ -100,8 +103,8 @@ namespace DaftAppleGames.RetroRacketRevolution
                 playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
-            Notify($"Player 1 catch enabled for {addOnDuration} seconds");
 
+            Notify($"Player 1 catch enabled for {addOnDuration} seconds");
         }
 
         /// <summary>
@@ -109,7 +112,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Give Catch (P2)")]
-        private void OnCheatCatchP2()
+        public void OnCheatCatchP2()
         {
             HardPoint playerHardPoint = player2.GetFreeHardPoint(HardPointLocation.Center);
             if (playerHardPoint != null)
@@ -117,6 +120,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 playerHardPoint.Deploy();
                 StartCoroutine(DisableAddOnAfterDelay(playerHardPoint, addOnDuration));
             }
+
             Notify($"Player 2 catch enabled for {addOnDuration} seconds");
         }
 
@@ -125,7 +129,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Extra Life")]
-        private void OnCheatSpawnLife()
+        public void OnCheatSpawnLife()
         {
             bonusManager.SpawnBonus(BonusType.ExtraLife, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.ExtraLife}");
@@ -136,7 +140,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Laser")]
-        private void OnCheatSpawnLaser()
+        public void OnCheatSpawnLaser()
         {
             bonusManager.SpawnBonus(BonusType.Laser, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.Laser}");
@@ -147,28 +151,29 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Catch")]
-        private void OnCheatSpawnCatch()
+        public void OnCheatSpawnCatch()
         {
             bonusManager.SpawnBonus(BonusType.Catcher, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.Catcher}");
-
         }
+
         /// <summary>
         /// Handle Spawn cheat message (slow ball)
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Slow Ball")]
-        private void OnCheatSpawnSlowBall()
+        public void OnCheatSpawnSlowBall()
         {
             bonusManager.SpawnBonus(BonusType.SlowBall, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.SlowBall}");
         }
+
         /// <summary>
         /// Handle Spawn cheat message (mega ball)
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Mega Ball")]
-        private void OnCheatSpawnMegaBall()
+        public void OnCheatSpawnMegaBall()
         {
             bonusManager.SpawnBonus(BonusType.MegaBall, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.MegaBall}");
@@ -179,37 +184,40 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Multi Ball")]
-        private void OnCheatSpawnMultiBall()
+        public void OnCheatSpawnMultiBall()
         {
             bonusManager.SpawnBonus(BonusType.MultiBall, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.MultiBall}");
         }
+
         /// <summary>
         /// Handle Spawn cheat message (grow bat)
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Grow Bat")]
-        private void OnCheatSpawnGrowBat()
+        public void OnCheatSpawnGrowBat()
         {
             bonusManager.SpawnBonus(BonusType.GrowBat, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.GrowBat}");
         }
+
         /// <summary>
         /// Handle Spawn cheat message (shrink bat)
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Shrink Bat")]
-        private void OnCheatSpawnShrinkBat()
+        public void OnCheatSpawnShrinkBat()
         {
             bonusManager.SpawnBonus(BonusType.ShrinkBat, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.ShrinkBat}");
         }
+
         /// <summary>
         /// Handle Spawn cheat message (small score)
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Small Score")]
-        private void OnCheatSpawnSmallScore()
+        public void OnCheatSpawnSmallScore()
         {
             bonusManager.SpawnBonus(BonusType.SmallScore, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.SmallScore}");
@@ -220,7 +228,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn BigScore")]
-        private void OnCheatSpawnBigScore()
+        public void OnCheatSpawnBigScore()
         {
             bonusManager.SpawnBonus(BonusType.BigScore, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.BigScore}");
@@ -231,7 +239,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Win Level")]
-        private void OnCheatSpawnWinLevel()
+        public void OnCheatSpawnWinLevel()
         {
             bonusManager.SpawnBonus(BonusType.FinishLevel, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.FinishLevel}");
@@ -242,7 +250,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("Spawn Random")]
-        private void OnCheatSpawnRandom()
+        public void OnCheatSpawnRandom()
         {
             bonusManager.SpawnBonus(BonusType.Random, cheatSpawnTransform.position);
             Notify($"Spawned {BonusType.Random}");
@@ -253,17 +261,15 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         [FoldoutGroup("Cheats")]
         [Button("SkipLevel")]
-        private void OnCheatSkipLevel()
+        public void OnCheatSkipLevel()
         {
             brickManager.DestroyAllBricks();
             Notify($"Skipping level...");
         }
 
-
         /// <summary>
         /// Add a notification to the queue and show
         /// </summary>
-        /// <param name="message"></param>
         private void Notify(string message)
         {
             // Notify any listeners that cheats have been used
@@ -281,7 +287,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Show the current notification queue, fade in and out
         /// </summary>
-        /// <returns></returns>
         private IEnumerator NotifyFade(string message)
         {
             notificationText.color = _hiddenColor;
@@ -295,6 +300,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 time += Time.deltaTime;
                 yield return null;
             }
+
             notificationText.color = _visibleColor;
 
             // Wait
@@ -308,6 +314,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 time += Time.deltaTime;
                 yield return null;
             }
+
             notificationText.color = _hiddenColor;
             notificationText.text = "";
         }
@@ -315,9 +322,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Disable AddOn cheats after time
         /// </summary>
-        /// <param name="hardPoint"></param>
-        /// <param name="delay"></param>
-        /// <returns></returns>
         private IEnumerator DisableAddOnAfterDelay(HardPoint hardPoint, float delay)
         {
             yield return new WaitForSeconds(delay);

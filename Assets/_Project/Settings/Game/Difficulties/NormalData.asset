@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: NormalData
   m_EditorClassIdentifier: 
   difficultyName: Normal
-  defaultBallSpeed: 180
-  ballSpeedUpAfterDuration: 60
+  defaultBallSpeed: 200
+  ballSpeedUpAfterDuration: 30
   ballSpeedMultiplier: 1.2
   startingLives: 5
   defaultBatLength: 12

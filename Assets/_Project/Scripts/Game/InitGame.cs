@@ -1,4 +1,5 @@
 using DaftAppleGames.Levels;
+using DaftAppleGames.RetroRacketRevolution.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,8 @@ namespace DaftAppleGames.Game
 {
     public class InitGame : MonoBehaviour
     {
-        [BoxGroup("Settings")] [SerializeField] private string mainMenuScene;
+        [BoxGroup("Settings")] [SerializeField] private GameConfig gameConfig;
+
         private void Start()
         {
             LevelDataResources levelDataResources = GetComponent<LevelDataResources>();
@@ -16,7 +18,7 @@ namespace DaftAppleGames.Game
 
         public void InitDone()
         {
-            SceneManager.LoadScene(mainMenuScene);
+            SceneManager.LoadScene(gameConfig.menuScene);
         }
     }
 }

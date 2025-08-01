@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42658f0110be61b4f8e985a01b7423ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuScene: MainMenuScene3D
+  gameConfig: {fileID: 11400000, guid: 7c0b1d5110e000744ac0541edace0b85, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

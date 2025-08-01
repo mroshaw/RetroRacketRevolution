@@ -156,16 +156,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e785cc244dac543b43446ec4bdd0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultBallSpeed: 100
+  defaultBallSpeed: 130
   speedUpAfterDuration: 20
   speedMultiplier: 1.2
   spinForce: 1000
   megaBallDuration: 5
   hitPlayerClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
-  hitBoundaryClip: {fileID: 0}
+  hitBoundaryClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
   hitBrickClip: {fileID: 0}
-  hitMultibrickClip: {fileID: 0}
-  hitInvincibleBrickClip: {fileID: 0}
+  hitMultibrickClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
+  hitInvincibleBrickClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
   speedChangeTimer: 0
   currSpeed: 0
   onAttached:

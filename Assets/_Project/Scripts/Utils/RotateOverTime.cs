@@ -9,10 +9,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Utils
     public class RotateOverTime : MonoBehaviour
     {
         [BoxGroup("Settings")] [SerializeField] private bool rotateOnStart = true;
-        [BoxGroup("Settings")] [SerializeField] private float rotateSpeed = 1.0f;
-        
+        [BoxGroup("Settings")] [SerializeField] private Vector3 rotateSpeed;
+
         private bool _rotating = false;
-        
+
         private void Start()
         {
             _rotating = rotateOnStart;
@@ -24,7 +24,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Utils
             {
                 return;
             }
-            transform.Rotate(Vector3.up * (rotateSpeed * Time.deltaTime), Space.World);
+
+            transform.Rotate((rotateSpeed * Time.deltaTime), Space.World);
         }
 
         [Button("Start Rotating")]
@@ -32,12 +33,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Utils
         {
             _rotating = true;
         }
-        
+
         [Button("Stop Rotating")]
         public void StopRotating()
         {
             _rotating = false;
         }
-        
     }
 }

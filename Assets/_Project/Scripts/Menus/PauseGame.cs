@@ -1,4 +1,5 @@
 using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftAppleGames.UserInterface;
 using DaftAppleGames.UserInterface.PauseGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,7 +11,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
     public class PauseGame : PauseGameController
     {
         [BoxGroup("Game Config")] [SerializeField] private GameConfig gameConfig;
-        
+        [BoxGroup("Settings")] [SerializeField] private CanvasFader canvasFader;
+
         /// <summary>
         /// Toggles the pause state
         /// </summary>
@@ -21,6 +23,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
 
         protected override void ReturnToMainMenu()
         {
+            canvasFader.FadeOut(LoadMainMenu);
+        }
+
+        private void LoadMainMenu()
+        {
+            UnPauseGame();
             SceneManager.LoadScene(gameConfig.menuScene);
         }
     }
