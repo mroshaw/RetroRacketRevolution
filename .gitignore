@@ -144,3 +144,7 @@ crashlytics-build.properties
 /[Aa]ssets/TextMesh Pro/
 /[Aa]ssets/TextMesh Pro.meta
 /.utmp
+
+# Sub-modules
+!Packages/com.daftapplegames.ui-and-settings
+!Packages/com.daftapplegames.ui-and-settings/**
