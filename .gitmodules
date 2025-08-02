@@ -1,3 +1,3 @@
-[submodule "Packages/com.daftapplegames.ui-and-settings/-f"]
-	path = Packages/com.daftapplegames.ui-and-settings/-f
+[submodule "Packages/ui-and-settings"]
+	path = Packages/ui-and-settings
 	url = https://github.com/mroshaw/ui-and-settings.git
