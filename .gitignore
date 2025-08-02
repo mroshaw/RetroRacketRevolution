@@ -146,5 +146,5 @@ crashlytics-build.properties
 /.utmp
 
 # Sub-modules
-!Packages/ui-and-settings
-!Packages/ui-and-settings/**
+!Packages/com.daftapplegames.ui-and-settings
+!Packages/com.daftapplegames.ui-and-settings/**
