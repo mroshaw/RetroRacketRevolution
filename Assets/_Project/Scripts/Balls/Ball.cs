@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         internal int CurrSpeedMultiplier { get; private set; }
 
         // Components
-        private Rigidbody _rb;
+        private Rigidbody _rigidBody;
         private AudioSource _audioSource;
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         private void Awake()
         {
-            _rb = GetComponentInChildren<Rigidbody>();
+            _rigidBody = GetComponentInChildren<Rigidbody>();
             _audioSource = GetComponent<AudioSource>();
             currSpeed = defaultBallSpeed;
             speedChangeTimer = 0;
@@ -77,6 +78,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             {
                 return;
             }
+
             speedChangeTimer += Time.deltaTime;
             if (speedChangeTimer > speedUpAfterDuration)
             {
@@ -85,6 +87,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 CurrSpeedMultiplier++;
                 onSpeedMultiplierChanged.Invoke(this);
             }
+
             CheckOutOfBounds();
         }
 
@@ -115,7 +118,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [Button("Make Mega Ball")]
         internal void MakeMegaBall()
         {
-            _rb.excludeLayers |= (1 << LayerMask.NameToLayer("Bricks"));
+            _rigidBody.excludeLayers |= (1 << LayerMask.NameToLayer("Bricks"));
             StartCoroutine(RevertMegaBallAsync(megaBallDuration));
         }
 
@@ -125,7 +128,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [Button("Make Normal Ball")]
         internal void MakeNormalBall()
         {
-            _rb.excludeLayers &= ~(1 << LayerMask.NameToLayer("Bricks"));
+            _rigidBody.excludeLayers &= ~(1 << LayerMask.NameToLayer("Bricks"));
         }
 
         /// <summary>
@@ -191,9 +194,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 Brick brick = other.gameObject.GetComponent<Brick>();
                 CollideWithBrick(brick);
             }
-            
+
             // Goes out of bounds, off the bottom of the screen
-            if(other.gameObject.CompareTag("OutOfBounds"))
+            if (other.gameObject.CompareTag("OutOfBounds"))
             {
                 DestroyBall();
             }
@@ -217,7 +220,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 _audioSource.PlayOneShot(hitBoundaryClip);
             }
         }
-        
+
         /// <summary>
         /// Handles collision with a brick
         /// </summary>
@@ -234,11 +237,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                     {
                         _audioSource.PlayOneShot(hitMultibrickClip);
                     }
+
                     break;
                 case BrickType.Invincible:
                     _audioSource.PlayOneShot(hitInvincibleBrickClip);
                     break;
             }
+
             brick.BrickHit(LastTouchedByPlayer);
         }
 
@@ -254,6 +259,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             {
                 return;
             }
+
             LastTouchedByPlayer = player;
 
             // Calculate hit Factor
@@ -264,10 +270,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
                 other.transform.position, other.collider.bounds.size.x);
 
             // Calculate direction, set length to 1
-            Vector3 dir = new Vector3(x, 1, 1).normalized;
+            Vector3 dir = new Vector3(x, y, 1).normalized;
 
             // Set Velocity with dir * speed
-            GetComponent<Rigidbody>().linearVelocity = dir * currSpeed;
+            _rigidBody.linearVelocity = dir * currSpeed;
+            Spin();
             if (_audioSource.enabled)
             {
                 _audioSource.PlayOneShot(hitPlayerClip);
@@ -318,11 +325,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             {
                 return;
             }
+
             _attachedPlayer = player;
             LastTouchedByPlayer = player;
-            _rb.angularVelocity = Vector3.zero;
-            _rb.linearVelocity = Vector3.zero;
-            _rb.isKinematic = true;
+            _rigidBody.angularVelocity = Vector3.zero;
+            _rigidBody.linearVelocity = Vector3.zero;
+            _rigidBody.isKinematic = true;
             gameObject.transform.SetParent(player.gameObject.transform, true);
             gameObject.transform.position = attachPosition;
             player.AttachBall(this);
@@ -336,10 +344,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         {
             gameObject.transform.SetParent(DefaultParent.transform, true);
             _attachedPlayer = null;
-            _rb.isKinematic = false;
+            _rigidBody.isKinematic = false;
             speedChangeTimer = 0.0f;
-            _rb.linearVelocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
-            AddRandomSpin();
+            _rigidBody.linearVelocity = (Vector2.up + 0.1f * RandomVector()) * defaultBallSpeed;
+            Spin();
             player.DetachBall(this);
             onDetached.Invoke();
         }
@@ -357,7 +365,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         internal void Nudge(Vector2 vectorDirection)
         {
-            _rb.linearVelocity = vectorDirection * defaultBallSpeed;
+            _rigidBody.linearVelocity = vectorDirection * defaultBallSpeed;
         }
 
         /// <summary>
@@ -381,7 +389,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Adds random torque to set the ball spinning
         /// </summary>
-        private void AddRandomSpin()
+        internal void Spin()
         {
             // Generate random torque values for each axis
             float randomX = Random.Range(-spinForce, spinForce);
@@ -392,7 +400,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
             Vector3 randomTorque = new Vector3(randomX, randomY, randomZ);
 
             // Apply the torque to the Rigidbody
-            _rb.AddTorque(randomTorque);
+            _rigidBody.AddTorque(randomTorque);
         }
     }
 }

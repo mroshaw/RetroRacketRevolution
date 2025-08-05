@@ -1,10 +1,9 @@
-using DaftAppleGames.Levels;
-using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftAppleGames.RetroRacketRevolution.Levels;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace DaftAppleGames.Game
+namespace DaftAppleGames.RetroRacketRevolution.Game
 {
     public class InitGame : MonoBehaviour
     {

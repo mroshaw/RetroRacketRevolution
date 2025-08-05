@@ -4,11 +4,10 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Enemies
 {
     public class EnemyProjectile : Projectile
     {
-
         [BoxGroup("Audio")] [SerializeField] private AudioClip fallingAudioClip;
         [FoldoutGroup("Events")] public UnityEvent<Projectile> ProjectileDestroyedEvent;
 

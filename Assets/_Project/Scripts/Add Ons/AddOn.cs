@@ -1,16 +1,14 @@
 using System;
+using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public abstract class AddOn : MonoBehaviour
     {
-
-        [BoxGroup("Audio")] [SerializeField] private AudioClip deployClip;
-        [BoxGroup("Audio")] [SerializeField] private AudioClip retractClip;
-
         [BoxGroup("Debug")] [SerializeField] private Player attachedPlayer;
         [BoxGroup("Debug")] [SerializeField] private HardPoint attachedHardPoint;
 
@@ -19,7 +17,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
 
         protected bool IsDeployed => attachedHardPoint && attachedHardPoint.IsDeployed;
 
-        protected internal AudioSource AudioSource;
+        protected AudioSource AudioSource;
 
         internal abstract void Fire();
         internal abstract void StopFire();
@@ -40,7 +38,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
                 attachedPlayer = player;
             }
 
-            attachedHardPoint =  hardPoint;
+            attachedHardPoint = hardPoint;
         }
 
         /// <summary>
@@ -53,25 +51,10 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         }
 
         /// <summary>
-        /// Deploy add-on functionality
+        /// Async routines for specific Addons
         /// </summary>
-        protected internal virtual void Deploy(Action callBack, bool immediate = false)
-        {
-            if (AudioSource && deployClip)
-            {
-                AudioSource.PlayOneShot(deployClip);
-            }
-        }
+        protected internal abstract IEnumerator Deploy(bool immediate = false);
 
-        /// <summary>
-        /// Deploy add-on functionality
-        /// </summary>
-        protected internal virtual void Retract(Action callBack, bool immediate = false)
-        {
-            if (AudioSource && retractClip)
-            {
-                AudioSource.PlayOneShot(retractClip);
-            }
-        }
+        protected internal abstract IEnumerator Retract(bool immediate = false);
     }
 }

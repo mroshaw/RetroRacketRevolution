@@ -1,14 +1,13 @@
 using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Balls;
-using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace DaftAppleGames.RetroRacketRevolution.Players
 {
-    public class PlayerManager : MonoBehaviour, IBonusRecipient
+    public class PlayerManager : MonoBehaviour
     {
         [BoxGroup("Players")] [SerializeField] private Player playerOne;
         [BoxGroup("Players")] [SerializeField] private Player playerTwo;
@@ -85,7 +84,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void ConfigurePlayerArea(bool isTwoPlayer)
         {
-
             Transform player1Transform = playerOne.transform;
             Transform player2Transform = playerTwo.transform;
 
@@ -96,9 +94,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 playerOneControls.ConfigurePlayer(player1MinX, player2MaxX);
 
                 // Position players
-                Vector3 player1Position = new((player1MaxX - player1MinX) / 2, player1Transform.position.y, player1Transform.position.z);
+                Vector3 player1Position = new((player1MaxX - player1MinX) / 2, player1Transform.position.y,
+                    player1Transform.position.z);
                 playerOne.gameObject.transform.localPosition = player1Position;
-
             }
             // Two player game
             else
@@ -108,9 +106,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 playerTwoControls.ConfigurePlayer(player2MinX, player2MaxX);
 
                 // Position players
-                Vector3 player1Position = new Vector3((player1MaxX - player1MinX) / 2, player1Transform.position.y, player1Transform.position.z);
-                Vector3 player2Position = new Vector3((player2MaxX - player2MinX) / 2, player2Transform.position.y, player2Transform.position.z);
- 
+                Vector3 player1Position = new Vector3((player1MaxX - player1MinX) / 2, player1Transform.position.y,
+                    player1Transform.position.z);
+                Vector3 player2Position = new Vector3((player2MaxX - player2MinX) / 2, player2Transform.position.y,
+                    player2Transform.position.z);
+
                 playerOne.gameObject.transform.localPosition = player1Position;
                 playerTwo.gameObject.transform.localPosition = player2Position;
             }
@@ -129,7 +129,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             player.Kill();
             _lifeForce.LoseLife();
         }
-        
+
         public void KillBothPlayers()
         {
             KillPlayerOne(true);
@@ -137,6 +137,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 KillPlayerTwo();
             }
+
             _lifeForce.LoseLife();
             StartCoroutine(RespawnAsync(playerOne, true));
             if (gameData.isTwoPlayer)
@@ -152,14 +153,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 return;
             }
+
             StartCoroutine(RespawnAsync(playerOne, spawnBall));
         }
 
         public void KillPlayerTwo()
         {
-            
         }
-        
+
         /// <summary>
         /// Respawns a player after a delay
         /// </summary>
@@ -168,7 +169,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             yield return new WaitForSeconds(respawnDelay);
             player.ResetPlayer(spawnBall);
         }
-        
+
         /// <summary>
         /// Setup the desired control scheme when the player controller is started.
         /// </summary>
@@ -179,7 +180,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             switch (input.gameObject.name)
             {
                 case "Player 1":
-                    SetControlScheme(playerOneInput,gameData.playerOneControlScheme);
+                    SetControlScheme(playerOneInput, gameData.playerOneControlScheme);
                     break;
 
                 case "Player 2":
@@ -189,22 +190,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         }
 
         /// <summary>
-        /// Handler the BonusApplied event
-        /// </summary>
-        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
-        {
-            switch (bonus.bonusType)
-            {
-                case BonusType.ExtraLife:
-                    AddLife();
-                    break;
-            }
-        }
-
-        /// <summary>
         /// Add a life to the players
         /// </summary>
-        private void AddLife()
+        internal void AddLife()
         {
             _lifeForce.AddLife();
         }
@@ -223,9 +211,33 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             playerOne.ResetPlayer(spawnBall);
         }
 
+        public void ResetPlayers(bool spawnBall)
+        {
+            ResetPlayerOne(spawnBall);
+            ResetPlayerTwo();
+        }
+
         private void ResetPlayerTwo()
         {
             playerTwo.ResetPlayer(false);
+        }
+
+        /// <summary>
+        /// Communicate ball related player bonuses to the ball manager
+        /// </summary>
+        internal void MakeMegaBalls()
+        {
+            ballManager.MakeMegaBalls();
+        }
+
+        internal void MakeMultiBalls()
+        {
+            ballManager.SpawnTripleBall();
+        }
+
+        internal void MakeSlowBalls()
+        {
+            ballManager.SlowAllBalls();
         }
     }
 }

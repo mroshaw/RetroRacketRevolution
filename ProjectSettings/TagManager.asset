@@ -24,11 +24,11 @@ TagManager:
   - Water
   - UI
   - Bricks
-  - Player1
+  - Player
   - Bonus
   - Ball
   - Walls
-  - Player2
+  - 
   - MegaBall
   - Projectile
   - Catcher

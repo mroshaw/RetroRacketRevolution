@@ -166,6 +166,10 @@ MonoBehaviour:
   settingUis:
   - {fileID: 718783260942485262}
   - {fileID: 2783718177625584612}
+  - {fileID: 6811974086063882932}
+  - {fileID: 6981577164689750998}
+  - {fileID: 3819980261669959508}
+  - {fileID: 3972530599000089429}
   saveButton: {fileID: 3466211603943097981}
   cancelButton: {fileID: 7683610861587337183}
   onSaveButtonClickedEvent:
@@ -415,7 +419,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 25
+  m_Spacing: 40
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -561,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4757471009972507350, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_text
-      value: Music
+      value: Music Volume
       objectReference: {fileID: 0}
     - target: {fileID: 9039284626255927772, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_AnchorMax.y
@@ -787,6 +791,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7079950630974290139, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
   m_PrefabInstance: {fileID: 3354082715494067081}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6811974086063882932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071829468127963453, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
+  m_PrefabInstance: {fileID: 3354082715494067081}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ebc08c34f555f42be3e235c54c7805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4617715093270794145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -945,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172314982843405934, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
       propertyPath: m_text
-      value: Sound FX
+      value: Sound FX Volume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1026,12 +1041,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3915824657817031261, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 330
+      objectReference: {fileID: 0}
+    - target: {fileID: 3915824657817031261, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3915824657817031261, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608213290277527998, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
+      propertyPath: m_Spacing
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7079950630974290139, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
       propertyPath: m_Pivot.x
@@ -1155,6 +1178,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7079950630974290139, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
   m_PrefabInstance: {fileID: 5126685903808957032}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3972530599000089429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071829468127963453, guid: 251227a5b5af86e4a9bc746982ccfaea, type: 3}
+  m_PrefabInstance: {fileID: 5126685903808957032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ebc08c34f555f42be3e235c54c7805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5871201642598822990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1406,7 +1440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250842042483321040, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 250842042483321040, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1528,6 +1562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sound FX Volume
       objectReference: {fileID: 0}
+    - target: {fileID: 6194311726487414327, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
+      propertyPath: m_Spacing
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6700579634516647268, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1546,7 +1584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172314982843405934, guid: f48569a9772eec9469f5a7d2e2280847, type: 3}
       propertyPath: m_text
-      value: Sound FX
+      value: Sound FX Volume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1636,7 +1674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519741274085731432, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 2519741274085731432, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1688,7 +1726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2666649502290931560, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 2666649502290931560, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1744,7 +1782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4757471009972507350, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_text
-      value: Music
+      value: Music Volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393123551957688975, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
+      propertyPath: m_Spacing
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9039284626255927772, guid: a6d980ffceafedb45a2f1ec17d5f3401, type: 3}
       propertyPath: m_AnchorMax.y

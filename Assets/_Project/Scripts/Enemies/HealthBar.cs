@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 
-namespace DaftAppleGames.Enemies
+namespace DaftAppleGames.RetroRacketRevolution.Enemies
 {
     public class HealthBar : MonoBehaviour
     {
@@ -17,13 +16,8 @@ namespace DaftAppleGames.Enemies
         [BoxGroup("Health")] public int critialHealth;
         [BoxGroup("Health")] public Color criticalHealthColor = Color.red;
 
-        // Public properties
-
-        // Private fields
         private Image _healthImage;
 
-        #region UnityMethods
-  
         /// <summary>
         /// Initialise this component
         /// </summary>   
@@ -31,10 +25,6 @@ namespace DaftAppleGames.Enemies
         {
             _healthImage = healthSlider.fillRect.gameObject.GetComponent<Image>();
         }
-        
-        #endregion
-
-	    #region PublicMethods
 
         /// <summary>
         /// Initialise the health bar
@@ -51,15 +41,14 @@ namespace DaftAppleGames.Enemies
         /// Update the health bar
         /// </summary>
         /// <param name="health"></param>
-
         public void UpdateHealthBar(int health)
         {
             healthSlider.value = health;
             if (health >= normalHealth)
             {
-               _healthImage.color = normalHealthColor;
+                _healthImage.color = normalHealthColor;
             }
-            else if(health < normalHealth && health > warningHealth)
+            else if (health < normalHealth && health > warningHealth)
             {
                 _healthImage.color = warningHealthColor;
             }
@@ -68,7 +57,5 @@ namespace DaftAppleGames.Enemies
                 _healthImage.color = criticalHealthColor;
             }
         }
-	    #endregion
-
     }
 }

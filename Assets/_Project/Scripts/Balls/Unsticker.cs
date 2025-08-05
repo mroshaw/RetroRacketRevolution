@@ -3,7 +3,7 @@ using DaftAppleGames.RetroRacketRevolution.Balls;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Balls
 {
     public class Unsticker : MonoBehaviour
     {
@@ -16,8 +16,8 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("Debug")] [SerializeField] private float _rbVelocityY;
 
 
-        [BoxGroup("Debug")][SerializeField] private float _horizontalStuckTime;
-        [BoxGroup("Debug")][SerializeField] private float _verticalStuckTime;
+        [BoxGroup("Debug")] [SerializeField] private float _horizontalStuckTime;
+        [BoxGroup("Debug")] [SerializeField] private float _verticalStuckTime;
 
         private Ball _ball;
 
@@ -42,6 +42,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             {
                 return;
             }
+
             CheckHorizontal();
             CheckVertical();
         }
@@ -65,7 +66,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (_horizontalStuckTime > stuckTimeBeforeIntervention)
             {
                 Debug.Log("Detected stuck horizontal. Nudging left...");
-                Nudge(Vector2.left);
+                Nudge(Vector3.left);
             }
         }
 
@@ -90,7 +91,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (_verticalStuckTime > stuckTimeBeforeIntervention)
             {
                 Debug.Log("Detected stuck horizontal. Nudging up...");
-                Nudge(Vector2.up);
+                Nudge(Vector3.up);
             }
         }
 

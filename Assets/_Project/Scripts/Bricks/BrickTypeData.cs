@@ -5,18 +5,14 @@ using Sirenix.OdinInspector;
 
 namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
-    /// <summary>
-    /// Scriptable Object: TODO Purpose and Summary
-    /// </summary>
     [CreateAssetMenu(fileName = "BrickTypeData", menuName = "Bricks/Brick Type Data", order = 1)]
     public class BrickTypeData : ScriptableObject
     {
         // Public serializable properties
         [BoxGroup("Brick Data")] public Sprite NoBrickSprite;
         [BoxGroup("Brick Data")] public List<BrickDef> BrickTypes;
-        
-        [Serializable]
-        public class BrickDef
+
+        [Serializable] public class BrickDef
         {
             public BrickType Type;
             public Sprite BrickSprite;
@@ -39,6 +35,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
                     return def;
                 }
             }
+
             return null;
         }
     }

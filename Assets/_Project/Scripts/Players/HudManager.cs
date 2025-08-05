@@ -8,18 +8,17 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class HudManager : MonoBehaviour
     {
-        [BoxGroup("Lives")] public GameObject livesPrefab;
-        [BoxGroup("Lives")] public GameObject livesContainer;
-        [BoxGroup("Score")] public TextMeshProUGUI player1ScoreText;
-        [BoxGroup("Score")] public TextMeshProUGUI highScoreText;
-        [BoxGroup("Score")] public TextMeshProUGUI player2ScoreText;
+        [BoxGroup("Lives")] [SerializeField] private GameObject livesPrefab;
+        [BoxGroup("Lives")] [SerializeField] private GameObject livesContainer;
+        [BoxGroup("Score")] [SerializeField] private TextMeshProUGUI player1ScoreText;
+        [BoxGroup("Score")] [SerializeField] private TextMeshProUGUI highScoreText;
+        [BoxGroup("Score")] [SerializeField] private TextMeshProUGUI player2ScoreText;
 
         private List<GameObject> _lives = new List<GameObject>();
 
         /// <summary>
         /// Update the lives UI
         /// </summary>
-        /// <param name="numLives"></param>
         public void NumLivesChanged(int numLives)
         {
             int currLives = _lives.Count;
@@ -56,7 +55,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle Player 1 Score update
         /// </summary>
-        /// <param name="score"></param>
         public void Player1ScoreChanged(int score)
         {
             player1ScoreText.text = score.ToString();
@@ -65,7 +63,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle Player 2 Score update
         /// </summary>
-        /// <param name="score"></param>
         public void Player2ScoreChanged(int score)
         {
             player2ScoreText.text = score.ToString();
@@ -74,7 +71,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// High score has changed
         /// </summary>
-        /// <param name="score"></param>
         public void HighScoreChanges(int score)
         {
             highScoreText.text = $"HI: {score.ToString()}";

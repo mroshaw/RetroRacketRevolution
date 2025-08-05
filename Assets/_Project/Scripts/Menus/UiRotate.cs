@@ -1,7 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace DaftAppleGames.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class UiRotate : MonoBehaviour
     {

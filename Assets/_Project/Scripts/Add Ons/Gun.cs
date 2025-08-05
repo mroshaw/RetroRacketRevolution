@@ -31,20 +31,12 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         protected override void Awake()
         {
             base.Awake();
-            _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool, OnReturnProjectileToPool, OnDestroyProjectile, true, 20);
+            _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool,
+                OnReturnProjectileToPool, OnDestroyProjectile, true, 20);
             _lastShotCounter = 0.0f;
-        }
 
-        /// <summary>
-        /// Configure components
-        /// </summary>
-        private void Start()
-        {
-            // Un-parent the bolt container, to prevent it following the player
-            if (projectileContainer.transform.parent != null)
-            {
-                projectileContainer.transform.SetParent(null);
-            }
+            // Unparent to avoid moving with the player
+            projectileContainer.transform.SetParent(null);
         }
 
         protected virtual void Update()
@@ -65,31 +57,17 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <summary>
         /// Deploy the Gun
         /// </summary>
-        protected internal override void Deploy(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Deploy(bool immediate = false)
         {
-            base.Deploy(callBack, immediate);
-            StartCoroutine(DeployAsync(callBack, immediate));
+            yield return RotateWeapon(retractedRotation, deployedRotation, immediate ? 0.0f : deployTime);
         }
 
         /// <summary>
         /// Retract the Gun
         /// </summary>
-        protected internal override void Retract(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Retract(bool immediate = false)
         {
-            base.Retract(callBack, immediate);
-            StartCoroutine(RetractAsync(callBack, immediate));
-        }
-
-        private IEnumerator DeployAsync(Action callBack, bool immediate)
-        {
-            yield return RotateWeapon(retractedRotation, deployedRotation, immediate? 0.0f : deployTime);
-            callBack?.Invoke();
-        }
-
-        private IEnumerator RetractAsync(Action callBack, bool immediate)
-        {
-            yield return RotateWeapon(deployedRotation, retractedRotation, immediate? 0.0f : deployTime);
-            callBack?.Invoke();
+            yield return RotateWeapon(deployedRotation, retractedRotation, immediate ? 0.0f : deployTime);
         }
 
         private IEnumerator RotateWeapon(Quaternion startRotation, Quaternion endRotation, float rotateTime)
@@ -101,6 +79,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
             transform.localRotation = endRotation;
         }
 

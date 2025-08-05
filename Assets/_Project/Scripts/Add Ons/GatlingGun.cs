@@ -22,7 +22,11 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         protected override void Awake()
         {
             base.Awake();
-            _casingPool = new ObjectPool<GameObject>(CreateCasing, OnTakeCasingFromPool, OnReturnCasingToPool, OnDestroyCasing, true, 20);
+            _casingPool = new ObjectPool<GameObject>(CreateCasing, OnTakeCasingFromPool, OnReturnCasingToPool,
+                OnDestroyCasing, true, 20);
+
+            // Unparent to avoid moving with the player
+            casingContainer.transform.SetParent(null);
         }
 
         /// <summary>
@@ -36,15 +40,17 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
                 RotateBarrel();
             }
         }
+
         private void RotateBarrel()
         {
-            barrels.Rotate(barrelRotateSpeed * Time.deltaTime,0,  0);
+            barrels.Rotate(0, barrelRotateSpeed * Time.deltaTime, 0);
         }
 
         protected override void PostFiring()
         {
             EjectShell();
         }
+
         private void EjectShell()
         {
             GameObject casing = _casingPool.Get();

@@ -1,11 +1,9 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 namespace DaftAppleGames.RetroRacketRevolution.Players
 {
-
     public class PlayerMovement : MonoBehaviour
     {
         [BoxGroup("Movement")] [SerializeField] private float digitalSpeedModified = 2000.0f;
@@ -13,10 +11,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [BoxGroup("Movement")] [SerializeField] private float minX = -200.0f;
         [BoxGroup("Movement")] [SerializeField] private float maxX = 200.0f;
 
-        [BoxGroup("Debug")] [SerializeField] private Vector2 moveVector;
+        [BoxGroup("Debug")] [SerializeField] private Vector3 moveVector;
         [BoxGroup("Debug")] [SerializeField] private float horizontal;
         [BoxGroup("Debug")] [SerializeField] private bool fire;
-        
+
         [BoxGroup("Events")] public UnityEvent onMovingLeft;
         [BoxGroup("Events")] public UnityEvent onMovingRight;
         [BoxGroup("Events")] public UnityEvent onStopped;
@@ -25,14 +23,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private float _speed = 1.0f;
         private bool _isMoving;
         private Vector2 _moveVector;
-        
+
         private Rigidbody _rb;
 
         private float _keyboardSpeedMultiplier;
         private float _dpadSpeedMultiplier;
 
         private Player _player;
-        
+
         /// <summary>
         /// Init the player controls
         /// </summary>
@@ -41,7 +39,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             _rb = GetComponent<Rigidbody>();
             _player = GetComponent<Player>();
             ControlsEnabled = true;
-            _moveVector =  Vector2.zero;
+            _moveVector = Vector3.zero;
         }
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         {
             Cursor.visible = false;
         }
-        
+
         internal void ConfigurePlayer(float newMinX, float newMaxX)
         {
             minX = newMinX;
@@ -72,6 +70,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         public void DisableControls()
         {
             ControlsEnabled = false;
+            horizontal = 0.0f;
+            _rb.linearVelocity = Vector3.zero;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void KeyboardSensitivityChanged(float newValue)
         {
-            digitalSpeedModified =  newValue;
+            digitalSpeedModified = newValue;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             return ControlsEnabled && !_player.Destroyed;
         }
 
-        public void SetMoveVector(Vector2 newMoveVector)
+        public void SetMoveVector(Vector3 newMoveVector)
         {
             moveVector = newMoveVector;
             horizontal = moveVector.normalized.x;
@@ -119,7 +119,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                     break;
             }
         }
-        
+
         /// <summary>
         /// Reposition if exceeded boundary limits
         /// </summary>
@@ -136,6 +136,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 newPosition = new Vector3(maxX, position.y, position.z);
                 return true;
             }
+
             newPosition = position;
             return false;
         }
@@ -147,9 +148,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private void Update()
         {
             // Check boundaries
-            if (CheckBoundaries(gameObject.transform.localPosition, out Vector3 newPosition))
+            if (CheckBoundaries(gameObject.transform.position, out Vector3 newPosition))
             {
-                gameObject.transform.localPosition = newPosition;
+                gameObject.transform.position = newPosition;
                 horizontal = 0;
             }
         }
@@ -159,6 +160,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void FixedUpdate()
         {
+            if (!CanControl())
+            {
+                return;
+            }
+
             /*
             switch (currentControlScheme)
             {
@@ -173,7 +179,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                     break;
             }
             */
-            _rb.linearVelocity = Vector2.right * (horizontal * _speed * digitalSpeedModified);
+            _rb.linearVelocity = Vector3.right * (horizontal * _speed * digitalSpeedModified);
+            // _rb.MovePosition(transform.position * (horizontal * _speed * digitalSpeedModified));
         }
     }
 }

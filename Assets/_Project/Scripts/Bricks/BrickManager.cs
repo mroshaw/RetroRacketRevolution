@@ -43,7 +43,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// </summary>
         [BoxGroup("Debug")]
         [Button("Destroy All Bricks")]
-        internal void DestroyAllBricks()
+        public void DestroyAllBricks()
         {
             foreach (Brick brick in bricks.ToArray())
             {
@@ -139,8 +139,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             // Check if this is the last destructable brick
             if (HasLastBrickBeenDestroyed())
             {
-                // Clear down the indestructable bricks
+                // Clear down the indestructable bricks and disruptors
                 ClearRemainingBricks();
+                DestroyAllDisruptors();
 
                 // Call event listeners
                 onLastBrickDestroyed.Invoke();

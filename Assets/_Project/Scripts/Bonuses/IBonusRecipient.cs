@@ -1,10 +1,10 @@
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public interface IBonusRecipient
     {
-        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject);
+        public void ApplyBonus(Bonus bonus);
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using TMPro;
 
@@ -11,9 +10,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
     public class TextColorCycler : MonoBehaviour
     {
         // Public serializable properties
-        [BoxGroup("Settings")] public bool cycleOnAwake = false;
-        [BoxGroup("Settings")] public bool cycleOnStart = false;
-        [BoxGroup("Settings")] public bool cycleOnEnable = true;
+        [BoxGroup("Settings")] [SerializeField] private bool cycleOnAwake = false;
+        [BoxGroup("Settings")] [SerializeField] private bool cycleOnStart = false;
+        [BoxGroup("Settings")] [SerializeField] private bool cycleOnEnable = true;
 
         private static readonly Color Orange = new Color(255, 165, 0, 1);
         private static readonly Color Indigo = new Color(29, 0, 51, 1);
@@ -21,14 +20,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
         private static readonly Color Pink = new Color(255, 20, 147, 1);
 
         private static readonly Color[] Colors = { Color.red, Orange, Color.yellow, Color.green, Color.blue, Indigo };
-        private static readonly Color[] Colors2 = { Color.red, Orange, Color.yellow, Color.green, Color.blue, Indigo, Violet };
+        private static readonly Color[] Colors2 =
+            { Color.red, Orange, Color.yellow, Color.green, Color.blue, Indigo, Violet };
 
         // Public properties
 
         // Private fields
         private TMP_Text _textComponent;
 
-        #region UnityMethods
         /// <summary>
         /// Initialise this component
         /// </summary>   
@@ -80,9 +79,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
             StopAllCoroutines();
         }
 
-        #endregion
-
-        #region PublicMethods
         /// <summary>
         /// Start the animation
         /// </summary>
@@ -99,9 +95,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
             StopCoroutine(AnimateVertexColors());
             // StopAllCoroutines();
         }
-        #endregion
 
-        #region PrivateMethods
         /// <summary>
         /// Method to animate vertex colors of a TMP Text object.
         /// </summary>
@@ -185,6 +179,5 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
                 yield return new WaitForSecondsRealtime(0.05f);
             }
         }
-        #endregion
     }
 }

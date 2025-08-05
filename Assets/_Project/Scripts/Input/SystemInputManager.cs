@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace DaftAppleGames.Input
+namespace DaftAppleGames.RetroRacketRevolution.Input
 {
     public class SystemInputManager : InputManager
     {
         [BoxGroup("Events")] public UnityEvent onPauseToggled;
-        
+
         private InputAction PauseInputAction { get; set; }
-        
+
         protected override void InitInput()
         {
             base.InitInput();

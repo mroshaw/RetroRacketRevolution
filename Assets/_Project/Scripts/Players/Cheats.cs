@@ -2,28 +2,27 @@ using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
-using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class Cheats : MonoBehaviour
     {
-        [BoxGroup("Managers")] public BrickManager brickManager;
-        [BoxGroup("Managers")] public BonusManager bonusManager;
-        [BoxGroup("Managers")] public PlayerManager playerManager;
-        [BoxGroup("Player")] public Player player1;
-        [BoxGroup("Player")] public Player player2;
-        [BoxGroup("Cheat Settings")] public float addOnDuration = 20.0f;
-        [BoxGroup("Cheat Settings")] public Transform cheatSpawnTransform;
-        [BoxGroup("UI")] public TextMeshProUGUI notificationText;
-        [BoxGroup("UI")] public float notificationFadeTime;
-        [BoxGroup("UI")] public float notificationVisibleTime;
+        [BoxGroup("Managers")] [SerializeField] private BrickManager brickManager;
+        [BoxGroup("Managers")] [SerializeField] private BonusManager bonusManager;
+        [BoxGroup("Managers")] [SerializeField] private PlayerManager playerManager;
+        [BoxGroup("Player")] [SerializeField] private Player player1;
+        [BoxGroup("Player")] [SerializeField] private Player player2;
+        [BoxGroup("Cheat Settings")] [SerializeField] private float addOnDuration = 20.0f;
+        [BoxGroup("Cheat Settings")] [SerializeField] private Transform cheatSpawnTransform;
+        [BoxGroup("UI")] [SerializeField] private TextMeshProUGUI notificationText;
+        [BoxGroup("UI")] [SerializeField] private float notificationFadeTime;
+        [BoxGroup("UI")] [SerializeField] private float notificationVisibleTime;
 
-        [FoldoutGroup("Events")] public UnityEvent CheatUsedEvent;
+        [FoldoutGroup("Events")] public UnityEvent onCheatsUsed;
 
         // Variables for notification fader
         private Color _visibleColor;
@@ -276,7 +275,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             if (!_cheatsUsed)
             {
                 _cheatsUsed = true;
-                CheatUsedEvent.Invoke();
+                onCheatsUsed.Invoke();
             }
 
             // Notify the player

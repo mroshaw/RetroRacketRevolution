@@ -1,5 +1,7 @@
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,6 +31,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         [BoxGroup("Debug")] [SerializeField] private int row;
         [BoxGroup("Debug")] [SerializeField] private int col;
 
+        private MaterialTools _matTools;
         private Explosion _explosion;
 
         // Public properties
@@ -56,6 +59,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             _audioSource = GetComponent<AudioSource>();
             _material = GetComponentInChildren<Renderer>().material;
             _explosion = GetComponentInChildren<Explosion>();
+            _matTools = GetComponent<MaterialTools>();
         }
 
         /// <summary>
@@ -123,8 +127,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             }
 
             // Set color
-            _material.SetColor(BrickMatColor, brickColor);
-
+            // _material.SetColor(BrickMatColor, brickColor);
+            _matTools.SetColor(brickColor);
             // Init cracks
             if (IsDarkColor(brickColor))
             {

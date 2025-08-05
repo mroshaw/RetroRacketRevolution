@@ -2,13 +2,12 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.AddOns;
-using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Levels;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
@@ -49,8 +48,10 @@ namespace DaftAppleGames.RetroRacketRevolution
         private void Awake()
         {
             // Initialise the prefab pools
-            _enemyPool = new ObjectPool<GameObject>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, OnDestroyEnemy, true, 5);
-            _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool, OnReturnProjectileToPool, OnDestroyProjectile, true, 10);
+            _enemyPool = new ObjectPool<GameObject>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool,
+                OnDestroyEnemy, true, 5);
+            _projectilePool = new ObjectPool<GameObject>(CreateProjectile, OnTakeProjectileFromPool,
+                OnReturnProjectileToPool, OnDestroyProjectile, true, 10);
             _isSpawning = false;
             timeSinceLastSpawn = 0.0f;
             nextSpawnTime = GetNextSpawnTime();
@@ -72,6 +73,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             {
                 return;
             }
+
             timeSinceLastSpawn += Time.deltaTime;
             // If we're passed max spawn time, spawn
             if (timeSinceLastSpawn > nextSpawnTime)
@@ -135,7 +137,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         public void HandleLevelLoadedEvent(LevelDataExt levelData)
         {
             StopSpawning(true);
-  
+
             _isBossEnemy = levelData.isBossLevel;
             if (_isBossEnemy)
             {
@@ -233,6 +235,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             {
                 _enemyPool.Release(enemy.gameObject);
             }
+
             onEnemyDestroyed.Invoke();
             // Check if this is the last enemy destroyed. Used mainly for Boss enemies
             if (activeEnemies.Count == 0)

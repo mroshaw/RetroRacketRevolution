@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     public class BrickGlint : MonoBehaviour
     {
@@ -57,6 +55,7 @@ namespace DaftAppleGames.RetroRacketRevolution
             {
                 return;
             }
+
             // Time to glint?
             if (Time.time > _nextGlintTime)
             {

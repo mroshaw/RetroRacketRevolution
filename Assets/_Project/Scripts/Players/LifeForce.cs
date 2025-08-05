@@ -6,10 +6,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class LifeForce : MonoBehaviour
     {
-        [BoxGroup("Settings")] public int defaultLives = 3;
-        [FoldoutGroup("Events")] public UnityEvent AllLivesLostEvent;
-        [FoldoutGroup("Events")] public UnityEvent LifeLostEvent;
-        [FoldoutGroup("Events")] public UnityEvent<int> LivesUpdatedEvent;
+        [BoxGroup("Settings")] [SerializeField] private int defaultLives = 3;
+        [FoldoutGroup("Events")] public UnityEvent onAllLivesLost;
+        [FoldoutGroup("Events")] public UnityEvent onLifeLost;
+        [FoldoutGroup("Events")] public UnityEvent<int> onLivesUpdated;
         [BoxGroup("Cheats")] public bool UnlimitedLives { get; set; } = false;
 
         // Players lives
@@ -19,7 +19,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             set
             {
                 _numLives = value;
-                LivesUpdatedEvent.Invoke(value);
+                onLivesUpdated.Invoke(value);
             }
         }
 
@@ -47,8 +47,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void LoseLife()
         {
-            
-            LifeLostEvent.Invoke();
+            onLifeLost.Invoke();
             if (!UnlimitedLives)
             {
                 NumLives--;
@@ -56,7 +55,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
 
             if (IsGameOver())
             {
-                AllLivesLostEvent.Invoke();
+                onAllLivesLost.Invoke();
                 return;
             }
         }

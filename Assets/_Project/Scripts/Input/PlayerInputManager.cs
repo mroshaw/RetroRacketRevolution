@@ -1,28 +1,26 @@
 using DaftAppleGames.RetroRacketRevolution.Players;
 using UnityEngine;
-using Sirenix.OdinInspector;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace DaftAppleGames.Input
+namespace DaftAppleGames.RetroRacketRevolution.Input
 {
     public class PlayerInputManager : InputManager
     {
         private Player _player;
         private PlayerMovement _playerMovement;
-        
+
         private InputAction MovementInputAction { get; set; }
         private InputAction AnalogueMovementInputAction { get; set; }
         private InputAction FireInputAction { get; set; }
 
         private bool CanMove => !_player.Destroyed;
-        
+
         private void Awake()
         {
             _player = GetComponent<Player>();
-            _playerMovement =  GetComponent<PlayerMovement>();
+            _playerMovement = GetComponent<PlayerMovement>();
         }
-        
+
         protected override void InitInput()
         {
             base.InitInput();
@@ -50,7 +48,7 @@ namespace DaftAppleGames.Input
             {
                 Debug.LogError("No MoveAnalogue action found!");
             }
-            
+
             FireInputAction = InputActionsAsset.FindAction("Fire");
             if (FireInputAction != null)
             {
@@ -67,14 +65,14 @@ namespace DaftAppleGames.Input
         protected override void DeInitInput()
         {
             base.DeInitInput();
-            
+
             // Unsubscribe from input action events and disable input actions
             if (MovementInputAction != null)
             {
                 MovementInputAction.Disable();
                 MovementInputAction = null;
             }
-            
+
             if (FireInputAction != null)
             {
                 FireInputAction.Disable();
@@ -99,7 +97,8 @@ namespace DaftAppleGames.Input
 
         private void OnMove(InputAction.CallbackContext context)
         {
-            Vector2 movement = MovementInputAction?.ReadValue<Vector2>() ?? AnalogueMovementInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
+            Vector2 movement = MovementInputAction?.ReadValue<Vector2>() ??
+                               AnalogueMovementInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
             _playerMovement.SetMoveVector(movement);
         }
 
@@ -107,16 +106,15 @@ namespace DaftAppleGames.Input
         {
             _playerMovement.SetMoveVector(Vector2.zero);
         }
-        
+
         /// <summary>
         /// Polls movement InputAction (if any).
         /// Return its current value or zero if no valid InputAction found.
         /// </summary>
         private Vector2 GetMovementInput()
         {
-            return MovementInputAction?.ReadValue<Vector2>() ?? AnalogueMovementInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
+            return MovementInputAction?.ReadValue<Vector2>() ??
+                   AnalogueMovementInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
         }
-        
-        
     }
 }

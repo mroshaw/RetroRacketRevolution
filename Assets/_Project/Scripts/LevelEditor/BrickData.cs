@@ -2,13 +2,12 @@ using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution.Levels
+namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     /// <summary>
     /// Internal class describing a brick in the level
     /// </summary>
-    [System.Serializable]
-    public class BrickData
+    [System.Serializable] public class BrickData
     {
         // Public properties
         public int RowNumber;
@@ -25,7 +24,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
 
         public BrickData()
         {
-
         }
 
         /// <summary>

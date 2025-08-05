@@ -1,8 +1,7 @@
-using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace DaftAppleGames.Players
+namespace DaftAppleGames.RetroRacketRevolution.Players
 {
     public class Engine : MonoBehaviour
     {
@@ -26,12 +25,14 @@ namespace DaftAppleGames.Players
         private void OnDisable()
         {
             _canFire = false;
+            _audioSource.Stop();
         }
 
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             engineParticles.Stop();
+            _audioSource.clip = engineSound;
         }
 
         private void Update()

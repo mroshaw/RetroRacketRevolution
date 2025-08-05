@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Effects
 {
     public class FadeIn : MonoBehaviour
     {
@@ -69,6 +68,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 time += Time.deltaTime;
                 yield return null;
             }
+
             _material.SetColor("_Color", _targetColor);
         }
     }

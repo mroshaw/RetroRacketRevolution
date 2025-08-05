@@ -6,26 +6,37 @@ using UnityEngine.Events;
 
 namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
-    public enum DeploymentState { Deploying, Deployed, Retracting, Retracted }
+    public enum DeploymentState
+    {
+        Deploying,
+        Deployed,
+        Retracting,
+        Retracted
+    }
 
     public class HardPoint : MonoBehaviour
     {
         [BoxGroup("Settings")] [SerializeField] private bool deployOnStart;
         [BoxGroup("Settings")] [SerializeField] private AddOn defaultAddOn;
+
+        [BoxGroup("Audio")] [SerializeField] private AudioClip deployClip;
+        [BoxGroup("Audio")] [SerializeField] private AudioClip retractClip;
+
         [BoxGroup("Debug")] [SerializeField] private AddOn attachedAddOn;
         [BoxGroup("Debug")] [SerializeField] private DeploymentState deploymentState;
 
-        [FoldoutGroup("Events")] public UnityEvent deployEvent;
-        [FoldoutGroup("Events")] public UnityEvent retractEvent;
+        [FoldoutGroup("Events")] public UnityEvent onDeploying;
+        [FoldoutGroup("Events")] public UnityEvent onDeployed;
+        [FoldoutGroup("Events")] public UnityEvent onRetracting;
+        [FoldoutGroup("Events")] public UnityEvent onRetracted;
 
         internal bool IsDeployed => deploymentState == DeploymentState.Deployed;
         internal DeploymentState DeploymentState => deploymentState;
-
         internal Player HardPointPlayer => _hardPointPlayer;
-
 
         private bool IsHardPointOccupied => attachedAddOn != null;
         private Player _hardPointPlayer;
+        private AudioSource _audioSource;
 
         /// <summary>
         /// Set up the Hard Point
@@ -33,6 +44,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         private void Awake()
         {
             _hardPointPlayer = GetComponentInParent<Player>();
+            _audioSource = GetComponent<AudioSource>();
 
             if (defaultAddOn)
             {
@@ -51,6 +63,21 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             else
             {
                 Retract(true);
+            }
+        }
+
+        /// <summary>
+        /// Setup the component
+        /// </summary>
+        private void Start()
+        {
+            if (deployOnStart)
+            {
+                Deploy();
+            }
+            else
+            {
+                Retract();
             }
         }
 
@@ -73,20 +100,6 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             }
         }
 
-        /// <summary>
-        /// Setup the component
-        /// </summary>
-        private void Start()
-        {
-            if (deployOnStart)
-            {
-                Deploy();
-            }
-            else
-            {
-                Retract();
-            }
-        }
 
         public void FirePressed()
         {
@@ -114,14 +127,18 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             {
                 return;
             }
-            deploymentState = DeploymentState.Deploying;
-            attachedAddOn.Deploy(DeployedCallBack, immediate);
-            deployEvent.Invoke();
+
+            StartCoroutine(DeployAsync(immediate));
         }
 
-        private void DeployedCallBack()
+        private IEnumerator DeployAsync(bool immediate = false)
         {
+            deploymentState = DeploymentState.Deploying;
+            onDeploying?.Invoke();
+            _audioSource.PlayOneShot(deployClip);
+            yield return attachedAddOn.Deploy(immediate);
             deploymentState = DeploymentState.Deployed;
+            onDeployed?.Invoke();
         }
 
         /// <summary>
@@ -134,9 +151,18 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             {
                 return;
             }
+
+            StartCoroutine(RetractAsync(immediate));
+        }
+
+        private IEnumerator RetractAsync(bool immediate = false)
+        {
             deploymentState = DeploymentState.Retracting;
-            attachedAddOn.Retract(RetractCallBack, immediate);
-            retractEvent.Invoke();
+            onRetracting?.Invoke();
+            _audioSource.PlayOneShot(deployClip);
+            yield return attachedAddOn.Retract(immediate);
+            deploymentState = DeploymentState.Retracted;
+            onRetracted?.Invoke();
         }
 
         private void RetractCallBack()

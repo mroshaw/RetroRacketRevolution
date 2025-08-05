@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,8 +6,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
 {
     public class Flicker : MonoBehaviour
     {
-        [BoxGroup("Settings")] public float fadeTime = 3.0f;
-        [BoxGroup("Settings")] public bool flickerOnStart = true;
+        [BoxGroup("Settings")] [SerializeField] private float fadeTime = 3.0f;
+        [BoxGroup("Settings")] [SerializeField] private bool flickerOnStart = true;
 
         private Material _material;
         private Color _color;
@@ -80,6 +79,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
                     time += Time.deltaTime;
                     yield return null;
                 }
+
                 _material.SetColor("_Color", _targetColor);
 
                 // Flicker out
@@ -90,6 +90,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Effects
                     time += Time.deltaTime;
                     yield return null;
                 }
+
                 _material.SetColor("_Color", _startColor);
             }
         }

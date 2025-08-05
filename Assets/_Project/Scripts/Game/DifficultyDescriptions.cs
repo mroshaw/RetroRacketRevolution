@@ -1,31 +1,20 @@
-using DaftAppleGames.RetroRacketRevolution.Game;
 using UnityEngine;
-using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using TMPro;
 
-namespace DaftAppleGames.Game
+namespace DaftAppleGames.RetroRacketRevolution.Game
 {
     public class DifficultyDescriptions : MonoBehaviour
     {
         // Public serializable properties
-        [BoxGroup("UI Settings")] public TextMeshProUGUI easyText;
-        [BoxGroup("UI Settings")] public TextMeshProUGUI normalText;
-        [BoxGroup("UI Settings")] public TextMeshProUGUI hardText;
-        [BoxGroup("UI Settings")] public TextMeshProUGUI insaneText;
-        [BoxGroup("UI Settings")] public DifficultyData easyDifficultyData;
-        [BoxGroup("UI Settings")] public DifficultyData normalDifficultyData;
-        [BoxGroup("UI Settings")] public DifficultyData hardDifficultyData;
-        [BoxGroup("UI Settings")] public DifficultyData insaneDifficultyData;
-
-        [FoldoutGroup("Events")]
-        public UnityEvent MyEvent;
-
-        // Public properties
-        
-        // Private fields
-
-        #region UnityMethods
+        [BoxGroup("UI Settings")] [SerializeField] private TextMeshProUGUI easyText;
+        [BoxGroup("UI Settings")] [SerializeField] private TextMeshProUGUI normalText;
+        [BoxGroup("UI Settings")] [SerializeField] private TextMeshProUGUI hardText;
+        [BoxGroup("UI Settings")] [SerializeField] private TextMeshProUGUI insaneText;
+        [BoxGroup("UI Settings")] [SerializeField] private DifficultyData easyDifficultyData;
+        [BoxGroup("UI Settings")] [SerializeField] private DifficultyData normalDifficultyData;
+        [BoxGroup("UI Settings")] [SerializeField] private DifficultyData hardDifficultyData;
+        [BoxGroup("UI Settings")] [SerializeField] private DifficultyData insaneDifficultyData;
 
         /// <summary>
         /// Initialise this component
@@ -34,22 +23,17 @@ namespace DaftAppleGames.Game
         {
             PopulateDescriptions();
         }
-        #endregion
 
-	    #region PublicMethods
         /// <summary>
         /// Populate the difficulty descriptions
         /// </summary>
-        public void PopulateDescriptions()
+        private void PopulateDescriptions()
         {
             easyText.text = GetDescriptionText(easyDifficultyData);
             normalText.text = GetDescriptionText(normalDifficultyData);
             hardText.text = GetDescriptionText(hardDifficultyData);
             insaneText.text = GetDescriptionText(insaneDifficultyData);
         }
-	    #endregion
-
-	    #region PrivateMethods
 
         /// <summary>
         /// Get description text for given difficulty
@@ -64,9 +48,8 @@ namespace DaftAppleGames.Game
             string ballSpeedUpMultiplierText = $"Ball delta: {difficultyData.ballSpeedMultiplier}x";
             string batLengthText = $"Bat length: {difficultyData.defaultBatLength}";
 
-            return $"{livesText}\n{ballSpeedText}\n{ballSpeedUpDelayText}\n{ballSpeedUpMultiplierText}\n{batLengthText}";
-
+            return
+                $"{livesText}\n{ballSpeedText}\n{ballSpeedUpDelayText}\n{ballSpeedUpMultiplierText}\n{batLengthText}";
         }
-	    #endregion
     }
 }

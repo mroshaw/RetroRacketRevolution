@@ -1,10 +1,16 @@
 using Sirenix.OdinInspector;
+using SpaceGraphicsToolkit.Ring;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
-    public enum VortexDirection { Outward, Inward, Both}
-    
+    public enum VortexDirection
+    {
+        Outward,
+        Inward,
+        Both
+    }
+
     public class Disruptor : MonoBehaviour
     {
         [BoxGroup("Settings")] public VortexDirection direction;
@@ -12,17 +18,18 @@ namespace DaftAppleGames.RetroRacketRevolution
         [BoxGroup("Settings")] public float rotateSpeed = 1.0f;
         [BoxGroup("Settings")] public float disruptiveForce = 1.0f;
         [BoxGroup("Colors")] public Color inwardColour = Color.blue;
-        [BoxGroup("Colors")] public Color outwardColour = Color.blue;
+        [BoxGroup("Colors")] public Color outwardColour = Color.red;
 
         private VortexDirection _currentDirection;
         private float _nextDirectionChangeTime;
-
+        private SgtRing _accretionRing;
 
         /// <summary>
         /// Initialise this component
         /// </summary>
         private void Awake()
         {
+            _accretionRing = GetComponentInChildren<SgtRing>();
             _currentDirection = direction;
             UpdateColor();
         }
@@ -30,10 +37,9 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Handle the ball passing through
         /// </summary>
-        /// <param name="other"></param>
         private void OnTriggerStay(Collider other)
         {
-            if(other.gameObject.CompareTag("Ball"))
+            if (other.gameObject.CompareTag("Ball"))
             {
                 ApplyForce(other.gameObject);
             }
@@ -42,7 +48,6 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// <summary>
         /// Apply force to the ball
         /// </summary>
-        /// <param name="ballGameObject"></param>
         private void ApplyForce(GameObject ballGameObject)
         {
             // Get the ball RigidBody           
@@ -61,38 +66,10 @@ namespace DaftAppleGames.RetroRacketRevolution
         }
 
         /// <summary>
-        /// Rotate to left by one degree
-        /// </summary>
-        /// <param name="vector"></param>
-        /// <returns></returns>
-        private Vector3 RotateLeft(Vector3 vector)
-        {
-            return new Vector3(vector.y * -0.1f, vector.x, vector.z).normalized;
-        }
-
-        /// <summary>
-        /// Rotate to right by one degree
-        /// </summary>
-        private Vector3 RotateRight(Vector3 vector)
-        {
-            return new Vector3(vector.y, vector.x * -0.1f, vector.z).normalized;
-        }
-
-        /// <summary>
         /// Rotate the disruptor
         /// </summary>
         private void Update()
         {
-            switch (_currentDirection)
-            {
-                case VortexDirection.Outward:
-                    transform.Rotate(0, 0, rotateSpeed);
-                    break;
-                default:
-                    transform.Rotate(0, 0, -rotateSpeed);
-                    break;
-            }
-
             if (IsTimeToChangeDirection())
             {
                 ChangeDirection();
@@ -104,7 +81,9 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void ChangeDirection()
         {
-            _currentDirection = _currentDirection == VortexDirection.Outward ? VortexDirection.Inward : VortexDirection.Outward;
+            _currentDirection = _currentDirection == VortexDirection.Outward
+                ? VortexDirection.Inward
+                : VortexDirection.Outward;
             UpdateColor();
             _nextDirectionChangeTime = Time.time + delayBetweenChange;
         }
@@ -114,7 +93,14 @@ namespace DaftAppleGames.RetroRacketRevolution
         /// </summary>
         private void UpdateColor()
         {
-
+            if (_currentDirection == VortexDirection.Outward)
+            {
+                _accretionRing.Color = outwardColour;
+            }
+            else
+            {
+                _accretionRing.Color = inwardColour;
+            }
         }
 
         /// <summary>

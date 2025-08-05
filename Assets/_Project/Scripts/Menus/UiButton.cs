@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class UiButton : MonoBehaviour
     {

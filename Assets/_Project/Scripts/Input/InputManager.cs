@@ -2,13 +2,13 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 
-namespace DaftAppleGames.Input
+namespace DaftAppleGames.RetroRacketRevolution.Input
 {
     public abstract class InputManager : MonoBehaviour
     {
         [BoxGroup("Input")] [SerializeField] private InputActionAsset inputActionsAsset;
-        protected InputActionAsset  InputActionsAsset => inputActionsAsset;
-        
+        protected InputActionAsset InputActionsAsset => inputActionsAsset;
+
         private void OnEnable()
         {
             InitInput();
@@ -18,7 +18,7 @@ namespace DaftAppleGames.Input
         {
             DeInitInput();
         }
-        
+
         protected virtual void InitInput()
         {
             if (!inputActionsAsset)

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using DaftAppleGames.Players;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,35 +8,25 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
 {
     public class LevelBooster : AddOn
     {
-        [BoxGroup("Settings")] [SerializeField] float boostTime = 3.0f;
-        [BoxGroup("Settings")] [SerializeField] float boostHeight = 150.0f;
+        [BoxGroup("Settings")] [SerializeField] private float boostTime = 3.0f;
+        [BoxGroup("Settings")] [SerializeField] private float boostHeight = 150.0f;
         [BoxGroup("Settings")] [SerializeField] private Engine engine1;
         [BoxGroup("Settings")] [SerializeField] private Engine engine2;
 
-        [FoldoutGroup("Events")] public UnityEvent StartBoostEvent;
-        [FoldoutGroup("Events")] public UnityEvent EndBoostEvent;
+        [BoxGroup("Deployment")] [SerializeField] private Vector3 deployedPosition;
+        [BoxGroup("Deployment")] [SerializeField] private Vector3 retractedPosition;
+        [BoxGroup("Deployment")] [SerializeField] private float deployTime = 0.5f;
 
-        private float _startHeight;
-        private float _startHorizontal;
+        [BoxGroup("Events")] public UnityEvent onStartBoost;
+        [BoxGroup("Events")] public UnityEvent onEndBoost;
 
         private GameObject _parentGameObject;
-
-        private Vector2 _startPosition;
-        private Vector2 _endPosition;
-
         private AudioSource _audioSource;
 
-        /// <summary>
-        /// Initialise this component
-        /// </summary>
         protected override void Awake()
         {
             base.Awake();
             _parentGameObject = GetComponentInParent<Player>().gameObject;
-            _startHeight = this._parentGameObject.transform.position.y;
-            _startHorizontal = this._parentGameObject.transform.position.x;
-            _startPosition = new Vector2(_startHorizontal, _startHeight);
-            _endPosition = new Vector2(_startHorizontal, boostHeight);
         }
 
         internal override void Fire()
@@ -49,35 +37,31 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         {
         }
 
-        /// <summary>
-        /// Deploy override
-        /// </summary>
-        protected internal override void Deploy(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Deploy(bool immediate = false)
         {
-            engine1.gameObject.SetActive(true);
-            engine2.gameObject.SetActive(true);
-            Boost();
-            callBack?.Invoke();
+            yield return MoveBooster(retractedPosition, deployedPosition, immediate ? 0.0f : deployTime);
+            yield return BoostAsync();
         }
 
-        protected internal override void Retract(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Retract(bool immediate = false)
         {
-            engine1.gameObject.SetActive(false);
-            engine2.gameObject.SetActive(false);
-            callBack?.Invoke();
+            yield return MoveBooster(deployedPosition, retractedPosition, immediate ? 0.0f : deployTime);
         }
 
-        /// <summary>
-        /// Call the boost function
-        /// </summary>
-        public void Boost()
+        private IEnumerator MoveBooster(Vector3 startPosition, Vector3 endPosition, float moveTime)
         {
-            engine1.FireEngine();
-            engine2.FireEngine();
-            StartCoroutine(BoostAsync());
+            float elapsedTime = 0;
+            while (elapsedTime < moveTime)
+            {
+                transform.localPosition = Vector3.Lerp(startPosition, endPosition, elapsedTime / moveTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localPosition = endPosition;
         }
 
-        private void EndBoost()
+        private void ResetBoosters()
         {
             engine1.StopFiringEngine();
             engine2.StopFiringEngine();
@@ -89,17 +73,26 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         /// <returns></returns>
         private IEnumerator BoostAsync()
         {
-            StartBoostEvent.Invoke();
+            engine1.FireEngine();
+            engine2.FireEngine();
+            Vector3 startPosition = _parentGameObject.transform.position;
+            Vector3 endPosition = new Vector3(_parentGameObject.transform.position.x, boostHeight,
+                _parentGameObject.transform.position.z);
+
+            onStartBoost.Invoke();
             yield return null;
             float time = 0;
             while (time < boostTime)
             {
-                _parentGameObject.transform.position = Vector2.Lerp(_startPosition, _endPosition, time / boostTime);
+                _parentGameObject.transform.position = Vector3.Lerp(startPosition, endPosition, time / boostTime);
                 time += Time.deltaTime;
                 yield return null;
             }
-            _parentGameObject.transform.position = _endPosition;
-            EndBoostEvent.Invoke();
+
+            _parentGameObject.transform.position = endPosition;
+            ResetBoosters();
+            Debug.Log("Boost Complete!");
+            onEndBoost.Invoke();
         }
     }
 }

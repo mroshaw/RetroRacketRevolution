@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Utils
 {
     public static class ObjectUtils
     {

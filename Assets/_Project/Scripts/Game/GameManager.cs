@@ -15,7 +15,13 @@ using UnityEngine.SceneManagement;
 
 namespace DaftAppleGames.RetroRacketRevolution.Game
 {
-    public enum AlertType {StartLevel, FinishLevel, GameOver, GameComplete }
+    public enum AlertType
+    {
+        StartLevel,
+        FinishLevel,
+        GameOver,
+        GameComplete
+    }
 
     public class GameManager : MonoBehaviour
     {
@@ -43,20 +49,20 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         [BoxGroup("Audio")] public AudioClip levelCompleteClip;
         [BoxGroup("Audio")] public AudioClip gameOverClip;
         [BoxGroup("Audio")] public AudioClip gameCompletedClip;
-        
+
         [BoxGroup("Object Tracking")] public Player player1;
         [BoxGroup("Object Tracking")] public Player player2;
 
-        [FoldoutGroup("Events")] public UnityEvent<int> HighScoreChangedEvent;
-        [FoldoutGroup("Events")] public UnityEvent GameOverEvent;
-        [FoldoutGroup("Events")] public UnityEvent GameCompleteEvent;
-        [FoldoutGroup("Events")] public UnityEvent LevelCompleteEvent;
-        [FoldoutGroup("Alert Events")] public UnityEvent BeforeAlertEvent;
-        [FoldoutGroup("Alert Events")] public UnityEvent AfterAlertEvent;
+        [FoldoutGroup("Events")] public UnityEvent<int> onHighScoreChanged;
+        [FoldoutGroup("Events")] public UnityEvent onGameOver;
+        [FoldoutGroup("Events")] public UnityEvent onGameComplete;
+        [FoldoutGroup("Events")] public UnityEvent onLevelComplete;
+        [FoldoutGroup("Alert Events")] public UnityEvent onBeforeAlert;
+        [FoldoutGroup("Alert Events")] public UnityEvent onAfterAlert;
 
         public bool CheatsUsed { get; set; }
 
-        private HighScores highScores;
+        private HighScores _highScores;
 
         private const string HighScore = "HighScore";
 
@@ -85,8 +91,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         {
             // Set unlimited framerate
             Application.targetFrameRate = -1;
-            highScores = new HighScores();
-            highScores.LoadHighScores();
+            _highScores = new HighScores();
+            _highScores.LoadHighScores();
             GetHighScore();
         }
 
@@ -95,8 +101,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void GetHighScore()
         {
-            int highScore = highScores.GetCurrentHighScore();
-            HighScoreChangedEvent.Invoke(highScore);
+            int highScore = _highScores.GetCurrentHighScore();
+            onHighScoreChanged.Invoke(highScore);
         }
 
         /// <summary>
@@ -124,6 +130,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         public void CheckLevelComplete()
         {
+            if (_currentLevelData == null)
+            {
+                return;
+            }
+
             // In Boss Level and boss has been destroyed
             if (_currentLevelData.isBossLevel && _allBricksDestroyed && _allEnemiesDestroyed)
             {
@@ -143,10 +154,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         public void LevelComplete()
         {
+            onLevelComplete.Invoke();
             ballManager.DestroyAllBalls();
             _audioSource.PlayOneShot(levelCompleteClip);
             ShowAlert(AlertType.FinishLevel, levelCompletePanelDuration, LoadNextLevel);
-            LevelCompleteEvent.Invoke();
         }
 
         /// <summary>
@@ -154,7 +165,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void LoadNextLevel()
         {
-            if(levelLoader.LoadNextLevel() == false)
+            if (levelLoader.LoadNextLevel() == false)
             {
                 GameComplete();
             }
@@ -176,7 +187,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         public void GameComplete()
         {
-            GameCompleteEvent.Invoke();
+            onGameComplete.Invoke();
             _audioSource.PlayOneShot(gameCompletedClip);
             ShowAlert(AlertType.GameComplete, gameCompletePanelDuration, CheckHighScores);
         }
@@ -186,7 +197,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         public void GameOver()
         {
-            GameOverEvent.Invoke();
+            onGameOver.Invoke();
             _audioSource.PlayOneShot(gameOverClip);
             ShowAlert(AlertType.GameOver, gameOverPanelDuration, CheckHighScores);
         }
@@ -199,12 +210,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             int playerOneScore = playerManager.PlayerOneScore;
             int playerTwoScore = playerManager.PlayerTwoScore;
 
-            if (highScores.IsHighScore(playerOneScore))
+            if (_highScores.IsHighScore(playerOneScore))
             {
                 // Debug.Log("Player 1 has a new high score");
                 NewHighScore(playerManager.PlayerOne);
             }
-            else if (highScores.IsHighScore(playerTwoScore))
+            else if (_highScores.IsHighScore(playerTwoScore))
             {
                 // Debug.Log("Player 2 has a new high score");
                 NewHighScore(playerManager.PlayerTwo);
@@ -233,8 +244,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
             // Determine values to send to High Score system
             string levelsPlayed = "Original";
-            string difficulty = "Normal";
-            string cheatsUsed = "No";
 
             // Get "Friendly" name for levels selected.
             switch (gameData.levelSelect)
@@ -251,13 +260,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
                     break;
             }
 
-            difficulty = gameData.difficulty.difficultyName;
-            cheatsUsed = CheatsUsed ? "Yes" : "No";
+            string difficulty = gameData.difficulty.difficultyName;
+            string cheatsUsed = CheatsUsed ? "Yes" : "No";
 
-            highScores.SubmitHighScore(playerInitials, player.Score,difficulty, levelsPlayed, cheatsUsed);
+            _highScores.SubmitHighScore(playerInitials, player.Score, difficulty, levelsPlayed, cheatsUsed);
 
             int playerTwoScore = playerManager.PlayerTwoScore;
-            if (player == playerManager.PlayerOne && highScores.IsHighScore(playerTwoScore))
+            if (player == playerManager.PlayerOne && _highScores.IsHighScore(playerTwoScore))
             {
                 NewHighScore(playerManager.PlayerTwo);
             }
@@ -271,11 +280,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// <summary>
         /// Show alert
         /// </summary>
-        /// <param name="alertType"></param>
-        /// <param name="duration"></param>
-        /// <param name="actionDelegate"></param>
-        /// <param name="levelName"></param>
-        private void ShowAlert(AlertType alertType, float duration, Action actionDelegate, string levelName="")
+        private void ShowAlert(AlertType alertType, float duration, Action actionDelegate, string levelName = "")
         {
             infoPanel.SetActive(true);
             TextColorCycler cycler;
@@ -325,16 +330,16 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         private IEnumerator HideAlertAfterDelayAsync(float duration, Action actionDelegate)
         {
             // Call event and wait a frame
-            BeforeAlertEvent.Invoke();
+            onBeforeAlert.Invoke();
             yield return null;
 
             // Wait for seconds
             yield return new WaitForSecondsRealtime(duration);
-            
+
             HideAlert();
 
             // Call event
-            AfterAlertEvent.Invoke();
+            onAfterAlert.Invoke();
 
             if (actionDelegate != null)
             {

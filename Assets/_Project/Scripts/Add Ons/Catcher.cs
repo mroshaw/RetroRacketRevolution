@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             {
                 return;
             }
+
             AttachedPlayer.BeginFiring();
             _ball = null;
         }
@@ -33,13 +35,15 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         {
         }
 
-        protected internal override void Deploy(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Deploy(bool immediate = false)
         {
+            yield break;
         }
 
-        protected internal override void Retract(Action callBack, bool immediate = false)
+        protected internal override IEnumerator Retract(bool immediate = false)
         {
-  }
+            yield break;
+        }
 
         /// <summary>
         /// Ball enters catcher trigger collider

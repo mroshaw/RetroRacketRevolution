@@ -1,5 +1,6 @@
 using System.Linq;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
+using DaftAppleGames.RetroRacketRevolution.Enemies;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +24,6 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
-
         }
 
         internal void Fire(float velocity)
@@ -66,6 +66,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
                 Enemy enemy = collision.gameObject.GetComponent<Enemy>();
                 enemy.Hit(this.gameObject);
             }
+
             projectileCollideEvent.Invoke(this.gameObject);
         }
     }

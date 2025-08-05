@@ -1,13 +1,11 @@
 using UnityEngine;
 
-namespace DaftAppleGames.Menus
+namespace DaftAppleGames.RetroRacketRevolution.Menus
 {
     public class SpriteScreenBounce : MonoBehaviour
     {
-        // Private fields
         private Rigidbody2D _rb;
 
-        #region UnityMethods
         /// <summary>
         /// Initialise this component
         /// </summary>   
@@ -15,7 +13,7 @@ namespace DaftAppleGames.Menus
         {
             _rb = GetComponent<Rigidbody2D>();
         }
-    
+
         /// <summary>
         /// Configure the component on Start
         /// </summary>
@@ -39,25 +37,14 @@ namespace DaftAppleGames.Menus
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, Random.Range(1, 3));
             }
         }
-        #endregion
 
-        #region PublicMethods
         /// <summary>
         /// Starts bouncing the sprite
         /// </summary>
-        public void StartBouncing()
+        private void StartBouncing()
         {
             float rand = Random.Range(0, 2);
-            if (rand < 1)
-            {
-                _rb.AddForce(new Vector2(200, -150));
-            }
-            else
-            {
-                _rb.AddForce(new Vector2(-200, -150));
-
-            }
+            _rb.AddForce(rand < 1 ? new Vector2(200, -150) : new Vector2(-200, -150));
         }
-	    #endregion
     }
 }

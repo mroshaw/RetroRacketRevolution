@@ -8,18 +8,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
     public class VersionActions : MonoBehaviour
     {
         // Public serializable properties
-        [FoldoutGroup("No Version Events")]
-        public UnityEvent NoVersionFoundEvent;
-        [FoldoutGroup("Version Before Events")]
-        public UnityEvent InstalledVersionNewerEvent;
-        [FoldoutGroup("Version After Events")]
-        public UnityEvent InstalledVersionOlderEvent;
+        [FoldoutGroup("No Version Events")] public UnityEvent onNoVersionFound;
+        [FoldoutGroup("Version Before Events")] public UnityEvent onNewerVersionInstalled;
+        [FoldoutGroup("Version After Events")] public UnityEvent onOlderVersionInstalled;
 
-        // Public properties
-
-        // Private fields
-
-        #region UnityMethods
         /// <summary>
         /// Initialise this component
         /// </summary>   
@@ -27,7 +19,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
         {
             ProcessApplicationVersion();
         }
-        #endregion
 
         /// <summary>
         /// Determine what to do
@@ -42,7 +33,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
             if (string.IsNullOrEmpty(installedVersionString))
             {
                 Debug.Log("No version found");
-                NoVersionFoundEvent.Invoke();
+                onNoVersionFound.Invoke();
                 return;
             }
 
@@ -50,14 +41,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
             if (currVersion.CompareTo(installedVersion) < 0)
             {
                 Debug.Log("Installed version is older");
-                InstalledVersionOlderEvent.Invoke();
+                onOlderVersionInstalled.Invoke();
                 return;
             }
 
             if (currVersion.CompareTo(installedVersion) > 0)
             {
                 Debug.Log("Installed version is newer");
-                InstalledVersionNewerEvent.Invoke();
+                onNewerVersionInstalled.Invoke();
                 return;
             }
         }
@@ -66,7 +57,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
         /// Get the Installed Version
         /// </summary>
         /// <returns></returns>
-        public string GetInstalledVersion()
+        private string GetInstalledVersion()
         {
             return PlayerPrefs.GetString("InstalledVersion", String.Empty);
         }
@@ -74,7 +65,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Platform
         /// <summary>
         /// Set the Installed Version
         /// </summary>
-        public void SetInstalledVersion()
+        private void SetInstalledVersion()
         {
             PlayerPrefs.SetString("InstalledVersion", Application.version);
         }

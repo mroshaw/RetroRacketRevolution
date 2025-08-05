@@ -1,11 +1,12 @@
 using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Balls;
+using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DaftAppleGames.RetroRacketRevolution
+namespace DaftAppleGames.RetroRacketRevolution.Enemies
 {
     public class Enemy : MonoBehaviour
     {
@@ -81,6 +82,7 @@ namespace DaftAppleGames.RetroRacketRevolution
                 _movement = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                 _moveTimeLeft += accelerationTime;
             }
+
             _attackTime += Time.deltaTime;
             if (_attackTime > timeBetweenAttacks)
             {
@@ -121,7 +123,7 @@ namespace DaftAppleGames.RetroRacketRevolution
         public void Hit(GameObject hitByGameObject)
         {
             // Hit by boundary
-            if(hitByGameObject.layer == LayerMask.NameToLayer("OutOfBounds"))
+            if (hitByGameObject.layer == LayerMask.NameToLayer("OutOfBounds"))
             {
                 Die();
                 return;

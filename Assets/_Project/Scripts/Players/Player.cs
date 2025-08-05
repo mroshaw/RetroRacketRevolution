@@ -2,18 +2,26 @@ using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Effects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DaftAppleGames.RetroRacketRevolution.Players
 {
-    public enum HardPointLocation { Outer, Center, Bottom }
-    
+    public enum HardPointLocation
+    {
+        Outer,
+        Center,
+        Bottom
+    }
+
     public class Player : MonoBehaviour, IBonusRecipient
     {
         // Public settings
         [BoxGroup("Player Settings")] [SerializeField] private Vector3 defaultBatScale;
+        [BoxGroup("Player Settings")] [SerializeField] private Color shipColor;
+        [BoxGroup("Player Settings")] [SerializeField] private Vector3 startPosition;
         [BoxGroup("Bat Settings")] [SerializeField] private float sizeChangeFactor = 0.3f;
         [BoxGroup("Bat Settings")] [SerializeField] private float minLength = 1.3f;
         [BoxGroup("Bat Settings")] [SerializeField] private float maxLength = 0.5f;
@@ -34,35 +42,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         [FoldoutGroup("Events")] public UnityEvent<Player> onHit;
 
         internal bool Destroyed { get; private set; }
-        
-        [BoxGroup("Cheats")]
-        [Button("Grow Bat")]
-        public void GrowBatCheat()
-        {
-            GrowBat();
-        }
-        [BoxGroup("Cheats")]
-        [Button("Shrink Bat")]
-        public void ShrinkBatCheat()
-        {
-            ShrinkBat();
-        }
-        [BoxGroup("Cheats")]
-        [Button("Restore Bat")]
-        public void RestoreBatCheat()
-        {
-            SetDefaultBatSize();
-        }
-
-        /// <summary>
-        /// Sets the player bat scale
-        /// </summary>
-        internal void SetBatScale(float newScale)
-        {
-            defaultBatScale = new Vector3(newScale, defaultBatScale.y, defaultBatScale.z);
-        }
-
-        // Public properties
 
 
         // Player score
@@ -86,7 +65,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private PlayerManager _playerManager;
         private AudioSource _audioSource;
 
-        internal PlayerManager PlayerManager { set => _playerManager = value; }
+        internal PlayerManager PlayerManager
+        {
+            set => _playerManager = value;
+        }
 
         /// <summary>
         /// Init components
@@ -111,6 +93,40 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 SpawnBall();
             }
         }
+
+        private void SetShipColor()
+        {
+        }
+
+        [BoxGroup("Cheats")]
+        [Button("Grow Bat")]
+        public void GrowBatCheat()
+        {
+            GrowBat();
+        }
+
+        [BoxGroup("Cheats")]
+        [Button("Shrink Bat")]
+        public void ShrinkBatCheat()
+        {
+            ShrinkBat();
+        }
+
+        [BoxGroup("Cheats")]
+        [Button("Restore Bat")]
+        public void RestoreBatCheat()
+        {
+            SetDefaultBatSize();
+        }
+
+        /// <summary>
+        /// Sets the player bat scale
+        /// </summary>
+        internal void SetBatScale(float newScale)
+        {
+            defaultBatScale = new Vector3(newScale, defaultBatScale.y, defaultBatScale.z);
+        }
+
 
         /// <summary>
         /// Is ball attached to player?
@@ -183,6 +199,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 return;
             }
+
             if (_attachedBalls.Count == 0)
             {
                 Ball newBall = _playerManager.SpawnNewBall();
@@ -193,45 +210,45 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// <summary>
         /// Handle Bonus Applied events
         /// </summary>
-        public void BonusAppliedHandler(Bonus bonus, GameObject targetGameObject)
+        public void ApplyBonus(Bonus bonus)
         {
-            // Check if the target is for me
-            Player targetPlayer = targetGameObject.GetComponentInParent<Player>();
-            if (targetPlayer == null)
-            {
-                return;
-            }
-
-            if (targetPlayer != this)
-            {
-                return;
-            }
-
-            // Bonus is for me, so apply it
-            switch (bonus.bonusType)
+            switch (bonus.BonusType)
             {
                 case BonusType.SmallScore:
                 case BonusType.BigScore:
-                    AddScore(bonus.scoreToAdd);
+                    AddScore(bonus.ScoreToAdd);
                     break;
                 case BonusType.Laser:
                 case BonusType.Catcher:
                 case BonusType.FinishLevel:
-                    HardPoint playerHardPoint = GetFreeHardPoint(bonus.hardPointLocation);
+                    HardPoint playerHardPoint = GetFreeHardPoint(bonus.HardPointLocation);
                     if (playerHardPoint != null)
                     {
                         playerHardPoint.Deploy();
-                        if (bonus.duration > 0.0f)
+                        if (bonus.Duration > 0.0f)
                         {
-                            playerHardPoint.DeactivateHardPointAfterDelay(bonus.duration);
+                            playerHardPoint.DeactivateHardPointAfterDelay(bonus.Duration);
                         }
                     }
+
+                    break;
+                case BonusType.ExtraLife:
+                    _playerManager.AddLife();
                     break;
                 case BonusType.ShrinkBat:
                     ShrinkBat();
                     break;
                 case BonusType.GrowBat:
                     GrowBat();
+                    break;
+                case BonusType.MegaBall:
+                    _playerManager.MakeMegaBalls();
+                    break;
+                case BonusType.MultiBall:
+                    _playerManager.MakeMultiBalls();
+                    break;
+                case BonusType.SlowBall:
+                    _playerManager.MakeSlowBalls();
                     break;
             }
         }
@@ -334,6 +351,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
                 case HardPointLocation.Bottom:
                     return bottomHardPoint;
             }
+
             return null;
         }
 
@@ -352,6 +370,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         public void ResetPlayer(bool spawnBall)
         {
+            Debug.Log("Resetting Player!");
+            transform.position = startPosition;
             playerModelGameObject.SetActive(true);
             DeactivateHardPoints();
             SetDefaultBatSize();
@@ -361,6 +381,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             }
 
             Destroyed = false;
+
+            onReset?.Invoke();
         }
     }
 }

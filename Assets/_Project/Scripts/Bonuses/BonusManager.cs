@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.AddOns;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,12 +10,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 {
     public class BonusManager : MonoBehaviour
     {
-        [BoxGroup("Prefabs")] public Transform bonusContainer;
-        [BoxGroup("Settings")] public BonusData bonusData;
-        [BoxGroup("Random")] public Transform randomSpawnTransform;
+        [BoxGroup("Prefabs")] [SerializeField] private Transform bonusContainer;
+        [BoxGroup("Settings")] [SerializeField] [InlineEditor] private BonusData bonusData;
+        [BoxGroup("Spawning")] [SerializeField] private Transform randomSpawnTransform;
+        [BoxGroup("Spawning")] [SerializeField] private float bonusSpawnForce;
 
         [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> onBonusApplied;
 
+        private List<Bonus> _bonuses;
         private AudioSource _audioSource;
 
         /// <summary>
@@ -23,6 +26,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _bonuses = new();
         }
 
         /// <summary>
@@ -41,30 +45,22 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
             Bonus bonus = newBonus.GetComponent<Bonus>();
             newBonus.transform.position = spawnPosition;
             bonus.MainBonusManager = this;
-            if (bonus.spawnAudioClip)
-            {
-                _audioSource.PlayOneShot(bonus.spawnAudioClip);
-            }
+            bonus.Spawn();
+            bonus.onDestroyed.AddListener(RemoveBonus);
+            _bonuses.Add(bonus);
         }
 
-        /// <summary>
-        /// Applies the bonus effect on the target
-        /// </summary>
-        internal void ApplyBonusEffect(Bonus bonus, GameObject targetGameObject)
+        private void RemoveBonus(Bonus bonus)
         {
-            // Play bonus audio
-            _audioSource.PlayOneShot(bonus.collectAudioClip);
+            _bonuses.Remove(bonus);
+        }
 
-            // If Random, spawn a random bonus
-            if (bonus.bonusType == BonusType.Random)
+        public void DestroyAllBonuses()
+        {
+            foreach (Bonus bonus in _bonuses.ToArray())
             {
-                BonusType randomBonus = GetRandomBonus(BonusType.Random);
-                // Debug.Log($"Spawning random bonus... {randomBonus.ToString()}");
-                SpawnBonus(randomBonus, randomSpawnTransform.position);
-                return;
+                bonus.DestroyBonus();
             }
-
-            onBonusApplied.Invoke(bonus, targetGameObject);
         }
 
         /// <summary>
@@ -82,6 +78,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         {
             yield return new WaitForSeconds(delay);
             hardPoint.Retract();
+        }
+
+        internal void SpawnRandomBonus()
+        {
+            BonusType randomBonusType = GetRandomBonus(BonusType.Random);
+            SpawnBonus(randomBonusType, randomSpawnTransform.position);
         }
 
         /// <summary>
