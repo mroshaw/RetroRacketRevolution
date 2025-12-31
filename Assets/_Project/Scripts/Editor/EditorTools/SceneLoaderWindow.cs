@@ -8,9 +8,10 @@ namespace DaftAppleGames.Editor.BuildTool
 {
     public class SceneLoaderWindow : OdinEditorWindow
     {
-        [HideIf("@mainMenuSceneAsset != null")][SerializeField] private SceneAsset mainMenuSceneAsset;
-        [HideIf("@gameSceneAsset != null")][SerializeField] private SceneAsset gameSceneAsset;
-        [HideIf("@emptySceneAsset != null")][SerializeField] private SceneAsset emptySceneAsset;
+        [HideIf("@mainMenuSceneAsset != null")] [SerializeField] private SceneAsset mainMenuSceneAsset;
+        [HideIf("@gameSceneAsset != null")] [SerializeField] private SceneAsset gameSceneAsset;
+        [HideIf("@emptySceneAsset != null")] [SerializeField] private SceneAsset emptySceneAsset;
+        [HideIf("@modelSceneAsset != null")] [SerializeField] private SceneAsset modelSceneAsset;
 
         // Display Editor Window
         [MenuItem("Daft Apple Games/Editor/Scene Loader")]
@@ -36,6 +37,15 @@ namespace DaftAppleGames.Editor.BuildTool
             EditorSceneManager.SaveOpenScenes();
             OpenScene(gameSceneAsset);
         }
+
+        [BoxGroup("Editor Scenes")]
+        [Button("Model Scene", ButtonSizes.Medium)]
+        private void LoadModelScene()
+        {
+            EditorSceneManager.SaveOpenScenes();
+            OpenScene(modelSceneAsset);
+        }
+
 
         [BoxGroup("Editor Scenes")]
         [Button("Empty Scene", ButtonSizes.Medium)]

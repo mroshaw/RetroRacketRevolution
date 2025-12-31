@@ -3,6 +3,7 @@ using DaftAppleGames.RetroRacketRevolution.AddOns;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Effects;
+using DaftAppleGames.RetroRacketRevolution.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -64,10 +65,16 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private Vector3 _batLengthScale;
         private PlayerManager _playerManager;
         private AudioSource _audioSource;
+        private MaterialTools _materialTools;
 
         internal PlayerManager PlayerManager
         {
             set => _playerManager = value;
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         /// <summary>
@@ -76,6 +83,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _materialTools = GetComponent<MaterialTools>();
             // Init score
             Score = 0;
         }
@@ -92,10 +100,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
             {
                 SpawnBall();
             }
+
+            SetShipColor();
         }
 
         private void SetShipColor()
         {
+            _materialTools.SetColor(shipColor);
         }
 
         [BoxGroup("Cheats")]
@@ -324,9 +335,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         /// </summary>
         private void DeactivateHardPoints()
         {
-            leftHardPoint.Retract();
-            rightHardPoint.Retract();
-            centerHardPoint.Retract();
+            leftHardPoint.Retract(true);
+            rightHardPoint.Retract(true);
+            centerHardPoint.Retract(true);
         }
 
         /// <summary>
@@ -371,6 +382,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Players
         public void ResetPlayer(bool spawnBall)
         {
             Debug.Log("Resetting Player!");
+            StopAllCoroutines();
             transform.position = startPosition;
             playerModelGameObject.SetActive(true);
             DeactivateHardPoints();

@@ -1,4 +1,5 @@
 using DaftAppleGames.RetroRacketRevolution.Game;
+using DaftAppleGames.UserInterface;
 using DaftAppleGames.UserInterface.MainMenu;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,13 +11,21 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
     {
         [BoxGroup("Game Config")] [SerializeField] private GameConfig gameConfig;
         [BoxGroup("Game Data")] [SerializeField] private GameData gameData;
+
+        private CanvasFader _canvasFader;
+
+        private void Awake()
+        {
+            _canvasFader = GetComponentInChildren<CanvasFader>();
+        }
+
         /// <summary>
         /// Start a one player game
         /// </summary>
         public void Start1P()
         {
             gameData.isTwoPlayer = false;
-            StartGame();
+            _canvasFader.FadeOut(null, StartGame);
         }
 
         /// <summary>

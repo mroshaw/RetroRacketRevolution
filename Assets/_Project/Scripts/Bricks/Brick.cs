@@ -25,6 +25,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         [BoxGroup("Settings")] [SerializeField] private Color brickColor;
         [BoxGroup("Settings")] [SerializeField] private BrickType brickType;
         [BoxGroup("Settings")] [SerializeField] private BonusType brickBonus;
+        [BoxGroup("Settings")] [SerializeField] private string normalLayer = "Bricks";
+        [BoxGroup("Settings")] [SerializeField] private string invincibleLayer = "InvincibleBricks";
         [BoxGroup("Events")] [SerializeField] public UnityEvent<Brick> onDestroyed;
 
         [BoxGroup("Debug")] [SerializeField] private int health = 1;
@@ -33,6 +35,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 
         private MaterialTools _matTools;
         private Explosion _explosion;
+        private BoxCollider _boxCollider;
 
         // Public properties
         public BrickType BrickType => brickType;
@@ -100,15 +103,19 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             {
                 case BrickType.Normal:
                     health = 1;
+                    gameObject.layer = LayerMask.NameToLayer(normalLayer);
                     break;
                 case BrickType.DoubleStrong:
                     health = 2;
+                    gameObject.layer = LayerMask.NameToLayer(normalLayer);
                     break;
                 case BrickType.TripleStrong:
                     health = 3;
+                    gameObject.layer = LayerMask.NameToLayer(normalLayer);
                     break;
                 case BrickType.Invincible:
                     health = -1;
+                    gameObject.layer = LayerMask.NameToLayer(invincibleLayer);
                     break;
             }
 
@@ -165,17 +172,17 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
                 Destroy();
                 hitByPlayer.AddScore(_scoreValue);
                 SpawnBonus();
-                onDestroyed.Invoke(this);
             }
         }
 
         /// <summary>
         /// Destroy the brick
         /// </summary>
-        private void Destroy()
+        internal void Destroy(bool playSound = true)
         {
             brickModel.gameObject.SetActive(false);
             _explosion.Explode(true);
+            onDestroyed.Invoke(this);
         }
 
         /// <summary>

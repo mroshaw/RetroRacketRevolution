@@ -50,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be01712c9cfd804ea007bfbbf0a03a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deployClip: {fileID: 8300000, guid: 6832b15d9a7bdb948aa26664b3452356, type: 3}
-  retractClip: {fileID: 8300000, guid: 5d33d366b7791fe4f942cd0348b6fd28, type: 3}
   attachedPlayer: {fileID: 0}
   attachedHardPoint: {fileID: 0}
   projectilePrefab: {fileID: 6485543388741363667, guid: 71dd97163ed3db247b6fe16cd3b8aade, type: 3}
@@ -256,7 +254,7 @@ Transform:
   m_GameObject: {fileID: 5596492989249196429}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 2.57}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

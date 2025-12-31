@@ -9,7 +9,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
     public class LevelBooster : AddOn
     {
         [BoxGroup("Settings")] [SerializeField] private float boostTime = 3.0f;
-        [BoxGroup("Settings")] [SerializeField] private float boostHeight = 150.0f;
+        [BoxGroup("Settings")] [SerializeField] private Vector3 boostVector = new Vector3(0, 150.0f, -100.0f);
         [BoxGroup("Settings")] [SerializeField] private Engine engine1;
         [BoxGroup("Settings")] [SerializeField] private Engine engine2;
 
@@ -76,8 +76,7 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
             engine1.FireEngine();
             engine2.FireEngine();
             Vector3 startPosition = _parentGameObject.transform.position;
-            Vector3 endPosition = new Vector3(_parentGameObject.transform.position.x, boostHeight,
-                _parentGameObject.transform.position.z);
+            Vector3 endPosition = startPosition + boostVector;
 
             onStartBoost.Invoke();
             yield return null;

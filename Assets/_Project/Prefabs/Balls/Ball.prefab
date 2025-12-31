@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4737940249108346665}
   - component: {fileID: 4340949420165088830}
   - component: {fileID: 6141127910228793213}
+  - component: {fileID: 855731264647459978}
   m_Layer: 9
   m_Name: Ball
   m_TagString: Ball
@@ -53,7 +54,13 @@ MonoBehaviour:
   speedUpAfterDuration: 20
   speedMultiplier: 1.2
   spinForce: 1000
-  megaBallDuration: 5
+  normalBallColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+  normalBallEmissiveColor: {r: 1, g: 0.9882353, b: 0.8745098, a: 0}
+  normalBallEmissive: 0.15
+  megaBallDuration: 20
+  megaBallColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0}
+  megaBallEmissiveColor: {r: 0.8396226, g: 0.2670809, b: 0.09109115, a: 0}
+  megaBallEmissive: 0.6
   hitPlayerClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
   hitBoundaryClip: {fileID: 8300000, guid: 3a55f6106502c9a4fb5280ab89327370, type: 3}
   hitBrickClip: {fileID: 0}
@@ -238,6 +245,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &855731264647459978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6081878811301372583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4ba669c99b51444a2804a504497e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 5833738811400511805}
 --- !u!1001 &5130742555244068281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,5 +323,10 @@ PrefabInstance:
 --- !u!4 &4665366748544899666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1896270e3b712f84b8117424f0e2d79f, type: 3}
+  m_PrefabInstance: {fileID: 5130742555244068281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5833738811400511805 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1896270e3b712f84b8117424f0e2d79f, type: 3}
   m_PrefabInstance: {fileID: 5130742555244068281}
   m_PrefabAsset: {fileID: 0}

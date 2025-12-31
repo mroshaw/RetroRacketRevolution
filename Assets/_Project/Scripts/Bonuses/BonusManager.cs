@@ -14,11 +14,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         [BoxGroup("Settings")] [SerializeField] [InlineEditor] private BonusData bonusData;
         [BoxGroup("Spawning")] [SerializeField] private Transform randomSpawnTransform;
         [BoxGroup("Spawning")] [SerializeField] private float bonusSpawnForce;
+        [BoxGroup("Spawning")] [SerializeField] private Vector3 spawnAdjust;
 
         [FoldoutGroup("Events")] public UnityEvent<Bonus, GameObject> onBonusApplied;
 
         private List<Bonus> _bonuses;
         private AudioSource _audioSource;
+
+        private Vector3 _spawnAdjust;
 
         /// <summary>
         /// Set up the Bonus Manager
@@ -43,7 +46,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
 
             GameObject newBonus = Instantiate(bonusData.GetBonusByType(bonusType).spawnPrefab, bonusContainer);
             Bonus bonus = newBonus.GetComponent<Bonus>();
-            newBonus.transform.position = spawnPosition;
+            newBonus.transform.position = spawnPosition + spawnAdjust;
             bonus.MainBonusManager = this;
             bonus.Spawn();
             bonus.onDestroyed.AddListener(RemoveBonus);
@@ -83,7 +86,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         internal void SpawnRandomBonus()
         {
             BonusType randomBonusType = GetRandomBonus(BonusType.Random);
-            SpawnBonus(randomBonusType, randomSpawnTransform.position);
+            SpawnBonus(randomBonusType, randomSpawnTransform.position + spawnAdjust);
         }
 
         /// <summary>

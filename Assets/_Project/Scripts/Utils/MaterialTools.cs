@@ -9,14 +9,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Utils
     public class MaterialTools : MonoBehaviour
     {
         private static readonly int ColorProperty = Shader.PropertyToID("_Color");
+        private static readonly int EmissiveColorProperty = Shader.PropertyToID("_Emissive_Color");
+        private static readonly int EmissiveProperty = Shader.PropertyToID("_Emission");
 
-        [BoxGroup("Settings")] [SerializeField] private Color color;
         [BoxGroup("Settings")] [SerializeField] private MeshRenderer[] renderers;
-
-        private void Awake()
-        {
-            SetColor();
-        }
 
         [Button("Refresh Renderers")]
         private void RefreshRenderers()
@@ -24,18 +20,36 @@ namespace DaftAppleGames.RetroRacketRevolution.Utils
             renderers = GetComponentsInChildren<MeshRenderer>(true);
         }
 
-        internal void SetColor()
+        internal void SetColor(Color newColor)
         {
-            foreach (Renderer currRenderer in renderers)
+            SetColorProperty(ColorProperty, newColor);
+        }
+
+        internal void SetEmissiveColor(Color newEmissiveColor)
+        {
+            SetColorProperty(EmissiveColorProperty, newEmissiveColor);
+        }
+
+        internal void SetEmission(float newEmission)
+        {
+            SetFloatProperty(EmissiveProperty, newEmission);
+        }
+
+
+        private void SetFloatProperty(int propertyId, float newValue)
+        {
+            foreach (MeshRenderer currRenderer in renderers)
             {
-                currRenderer.material.SetColor(ColorProperty, color);
+                currRenderer.material.SetFloat(propertyId, newValue);
             }
         }
 
-        internal void SetColor(Color newColor)
+        private void SetColorProperty(int propertyId, Color newColor)
         {
-            color = newColor;
-            SetColor();
+            foreach (MeshRenderer currRenderer in renderers)
+            {
+                currRenderer.material.SetColor(propertyId, newColor);
+            }
         }
     }
 }

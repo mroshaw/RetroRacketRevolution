@@ -18,6 +18,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         [BoxGroup("AddOn")] [SerializeField] private AddOnType addOnType;
         [BoxGroup("AddOn")] [SerializeField] private HardPointLocation hardPointLocation;
         [BoxGroup("Events")] [SerializeField] internal UnityEvent<Bonus> onDestroyed;
+        [BoxGroup("Events")] [SerializeField] internal UnityEvent onSpawned;
 
         internal BonusManager MainBonusManager { get; set; }
         internal BonusType BonusType => bonusType;
@@ -91,6 +92,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
             }
 
             PushDown();
+            onSpawned?.Invoke();
         }
 
         private void PushDown()

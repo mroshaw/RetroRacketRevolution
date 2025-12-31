@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
+using DaftAppleGames.RetroRacketRevolution.Effects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,13 +12,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 {
     public class BrickManager : MonoBehaviour
     {
-        [BoxGroup("Audio")] [SerializeField] private AudioClip destroyedClip;
         [BoxGroup("Prefabs")] [SerializeField] private GameObject brickPrefab;
         [BoxGroup("Prefabs")] [SerializeField] private GameObject disruptorPrefab;
         [BoxGroup("Prefabs")] [SerializeField] private GameObject brickContainer;
         [BoxGroup("Prefabs")] [SerializeField] private GameObject disruptorContainer;
         [BoxGroup("Prefabs")] [SerializeField] private float delayBeforePoolReturn = 3.0f;
         [BoxGroup("Prefabs")] [SerializeField] private int defaultPoolSize = 200;
+
+        [BoxGroup("Settings")] [SerializeField] private Explosion allBricksExplosion;
+
         [BoxGroup("Debug")] [SerializeField] private List<Brick> bricks = new List<Brick>();
         [BoxGroup("Debug")] [SerializeField] private List<Disruptor> disruptors = new List<Disruptor>();
 
@@ -45,11 +48,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         [Button("Destroy All Bricks")]
         public void DestroyAllBricks()
         {
+            allBricksExplosion.Explode(true);
             foreach (Brick brick in bricks.ToArray())
             {
                 if (brick.BrickType != BrickType.Invincible)
                 {
-                    DestroyBrickCallBack(brick);
+                    // DestroyBrickCallBack(brick);
+                    brick.Destroy(false);
                 }
             }
         }
@@ -60,9 +65,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         internal Brick SpawnBrick(BrickType brickType, Color brickColor, BonusType brickBonus, int row, int col,
             bool isMainSortingGroup)
         {
-            GameObject newBrickGameObject;
-
-            newBrickGameObject = _brickPool.Get();
+            GameObject newBrickGameObject = _brickPool.Get();
 
             Brick brick = newBrickGameObject.GetComponent<Brick>();
             bricks.Add(brick);
@@ -223,7 +226,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             Brick brick = brickGameObject.GetComponent<Brick>();
             brick.onDestroyed.RemoveAllListeners();
             brickGameObject.SetActive(false);
-            // Debug.Log($"Brick returned to pool: {brick.brickType}, {brick.brickColor}. Pool size is: {brickPool.CountAll} of which {brickPool.CountActive} are active.");
         }
 
         /// <summary>
@@ -231,8 +233,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
         /// </summary>
         private void OnDestroyBrick(GameObject brickGameObject)
         {
-            Brick brick = brickGameObject.GetComponent<Brick>();
-            // Debug.Log($"Brick destroyed to pool. {brick.brickType}, {brick.brickColor}. Pool size is: {brickPool.CountAll} of which {brickPool.CountActive} are active.");
             Destroy(brickGameObject);
         }
 

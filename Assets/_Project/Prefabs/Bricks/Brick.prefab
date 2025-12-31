@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8091192660199984876}
   - component: {fileID: 5723624056005389458}
   - component: {fileID: 923476122197660109}
+  - component: {fileID: 549795142596124324}
   m_Layer: 6
   m_Name: Brick
   m_TagString: Brick
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1390128696345112208}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15.2, z: 34.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,6 +53,8 @@ MonoBehaviour:
   brickColor: {r: 0, g: 0, b: 0, a: 0}
   brickType: 0
   brickBonus: 0
+  normalLayer: Bricks
+  invincibleLayer: InvincibleBricks
   onDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -66,7 +69,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390128696345112208}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -97,9 +100,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4ba669c99b51444a2804a504497e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
   renderers:
   - {fileID: 6777895034346956215}
+--- !u!65 &549795142596124324
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390128696345112208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 28.7, y: 11.78, z: 40}
+  m_Center: {x: 0, y: 6.6, z: 0}
 --- !u!1 &2454645516794506523
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +173,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5220,7 +5243,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -10289,7 +10312,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -15193,7 +15216,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -20190,37 +20213,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bded2914f7acf146b9bfca4d303008f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7619319499732917207}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bded2914f7acf146b9bfca4d303008f, type: 3}
---- !u!1 &5932640281545607565 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bded2914f7acf146b9bfca4d303008f, type: 3}
-  m_PrefabInstance: {fileID: 6815513275258516700}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7619319499732917207
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5932640281545607565}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.33, y: 0.92, z: 2.85}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!4 &6421895899647267639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1bded2914f7acf146b9bfca4d303008f, type: 3}

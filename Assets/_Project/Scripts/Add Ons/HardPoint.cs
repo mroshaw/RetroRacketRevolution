@@ -135,7 +135,11 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         {
             deploymentState = DeploymentState.Deploying;
             onDeploying?.Invoke();
-            _audioSource.PlayOneShot(deployClip);
+            if (!immediate)
+            {
+                _audioSource.PlayOneShot(deployClip);
+            }
+
             yield return attachedAddOn.Deploy(immediate);
             deploymentState = DeploymentState.Deployed;
             onDeployed?.Invoke();
@@ -159,7 +163,11 @@ namespace DaftAppleGames.RetroRacketRevolution.AddOns
         {
             deploymentState = DeploymentState.Retracting;
             onRetracting?.Invoke();
-            _audioSource.PlayOneShot(deployClip);
+            if (!immediate)
+            {
+                _audioSource.PlayOneShot(deployClip);
+            }
+
             yield return attachedAddOn.Retract(immediate);
             deploymentState = DeploymentState.Retracted;
             onRetracted?.Invoke();

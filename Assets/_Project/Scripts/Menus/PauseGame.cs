@@ -23,7 +23,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
 
         protected override void ReturnToMainMenu()
         {
-            canvasFader.FadeOut(LoadMainMenu);
+            canvasFader.FadeOut(null, LoadMainMenu);
         }
 
         private void LoadMainMenu()

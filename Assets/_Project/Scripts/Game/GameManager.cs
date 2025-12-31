@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.AddOns;
-using DaftAppleGames.RetroRacketRevolution.Effects;
 using DaftAppleGames.RetroRacketRevolution.Balls;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using DaftAppleGames.RetroRacketRevolution.Levels;
@@ -25,33 +24,37 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
     public class GameManager : MonoBehaviour
     {
-        [BoxGroup("Managers")] public BallManager ballManager;
-        [BoxGroup("Managers")] public BrickManager brickManager;
-        [BoxGroup("Managers")] public LevelLoader levelLoader;
-        [BoxGroup("Managers")] public AddOnManager addOnManager;
-        [BoxGroup("Managers")] public PlayerManager playerManager;
+        [BoxGroup("Managers")] [SerializeField] private BallManager ballManager;
+        [BoxGroup("Managers")] [SerializeField] private BrickManager brickManager;
+        [BoxGroup("Managers")] [SerializeField] private LevelLoader levelLoader;
+        [BoxGroup("Managers")] [SerializeField] private AddOnManager addOnManager;
+        [BoxGroup("Managers")] [SerializeField] private PlayerManager playerManager;
 
-        [BoxGroup("Game Data")] public GameData gameData;
+        [BoxGroup("Game Data")] [SerializeField] private GameData gameData;
 
-        [BoxGroup("UI")] public GameObject infoPanel;
-        [BoxGroup("UI")] public GameObject startLevel;
-        [BoxGroup("UI")] public TextMeshProUGUI startLevelNameText;
-        [BoxGroup("UI")] public GameObject finishLevel;
-        [BoxGroup("UI")] public GameObject gameOver;
-        [BoxGroup("UI")] public GameObject gameComplete;
-        [BoxGroup("UI")] public CircleTextInput newHighScoreInput;
-        [BoxGroup("UI")] public float gameOverPanelDuration = 5.0f;
-        [BoxGroup("UI")] public float gameCompletePanelDuration = 5.0f;
-        [BoxGroup("UI")] public float levelCompletePanelDuration = 3.0f;
-        [BoxGroup("UI")] public float levelStartPanelDuration = 3.0f;
+        [BoxGroup("UI")] [SerializeField] private GameObject infoPanel;
+        [BoxGroup("Start Level UI")] [SerializeField] private GameObject startLevel;
+        [BoxGroup("Start Level UI")] [SerializeField] private TextMeshProUGUI startLevelNameText;
+        [BoxGroup("Start Level UI")] [SerializeField] private float levelStartPanelDuration = 3.0f;
+        [BoxGroup("Start Level UI")] [SerializeField] private AudioClip levelStartedClip;
 
-        [BoxGroup("Audio")] public AudioClip levelStartedClip;
-        [BoxGroup("Audio")] public AudioClip levelCompleteClip;
-        [BoxGroup("Audio")] public AudioClip gameOverClip;
-        [BoxGroup("Audio")] public AudioClip gameCompletedClip;
+        [BoxGroup("Finish Level UI")] [SerializeField] private GameObject finishLevel;
+        [BoxGroup("Finish Level UI")] [SerializeField] private TextMeshProUGUI finishLevelNameText;
+        [BoxGroup("Finish Level UI")] [SerializeField] private float levelCompletePanelDuration = 3.0f;
+        [BoxGroup("Finish Level UI")] [SerializeField] private AudioClip levelCompleteClip;
 
-        [BoxGroup("Object Tracking")] public Player player1;
-        [BoxGroup("Object Tracking")] public Player player2;
+        [BoxGroup("Game Over UI")] [SerializeField] private GameObject gameOver;
+        [BoxGroup("Game Over UI")] [SerializeField] private float gameOverPanelDuration = 5.0f;
+        [BoxGroup("Game Over UI")] [SerializeField] private AudioClip gameOverClip;
+
+        [BoxGroup("Game Complete UI")] [SerializeField] private GameObject gameComplete;
+        [BoxGroup("Game Complete UI")] [SerializeField] private float gameCompletePanelDuration = 5.0f;
+        [BoxGroup("Game Complete UI")] [SerializeField] private AudioClip gameCompletedClip;
+
+        [BoxGroup("High Score UI")] [SerializeField] private CircleTextInput newHighScoreInput;
+
+        [BoxGroup("Object Tracking")] [SerializeField] private Player player1;
+        [BoxGroup("Object Tracking")] [SerializeField] private Player player2;
 
         [FoldoutGroup("Events")] public UnityEvent<int> onHighScoreChanged;
         [FoldoutGroup("Events")] public UnityEvent onGameOver;
@@ -63,7 +66,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         public bool CheatsUsed { get; set; }
 
         private HighScores _highScores;
-
         private const string HighScore = "HighScore";
 
         private AudioSource _audioSource;
@@ -71,6 +73,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
         private bool _allBricksDestroyed;
         private bool _allEnemiesDestroyed;
+
+        private int _currLevelIndex;
 
         /// <summary>
         /// Set up the Game Manager
@@ -82,6 +86,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             CheatsUsed = false;
             _allBricksDestroyed = false;
             _allEnemiesDestroyed = false;
+            _currLevelIndex = 1;
         }
 
         /// <summary>
@@ -157,11 +162,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             onLevelComplete.Invoke();
             ballManager.DestroyAllBalls();
             _audioSource.PlayOneShot(levelCompleteClip);
-            ShowAlert(AlertType.FinishLevel, levelCompletePanelDuration, LoadNextLevel);
+            ShowAlert(AlertType.FinishLevel, levelCompletePanelDuration, LoadNextLevel, _currLevelIndex.ToString());
+            _currLevelIndex++;
         }
 
         /// <summary>
-        /// Reset the player and balls
+        /// Load the next level
         /// </summary>
         private void LoadNextLevel()
         {
@@ -179,7 +185,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             _currentLevelData = levelData;
             _allBricksDestroyed = false;
             _allEnemiesDestroyed = false;
-            ShowAlert(AlertType.StartLevel, levelStartPanelDuration, null, levelData.levelName);
+            ShowAlert(AlertType.StartLevel, levelStartPanelDuration, null, _currLevelIndex.ToString());
         }
 
         /// <summary>
@@ -283,29 +289,21 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         private void ShowAlert(AlertType alertType, float duration, Action actionDelegate, string levelName = "")
         {
             infoPanel.SetActive(true);
-            TextColorCycler cycler;
             switch (alertType)
             {
                 case AlertType.StartLevel:
                     startLevel.SetActive(true);
                     startLevelNameText.text = levelName;
-                    cycler = startLevel.GetComponentInChildren<TextColorCycler>();
-                    cycler.StartColor();
                     break;
                 case AlertType.FinishLevel:
                     finishLevel.SetActive(true);
-                    cycler = finishLevel.GetComponentInChildren<TextColorCycler>();
-                    cycler.StartColor();
+                    finishLevelNameText.text = levelName;
                     break;
                 case AlertType.GameOver:
                     gameOver.SetActive(true);
-                    cycler = gameOver.GetComponentInChildren<TextColorCycler>();
-                    cycler.StartColor();
                     break;
                 case AlertType.GameComplete:
                     gameComplete.SetActive(true);
-                    cycler = gameComplete.GetComponentInChildren<TextColorCycler>();
-                    cycler.StartColor();
                     break;
             }
 

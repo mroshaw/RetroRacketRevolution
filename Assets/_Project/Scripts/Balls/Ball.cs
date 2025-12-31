@@ -3,6 +3,7 @@ using System.Collections;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
 using DaftAppleGames.RetroRacketRevolution.Enemies;
 using DaftAppleGames.RetroRacketRevolution.Players;
+using DaftAppleGames.RetroRacketRevolution.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +18,14 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Ball Settings")] [SerializeField] private float speedUpAfterDuration = 20.0f;
         [BoxGroup("Ball Settings")] [SerializeField] private float speedMultiplier = 1.2f;
         [BoxGroup("Ball Settings")] [SerializeField] private float spinForce = 50.0f;
+        [BoxGroup("Normal Ball")] [SerializeField] private Color normalBallColor;
+        [BoxGroup("Normal Ball")] [SerializeField] private Color normalBallEmissiveColor;
+        [BoxGroup("Normal Ball")] [SerializeField] private float normalBallEmissive;
+
         [BoxGroup("MegaBall")] [SerializeField] private float megaBallDuration = 5.0f;
+        [BoxGroup("MegaBall")] [SerializeField] private Color megaBallColor;
+        [BoxGroup("MegaBall")] [SerializeField] private Color megaBallEmissiveColor;
+        [BoxGroup("MegaBall")] [SerializeField] private float megaBallEmissive;
 
         [BoxGroup("Audio")] [SerializeField] private AudioClip hitPlayerClip;
         [BoxGroup("Audio")] [SerializeField] private AudioClip hitBoundaryClip;
@@ -34,8 +42,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> onDestroyed;
         [BoxGroup("Events")] [SerializeField] public UnityEvent<Ball> onSpeedMultiplierChanged;
 
-        // Private pointers
         private Player _attachedPlayer;
+        private MaterialTools _materialTools;
+        private Rigidbody _rigidBody;
+        private AudioSource _audioSource;
 
         // Used for scoring
         internal Player LastTouchedByPlayer { get; set; }
@@ -45,9 +55,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
 
         internal int CurrSpeedMultiplier { get; private set; }
 
-        // Components
-        private Rigidbody _rigidBody;
-        private AudioSource _audioSource;
+        private bool _isMegaBall;
 
         /// <summary>
         /// Setup component references
@@ -56,6 +64,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         {
             _rigidBody = GetComponentInChildren<Rigidbody>();
             _audioSource = GetComponent<AudioSource>();
+            _materialTools = GetComponent<MaterialTools>();
             currSpeed = defaultBallSpeed;
             speedChangeTimer = 0;
             CurrSpeedMultiplier = 1;
@@ -67,6 +76,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         private void Start()
         {
             onSpeedMultiplierChanged.Invoke(this);
+            MakeNormalBall();
         }
 
         /// <summary>
@@ -119,6 +129,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         internal void MakeMegaBall()
         {
             _rigidBody.excludeLayers |= (1 << LayerMask.NameToLayer("Bricks"));
+            _materialTools.SetColor(megaBallColor);
+            _materialTools.SetColor(megaBallEmissiveColor);
+            _materialTools.SetEmission(megaBallEmissive);
+            _isMegaBall = true;
             StartCoroutine(RevertMegaBallAsync(megaBallDuration));
         }
 
@@ -129,13 +143,16 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         internal void MakeNormalBall()
         {
             _rigidBody.excludeLayers &= ~(1 << LayerMask.NameToLayer("Bricks"));
+            _materialTools.SetColor(normalBallColor);
+            _materialTools.SetColor(normalBallEmissiveColor);
+            _materialTools.SetEmission(normalBallEmissive);
+
+            _isMegaBall = false;
         }
 
         /// <summary>
         /// Revert to normal after number of seconds
         /// </summary>
-        /// <param name="duration"></param>
-        /// <returns></returns>
         private IEnumerator RevertMegaBallAsync(float duration)
         {
             yield return new WaitForSeconds(duration);
@@ -166,6 +183,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         void OnCollisionEnter(Collision other)
         {
+            Debug.Log($"Ball hit: {other.gameObject.name}");
             // Hit the player
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
             {
@@ -224,7 +242,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// <summary>
         /// Handles collision with a brick
         /// </summary>
-        internal void CollideWithBrick(Brick brick)
+        private void CollideWithBrick(Brick brick)
         {
             // Play appropriate sound clip
             switch (brick.BrickType)
