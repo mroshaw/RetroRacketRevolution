@@ -6104,7 +6104,78 @@ MonoBehaviour:
         m_CallState: 2
   onLevelStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 347704142}
+        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Enemies.EnemyManager,
+          DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: StartSpawning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameBusy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1454400342}
+        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Input.PlayerInputManager,
+          DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: SetGameBusy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2025870833}
+        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Input.PlayerInputManager,
+          DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: SetGameBusy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameReady:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1454400342}
+        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Input.PlayerInputManager,
+          DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: SetGameReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2025870833}
+        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Input.PlayerInputManager,
+          DaftAppleGames.RetroRacketRevo.Game
+        m_MethodName: SetGameReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onBeforeAlert:
     m_PersistentCalls:
       m_Calls: []
@@ -29972,6 +30043,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e76b0a6c15717b40903ead2838ce6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1454400342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2696462097758385633, guid: 97d631e1bee9fb04ba3c6efcd79d5c4b, type: 3}
+  m_PrefabInstance: {fileID: 1454400340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9716d3f010d2684aafd8ac037d2e8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1483161781
 GameObject:
   m_ObjectHideFlags: 0
@@ -31926,6 +32008,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005660355}
   m_CullTransparentMesh: 0
+--- !u!114 &2025870833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2696462097758385633, guid: 97d631e1bee9fb04ba3c6efcd79d5c4b, type: 3}
+  m_PrefabInstance: {fileID: 277768756}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9716d3f010d2684aafd8ac037d2e8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2107788927
 GameObject:
   m_ObjectHideFlags: 0

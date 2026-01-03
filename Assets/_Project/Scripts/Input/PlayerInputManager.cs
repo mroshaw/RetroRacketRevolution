@@ -14,6 +14,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Input
         private InputAction AnalogueMovementInputAction { get; set; }
         private InputAction FireInputAction { get; set; }
 
+        private bool _isGameBusy;
+
         private bool CanMove => !_player.Destroyed;
 
         private void Awake()
@@ -81,9 +83,25 @@ namespace DaftAppleGames.RetroRacketRevolution.Input
             }
         }
 
+        /// <summary>
+        /// Link to Game Manager event to block inputs when game UI is busy
+        /// </summary>
+        public void SetGameBusy()
+        {
+            _isGameBusy = true;
+        }
+
+        /// <summary>
+        /// Link to Game Manager event to resume input when game UI is ready
+        /// </summary>
+        public void SetGameReady()
+        {
+            _isGameBusy = false;
+        }
+
         private void OnFire(InputAction.CallbackContext context)
         {
-            if (context.started && !GameManager.IsBusy)
+            if (context.started && !_isGameBusy)
             {
                 _player.BeginFiring();
                 return;

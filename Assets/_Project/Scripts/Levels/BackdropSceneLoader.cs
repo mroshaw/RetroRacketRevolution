@@ -5,14 +5,22 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
+
 namespace DaftAppleGames.RetroRacketRevolution.Levels
 {
     public class BackdropSceneLoader : MonoBehaviour
     {
-        [BoxGroup("Settings")] [SerializeField] private LevelBackdropScenes levelBackdropScenes;
+        [BoxGroup("Settings")] [SerializeField] [InlineEditor] private LevelBackdropScenes levelBackdropScenes;
 
         [BoxGroup("Debug")] [SerializeField] private string currentlyLoadedSceneName;
         [BoxGroup("Debug")] [SerializeField] private bool isSceneLoaded = false;
+#if UNITY_EDITOR
+        [BoxGroup("Editor Debug")] [SerializeField] private Scene currentlyLoadedSceneInEditor;
+        [BoxGroup("Editor Debug")] [SerializeField] private bool isSceneLoadedInEditor;
+#endif
 
         /// <summary>
         /// Load the scene given the scene index
@@ -60,7 +68,31 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             // Stop any active coroutine
             StartCoroutine(UnloadCurrentSceneAsync());
         }
+#if UNITY_EDITOR
+        /// <summary>
+        /// Open scene in editor mode
+        /// </summary>
+        public void OpenSceneInEditor(string scenePath, string sceneName)
+        {
+            currentlyLoadedSceneInEditor = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+            isSceneLoadedInEditor = true;
+        }
 
+        /// <summary>
+        /// Save and close the current backdrop scene in the editor
+        /// </summary>
+        public void UnloadCurrentSceneInEditor()
+        {
+            if (!isSceneLoadedInEditor)
+            {
+                return;
+            }
+
+            EditorSceneManager.SaveOpenScenes();
+            EditorSceneManager.CloseScene(currentlyLoadedSceneInEditor, true);
+            isSceneLoadedInEditor = false;
+        }
+#endif
         /// <summary>
         /// Loads the given backdrop scene then sets the scene properties
         /// </summary>

@@ -11,6 +11,7 @@ namespace DaftAppleGames.Editor.BuildTool
         [HideIf("@mainMenuSceneAsset != null")] [SerializeField] private SceneAsset mainMenuSceneAsset;
         [HideIf("@gameSceneAsset != null")] [SerializeField] private SceneAsset gameSceneAsset;
         [HideIf("@levelEditorSceneAsset != null")] [SerializeField] private SceneAsset levelEditorSceneAsset;
+        [HideIf("@backdropTestSceneAsset != null")] [SerializeField] private SceneAsset backdropTestSceneAsset;
         [HideIf("@emptySceneAsset != null")] [SerializeField] private SceneAsset emptySceneAsset;
         [HideIf("@modelSceneAsset != null")] [SerializeField] private SceneAsset modelSceneAsset;
 
@@ -46,6 +47,15 @@ namespace DaftAppleGames.Editor.BuildTool
             EditorSceneManager.SaveOpenScenes();
             OpenScene(levelEditorSceneAsset);
         }
+
+        [BoxGroup("Editor Scenes")]
+        [Button("Backdrop Scene", ButtonSizes.Medium)]
+        private void LoadBackdropScene()
+        {
+            EditorSceneManager.SaveOpenScenes();
+            OpenScene(backdropTestSceneAsset);
+        }
+
 
         [BoxGroup("Editor Scenes")]
         [Button("Model Scene", ButtonSizes.Medium)]

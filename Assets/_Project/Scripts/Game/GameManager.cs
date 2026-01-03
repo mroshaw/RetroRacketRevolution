@@ -62,6 +62,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         [FoldoutGroup("Events")] public UnityEvent onGameComplete;
         [FoldoutGroup("Events")] public UnityEvent onLevelComplete;
         [FoldoutGroup("Events")] public UnityEvent onLevelStart;
+        [FoldoutGroup("Events")] public UnityEvent onGameBusy;
+        [FoldoutGroup("Events")] public UnityEvent onGameReady;
         [FoldoutGroup("Alert Events")] public UnityEvent onBeforeAlert;
         [FoldoutGroup("Alert Events")] public UnityEvent onAfterAlert;
 
@@ -72,9 +74,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
         private AudioSource _audioSource;
         private LevelDataExt _currentLevelData;
-
-        // Can be used to block user input while UI elements etc are being shown
-        public static bool IsBusy { get; private set; } = false;
 
         private bool _allBricksDestroyed;
         private bool _allEnemiesDestroyed;
@@ -302,7 +301,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void ShowAlert(AlertType alertType, float duration, Action actionDelegate, string levelName = "")
         {
-            IsBusy = true;
+            onGameBusy?.Invoke();
             infoPanel.SetActive(true);
             switch (alertType)
             {
@@ -334,7 +333,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             startLevel.SetActive(false);
             finishLevel.SetActive(false);
             gameOver.SetActive(false);
-            IsBusy = false;
+            onGameReady?.Invoke();
         }
 
         /// <summary>
