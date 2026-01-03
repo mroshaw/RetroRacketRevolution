@@ -51,7 +51,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Menus
                 newEntry.transform.localScale = new Vector3(1, 1, 1);
                 newEntry.transform.localPosition = new Vector3(0, 0, 0);
                 newEntry.GetComponent<NameImageTemplate>().SetEntryContent(bonusDef.friendlyName, bonusDef.description,
-                    bonusDef.spawnSprite);
+                    bonusDef.levelEditorSprite);
                 newEntry.SetActive(true);
             }
         }

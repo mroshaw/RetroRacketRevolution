@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3131087696925750379}
   - component: {fileID: 1949407268930297996}
   - component: {fileID: 2178766680209837760}
-  - component: {fileID: 8131856716492948942}
   m_Layer: 15
   m_Name: Alien Saucer
   m_TagString: Enemy
@@ -224,20 +223,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8131856716492948942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510776622213400851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3d4c698dd8b744ea06cf77c6f6baad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinSpeed: 40
-  spinOnStart: 1
 --- !u!1 &7386702454732925038
 GameObject:
   m_ObjectHideFlags: 0

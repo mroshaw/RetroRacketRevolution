@@ -1,3 +1,4 @@
+using DaftAppleGames.RetroRacketRevolution.Game;
 using DaftAppleGames.RetroRacketRevolution.Players;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -82,7 +83,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Input
 
         private void OnFire(InputAction.CallbackContext context)
         {
-            if (context.started)
+            if (context.started && !GameManager.IsBusy)
             {
                 _player.BeginFiring();
                 return;

@@ -183,7 +183,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Balls
         /// </summary>
         void OnCollisionEnter(Collision other)
         {
-            Debug.Log($"Ball hit: {other.gameObject.name}");
+            // Debug.Log($"Ball hit: {other.gameObject.name}");
             // Hit the player
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Player2"))
             {

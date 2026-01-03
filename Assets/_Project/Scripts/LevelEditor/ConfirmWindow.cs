@@ -14,7 +14,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [FoldoutGroup("Button Events")] public UnityEvent NoButtonClickedEvent;
         [FoldoutGroup("Button Events")] public UnityEvent<string> NoButtonWithInputClickedEvent;
 
-        #region PublicMethods
         /// <summary>
         /// Handle the Yes button
         /// </summary>
@@ -44,6 +43,5 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 NoButtonWithInputClickedEvent.Invoke(inputField.text);
             }
         }
-        #endregion
     }
 }

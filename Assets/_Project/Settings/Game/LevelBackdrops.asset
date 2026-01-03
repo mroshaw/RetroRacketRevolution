@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b1d168537121f4c880b07d010befe6, type: 3}
+  m_Name: LevelBackdrops
+  m_EditorClassIdentifier: DaftAppleGames.RetroRacketRevo.Game::DaftAppleGames.RetroRacketRevolution.Levels.LevelBackdropScenes
+  backdropScenes:
+  - sceneName: SaturnBackdrop
+    sceneAsset: {fileID: 102900000, guid: d28be20b6b0cec04ea9eb9d0c0c6c8be, type: 3}
+  - sceneName: AlienWorld1Backdrop
+    sceneAsset: {fileID: 102900000, guid: 06de5422584273546a02550df9320e67, type: 3}
+  - sceneName: EarthBackdrop
+    sceneAsset: {fileID: 102900000, guid: b153a8971f219d44493017ac3f500ddb, type: 3}

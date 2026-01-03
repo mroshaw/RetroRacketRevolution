@@ -56,10 +56,12 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         [BoxGroup("Object Tracking")] [SerializeField] private Player player1;
         [BoxGroup("Object Tracking")] [SerializeField] private Player player2;
 
+        [FoldoutGroup("Events")] public UnityEvent onGameStart;
         [FoldoutGroup("Events")] public UnityEvent<int> onHighScoreChanged;
         [FoldoutGroup("Events")] public UnityEvent onGameOver;
         [FoldoutGroup("Events")] public UnityEvent onGameComplete;
         [FoldoutGroup("Events")] public UnityEvent onLevelComplete;
+        [FoldoutGroup("Events")] public UnityEvent onLevelStart;
         [FoldoutGroup("Alert Events")] public UnityEvent onBeforeAlert;
         [FoldoutGroup("Alert Events")] public UnityEvent onAfterAlert;
 
@@ -70,6 +72,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
 
         private AudioSource _audioSource;
         private LevelDataExt _currentLevelData;
+
+        // Can be used to block user input while UI elements etc are being shown
+        public static bool IsBusy { get; private set; } = false;
 
         private bool _allBricksDestroyed;
         private bool _allEnemiesDestroyed;
@@ -99,6 +104,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             _highScores = new HighScores();
             _highScores.LoadHighScores();
             GetHighScore();
+            onGameStart?.Invoke();
         }
 
         /// <summary>
@@ -185,7 +191,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             _currentLevelData = levelData;
             _allBricksDestroyed = false;
             _allEnemiesDestroyed = false;
-            ShowAlert(AlertType.StartLevel, levelStartPanelDuration, null, _currLevelIndex.ToString());
+            ShowAlert(AlertType.StartLevel, levelStartPanelDuration, LevelStartReady, _currLevelIndex.ToString());
+        }
+
+        /// <summary>
+        /// Trigger the level start ready event
+        /// </summary>
+        private void LevelStartReady()
+        {
+            onLevelStart?.Invoke();
         }
 
         /// <summary>
@@ -288,6 +302,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
         /// </summary>
         private void ShowAlert(AlertType alertType, float duration, Action actionDelegate, string levelName = "")
         {
+            IsBusy = true;
             infoPanel.SetActive(true);
             switch (alertType)
             {
@@ -319,6 +334,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Game
             startLevel.SetActive(false);
             finishLevel.SetActive(false);
             gameOver.SetActive(false);
+            IsBusy = false;
         }
 
         /// <summary>

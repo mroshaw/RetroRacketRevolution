@@ -10,6 +10,7 @@ namespace DaftAppleGames.Editor.BuildTool
     {
         [HideIf("@mainMenuSceneAsset != null")] [SerializeField] private SceneAsset mainMenuSceneAsset;
         [HideIf("@gameSceneAsset != null")] [SerializeField] private SceneAsset gameSceneAsset;
+        [HideIf("@levelEditorSceneAsset != null")] [SerializeField] private SceneAsset levelEditorSceneAsset;
         [HideIf("@emptySceneAsset != null")] [SerializeField] private SceneAsset emptySceneAsset;
         [HideIf("@modelSceneAsset != null")] [SerializeField] private SceneAsset modelSceneAsset;
 
@@ -36,6 +37,14 @@ namespace DaftAppleGames.Editor.BuildTool
         {
             EditorSceneManager.SaveOpenScenes();
             OpenScene(gameSceneAsset);
+        }
+
+        [BoxGroup("Game Scenes")]
+        [Button("Level Editor", ButtonSizes.Medium), GUIColor(0, 1, 0)]
+        private void LoadGameLevelEditScene()
+        {
+            EditorSceneManager.SaveOpenScenes();
+            OpenScene(levelEditorSceneAsset);
         }
 
         [BoxGroup("Editor Scenes")]

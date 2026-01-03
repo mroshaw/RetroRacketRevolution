@@ -28,61 +28,48 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("UI - Brick")] [SerializeField] private Toggle brickIsEmptyToggle;
         [BoxGroup("UI - Brick")] [SerializeField] private Button mainColorButton;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField levelFileNameText;
-        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField levelDescriptionText;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField levelNameText;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown loadLevelDropDown;
-        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown backGroundSpriteDropDown;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown backdropScenesDropDown;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown backGroundMusicDropDown;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField maxEnemiesText;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField minTimeBetweenEnemiesText;
         [BoxGroup("UI - Level")] [SerializeField] private TMP_InputField maxTimeBetweenEnemiesText;
         [BoxGroup("UI - Level")] [SerializeField] private Toggle isCustomLevelsToggle;
         [BoxGroup("UI - Level")] [SerializeField] private Toggle levelIsBossLevelToggle;
-        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown levelBossSpriteDropDown;
+        [BoxGroup("UI - Level")] [SerializeField] private TMP_Dropdown levelBossDropdown;
         [BoxGroup("UI - Other")] [SerializeField] private ConfirmWindow deleteWindow;
         [BoxGroup("UI - Other")] [SerializeField] private AlertText alertText;
         [BoxGroup("UI - Other")] [SerializeField] private string mainMenuScene;
 
         [BoxGroup("Data")] [SerializeField] private BrickTypeData brickTypeData;
         [BoxGroup("Data")] [SerializeField] private BonusData bonusData;
-        [BoxGroup("Data")] [SerializeField] private LevelBackgroundSprites backgroundData;
+        [BoxGroup("Data")] [SerializeField] private LevelBackdropScenes backdropScenes;
         [BoxGroup("Data")] [SerializeField] private PlayList backgroundMusicData;
         [BoxGroup("Data")] [SerializeField] private EnemiesData levelBossData;
-        [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> BrickGridClickedEvent;
-        [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> BrickUpdatedEvent;
-        [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampRewardChangedEvent;
-        [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampTypeChangedEvent;
-        [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampColorChangedEvent;
-        [FoldoutGroup("Events - Stamp")] public UnityEvent<bool> StampIsEmptyChangedEvent;
-        [FoldoutGroup("Events - Brick")] public UnityEvent<BrickType> BrickTypeChangedEvent;
-        [FoldoutGroup("Events - Brick")] public UnityEvent<BonusType> BrickBonusChangedEvent;
-        [FoldoutGroup("Events - Brick")] public UnityEvent<bool> BrickIsEmptyChangedEvent;
-        [FoldoutGroup("Events - Brick")] public UnityEvent<Color> BrickColorChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelNumEnemiesChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMinChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<float> LevelEnemyMaxChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBackgroundMusicChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelMusicPlayClickedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelFileNameChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelDescChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelSaveClickedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string> LevelLoadFileNameChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<bool> LevelCustomLevelChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelLoadClickedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<string, bool> LevelDeleteClickedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent LevelClearClickedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<int> LevelBossChangedEvent;
-        [FoldoutGroup("Events - Level")] public UnityEvent<bool> LevelIsBossLevelChangedEvent;
-        [FoldoutGroup("Events - Other")] public UnityEvent MainMenuClickedEvent;
-        [FoldoutGroup("Events - Other")] public UnityEvent LevelShareClickedEvent;
-        [FoldoutGroup("Events - Other")] public UnityEvent LevelAddClickedEvent;
+
+        [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> brickGridClickedEvent;
+        [FoldoutGroup("Events - Brick Grid")] public UnityEvent<BrickData> brickUpdatedEvent;
+
+        [FoldoutGroup("Events - Other")] public UnityEvent levelShareClickedEvent;
+        [FoldoutGroup("Events - Other")] public UnityEvent levelAddClickedEvent;
 
         private BrickButton[] _allBrickButtons;
+
+        private LevelEditorManager _levelEditorManager;
 
         /// <summary>
         /// Initialise this component
         /// </summary>   
         private void Awake()
+        {
+            _levelEditorManager = GetComponent<LevelEditorManager>();
+        }
+
+        /// <summary>
+        /// Populate controls
+        /// </summary>
+        private void Start()
         {
             // Enable switching between custom and OG levels in Editor only
 #if UNITY_EDITOR
@@ -95,177 +82,80 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             GetBrickButtons();
             SetUpBrickButtons();
             SetUpColorButtons();
-            PopulateBackgroundSprites();
+            PopulateBackdropScenes();
             PopulateBackgroundMusic();
             PopulateBossSprites();
             PopulateBrickTypeDropDown();
             PopulateBonusTypeDropDown();
+            PopulateLevels();
+            SetDefaults();
         }
 
         /// <summary>
-        /// Configure the component on Start
+        ///  Sets default settings
         /// </summary>
-        private void Start()
+        private void SetDefaults()
         {
+            SetBrickColour(Color.red);
         }
 
         /// <summary>
-        /// Clean up on Destroy
+        /// Updates the manager internal data with what's in the UI
         /// </summary>
-        private void OnDestroy()
+        private void UpdateManager()
         {
+            _levelEditorManager.MaxEnemies = Int32.Parse(maxEnemiesText.text);
+            _levelEditorManager.MinEnemyTime = Int32.Parse(minTimeBetweenEnemiesText.text);
+            _levelEditorManager.MaxEnemyTime = Int32.Parse(maxTimeBetweenEnemiesText.text);
+            _levelEditorManager.IsBossLevel = levelIsBossLevelToggle.isOn;
+            _levelEditorManager.LevelBossIndex = levelBossDropdown.value;
+            _levelEditorManager.BackdropSceneIndex = backdropScenesDropDown.value;
+            _levelEditorManager.BackgroundMusicIndex = backGroundMusicDropDown.value;
+            _levelEditorManager.FileName = levelFileNameText.text;
+            _levelEditorManager.LevelName = levelNameText.text;
+            _levelEditorManager.IsCustomLevel = isCustomLevelsToggle.isOn;
+
+            foreach (BrickButton brickButton in _allBrickButtons)
+            {
+                _levelEditorManager.BrickDataArray[brickButton.rowNumber, brickButton.columnNumber] =
+                    brickButton.BrickData;
+            }
         }
 
         /// <summary>
-        /// Handler for Reward Stamp
+        /// Updates the UI with what's in the manager
         /// </summary>
-        public void StampSetRewardHandler(bool value)
+        private void UpdateUserInterface()
         {
-            StampRewardChangedEvent.Invoke(value);
-        }
+            maxEnemiesText.text = _levelEditorManager.MaxEnemies.ToString();
+            minTimeBetweenEnemiesText.text = _levelEditorManager.MinEnemyTime.ToString();
+            maxTimeBetweenEnemiesText.text = _levelEditorManager.MaxEnemyTime.ToString();
+            levelIsBossLevelToggle.isOn = _levelEditorManager.IsBossLevel;
+            levelBossDropdown.value = _levelEditorManager.BackdropSceneIndex;
+            backdropScenesDropDown.value = _levelEditorManager.BackdropSceneIndex;
+            backGroundMusicDropDown.value = _levelEditorManager.BackgroundMusicIndex;
+            levelFileNameText.text = _levelEditorManager.FileName;
+            levelNameText.text = _levelEditorManager.LevelName;
 
-        /// <summary>
-        /// Handler for Type stamp
-        /// </summary>
-        public void StampSetTypeHandler(bool value)
-        {
-            StampTypeChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Color stamp
-        /// </summary>
-        public void StampSetColorHandler(bool value)
-        {
-            StampColorChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Empty stamp
-        /// </summary>
-        public void StampSetIsEmptyHandler(bool value)
-        {
-            StampIsEmptyChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Brick Type
-        /// </summary>
-        public void BrickSetTypeHandler(int value)
-        {
-            BrickTypeChangedEvent.Invoke((BrickType)value);
-        }
-
-        /// <summary>
-        /// Handler for Bonus Type
-        /// </summary>
-        public void BrickBonusTypeHandler(int value)
-        {
-            BrickBonusChangedEvent.Invoke((BonusType)value);
-        }
-
-        /// <summary>
-        /// Handler for IsEmpty
-        /// </summary>
-        public void BrickIsEmptyTypeHandler(bool value)
-        {
-            BrickIsEmptyChangedEvent.Invoke(value);
+            foreach (BrickButton brickButton in _allBrickButtons)
+            {
+                brickButton.UpdateBrick(
+                    _levelEditorManager.BrickDataArray[brickButton.rowNumber, brickButton.columnNumber]);
+            }
         }
 
         /// <summary>
         /// Handler for Brick Color
         /// </summary>
-        public void BrickColorHandler(Color value)
+        public void SetBrickColour(Color value)
         {
             mainColorButton.GetComponent<Image>().color = value;
-            BrickColorChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Max Enemy
-        /// </summary>
-        public void LevelEnemiesHandler(string value)
-        {
-            LevelNumEnemiesChangedEvent.Invoke(int.Parse(value));
-        }
-
-        /// <summary>
-        /// Handler for Min Enemy time
-        /// </summary>
-        public void LevelMinEnemyHandler(string value)
-        {
-            LevelEnemyMinChangedEvent.Invoke(float.Parse(value));
-        }
-
-        /// <summary>
-        /// Handler for Max Enemy time
-        /// </summary>
-        public void LevelMaxEnemyHandler(string value)
-        {
-            LevelEnemyMaxChangedEvent.Invoke(float.Parse(value));
-        }
-
-        /// <summary>
-        /// Handler for Level Background
-        /// </summary>
-        public void LevelBackgroundHandler(int value)
-        {
-            gridBackgroundImage.sprite = backgroundData.BackgroundSprites[value];
-            LevelBackgroundChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Level Background Music
-        /// </summary>
-        public void LevelBackgroundMusicHandler(int value)
-        {
-            LevelBackgroundMusicChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Boss sprite
-        /// </summary>
-        public void LevelBossSpriteHandler(int value)
-        {
-            LevelBossChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Is Boss Level
-        /// </summary>
-        public void LevelIsBossLevelHandler(bool value)
-        {
-            LevelIsBossLevelChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Level Background Music button click
-        /// </summary>
-        public void LevelMusicPlayClickedHandler()
-        {
-            LevelMusicPlayClickedEvent.Invoke(backGroundMusicDropDown.value);
-        }
-
-        /// <summary>
-        /// Handler for Level Name
-        /// </summary>
-        public void LevelNameHandler(string value)
-        {
-            LevelFileNameChangedEvent.Invoke(value);
-        }
-
-        /// <summary>
-        /// Handler for Level Desc
-        /// </summary>
-        public void LevelDescHandler(string value)
-        {
-            LevelDescChangedEvent.Invoke(value);
         }
 
         /// <summary>
         /// Handler for Level Save
         /// </summary>
-        public void LevelSaveHandler()
+        public void LevelSaveClicked()
         {
             string fileName = levelFileNameText.text;
             if (string.IsNullOrEmpty(fileName))
@@ -274,7 +164,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 return;
             }
 
-            if (string.IsNullOrEmpty(levelDescriptionText.text))
+            if (string.IsNullOrEmpty(levelNameText.text))
             {
                 alertText.DisplayAlert("Please enter a level description before saving!", true);
                 return;
@@ -286,31 +176,25 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 return;
             }
 
-            LevelSaveClickedEvent.Invoke(fileName, isCustomLevelsToggle.isOn);
+            UpdateManager();
+            _levelEditorManager.SaveLevel();
+            PopulateLevels();
+
             alertText.DisplayAlert($"Saved {fileName} successfully.", false);
         }
 
         /// <summary>
-        /// Handler for Level Load Level
+        /// Reload the level list if custom level is toggled
         /// </summary>
-        public void LevelLoadLevelHandler(int value)
+        public void CustomLevelToggled(bool newValue)
         {
-            // levelFileNameText.text = loadLevelDropDown.options[value].text;
-            LevelLoadFileNameChangedEvent.Invoke(loadLevelDropDown.options[value].text);
-        }
-
-        /// <summary>
-        /// Handler for Custom Level
-        /// </summary>
-        public void LevelCustomLevelHandler(bool value)
-        {
-            LevelCustomLevelChangedEvent.Invoke(value);
+            PopulateLevels();
         }
 
         /// <summary>
         /// Handler for Load Level
         /// </summary>
-        public void LevelLoadHandler()
+        public void LoadLevelClicked()
         {
             if (loadLevelDropDown.value < 0)
             {
@@ -318,9 +202,17 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 return;
             }
 
-            LevelLoadClickedEvent.Invoke(loadLevelDropDown.options[loadLevelDropDown.value].text,
-                isCustomLevelsToggle.isOn);
-            levelFileNameText.text = loadLevelDropDown.options[loadLevelDropDown.value].text;
+            string levelName = loadLevelDropDown.options[loadLevelDropDown.value].text;
+            bool isCustomLevel = isCustomLevelsToggle.isOn;
+
+            levelFileNameText.text = levelName;
+
+            // Load the level
+            _levelEditorManager.LoadLevelByName(levelName, isCustomLevel);
+
+            // Update the UI
+            UpdateUserInterface();
+
             alertText.DisplayAlert($"Loaded {loadLevelDropDown.options[loadLevelDropDown.value].text} successfully.",
                 false);
         }
@@ -328,55 +220,70 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handler for Delete Level button
         /// </summary>
-        public void DeleteHandler()
+        public void DeleteClicked()
         {
             deleteWindow.Show();
         }
 
+
         /// <summary>
         /// Handler to Share level button
         /// </summary>
-        public void ShareHandler()
+        public void SharedClicked()
         {
-            LevelShareClickedEvent.Invoke();
+            levelShareClickedEvent.Invoke();
         }
 
-        public void AddHandler()
+        public void AddClicked()
         {
-            LevelAddClickedEvent.Invoke();
+            levelAddClickedEvent.Invoke();
         }
 
         /// <summary>
         /// Handler for Clear level
         /// </summary>
-        public void LevelClearHandler()
+        public void ClearClicked()
         {
+            maxEnemiesText.text = "0";
+            minTimeBetweenEnemiesText.text = "0.0";
+            maxTimeBetweenEnemiesText.text = "0.0";
+            levelIsBossLevelToggle.isOn = false;
+            levelBossDropdown.value = 0;
+            backdropScenesDropDown.value = 0;
+            backGroundMusicDropDown.value = 0;
             levelFileNameText.text = "";
-            LevelClearClickedEvent.Invoke();
+            levelNameText.text = "";
+
+            foreach (BrickButton brickButton in _allBrickButtons)
+            {
+                brickButton.Clear();
+            }
         }
 
         /// <summary>
         /// Handler for Main Menu
         /// </summary>
-        public void MainMenuHandler()
+        public void MainMenuClicked()
         {
-            MainMenuClickedEvent.Invoke();
+            ReturnToMainMenu();
         }
 
         /// <summary>
-        /// Calls for a file to be deleted
+        /// Calls for a file to be deleted. Call this from the Delete window
         /// </summary>
         public void DeleteFile()
         {
             string fileToDelete = loadLevelDropDown.options[loadLevelDropDown.value].text;
-            LevelDeleteClickedEvent.Invoke(fileToDelete, isCustomLevelsToggle.isOn);
+            bool isCustomLevel = isCustomLevelsToggle.isOn;
+
+            _levelEditorManager.DeleteLevelFile(fileToDelete, isCustomLevel);
             alertText.DisplayAlert($"Deleted {fileToDelete} successfully.", false);
         }
 
         /// <summary>
         /// Return to Main Menu scene
         /// </summary>
-        public void MainMenu()
+        private void ReturnToMainMenu()
         {
             SceneManager.LoadScene(mainMenuScene);
         }
@@ -384,23 +291,26 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handle clicks to the Brick Grid
         /// </summary>
-        public void BrickButtonHandler(int column, int row)
+        private void BrickButtonHandler(int column, int row)
         {
-            BrickData newBrickData = new BrickData();
-            newBrickData.ColumnNumber = column;
-            newBrickData.RowNumber = row;
+            BrickData newBrickData = new BrickData
+            {
+                columnNumber = column,
+                rowNumber = row,
+                // Work out what data to send
+                brickBonus = stampBonusToggle.isOn ? (BonusType)brickBonusDropDown.value : BonusType.None,
+                HasBrickBonusChanged = stampBonusToggle.isOn,
+                brickType = stampTypeToggle.isOn ? (BrickType)brickTypeDropDown.value : BrickType.Normal,
+                HasBrickTypeChanged = stampTypeToggle.isOn,
+                isEmptySlot = stampIsEmptyToggle.isOn && brickIsEmptyToggle.isOn,
+                HasIsEmptySlotChanged = stampIsEmptyToggle.isOn,
+                brickColor = stampColorToggle.isOn ? mainColorButton.GetComponent<Image>().color : Color.clear,
+                HasBrickColorChanged = stampColorToggle.isOn
+            };
 
-            // Work out what data to send
-            newBrickData.BrickBonus = stampBonusToggle.isOn ? (BonusType)brickBonusDropDown.value : BonusType.None;
-            newBrickData.HasBrickBonusChanged = stampBonusToggle.isOn;
-            newBrickData.BrickType = stampTypeToggle.isOn ? (BrickType)brickTypeDropDown.value : BrickType.Normal;
-            newBrickData.HasBrickTypeChanged = stampTypeToggle.isOn;
-            newBrickData.IsEmptySlot = stampIsEmptyToggle.isOn ? brickIsEmptyToggle.isOn : false;
-            newBrickData.HasIsEmptySlotChanged = stampIsEmptyToggle.isOn;
-            newBrickData.BrickColor = stampColorToggle.isOn ? mainColorButton.GetComponent<Image>().color : Color.clear;
-            newBrickData.HasBrickColorChanged = stampColorToggle.isOn;
             // Send to consumers
-            BrickGridClickedEvent.Invoke(newBrickData);
+            RefreshBrick(newBrickData);
+            // brickGridClickedEvent.Invoke(newBrickData);
         }
 
         /// <summary>
@@ -408,16 +318,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void SetLevelDesc(string levelDesc)
         {
-            levelDescriptionText.SetTextWithoutNotify(levelDesc);
-        }
-
-        /// <summary>
-        /// Updates the grid background to match the background sprite choice
-        /// </summary>
-        public void SetBackground(int spriteIndex)
-        {
-            backGroundSpriteDropDown.SetValueWithoutNotify(spriteIndex);
-            gridBackgroundImage.sprite = backgroundData.BackgroundSprites[spriteIndex];
+            levelNameText.SetTextWithoutNotify(levelDesc);
         }
 
         /// <summary>
@@ -429,21 +330,28 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         }
 
         /// <summary>
+        /// Update the selected backdrop scene index
+        /// </summary>
+        public void SetBackdropScene(int sceneIndex)
+        {
+            backdropScenesDropDown.SetValueWithoutNotify(sceneIndex);
+        }
+
+        /// <summary>
         /// Updates the selected Boss Sprite index
         /// </summary>
         public void SetLevelBossSprite(int levelBossIndex)
         {
-            levelBossSpriteDropDown.SetValueWithoutNotify(levelBossIndex);
+            levelBossDropdown.SetValueWithoutNotify(levelBossIndex);
         }
 
         /// <summary>
         /// Updates the selected Is Level Boss toggle
         /// </summary>
-        /// <param name="value"></param>
         public void SetIsBossLevel(bool value)
         {
             levelIsBossLevelToggle.SetIsOnWithoutNotify(value);
-            levelBossSpriteDropDown.interactable = value;
+            levelBossDropdown.interactable = value;
         }
 
         /// <summary>
@@ -473,8 +381,13 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Populate the drop down with current level list
         /// </summary>
-        public void SetCurrentLevels(List<string> levelNames)
+        public void PopulateLevels()
         {
+            // Get currently selected level
+            int currentLevel = loadLevelDropDown.value;
+
+            List<string> levelNames = _levelEditorManager.GetCurrentLevels(isCustomLevelsToggle.isOn);
+
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
 
             foreach (string fileName in levelNames)
@@ -483,8 +396,16 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             }
 
             loadLevelDropDown.options = options;
-            loadLevelDropDown.SetValueWithoutNotify(0);
-            // levelFileNameText.SetTextWithoutNotify(options[0].text);
+
+            // Restore the level
+            if (currentLevel < options.Count)
+            {
+                loadLevelDropDown.SetValueWithoutNotify(currentLevel);
+            }
+            else
+            {
+                loadLevelDropDown.SetValueWithoutNotify(0);
+            }
         }
 
         /// <summary>
@@ -492,7 +413,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void RefreshBrick(BrickData brickData)
         {
-            BrickUpdatedEvent.Invoke(brickData);
+            brickUpdatedEvent.Invoke(brickData);
         }
 
         /// <summary>
@@ -503,7 +424,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             BrickButton[] allButtons = grid.GetComponentsInChildren<BrickButton>(false);
             foreach (BrickButton button in allButtons)
             {
-                button.BrickData = brickDataArray[button.ColumnNumber, button.RowNumber];
+                button.BrickData = brickDataArray[button.columnNumber, button.rowNumber];
             }
         }
 
@@ -555,7 +476,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
             foreach (BonusData.BonusDef bonusDef in bonusData.bonuses)
             {
-                options.Add(new TMP_Dropdown.OptionData(bonusDef.type.ToString(), bonusDef.spawnSprite, Color.clear));
+                options.Add(new TMP_Dropdown.OptionData(bonusDef.type.ToString(), bonusDef.levelEditorSprite,
+                    Color.clear));
             }
 
             brickBonusDropDown.options = options;
@@ -564,16 +486,16 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Populates the available background sprites
         /// </summary>
-        private void PopulateBackgroundSprites()
+        private void PopulateBackdropScenes()
         {
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
 
-            foreach (Sprite sprite in backgroundData.BackgroundSprites)
+            foreach (string sceneName in backdropScenes.GetSceneNames())
             {
-                options.Add(new TMP_Dropdown.OptionData(sprite.name, sprite, Color.clear));
+                options.Add(new TMP_Dropdown.OptionData(sceneName));
             }
 
-            backGroundSpriteDropDown.options = options;
+            backdropScenesDropDown.options = options;
         }
 
         /// <summary>
@@ -588,7 +510,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
                 options.Add(new TMP_Dropdown.OptionData(bossData.enemyName, bossData.sprite, Color.clear));
             }
 
-            levelBossSpriteDropDown.options = options;
+            levelBossDropdown.options = options;
         }
 
         /// <summary>
@@ -614,7 +536,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             ColourButton[] allColourButtons = GetComponentsInChildren<ColourButton>();
             foreach (ColourButton button in allColourButtons)
             {
-                button.ColorButtonClickedEvent.AddListener(BrickColorHandler);
+                button.ColorButtonClickedEvent.AddListener(SetBrickColour);
             }
         }
 
@@ -625,8 +547,9 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             foreach (BrickButton button in _allBrickButtons)
             {
-                button.BrickButtonClickedEvent.AddListener(BrickButtonHandler);
-                BrickUpdatedEvent.AddListener(button.UpdateBrick);
+                button.brickButtonClickedEvent.AddListener(BrickButtonHandler);
+                brickUpdatedEvent.AddListener(button.UpdateBrick);
+                button.Clear();
             }
         }
     }

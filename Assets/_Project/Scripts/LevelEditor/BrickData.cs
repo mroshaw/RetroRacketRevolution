@@ -10,17 +10,17 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
     [System.Serializable] public class BrickData
     {
         // Public properties
-        public int RowNumber;
-        public int ColumnNumber;
-        public bool IsEmptySlot;
-        public BrickType BrickType;
-        public Color BrickColor;
-        public BonusType BrickBonus;
+        public int rowNumber;
+        public int columnNumber;
+        public bool isEmptySlot;
+        public BrickType brickType;
+        public Color brickColor;
+        public BonusType brickBonus;
 
-        public bool HasIsEmptySlotChanged;
-        public bool HasBrickTypeChanged;
-        public bool HasBrickColorChanged;
-        public bool HasBrickBonusChanged;
+        public bool HasIsEmptySlotChanged { get; set; }
+        public bool HasBrickTypeChanged { get; set; }
+        public bool HasBrickColorChanged { get; set; }
+        public bool HasBrickBonusChanged { get; set; }
 
         public BrickData()
         {
@@ -29,21 +29,15 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="brickType"></param>
-        /// <param name="color"></param>
-        /// <param name="brickBonus"></param>
-        /// <param name="isEmptySlot"></param>
-        /// <param name="rowNumber"></param>
-        /// <param name="columnNumber"></param>
         public BrickData(BrickType brickType, Color color, BonusType brickBonus,
             bool isEmptySlot, int rowNumber, int columnNumber)
         {
-            BrickType = brickType;
-            BrickColor = color;
-            BrickBonus = brickBonus;
-            IsEmptySlot = isEmptySlot;
-            RowNumber = rowNumber;
-            ColumnNumber = columnNumber;
+            this.brickType = brickType;
+            brickColor = color;
+            this.brickBonus = brickBonus;
+            this.isEmptySlot = isEmptySlot;
+            this.rowNumber = rowNumber;
+            this.columnNumber = columnNumber;
         }
 
         /// <summary>
@@ -52,8 +46,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <returns></returns>
         public bool IsDisruptor()
         {
-            return BrickType == BrickType.DisruptorIn || BrickType == BrickType.DisruptorOut ||
-                   BrickType == BrickType.DisruptorBoth;
+            return brickType == BrickType.DisruptorIn || brickType == BrickType.DisruptorOut ||
+                   brickType == BrickType.DisruptorBoth;
         }
     }
 }

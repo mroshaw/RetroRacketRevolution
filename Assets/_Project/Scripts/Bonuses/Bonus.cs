@@ -69,7 +69,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
             }
             else
             {
-                Debug.LogError($"No collect audio clip for bonus: {bonusType}");
+                Debug.Log($"No collect audio clip for bonus: {bonusType}");
             }
 
             // If Random, spawn a random bonus

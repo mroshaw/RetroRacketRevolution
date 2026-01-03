@@ -9,28 +9,21 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
     public class ColorPickerWindow : WindowBase
     {
         // Public serializable properties
-        [BoxGroup("UI Settings")]
-        public Slider redSlider;
-        [BoxGroup("UI Settings")]
-        public Slider greenSlider;
-        [BoxGroup("UI Settings")]
-        public Slider blueSlider;
-        [BoxGroup("UI Settings")]
-        public Image colorPreviewImage;
-        [FoldoutGroup("Events")]
-        public UnityEvent<Color> ColorChangedEvent;
-        public UnityEvent<Color> ColorSelectedEvent;
+        [BoxGroup("Managers")] [SerializeField] private LevelEditorWindow levelEditorWindowManager;
+        [BoxGroup("UI Settings")] [SerializeField] private Slider redSlider;
+        [BoxGroup("UI Settings")] [SerializeField] private Slider greenSlider;
+        [BoxGroup("UI Settings")] [SerializeField] private Slider blueSlider;
+        [BoxGroup("UI Settings")] [SerializeField] private Image colorPreviewImage;
+        [FoldoutGroup("Events")] public UnityEvent<Color> colorChangedEvent;
+        [FoldoutGroup("Events")] public UnityEvent<Color> colorSelectedEvent;
 
-        [SerializeField]
-        private Color _color = Color.white;
+        [SerializeField] private Color _color = Color.white;
 
         /// <summary>
         /// Handler changes to the red value
         /// </summary>
-        /// <param name="redValue"></param>
         public void RedSliderHandler(float redValue)
         {
-
             Color newColor = new Color(redValue / 255, _color.g, _color.b, 1);
             _color = newColor;
             UpdateColorPreview();
@@ -39,7 +32,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handle changes to the green value
         /// </summary>
-        /// <param name="greenValue"></param>
         public void GreenSliderHandler(float greenValue)
         {
             Color newColor = new Color(_color.r, greenValue / 255, _color.b, 1);
@@ -50,7 +42,6 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <summary>
         /// Handle changes to the blue value
         /// </summary>
-        /// <param name="blueValue"></param>
         public void BlueSliderHandler(float blueValue)
         {
             Color newColor = new Color(_color.r, _color.g, blueValue / 255, 1);
@@ -63,7 +54,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void PickButtonHandler()
         {
-            ColorSelectedEvent.Invoke(_color);
+            levelEditorWindowManager.SetBrickColour(_color);
         }
 
         /// <summary>
@@ -72,7 +63,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         private void UpdateColorPreview()
         {
             colorPreviewImage.color = _color;
-            ColorChangedEvent.Invoke(_color);
+            colorChangedEvent.Invoke(_color);
         }
     }
 }

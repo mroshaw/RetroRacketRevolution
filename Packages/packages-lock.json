@@ -22,7 +22,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e61da814232b4da28830435f1cf66cb85f252e2d"
+      "hash": "a2341caf5b330ef4219c0f54abc0210b3c236c0d"
     },
     "com.daftapplegames.ui-and-settings": {
       "version": "file:com.daftapplegames.ui-and-settings",

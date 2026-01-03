@@ -11,6 +11,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
     public class LevelLoader : MonoBehaviour
     {
         [BoxGroup("Managers")] [SerializeField] private BrickManager brickManager;
+        [BoxGroup("Managers")] [SerializeField] private BackdropSceneLoader backdropSceneLoader;
+
         [BoxGroup("Level Layout")] [SerializeField] private int numberOfRows = 12;
         [BoxGroup("Level Layout")] [SerializeField] private int numberOfBricksPerRow = 15;
         [BoxGroup("Level Layout")] [SerializeField] private GameObject levelRoot;
@@ -171,6 +173,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             float currBrickHor = startingPosition.x;
             float currBrickVert = startingPosition.y;
 
+            // Load the backdrop scene
+            backdropSceneLoader.SetScene(levelData.levelBackdropSceneIndex);
 
             // Alternate sorting groups to allow glint sprite mask
             bool isMainSortingGroup = true;
@@ -180,26 +184,26 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             {
                 for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
                 {
-                    BrickData currLoadBrickData = levelData.BrickDataArray.RowArray[currRow].RowBricks[currCol];
+                    BrickData currLoadBrickData = levelData.brickDataArray.rowArray[currRow].rowBricks[currCol];
 
                     // If this is an "empty" brick, then skip
-                    if (!currLoadBrickData.IsEmptySlot)
+                    if (!currLoadBrickData.isEmptySlot)
                     {
                         // Handle disruptor
-                        if (currLoadBrickData.BrickType == BrickType.DisruptorIn ||
-                            currLoadBrickData.BrickType == BrickType.DisruptorOut ||
-                            currLoadBrickData.BrickType == BrickType.DisruptorBoth)
+                        if (currLoadBrickData.brickType == BrickType.DisruptorIn ||
+                            currLoadBrickData.brickType == BrickType.DisruptorOut ||
+                            currLoadBrickData.brickType == BrickType.DisruptorBoth)
                         {
                             Disruptor newDisruptor =
-                                brickManager.SpawnDisruptor(currLoadBrickData.BrickType, currRow, currCol);
+                                brickManager.SpawnDisruptor(currLoadBrickData.brickType, currRow, currCol);
                             newDisruptor.gameObject.transform.localPosition = new Vector2(currBrickHor, currBrickVert);
                             newDisruptor.gameObject.transform.localScale = disruptorScale;
                         }
                         else
                         {
                             // Otherwise, instantiate, position and configure the brick
-                            GameObject newBrickGameObject = brickManager.SpawnBrick(currLoadBrickData.BrickType,
-                                currLoadBrickData.BrickColor, currLoadBrickData.BrickBonus, currRow, currCol,
+                            GameObject newBrickGameObject = brickManager.SpawnBrick(currLoadBrickData.brickType,
+                                currLoadBrickData.brickColor, currLoadBrickData.brickBonus, currRow, currCol,
                                 isMainSortingGroup).gameObject;
                             isMainSortingGroup = !isMainSortingGroup;
 

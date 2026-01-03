@@ -13,63 +13,68 @@ MonoBehaviour:
   m_Name: BonusData
   m_EditorClassIdentifier: 
   bonuses:
+  - type: 0
+    spawnPrefab: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 92178e91faf911d49b58ed636f2dceec, type: 3}
+    friendlyName: None
+    description: No bonus
   - type: 2
     spawnPrefab: {fileID: 2584260477768478727, guid: bfd9236621a5d1349bb04fbc0181a282, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: fc4d4caed1e944f4596b0b4f6c81b379, type: 3}
     friendlyName: Minigun
     description: Minigun
   - type: 3
     spawnPrefab: {fileID: 98839726097238566, guid: 4d72825b143caec4d9e410fc81465fd2, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 067f337e81afc194c90bd661da243b27, type: 3}
     friendlyName: Slow Ball
     description: Slow Ball
   - type: 1
     spawnPrefab: {fileID: 98839726097238566, guid: 6377ed87ba90c9347902edc3d5439519, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 2f4da39764034e24984614eafaa9275b, type: 3}
     friendlyName: Multi Ball
     description: Multi Ball
   - type: 4
     spawnPrefab: {fileID: 98839726097238566, guid: 0e8f505c97973f34d8a85eac8359803e, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: a938166a7b05f0f4ba8c557d1ffa3204, type: 3}
     friendlyName: Mega Ball
     description: Mega Ball
   - type: 5
     spawnPrefab: {fileID: 98839726097238566, guid: fd978f966618f7a4fb3072dbcf41c4bb, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: d48ea7856374cf445802cfef323cd23e, type: 3}
     friendlyName: Extra Life
     description: Extra Life
   - type: 8
     spawnPrefab: {fileID: 98839726097238566, guid: 5797a995152a2ba4eaf8bbbdb3846467, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 03b94edfce565c84bb99c9bd18e211b9, type: 3}
     friendlyName: Small Score
     description: Small Score
   - type: 9
     spawnPrefab: {fileID: 98839726097238566, guid: 9b47e1e435a4d5046b97b98b992677aa, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: fd31f03a6a61f1749bea196df67a0276, type: 3}
     friendlyName: Big Score
     description: Big Score
   - type: 10
     spawnPrefab: {fileID: 98839726097238566, guid: a2bc4cb580de55e4099f8a95406f9e6e, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 12fda05ca572f9a4187a870f81a6dd35, type: 3}
     friendlyName: Shrink Bat
     description: 
   - type: 11
     spawnPrefab: {fileID: 98839726097238566, guid: a1760d4e37560e042ac7d88fad60fd40, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: ffaf5a6b005ac9045a7b4bfc2f366c2b, type: 3}
     friendlyName: Grow Bat
     description: Grow Bat
   - type: 12
     spawnPrefab: {fileID: 98839726097238566, guid: 6994f9a2780b64743b0b89c25221940a, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 44493ed7f4427464cb3cf7dba4c22f1c, type: 3}
     friendlyName: Catcher
     description: Catcher
   - type: 6
     spawnPrefab: {fileID: 98839726097238566, guid: 38c6edead1192924c81c70a3d58f36a3, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: 8741fbbc7f7b3f4439ff91c49f7fe634, type: 3}
     friendlyName: Booster
     description: Booster
   - type: 7
     spawnPrefab: {fileID: 98839726097238566, guid: 0a8ab64fabdbae44884352fa7fc2396d, type: 3}
-    spawnSprite: {fileID: 0}
+    levelEditorSprite: {fileID: 21300000, guid: a444512717725c1479ba2913bd407305, type: 3}
     friendlyName: Random
     description: Random

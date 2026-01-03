@@ -31,22 +31,22 @@ MonoBehaviour:
     buildVersion:
       majorVersionNumber: 2
       minorVersionNumber: 0
-      patchVersionNumber: 15
+      patchVersionNumber: 18
       buildStage: 4
     lastSuccessfulBuild:
-      day: 6
-      month: 8
-      year: 2025
-      hour: 14
-      minute: 56
-      second: 54
+      day: 2
+      month: 1
+      year: 2026
+      hour: 23
+      minute: 31
+      second: 47
     lastBuildAttempt:
-      day: 6
-      month: 8
-      year: 2025
-      hour: 14
-      minute: 56
-      second: 11
+      day: 2
+      month: 1
+      year: 2026
+      hour: 23
+      minute: 31
+      second: 16
     lastBuildState: 1
     lastBuildLog: 
     lastSuccessfulDeploy:
@@ -170,6 +170,6 @@ MonoBehaviour:
     lastDeployState: 0
     lastDeployLog: 
   latestBuildTarget: 19
-  latestBuildDateTime: 06/08/2025 14:56:11
+  latestBuildDateTime: 02/01/2026 23:31:16
   latestBuildResult: SuccessWithWarnings
-  latestBuildVersion: 2.0.14 (Live)
+  latestBuildVersion: 2.0.17 (Live)

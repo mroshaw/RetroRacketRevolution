@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7763412314900655685}
-  - component: {fileID: 2614261907340872255}
-  - component: {fileID: 1346094305058649205}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -34,217 +32,6 @@ Transform:
   - {fileID: 332489674312937634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2614261907340872255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107792705536698266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bedab21cbec76174dbbf9bbe48931ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiPanelGameObject: {fileID: 6818513101410971549}
-  hidePanelOnAwake: 1
-  firstSelectedGameObject: {fileID: 8452697989924764345}
-  WindowShowEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1316304272548355337}
-        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Effects.TextColorCycler,
-          Assembly-CSharp
-        m_MethodName: StartColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  WindowHideEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1316304272548355337}
-        m_TargetAssemblyTypeName: DaftAppleGames.RetroRacketRevolution.Effects.TextColorCycler,
-          DaftAppleGames.RetroRacketRevo.Game
-        m_MethodName: StopColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  settingsPanel: {fileID: 6818513101410971549}
-  musicVolumeSlider: {fileID: 855114354506864689}
-  soundFxVolumeSlider: {fileID: 720598627079764141}
-  retroFxToggle: {fileID: 348462809967553375}
-  keyboardSensSlider: {fileID: 3905677659868943415}
-  dpadSensSlider: {fileID: 7431115880159957645}
-  MusicSliderChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1346094305058649205}
-        m_TargetAssemblyTypeName: DaftApplesGames.BattyRemake.Menus.SettingsManager,
-          Assembly-CSharp
-        m_MethodName: SetMusicVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  SoundsFxSliderChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1346094305058649205}
-        m_TargetAssemblyTypeName: DaftApplesGames.BattyRemake.Menus.SettingsManager,
-          Assembly-CSharp
-        m_MethodName: SetSoundFxVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  RetroFxToggleChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1346094305058649205}
-        m_TargetAssemblyTypeName: DaftApplesGames.BattyRemake.Menus.SettingsManager,
-          Assembly-CSharp
-        m_MethodName: SetRetroEffects
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  KeyboardSensSliderChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1346094305058649205}
-        m_TargetAssemblyTypeName: DaftApplesGames.RetroRacketRevolution.Menus.SettingsManager,
-          DaftAppleGames.RetroRacketRevo.Game
-        m_MethodName: SetKeyboardSens
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  DpadSensSliderChangedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1346094305058649205}
-        m_TargetAssemblyTypeName: DaftApplesGames.RetroRacketRevolution.Menus.SettingsManager,
-          DaftAppleGames.RetroRacketRevo.Game
-        m_MethodName: SetDpadSens
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  SaveClickedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2614261907340872255}
-        m_TargetAssemblyTypeName: DaftApplesGames.RetroRacketRevolution.WindowBase,
-          DaftAppleGames.RetroRacketRevo.Game
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DaftApplesGames.RetroRacketRevolution.Menus.PauseGame,
-          DaftAppleGames.RetroRacketRevo.Game
-        m_MethodName: Show
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1346094305058649205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107792705536698266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57710cb0aba89a84ba43bd67c066f409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 64c16fae9f1ec1c4fa9353e524a215e7, type: 2}
-  mainCamera: {fileID: 0}
-  defaultMusicVolume: -30
-  defaultSoundFxVolume: -25
-  defaultRetroFxEnabled: 0
-  defaultKeyboardSens: 5
-  defaultDpadSens: 5
-  onMusicLoaded:
-    m_PersistentCalls:
-      m_Calls: []
-  onSoundFxLoaded:
-    m_PersistentCalls:
-      m_Calls: []
-  onRetroFxLoaded:
-    m_PersistentCalls:
-      m_Calls: []
-  onKeyboardSensitivityLoaded:
-    m_PersistentCalls:
-      m_Calls: []
-  onDpadSensitivityLoaded:
-    m_PersistentCalls:
-      m_Calls: []
-  onMusicChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onSfxChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onRetroFxChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onKeyboardSensitivityChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onDpadSensitivityChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2655000026501233580
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +327,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -919,10 +707,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4259786770279078417}
     m_Modifications:
-    - target: {fileID: 422145505075585880, guid: 0be3c8186e2236d4c9b3465fbcbc4452, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
     - target: {fileID: 1017676935259375118, guid: 0be3c8186e2236d4c9b3465fbcbc4452, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1080,17 +864,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0be3c8186e2236d4c9b3465fbcbc4452, type: 3}
---- !u!114 &348462809967553375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 422145505075585880, guid: 0be3c8186e2236d4c9b3465fbcbc4452, type: 3}
-  m_PrefabInstance: {fileID: 76066473495365639}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3924570778914731890 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3997189145156206453, guid: 0be3c8186e2236d4c9b3465fbcbc4452, type: 3}
@@ -1383,10 +1156,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8929375157540119371, guid: 2e3d38a0a77d1b643a9ee064312ad4f9, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
-    - target: {fileID: 8929375157540119371, guid: 2e3d38a0a77d1b643a9ee064312ad4f9, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1482,7 +1251,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7770866966772730047, guid: 2e3d38a0a77d1b643a9ee064312ad4f9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1492,17 +1262,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9150487031280415173, guid: 2e3d38a0a77d1b643a9ee064312ad4f9, type: 3}
   m_PrefabInstance: {fileID: 2074791499032342982}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7431115880159957645 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8929375157540119371, guid: 2e3d38a0a77d1b643a9ee064312ad4f9, type: 3}
-  m_PrefabInstance: {fileID: 2074791499032342982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2271213776989491052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1615,10 +1374,6 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: -80
       objectReference: {fileID: 0}
-    - target: {fileID: 1466204373940344669, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
     - target: {fileID: 1550623964543825857, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
       propertyPath: m_Value
       value: 0
@@ -1627,10 +1382,6 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: -80
       objectReference: {fileID: 0}
-    - target: {fileID: 1550623964543825857, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
     - target: {fileID: 1588613003931846010, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
       propertyPath: showValue
       value: 0
@@ -2004,28 +1755,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
---- !u!114 &720598627079764141 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1550623964543825857, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-  m_PrefabInstance: {fileID: 2271213776989491052}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &855114354506864689 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1466204373940344669, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-  m_PrefabInstance: {fileID: 2271213776989491052}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2548771937874687347 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4385369654226303519, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
@@ -2140,10 +1869,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1466204373940344669, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
-    - target: {fileID: 1466204373940344669, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: KeyboardSensChanged
       objectReference: {fileID: 0}
@@ -2151,10 +1876,6 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DaftApplesGames.RetroRacketRevolution.Menus.SettingsWindow, DaftAppleGames.RetroRacketRevo.Game
       objectReference: {fileID: 0}
-    - target: {fileID: 1550623964543825857, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
     - target: {fileID: 1787204490566501376, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2460,17 +2181,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4385369654226303519, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
   m_PrefabInstance: {fileID: 2480005923506766698}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3905677659868943415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1466204373940344669, guid: c25831c6ba0f33b49964435bec8ee6aa, type: 3}
-  m_PrefabInstance: {fileID: 2480005923506766698}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2523623090154088081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2698,18 +2408,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3913222317225427346, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1346094305058649205}
-    - target: {fileID: 3913222317225427346, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
-    - target: {fileID: 3913222317225427346, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 2614261907340872255}
-    - target: {fileID: 3913222317225427346, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2781,10 +2479,5 @@ PrefabInstance:
 --- !u!224 &5245021435604712709 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2409576454981330116, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
-  m_PrefabInstance: {fileID: 7618549261017913793}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8452697989924764345 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2086435711889056632, guid: c2f834907cc75fb49b1baee4e7b44938, type: 3}
   m_PrefabInstance: {fileID: 7618549261017913793}
   m_PrefabAsset: {fileID: 0}

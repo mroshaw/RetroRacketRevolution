@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
@@ -9,27 +10,28 @@ using UnityEngine;
 
 namespace DaftAppleGames.RetroRacketRevolution.Levels
 {
-    public class LevelDataExt
+    [Serializable] public class LevelDataExt
     {
         [BoxGroup("Level Details")] public string levelName;
         [BoxGroup("Level Details")] public string levelFileName;
         [BoxGroup("Level Details")] public string levelAuthor;
-        [BoxGroup("Level Details")] public string levelBackgroundName;
-        [BoxGroup("Level Details")] public int levelBackgroundIndex;
+        [BoxGroup("Level Details")] public int levelBackdropSceneIndex;
         [BoxGroup("Level Details")] public int levelBackgroundMusicIndex;
         [BoxGroup("Level Details")] public bool isBossLevel;
         [BoxGroup("Level Details")] public int levelBossIndex;
         [BoxGroup("Enemies")] public int maxEnemies = 0;
         [BoxGroup("Enemies")] public float minTimeBetweenEnemies = 5.0f;
         [BoxGroup("Enemies")] public float maxTimeBetweenEnemies = 100.0f;
-        [BoxGroup("Level Data")] public Rows BrickDataArray = new Rows();
+        [BoxGroup("Level Data")] public Rows brickDataArray = new Rows();
 
         [BoxGroup("Level Layout")] private const int numberOfRows = 12;
         [BoxGroup("Level Layout")] private const int numberOfBricksPerRow = 15;
 
 #if UNITY_EDITOR
-        public static string OgLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\LevelData";
-        public static string CustomLevelDataPath = "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\CustomLevelData";
+        public static string OgLevelDataPath =
+            "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\LevelData";
+        public static string CustomLevelDataPath =
+            "E:\\Dev\\DAG\\Retro Racket Revolution\\Assets\\_Project\\Resources\\CustomLevelData";
 #else
         public static string OgLevelDataPath = Path.Combine(Application.persistentDataPath, "LevelData");
         public static string CustomLevelDataPath = Path.Combine(Application.persistentDataPath, "CustomLevelData");
@@ -44,7 +46,8 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
                 Debug.Log("Requested brick array index is out of range");
                 return;
             }
-            BrickDataArray.RowArray[row].RowBricks[column] = brickData;
+
+            brickDataArray.rowArray[row].rowBricks[column] = brickData;
         }
 
         /// <summary>
@@ -57,25 +60,24 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
                 Debug.Log("Requested brick array index is out of range");
                 return;
             }
-            BrickDataArray.RowArray[row].RowBricks[column].IsEmptySlot = isEmpty;
+
+            brickDataArray.rowArray[row].rowBricks[column].isEmptySlot = isEmpty;
         }
 
         /// <summary>
         /// Rows consist of a number of rows
         /// </summary>
-        [System.Serializable]
-        public class Rows
+        [Serializable] public class Rows
         {
-            public Row[] RowArray = new Row[numberOfRows];
+            public Row[] rowArray = new Row[numberOfRows];
         }
 
         /// <summary>
         /// A row consists of n "columns" of bricks
         /// </summary>
-        [System.Serializable]
-        public class Row
+        [Serializable] public class Row
         {
-            public BrickData[] RowBricks = new BrickData[numberOfBricksPerRow];
+            public BrickData[] rowBricks = new BrickData[numberOfBricksPerRow];
         }
 
         /// <summary>
@@ -85,10 +87,10 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         {
             for (int currRow = 0; currRow < numberOfRows; currRow++)
             {
-                BrickDataArray.RowArray[currRow] = new Row();
+                brickDataArray.rowArray[currRow] = new Row();
                 for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
                 {
-                    BrickDataArray.RowArray[currRow].RowBricks[currCol] =
+                    brickDataArray.rowArray[currRow].rowBricks[currCol] =
                         new BrickData(BrickType.Normal, Color.white, BonusType.None, true, currRow, currCol);
                 }
             }
@@ -103,8 +105,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             {
                 for (int currCol = 0; currCol < numberOfBricksPerRow; currCol++)
                 {
-                    BrickData brickData = levelData.BrickDataArray.RowArray[currRow].RowBricks[currCol];
-                    Debug.Log($"Brick: ({brickData.ColumnNumber}, {brickData.RowNumber}), Color: {brickData.BrickColor.ToString()}. Type: {brickData.BrickType}, Bonus: {brickData.BrickBonus}");
+                    BrickData brickData = levelData.brickDataArray.rowArray[currRow].rowBricks[currCol];
+                    Debug.Log(
+                        $"Brick: ({brickData.columnNumber}, {brickData.rowNumber}), Color: {brickData.brickColor.ToString()}. Type: {brickData.brickType}, Bonus: {brickData.brickBonus}");
                 }
             }
         }
@@ -126,7 +129,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Return a compressed Base64 encoded version of the level
         /// </summary>
-        /// <returns></returns>
         public string BaseEncodeLevel()
         {
             // Serialize the data
@@ -134,25 +136,23 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
 
             // Base64 encode
             byte[] plainTextBytes = System.Text.Encoding.UTF8.GetBytes(json);
-            return System.Convert.ToBase64String(plainTextBytes).Compress();
+            return Convert.ToBase64String(plainTextBytes).Compress();
         }
 
         /// <summary>
         /// Decodes a compressed Base64 encoded level, returns a LevelDataExt instance
         /// </summary>
-        /// <param name="encodedCompressedLevel"></param>
-        /// <returns></returns>
         public static LevelDataExt BaseDecodeLevel(string encodedCompressedLevel)
         {
-            byte[] base64EncodedBytes = System.Convert.FromBase64String(encodedCompressedLevel.Decompress());
-            LevelDataExt newLevelData = JsonUtility.FromJson<LevelDataExt>(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
+            byte[] base64EncodedBytes = Convert.FromBase64String(encodedCompressedLevel.Decompress());
+            LevelDataExt newLevelData =
+                JsonUtility.FromJson<LevelDataExt>(System.Text.Encoding.UTF8.GetString(base64EncodedBytes));
             return newLevelData;
         }
 
         /// <summary>
         /// Decodes the level and saves to disk as JSON
         /// </summary>
-        /// <param name="encodedLevel"></param>
         public void BaseDecodeLevelAndSave(string encodedLevel)
         {
             LevelDataExt newLevelDataExt = BaseDecodeLevel(encodedLevel);
@@ -162,8 +162,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Save the instance to a file
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="isCustomLevels"></param>
         public void SaveInstanceToFile(string fileName, bool isCustomLevels)
         {
             string levelPath = isCustomLevels ? CustomLevelDataPath : OgLevelDataPath;
@@ -178,9 +176,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             string levelFilePath = Path.Combine(levelPath, Path.ChangeExtension(fileName, ".json"));
 
             // Add / update the filename
-            this.levelFileName = fileName;
+            levelFileName = fileName;
 
-           // Serialise the data
+            // Serialise the data
             string json = JsonUtility.ToJson(this, true);
 
             // Write the JSON to file
@@ -194,9 +192,6 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
         /// <summary>
         /// Loads an instance from a file
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="isCustomLevels"></param>
-        /// <returns></returns>
         public static LevelDataExt LoadInstanceFromFile(string fileName, bool isCustomLevels)
         {
             string json;
@@ -215,8 +210,9 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
             {
                 json = inputFile.ReadToEnd();
             }
+
             LevelDataExt levelDataExt = JsonUtility.FromJson<LevelDataExt>(json);
-            
+
             // Print(levelDataExt);
             return levelDataExt;
         }
@@ -244,7 +240,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Levels
                 levelPathsList.Add(Path.GetFileName(currFile));
             }
 #endif
-                levelPathsList.Sort();
+            levelPathsList.Sort();
             return levelPathsList;
         }
     }

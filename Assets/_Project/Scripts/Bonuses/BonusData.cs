@@ -32,7 +32,7 @@ namespace DaftAppleGames.RetroRacketRevolution.Bonuses
         {
             [BoxGroup("Settings")] public BonusType type;
             [BoxGroup("Settings")] public GameObject spawnPrefab;
-            [BoxGroup("Level Editor")] public Sprite spawnSprite;
+            [BoxGroup("Level Editor")] public Sprite levelEditorSprite;
             [BoxGroup("Level Editor")] public string friendlyName;
             [BoxGroup("Level Editor")] public string description;
         }

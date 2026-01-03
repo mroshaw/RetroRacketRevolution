@@ -22,6 +22,11 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
     public class Brick : MonoBehaviour
     {
         [BoxGroup("Settings")] [SerializeField] private Transform brickModel;
+        [BoxGroup("Settings")] [SerializeField] private Transform normalModel;
+        [BoxGroup("Settings")] [SerializeField] private Transform cracked1Model;
+        [BoxGroup("Settings")] [SerializeField] private Transform cracked2Model;
+        [BoxGroup("Settings")] [SerializeField] private Transform invincibleModel;
+
         [BoxGroup("Settings")] [SerializeField] private Color brickColor;
         [BoxGroup("Settings")] [SerializeField] private BrickType brickType;
         [BoxGroup("Settings")] [SerializeField] private BonusType brickBonus;
@@ -35,14 +40,13 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 
         private MaterialTools _matTools;
         private Explosion _explosion;
-        private BoxCollider _boxCollider;
 
         // Public properties
         public BrickType BrickType => brickType;
         public Color BrickColor => brickColor;
         public BrickManager BrickManager { set; get; }
-        public float Health => health;
-
+        public int Health => health;
+        private int _startingHealth;
         private Material _material;
         private int _scoreValue = 10;
         private AudioSource _audioSource;
@@ -102,20 +106,28 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             switch (brickType)
             {
                 case BrickType.Normal:
+                    _startingHealth = 1;
                     health = 1;
                     gameObject.layer = LayerMask.NameToLayer(normalLayer);
+                    SetModel(normalModel);
                     break;
                 case BrickType.DoubleStrong:
+                    _startingHealth = 2;
                     health = 2;
                     gameObject.layer = LayerMask.NameToLayer(normalLayer);
+                    SetModel(normalModel);
                     break;
                 case BrickType.TripleStrong:
+                    _startingHealth = 3;
                     health = 3;
                     gameObject.layer = LayerMask.NameToLayer(normalLayer);
+                    SetModel(normalModel);
                     break;
                 case BrickType.Invincible:
+                    _startingHealth = -1;
                     health = -1;
                     gameObject.layer = LayerMask.NameToLayer(invincibleLayer);
+                    SetModel(invincibleModel);
                     break;
             }
 
@@ -136,13 +148,19 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
             // Set color
             // _material.SetColor(BrickMatColor, brickColor);
             _matTools.SetColor(brickColor);
-            // Init cracks
-            if (IsDarkColor(brickColor))
-            {
-            }
-            else
-            {
-            }
+        }
+
+        /// <summary>
+        /// Sets the given model as the active model
+        /// </summary>
+        private void SetModel(Transform model)
+        {
+            normalModel.gameObject.SetActive(false);
+            cracked1Model.gameObject.SetActive(false);
+            cracked2Model.gameObject.SetActive(false);
+            invincibleModel.gameObject.SetActive(false);
+
+            model.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -157,13 +175,15 @@ namespace DaftAppleGames.RetroRacketRevolution.Bricks
 
             health--;
 
-            // Change sprite for multi-hit bricks
-            if (health == 2)
+            // Set the appropriate model for multi-hit bricks
+            switch (health)
             {
-            }
-
-            if (health == 1)
-            {
+                case 2:
+                    SetModel(cracked1Model);
+                    break;
+                case 1:
+                    SetModel(cracked2Model);
+                    break;
             }
 
             if (health == 0)

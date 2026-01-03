@@ -1,7 +1,6 @@
 using System;
 using DaftAppleGames.RetroRacketRevolution.Bonuses;
 using DaftAppleGames.RetroRacketRevolution.Bricks;
-using DaftAppleGames.RetroRacketRevolution.Levels;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -12,8 +11,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 {
     public class BrickButton : MonoBehaviour
     {
-        [BoxGroup("Position")] public int ColumnNumber;
-        [BoxGroup("Position")] public int RowNumber;
+        [BoxGroup("Position")] public int columnNumber;
+        [BoxGroup("Position")] public int rowNumber;
 
         [BoxGroup("UI")] public Image buttonImage;
         [BoxGroup("UI")] public Image typeImage;
@@ -22,21 +21,25 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         [BoxGroup("Data")] public BonusData bonusData;
         [BoxGroup("Data")] public BrickTypeData brickTypeData;
 
-        [FoldoutGroup("Events")] public UnityEvent<int, int> BrickButtonClickedEvent;
+        [FoldoutGroup("Events")] public UnityEvent<int, int> brickButtonClickedEvent;
 
         public BrickData BrickData { get; set; }
 
         private Button _button;
+        private Sprite _noBonusSprite;
+        private Sprite _noBrickSprite;
+
         private TextMeshProUGUI _labelText;
 
         private void Awake()
         {
             _button = GetComponentInChildren<Button>(true);
             _labelText = _button.GetComponentInChildren<TextMeshProUGUI>(true);
-
+            _noBonusSprite = bonusData.GetBonusByType(BonusType.None).levelEditorSprite;
+            _noBrickSprite = brickTypeData.NoBrickSprite;
             string[] coords = _labelText.text.Split(",");
-            RowNumber = Int32.Parse(coords[0]);
-            ColumnNumber = Int32.Parse(coords[1]);
+            rowNumber = Int32.Parse(coords[0]);
+            columnNumber = Int32.Parse(coords[1]);
 
             _button.onClick.AddListener(ButtonClicked);
         }
@@ -54,7 +57,17 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void ButtonClicked()
         {
-            BrickButtonClickedEvent.Invoke(ColumnNumber, RowNumber);
+            brickButtonClickedEvent.Invoke(columnNumber, rowNumber);
+        }
+
+        /// <summary>
+        /// Clears the button
+        /// </summary>
+        public void Clear()
+        {
+            buttonImage.color = Color.white;
+            typeImage.sprite = _noBrickSprite;
+            bonusImage.sprite = _noBonusSprite;
         }
 
         /// <summary>
@@ -63,7 +76,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         public void UpdateBrick(BrickData brickData)
         {
             // Is the update for me?
-            if (brickData.RowNumber != RowNumber || brickData.ColumnNumber != ColumnNumber)
+            if (brickData.rowNumber != rowNumber || brickData.columnNumber != columnNumber)
             {
                 return;
             }
@@ -72,7 +85,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
 
             Color targetColor;
             _labelText.text = GetBrickLabel();
-            if (BrickData.IsEmptySlot)
+            if (BrickData.isEmptySlot)
             {
                 targetColor = Color.white;
             }
@@ -82,16 +95,48 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
             }
             else
             {
-                targetColor = BrickData.BrickColor;
+                targetColor = BrickData.brickColor;
             }
 
             Color newColor = targetColor;
             newColor.a = 0.99f;
             buttonImage.color = newColor;
-            bonusImage.sprite = bonusData.GetBonusByType(BrickData.BrickBonus).spawnSprite;
-            typeImage.sprite = BrickData.IsEmptySlot
+
+            BonusData.BonusDef bonusDef = bonusData.GetBonusByType(BrickData.brickBonus);
+
+            // Determine bonus info
+            if (bonusDef == null)
+            {
+                Debug.LogError($"Could not find Bonus Def for type: {BrickData.brickBonus}!");
+                return;
+            }
+
+            if (bonusDef.levelEditorSprite)
+            {
+                bonusImage.sprite = bonusData.GetBonusByType(BrickData.brickBonus).levelEditorSprite;
+            }
+            else
+            {
+                Debug.LogWarning($"Bonus Def entry for type {BrickData.brickBonus} does not contain a sprite image!");
+            }
+
+            // Determine brick info
+            var brickDef = brickTypeData.GetBrickByType(BrickData.brickType);
+
+            if (brickDef == null)
+            {
+                Debug.LogError($"Could not find Brick Def for type: {BrickData.brickType}!");
+                return;
+            }
+
+            if (!brickDef.BrickSprite)
+            {
+                Debug.LogWarning($"Bonus Type entry for type {BrickData.brickType} does not contain a sprite image!");
+            }
+
+            typeImage.sprite = BrickData.isEmptySlot
                 ? brickTypeData.NoBrickSprite
-                : brickTypeData.GetBrickByType(BrickData.BrickType).BrickSprite;
+                : brickDef.BrickSprite;
         }
 
         /// <summary>
@@ -100,7 +145,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <returns></returns>
         private string GetBrickLabel()
         {
-            return ($"{RowNumber},{ColumnNumber}");
+            return ($"{rowNumber},{columnNumber}");
         }
 
         /// <summary>
@@ -110,7 +155,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         private string GetBrickTypeLabel()
         {
             string brickTypeChar = "";
-            switch (BrickData.BrickType)
+            switch (BrickData.brickType)
             {
                 case BrickType.Normal:
                     brickTypeChar = "N";
@@ -145,7 +190,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         private string GetBrickBonusLabel()
         {
             string brickBonusChar = "";
-            switch (BrickData.BrickBonus)
+            switch (BrickData.brickBonus)
             {
                 case BonusType.None:
                     brickBonusChar = "NA";
@@ -197,7 +242,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// <returns></returns>
         private string GetBrickIsEmptyChar()
         {
-            return BrickData.IsEmptySlot ? "X" : "*";
+            return BrickData.isEmptySlot ? "X" : "*";
         }
     }
 }

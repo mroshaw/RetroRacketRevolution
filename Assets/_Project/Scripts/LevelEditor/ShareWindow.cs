@@ -11,6 +11,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
     public class ShareWindow : WindowBase
     {
         // Public serializable properties
+        [BoxGroup("Managers")] [SerializeField] private LevelEditorManager levelEditorManager;
         [BoxGroup("UI")] [SerializeField] private TMP_InputField encodedLevelDataText;
         [BoxGroup("UI")] [SerializeField] private TMP_InputField playerNameText;
         [BoxGroup("UI")] [SerializeField] private Button encodeButton;
@@ -31,6 +32,7 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         /// </summary>
         public void BackButtonHandler()
         {
+            Hide();
             onBackButtonClicked.Invoke();
         }
 
@@ -41,6 +43,8 @@ namespace DaftAppleGames.RetroRacketRevolution.LevelEditor
         {
             if (playerNameText.text.Length > 0)
             {
+                string encodedLevel = levelEditorManager.GetLevelAsEncodedData(playerNameText.text);
+                encodedLevelDataText.text = encodedLevel;
                 onEncodeButtonClicked.Invoke(playerNameText.text);
             }
         }
